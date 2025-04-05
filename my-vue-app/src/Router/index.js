@@ -3,9 +3,14 @@ import { createRouter, createWebHistory } from 'vue-router'
 
 const routes = [
     {
-      path: '/', // Trang gốc
+      path: '/signin', // Trang gốc
       name: 'dangnhap',
       component: () => import('../View/social.vue')
+    },
+    {
+      path: '/login', // Trang gốc
+      name: 'login',
+      component: () => import('../View/Login.vue')
     }
   ]
   
