@@ -48,9 +48,7 @@ const routes = [
       name:"RoomMap",
       component: () => import('../View/RoomMap.vue')
      }
-     {
-      
-     }
+
 
   ]
   
