@@ -4,7 +4,7 @@ import App from './App.vue'               // Import file gốc App.vue của ứ
 import router from '../src/Router/index'             // Import cấu hình Vue Router để điều hướng ứng dụng
  // Import hàm tạo Vuetify, một thư viện UI cho Vue
              // Import các styles mặc định của Vuetify
-
+          
 
 // Tạo một thể hiện Vuetify, đây là nơi chứa các cấu hình và tiện ích của Vuetify
 
