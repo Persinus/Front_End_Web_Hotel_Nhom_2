@@ -1,20 +1,50 @@
-// Import các module cần thiết từ Vue và Vuetify
-import { createApp } from 'vue'           // Cung cấp hàm createApp để khởi tạo ứng dụng Vue
-import App from './App.vue'               // Import file gốc App.vue của ứng dụng
-import router from '../src/Router/index'             // Import cấu hình Vue Router để điều hướng ứng dụng
- // Import hàm tạo Vuetify, một thư viện UI cho Vue
-             // Import các styles mặc định của Vuetify
-          
+vv// Import các module cần thiết từ Vue và các thư viện khác
+import { createApp } from 'vue'
+import { createPinia } from 'pinia'
+import { createStore } from 'vuex'
+import App from './App.vue'
+import router from '../src/Router/index'
+import axios from 'axios'
+import VueResource from 'vue-resource'
+import dayjs from 'dayjs'
+import 'dayjs/locale/vi'
 
-// Tạo một thể hiện Vuetify, đây là nơi chứa các cấu hình và tiện ích của Vuetify
+// Khởi tạo Vuex store
+const store = createStore({
+  state() {
+    return {
+      count: 0
+    }
+  },
+  mutations: {
+    increment(state) {
+      state.count++
+    }
+  }
+})
 
+// Khởi tạo Pinia
+const pinia = createPinia()
 
-// Tạo một thể hiện Vue cho ứng dụng
-const app = createApp(App)  // Khởi tạo ứng dụng Vue với component gốc App.vue
+// Cấu hình Axios
+axios.defaults.baseURL = 'https://api.example.com'
+axios.defaults.headers.common['Authorization'] = 'Bearer token'
 
-// Sử dụng các plugin trong ứng dụng Vue
-app.use(router)    // Kích hoạt Vue Router để quản lý các route trong ứng dụng
+// Cấu hình dayjs
+dayjs.locale('vi')
 
+// Khởi tạo ứng dụng
+const app = createApp(App)
 
-// Gắn ứng dụng Vue vào phần tử DOM có id là "app"
-app.mount('#app')  // Kế
+// Đăng ký plugins và components
+app.use(router)
+app.use(store)
+app.use(pinia)
+app.use(VueResource)
+
+// Thêm các instance vào global properties
+app.config.globalProperties.$axios = axios
+app.config.globalProperties.$dayjs = dayjs
+
+// Mount ứng dụng
+app.mount('#app')
