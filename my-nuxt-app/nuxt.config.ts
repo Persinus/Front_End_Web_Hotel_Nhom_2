@@ -6,6 +6,7 @@ export default defineNuxtConfig({
     'vuestic-ui/dist/vuestic-ui.css',
 
   ],
+  plugins: ['~/plugins/qrcode.js'],
   pages: true,
   // Không cần phải thêm `pages: true` vì đây là mặc định của Nuxt 3
 })
