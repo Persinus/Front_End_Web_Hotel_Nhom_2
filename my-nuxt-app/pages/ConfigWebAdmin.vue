@@ -45,9 +45,9 @@
 
 <script setup>
 import { ref } from "vue";
-import Sidebar from "~/components/Sidebar.vue";
-import AdminTable from "~/components/AdminTable.vue";
-import AddEditModal from "~/components/Modals/AddEditModal.vue";
+import Sidebar from "./components/Sidebar.vue";
+import AdminTable from "./components/AdminTable.vue";
+import AddEditModal from "./components/Modals/AddEditModal.vue";
 
 // State Management for Current Page
 const currentPage = ref("rooms");

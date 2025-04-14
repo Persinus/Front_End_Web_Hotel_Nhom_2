@@ -1,0 +1,78 @@
+# Phân tích cây thư mục và nội dung từng phần cho dự án Nuxt 3
+
+## 1. Thư mục chính và vai trò:
+### 1.1. **pages**:
+- Chứa các trang chính của ứng dụng, mỗi file đại diện cho một route.
+- Các trang:
+  - **ChatWeb.vue**: Trang chatbot dành cho khách hàng.
+  - **Login.vue**: Trang đăng nhập (hiển thị form đăng nhập).
+  - **Register.vue**: Trang đăng ký tài khoản mới.
+  - **Profile.vue**: Trang hồ sơ khách hàng, quản trị viên, lễ tân (hiển thị tùy theo role người dùng).
+  - **ConfigWebAdmin.vue**: Trang cấu hình dành riêng cho quản trị viên.
+  - **Home.vue**: Trang chủ của ứng dụng.
+  - **Detail.vue**: Trang hiển thị chi tiết phòng (lấy từ dữ liệu API).
+  - **DetailService.vue**: Trang hiển thị chi tiết dịch vụ khách sạn.
+  - **Check-in-outconfirmation.vue**: Trang check-in và check-out dành cho lễ tân hoặc khách hàng.
+  - **ForgotPass.vue**: Trang quên mật khẩu.
+  - **HotelRegulations.vue**: Trang hiển thị nội quy của khách sạn.
+  - **RoomMap.vue**: Sơ đồ hiển thị các phòng của khách sạn.
+  - **ManageWorkSchedule.vue**: Trang quản lý lịch làm việc của lễ tân.
+  - **Payment.vue**: Trang thanh toán.
+  - **Service.vue**: Trang hiển thị danh sách các dịch vụ.
+
+### 1.2. **components**:
+- Chứa các thành phần tái sử dụng, ví dụ:
+  - **Navbar.vue**: Thanh điều hướng.
+  - **Footer.vue**: Chân trang.
+  - **RoomCard.vue**: Thẻ hiển thị thông tin phòng.
+  - **ServiceCard.vue**: Thẻ hiển thị thông tin dịch vụ.
+
+### 1.3. **axiosBackend**:
+- Chứa các file gọi API với backend, ví dụ:
+  - **auth.js**: Xử lý API đăng nhập, đăng ký.
+  - **room.js**: Xử lý API liên quan đến phòng.
+  - **service.js**: Xử lý API liên quan đến dịch vụ.
+  - **schedule.js**: Xử lý API quản lý lịch làm việc.
+
+### 1.4. **store**:
+- Sử dụng Pinia để quản lý state toàn cục, ví dụ:
+  - **authStore.js**: Quản lý thông tin xác thực và trạng thái người dùng (loggedIn, role).
+  - **roomStore.js**: Quản lý trạng thái danh sách phòng.
+  - **serviceStore.js**: Quản lý trạng thái danh sách dịch vụ.
+
+### 1.5. **composables**:
+- Chứa các hàm JavaScript tái sử dụng, ví dụ:
+  - **useAuth.js**: Xử lý logic xác thực (login, logout).
+  - **useRoom.js**: Hàm lấy danh sách phòng hoặc chi tiết phòng.
+  - **useService.js**: Hàm lấy danh sách dịch vụ hoặc chi tiết dịch vụ.
+
+### 1.6. **plugins**:
+- Cấu hình các thư viện bên thứ ba, ví dụ:
+  - **vuestic.js**: Cấu hình Vuestic UI cho giao diện.
+  - **axios.js**: Cấu hình axios với interceptor.
+
+### 1.7. **assets**:
+- Chứa tài nguyên tĩnh như:
+  - **images/**: Hình ảnh.
+  - **styles/**: Tệp CSS hoặc SCSS.
+  - **json/**: Các tệp JSON tĩnh cho nội dung (nếu có).
+
+## 2. Cách sử dụng và tích hợp:
+### Luồng hoạt động chính:
+1. Người dùng truy cập các trang trong **pages**.
+2. Dữ liệu được lấy thông qua **axiosBackend** và được quản lý bởi **store**.
+3. Thành phần tái sử dụng từ **components** được render để hiển thị dữ liệu.
+4. Các sự kiện tương tác của người dùng được xử lý trong **composables**.
+
+### Ví dụ luồng hoạt động:
+- Người dùng vào **Login.vue**:
+  1. Form đăng nhập được hiển thị từ **components**.
+  2. Khi người dùng nhập thông tin và nhấn "Đăng nhập", dữ liệu được gửi qua **axiosBackend/auth.js**.
+  3. Kết quả từ backend được lưu trong **store/authStore.js**.
+  4. Người dùng được chuyển hướng sang **Profile.vue** dựa trên role.
+
+## 3. Lợi ích của cấu trúc này:
+- **Tách biệt rõ ràng:** Code dễ bảo trì và mở rộng.
+- **Tái sử dụng cao:** Các thành phần và hàm có thể tái sử dụng trong nhiều nơi.
+- **Quản lý dễ dàng:** Pinia giúp quản lý trạng thái hiệu quả.
+"""
