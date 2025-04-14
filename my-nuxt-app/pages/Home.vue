@@ -69,9 +69,9 @@
 
 <script setup>
 import { ref, onMounted } from 'vue'
-import TheHeader from '~/components/Header.vue'
-import TheFooter from '~/components/Footer.vue'
-import PromoBanner from '~/components/PromoBanner.vue'
+import TheHeader from '../Components/Header.vue'
+import TheFooter from './components/Footer.vue'
+import PromoBanner from './components/PromoBanner.vue'
 
 const slides = [
   'https://images.unsplash.com/photo-1600047509510-0e322f6cc73f',
