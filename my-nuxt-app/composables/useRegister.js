@@ -1,7 +1,15 @@
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 
 export function useRegister() {
-  const fullName = ref('')
+  // Thêm firstName và lastName
+  const firstName = ref('')
+  const lastName = ref('')
+  
+  // Sử dụng computed để tính toán fullName từ firstName và lastName
+  const fullName = computed(() => {
+    return `${firstName.value} ${lastName.value}`.trim()
+  })
+  
   const nationality = ref('')
   const phone = ref('')
   const birthDate = ref('')
@@ -14,6 +22,7 @@ export function useRegister() {
   const otp = ref('')
   const generatedOtp = ref('')
   const successMessage = ref('')
+  const showPassword = ref(false)
 
   const sendOtp = () => {
     if (!phone.value && !email.value) {
@@ -39,6 +48,8 @@ export function useRegister() {
   }
 
   return {
+    firstName,
+    lastName,
     fullName,
     nationality,
     phone,
@@ -51,6 +62,7 @@ export function useRegister() {
     confirmPassword,
     otp,
     successMessage,
+    showPassword,
     sendOtp,
     handleSubmit,
   }
