@@ -1,170 +1,178 @@
 <template>
-    <div class="login-wrapper">
-      <!-- Slide ảnh -->
-      <div class="image-side">
-        <transition-group name="fade" tag="div">
-          <img
-            v-for="(image, index) in images"
-            v-show="currentImageIndex === index"
-            :key="image"
-            :src="image"
-            alt="Hotel"
-            class="slideshow-image"
+  <div class="login-page min-h-screen w-full flex items-center justify-center bg-cover bg-center" style="background-image: url('/images/login-bg.jpg')">
+    <!-- Modal đăng nhập -->
+    <div class="login-modal bg-white rounded-md shadow-lg w-full max-w-md p-8 relative">
+      <!-- Nút đóng -->
+      <button class="absolute top-4 right-4 text-gray-400 hover:text-gray-600">
+        <i class="fas fa-times"></i>
+      </button>
+      
+      <!-- Avatar giả -->
+      <div class="flex justify-center mb-5">
+        <div class="avatar-placeholder w-16 h-16 rounded-full bg-gray-100 flex items-center justify-center">
+          <svg class="w-8 h-8 text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"></path>
+          </svg>
+        </div>
+      </div>
+      
+      <!-- Tiêu đề -->
+      <div class="text-center mb-6">
+        <h1 class="text-xl font-semibold">Log in</h1>
+        <p class="text-sm text-gray-500 mt-1">
+          Don't have an account? 
+          <a href="/Register" class="text-gray-900 font-medium hover:underline">Sign up</a>
+        </p>
+      </div>
+      
+      <!-- Đăng nhập bằng mạng xã hội -->
+      <va-button
+        class="w-full mb-3 justify-center"
+        color="transparent"
+        border
+        @click="facebookLogin"
+      >
+        <template #prepend>
+          <i class="fab fa-facebook text-blue-600 me-2"></i>
+        </template>
+        Log in with Facebook
+      </va-button>
+      
+      <va-button
+        class="w-full mb-6 justify-center"
+        color="transparent"
+        border
+        @click="googleLogin"
+      >
+        <template #prepend>
+          <i class="fab fa-google text-red-500 me-2"></i>
+        </template>
+        Log in with Google
+      </va-button>
+      
+      <!-- Divider -->
+      <div class="flex items-center mb-6">
+        <div class="flex-grow border-t border-gray-200"></div>
+        <div class="mx-4 text-gray-400 text-sm">OR</div>
+        <div class="flex-grow border-t border-gray-200"></div>
+      </div>
+      
+      <!-- Form đăng nhập email -->
+      <form @submit.prevent="emailLogin">
+        <div class="mb-4">
+          <label for="email" class="block text-sm font-normal text-gray-600 mb-1">Your email</label>
+          <va-input 
+            v-model="formEmail" 
+            id="email"
+            type="email"
+            placeholder="Email address"
+            class="w-full"
+            required
           />
-        </transition-group>
-      </div>
-  
-      <!-- Form -->
-      <div class="form-side">
-        <va-card class="login-card" outlined>
-          <va-card-title class="title">Chào mừng đến với HotelEase</va-card-title>
-          <va-card-subtitle class="subtitle">
-            Đăng nhập để quản lý đặt phòng của bạn
-          </va-card-subtitle>
-  
-          <va-form class="auth-form" @submit.prevent="emailLogin">
-            <va-input
-              v-model="formEmail"
-              label="Email"
-              type="email"
-              required
-              class="mb-3"
-              :rules="[(v) => !!v || 'Email là bắt buộc']"
-            />
-  
-            <va-input
-              v-model="formPassword"
-              :type="showPassword ? 'text' : 'password'"
-              label="Mật khẩu"
-              required
-              class="mb-1"
-              :rules="[(v) => !!v || 'Mật khẩu là bắt buộc']"
-            >
-              <template #appendInner>
-                <va-icon
-                  :name="showPassword ? 'visibility_off' : 'visibility'"
-                  size="small"
-                  color="gray"
-                  class="cursor-pointer"
-                  @click="togglePassword"
-                />
-              </template>
-            </va-input>
-  
-            <div class="text-right mb-3">
-              <a href="#" class="forgot-link">Quên mật khẩu?</a>
-            </div>
-  
-            <va-button type="submit" block color="primary" icon="mail">
-              Đăng nhập
-            </va-button>
-          </va-form>
-  
-          <va-divider class="my-4">Hoặc đăng nhập bằng</va-divider>
-  
-          <div class="social-row">
-            <div class="google-signin-button" id="g_id_signin"></div>
-            <va-button color="#4267B2" icon="fab fa-facebook-f" @click="facebookLogin" block>
-              Facebook
-            </va-button>
+        </div>
+        
+        <div class="mb-1">
+          <label for="password" class="block text-sm font-normal text-gray-600 mb-1">Your password</label>
+          <va-input
+            v-model="formPassword"
+            id="password"
+            :type="showPassword ? 'text' : 'password'"
+            placeholder="Password"
+            class="w-full"
+            required
+          >
+            <template #append>
+              <va-button
+                icon
+                size="small"
+                color="gray"
+                @click="togglePassword"
+              >
+                <i :class="showPassword ? 'fa fa-eye-slash' : 'fa fa-eye'"></i>
+              </va-button>
+            </template>
+          </va-input>
+          <div class="text-right mt-1">
+            <a href="/ForgotPass" class="text-xs text-gray-600 hover:underline">Forgot your password?</a>
           </div>
-  
-          <va-alert v-if="email || facebookName" color="info" class="mt-4">
-            <p>{{ email }}</p>
-            <p>{{ facebookName }}</p>
-          </va-alert>
-        </va-card>
-      </div>
+        </div>
+        
+        <va-button
+          type="submit" 
+          class="w-full mt-4"
+          color="#f0f0f0"
+          text-color="#333"
+        >
+          Log in
+        </va-button>
+      </form>
+
+      <!-- Thông báo đăng nhập thành công (nếu có) -->
+      <va-alert
+        v-if="email || facebookName"
+        class="mt-4"
+        color="success"
+        outlined
+      >
+        <p>{{ email }}</p>
+        <p>{{ facebookName }}</p>
+      </va-alert>
     </div>
-  </template>
-  <script setup>
-  import { useLogin } from '@/composables/useLogin'
-  
-  const {
-    email,
-    facebookName,
-    formEmail,
-    formPassword,
-    images,
-    currentImageIndex,
-    showPassword,
-    togglePassword,
-    emailLogin,
-    facebookLogin,
-  } = useLogin()
-  </script>
-  <style scoped>
-  .login-wrapper {
-    display: flex;
-    min-height: 100vh;
-    overflow: hidden;
-    background: linear-gradient(to right, #fdfbfb, #ebedee);
+  </div>
+</template>
+
+<script setup>
+import { useLogin } from '@/composables/useLogin'
+
+const {
+  email,
+  facebookName,
+  formEmail,
+  formPassword,
+  showPassword,
+  togglePassword,
+  emailLogin,
+  facebookLogin,
+} = useLogin()
+
+// Thêm hàm đăng nhập Google
+const googleLogin = () => {
+  if (window.google && window.google.accounts && window.google.accounts.id) {
+    window.google.accounts.id.prompt()
+  } else {
+    alert('Google sign-in is not available yet. Please try again later.')
   }
-  
-  .image-side {
-    flex: 1.2;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: relative;
-    overflow: hidden;
-  }
-  
-  .slideshow-image {
-    width: 100%;
-    height: 100vh;
-    object-fit: cover;
-    position: absolute;
-    top: 0;
-    left: 0;
-    transition: opacity 1s ease-in-out;
-  }
-  
-  .form-side {
-    flex: 1;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 40px 30px;
-    background: white;
-  }
-  
-  .login-card {
-    width: 100%;
-    max-width: 400px;
-    padding: 20px;
-  }
-  
-  .social-row {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-  }
-  
-  .fade-enter-active, .fade-leave-active {
-    transition: opacity 1s;
-  }
-  .fade-enter-from, .fade-leave-to {
+}
+</script>
+
+<style scoped>
+.login-modal {
+  animation: fadeIn 0.3s ease-out;
+}
+
+@keyframes fadeIn {
+  from {
     opacity: 0;
+    transform: translateY(-10px);
   }
-  
-  @media (max-width: 768px) {
-    .login-wrapper {
-      flex-direction: column;
-    }
-  
-    .image-side {
-      height: 200px;
-    }
-  
-    .slideshow-image {
-      height: 100%;
-      object-fit: cover;
-    }
-  
-    .form-side {
-      padding: 20px;
-    }
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
-  </style>
-  
+}
+
+:deep(.va-button) {
+  letter-spacing: normal;
+  text-transform: none;
+  font-weight: normal;
+}
+
+:deep(.va-input__container) {
+  border: 1px solid #e5e7eb;
+  border-radius: 6px;
+}
+
+:deep(.va-input__field) {
+  padding: 8px 12px;
+}
+</style>
