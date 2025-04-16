@@ -5,15 +5,15 @@
 - Chứa các trang chính của ứng dụng, mỗi file đại diện cho một route.
 - Các trang:
   - **ChatWeb.vue**: Trang chatbot dành cho khách hàng.
-  - **Login.vue**: Trang đăng nhập (hiển thị form đăng nhập).
-  - **Register.vue**: Trang đăng ký tài khoản mới.
+  - **Login.vue**: Trang đăng nhập (hiển thị form đăng nhập). (Thọ đã code)
+  - **Register.vue**: Trang đăng ký tài khoản mới. (Thọ đã code)
   - **Profile.vue**: Trang hồ sơ khách hàng, quản trị viên, lễ tân (hiển thị tùy theo role người dùng).
   - **ConfigWebAdmin.vue**: Trang cấu hình dành riêng cho quản trị viên.
   - **Home.vue**: Trang chủ của ứng dụng.
   - **Detail.vue**: Trang hiển thị chi tiết phòng (lấy từ dữ liệu API).
   - **DetailService.vue**: Trang hiển thị chi tiết dịch vụ khách sạn.
   - **Check-in-outconfirmation.vue**: Trang check-in và check-out dành cho lễ tân hoặc khách hàng.
-  - **ForgotPass.vue**: Trang quên mật khẩu.
+  - **ForgotPass.vue**: Trang quên mật khẩu. (Thọ đã code)
   - **HotelRegulations.vue**: Trang hiển thị nội quy của khách sạn.
   - **RoomMap.vue**: Sơ đồ hiển thị các phòng của khách sạn.
   - **ManageWorkSchedule.vue**: Trang quản lý lịch làm việc của lễ tân.
