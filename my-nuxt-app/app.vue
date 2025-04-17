@@ -28,7 +28,10 @@ useHead({
     // QR Code
     { src: 'https://cdn.jsdelivr.net/npm/qrcode.vue@3.4.1/dist/qrcode.vue.browser.min.js' },
     // Chart.js
-    { src: 'https://cdn.jsdelivr.net/npm/chart.js' }
+    { src: 'https://cdn.jsdelivr.net/npm/chart.js' },
+   
+    { rc: 'https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js' }, // Thêm Axios CDN
+  
   ]
 })
 </script>
