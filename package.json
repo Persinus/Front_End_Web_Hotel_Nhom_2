@@ -1,0 +1,20 @@
+{
+  "name": "front_end_web_hotel_nhom_2",
+  "version": "1.0.0",
+  "description": "",
+  "homepage": "https://github.com/Persinus/Front_End_Web_Hotel_Nhom_2#readme",
+  "bugs": {
+    "url": "https://github.com/Persinus/Front_End_Web_Hotel_Nhom_2/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Persinus/Front_End_Web_Hotel_Nhom_2.git"
+  },
+  "license": "ISC",
+  "author": "",
+  "type": "commonjs",
+  "main": "index.js",
+ "scripts": {
+  "test": "echo \"Error: no test specified\" && exit 1"
+}
+}
