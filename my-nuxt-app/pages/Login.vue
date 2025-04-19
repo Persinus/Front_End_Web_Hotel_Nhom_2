@@ -1,3 +1,15 @@
+
+<!-- Trang Thọ Code xin đừng động vào  -->
+<!-- Trang Thọ Code xin đừng động vào  -->
+<!-- Trang Thọ Code xin đừng động vào  -->
+<!-- Trang Thọ Code xin đừng động vào  -->
+<!-- Trang Thọ Code xin đừng động vào  -->
+<!-- Trang Thọ Code xin đừng động vào  -->
+<!-- Trang Thọ Code xin đừng động vào  -->
+
+
+
+
 <template>
   <div class="login-page min-h-screen w-full flex items-center justify-center bg-cover bg-center" style="background-image: url('/images/login-bg.jpg')">
     <!-- Modal đăng nhập -->

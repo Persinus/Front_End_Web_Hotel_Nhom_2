@@ -1,3 +1,15 @@
+
+
+<!-- Trang Chung cả nhóm ai merger mới đc vào xin đừng động vào  -->
+<!-- Trang Chung cả nhóm ai merger mới đc vào xin đừng động vào  -->
+<!-- Trang Chung cả nhóm ai merger mới đc vào xin đừng động vào  -->
+<!-- Trang Chung cả nhóm ai merger mới đc vào xin đừng động vào  -->
+<!-- Trang Chung cả nhóm ai merger mới đc vào xin đừng động vào  -->
+<!-- Trang Chung cả nhóm ai merger mới đc vào xin đừng động vào  -->
+<!-- Trang Chung cả nhóm ai merger mới đc vào xin đừng động vào  -->
+
+
+
 <template>
   <div>
     <!-- Hiển thị nội dung của các trang -->
@@ -14,8 +26,11 @@ useHead({
     // Vuestic UI CSS
     { rel: 'stylesheet', href: 'https://unpkg.com/vuestic-ui/dist/vuestic-ui.css' },
     // Font Awesome
-    { rel: 'stylesheet', href: 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css' }
+    { rel: 'stylesheet', href: 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css' },
+    // Animate.css
+    { rel: 'stylesheet', href: 'https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css' } // Sửa ở đây
   ],
+
   script: [
     // Tailwind CSS
     { src: 'https://cdn.tailwindcss.com' },

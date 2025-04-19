@@ -17,7 +17,7 @@
   - **HotelRegulations.vue**: Trang hiển thị nội quy của khách sạn.
   - **RoomMap.vue**: Sơ đồ hiển thị các phòng của khách sạn.
   - **ManageWorkSchedule.vue**: Trang quản lý lịch làm việc của lễ tân.
-  - **Payment.vue**: Trang thanh toán.
+  - **Payment.vue**: Trang thanh toán. ( Quỳnh - đã xong)
   - **Service.vue**: Trang hiển thị danh sách các dịch vụ.
 
 ### 1.2. **components**:

@@ -1,3 +1,12 @@
+
+<!-- Trang Thọ Code xin đừng động vào  -->
+<!-- Trang Thọ Code xin đừng động vào  -->
+<!-- Trang Thọ Code xin đừng động vào  -->
+<!-- Trang Thọ Code xin đừng động vào  -->
+<!-- Trang Thọ Code xin đừng động vào  -->
+<!-- Trang Thọ Code xin đừng động vào  -->
+<!-- Trang Thọ Code xin đừng động vào  -->
+
 <template>
   <div class="password-reset-page min-h-screen flex items-center justify-center bg-white">
     <div class="password-reset-container max-w-md w-full px-6 py-8 text-center">
