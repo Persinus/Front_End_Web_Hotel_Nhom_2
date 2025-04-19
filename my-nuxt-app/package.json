@@ -10,8 +10,9 @@
     "postinstall": "nuxt prepare"
   },
   "dependencies": {
-    "@fortawesome/fontawesome-svg-core": "^6.7.2",
-    "@fortawesome/vue-fontawesome": "^3.0.8",
+
+    "@chenfengyuan/vue-qrcode": "^2.0.0",
+
     "@mdi/font": "^7.4.47",
     "@nuxtjs/proxy": "^2.1.0",
     "@popperjs/core": "^2.11.6",
