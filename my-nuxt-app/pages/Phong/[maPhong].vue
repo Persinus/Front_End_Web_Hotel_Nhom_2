@@ -1,3 +1,13 @@
+
+<!-- Trang Mạnh Code xin đừng động vào  -->
+<!-- Trang Mạnh Code xin đừng động vào  -->
+<!-- Trang Mạnh Code xin đừng động vào  -->
+<!-- Trang Mạnh Code xin đừng động vào  -->
+<!-- Trang Mạnh Code xin đừng động vào  -->
+<!-- Trang Mạnh Code xin đừng động vào  -->
+<!-- Trang Mạnh Code xin đừng động vào  -->
+
+
 <template>
   <div class="room-details-container" v-if="!loading">
     <h1 class="room-title">{{ room.loaiPhong }} (Mã: {{ room.maPhong }})</h1>
