@@ -1,0 +1,18 @@
+{
+  "@vite/client": {
+    "prefetch": true,
+    "isEntry": true,
+    "file": "@vite/client",
+    "css": [],
+    "module": true,
+    "resourceType": "script"
+  },
+  "D:/Desktop/forntend/Front_End_Web_Hotel_Nhom_2/my-nuxt-app/node_modules/nuxt/dist/app/entry.js": {
+    "resourceType": "script",
+    "module": true,
+    "prefetch": true,
+    "preload": true,
+    "isEntry": true,
+    "file": "D:/Desktop/forntend/Front_End_Web_Hotel_Nhom_2/my-nuxt-app/node_modules/nuxt/dist/app/entry.js"
+  }
+}
