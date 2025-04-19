@@ -22,8 +22,8 @@ type NuxtAppInjections =
   InjectionType<typeof import("../../node_modules/nuxt/dist/app/plugins/check-if-layout-used.js")> &
   InjectionType<typeof import("../../plugins/axios.js")> &
   InjectionType<typeof import("../../plugins/vuestic-ui")> &
-  InjectionType<typeof import("../../plugins/element-plus")> &
-  InjectionType<typeof import("../../plugins/qrcode.js")>
+  InjectionType<typeof import("../../plugins/qrcode.js")> &
+  InjectionType<typeof import("../../plugins/element-plus")>
 
 declare module '#app' {
   interface NuxtApp extends NuxtAppInjections { }

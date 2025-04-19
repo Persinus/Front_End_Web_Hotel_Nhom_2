@@ -1,4 +1,3 @@
-
 <!-- Trang Mạnh Code xin đừng động vào  -->
 <!-- Trang Mạnh Code xin đừng động vào  -->
 <!-- Trang Mạnh Code xin đừng động vào  -->
@@ -6,33 +5,31 @@
 <!-- Trang Mạnh Code xin đừng động vào  -->
 <!-- Trang Mạnh Code xin đừng động vào  -->
 <!-- Trang Mạnh Code xin đừng động vào  -->
-
 
 <template>
   <div class="room-details-container" v-if="!loading">
-    <h1 class="room-title">{{ room.loaiPhong }} (Mã: {{ room.maPhong }})</h1>
-    
-    <img :src="room.urlAnhChinh" alt="Hình ảnh phòng" class="room-main-image" />
+    <!-- Slider ảnh -->
+    <div class="room-slider">
+      <div class="slider-wrapper" :style="{ transform: `translateX(-${currentSlide * 100}%)` }">
+        <img v-if="room.urlAnhChinh" :src="room.urlAnhChinh" alt="Hình ảnh phòng chính" />
+        <img v-if="room.urlAnhPhu1" :src="room.urlAnhPhu1" alt="Ảnh phụ 1" />
+        <img v-if="room.urlAnhPhu2" :src="room.urlAnhPhu2" alt="Ảnh phụ 2" />
+      </div>
+    </div>
 
+    <!-- Thông tin phòng -->
     <div class="room-info">
+      <h1 class="room-title">{{ room.loaiPhong }} (Mã: {{ room.maPhong }})</h1>
       <p><strong>Giá:</strong> {{ room.giaPhong }} VND</p>
       <p><strong>Tầng:</strong> {{ room.tang }}</p>
       <p><strong>Kiểu giường:</strong> {{ room.kieuGiuong }}</p>
       <p><strong>Mô tả:</strong> {{ room.moTa }}</p>
       <p><strong>Tiện nghi:</strong> {{ room.tienNghiList.join(', ') }}</p>
+
+      <button class="book-button">Đặt phòng</button>
+      <nuxt-link to="/PhongWithTienNghi" class="back-button">Quay lại danh sách phòng</nuxt-link>
     </div>
 
-    <div class="additional-images">
-      <h2>Hình ảnh thêm</h2>
-      <div class="image-slider">
-        <img v-if="room.urlAnhPhu1" :src="room.urlAnhPhu1" alt="Ảnh phụ 1" class="room-additional-image" />
-        <img v-if="room.urlAnhPhu2" :src="room.urlAnhPhu2" alt="Ảnh phụ 2" class="room-additional-image" />
-        <img v-if="room.urlAnhPhu3" :src="room.urlAnhPhu3" alt="Ảnh phụ 3" class="room-additional-image" />
-      </div>
-    </div>
-
-    <nuxt-link to="/PhongWithTienNghi" class="back-button">Quay lại danh sách phòng</nuxt-link>
-    
     <div v-if="error" class="error-message">{{ error }}</div>
   </div>
 
@@ -40,7 +37,7 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue';
+import { ref, onMounted, watchEffect } from 'vue';
 import { useRoute } from 'vue-router';
 import { useNuxtApp } from '#app';
 
@@ -54,6 +51,19 @@ const route = useRoute(); // Lấy route hiện tại
 const { $api } = useNuxtApp();
 
 const maPhong = route.params.maPhong; // Lấy mã phòng từ route
+
+// Slider logic
+const currentSlide = ref(0);
+const totalSlides = ref(3); // Tổng số ảnh trong slider
+
+// Tự động chuyển slide sau 3 giây
+onMounted(() => {
+  const interval = setInterval(() => {
+    currentSlide.value = (currentSlide.value + 1) % totalSlides.value;
+  }, 3000);
+
+  return () => clearInterval(interval); // Dọn dẹp interval khi component bị hủy
+});
 
 onMounted(async () => {
   try {
@@ -74,75 +84,81 @@ onMounted(async () => {
     loading.value = false;
   }
 });
-
-// Thêm logic cho hiệu ứng chuyển động của ảnh
-const currentIndex = ref(0);
-const images = ref([]);
-
-images.value = [room.value.urlAnhPhu1, room.value.urlAnhPhu2, room.value.urlAnhPhu3].filter(Boolean);
-
-const switchImage = () => {
-  currentIndex.value = (currentIndex.value + 1) % images.value.length;
-};
-
-setInterval(switchImage, 3000); // Chuyển ảnh mỗi 3 giây
 </script>
 
 <style scoped>
 .room-details-container {
+  display: flex;
+  height: 100vh;
   padding: 20px;
+  gap: 20px;
 }
 
-.room-title {
-  text-align: center;
+.room-slider {
+  flex: 1;
+  overflow: hidden;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-.room-main-image {
+.slider-wrapper {
+  display: flex;
+  transition: transform 0.5s ease-in-out;
+}
+
+.slider-wrapper img {
   width: 100%;
-  height: auto;
-  border-radius: 5px;
+  height: 100%;
+  object-fit: cover;
 }
 
 .room-info {
+  flex: 1;
   padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
-.additional-images {
+.room-title {
+  font-size: 1.8rem;
+  font-weight: bold;
+  margin-bottom: 20px;
+  color: #2c3e50;
+}
+
+.book-button {
+  padding: 10px 15px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1rem;
   margin-top: 20px;
-  text-align: center;
+  transition: background-color 0.3s, transform 0.2s;
 }
 
-.image-slider {
-  position: relative;
-  overflow: hidden;
-  height: 200px; /* Thay đổi chiều cao theo yêu cầu */
-}
-
-.room-additional-image {
-  position: absolute;
-  width: 100%;
-  height: auto;
-  left: 100%;
-  animation: slideAnimation 0.5s forwards; /* Hiệu ứng chuyển động */
-}
-
-@keyframes slideAnimation {
-  0% {
-    left: 100%; /* Ảnh bắt đầu từ bên phải */
-  }
-  100% {
-    left: 0; /* Ảnh chuyển vào vị trí */
-  }
+.book-button:hover {
+  background-color: #0056b3;
+  transform: scale(1.05);
 }
 
 .back-button {
   display: inline-block;
   margin-top: 20px;
   padding: 10px 15px;
-  background-color: #007bff;
+  background-color: #6c757d;
   color: white;
   text-decoration: none;
   border-radius: 5px;
+  font-size: 1rem;
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+.back-button:hover {
+  background-color: #5a6268;
+  transform: scale(1.05);
 }
 
 .error-message {
