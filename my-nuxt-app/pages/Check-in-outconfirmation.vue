@@ -11,9 +11,14 @@
   <div class="check-in-check-out">
     <h1>Xác nhận Check-in / Check-out</h1>
 
+    <!-- Ghi chú -->
+    <div class="notes">
+      <p><strong>Ghi chú:</strong> Vui lòng quét mã QR để xác nhận check-in hoặc check-out. Mã QR có hiệu lực trong vòng 30 phút kể từ lúc tạo.</p>
+    </div>
+
     <el-row :gutter="20">
       <!-- Phòng -->
-      <el-col :span="12">
+      <el-col :span="8">
         <div class="room-info">
           <img
             src="https://i.pinimg.com/474x/c5/7d/17/c57d17ca6d5b5e3616f578a2b4887da7.jpg"
@@ -31,7 +36,7 @@
       </el-col>
 
       <!-- QR -->
-      <el-col :span="12">
+      <el-col :span="16">
         <div class="qr-info">
           <h3>Thông tin mã QR</h3>
           <p>Mã QR có hiệu lực trong vòng 30 phút kể từ lúc tạo.</p>
@@ -53,30 +58,57 @@
 </template>
 
 <script setup>
-import { ref, computed } from 'vue'
+import { ref, computed, onMounted } from 'vue'
 import VueQrcode from '@chenfengyuan/vue-qrcode'
 import { ElButton, ElRow, ElCol } from 'element-plus'
+import { useToast } from 'vuestic-ui'
+import { useRouter } from 'vue-router'
 
 const qrData = ref('https://hotel-booking-system.com/checkin/123456')
-
 const expirationTime = computed(() => {
   const expiration = new Date()
   expiration.setMinutes(expiration.getMinutes() + 30)
   return expiration.toLocaleTimeString()
 })
 
+const toast = useToast()
+const router = useRouter()
+
 const handleCheckIn = () => {
-  alert('Check-in thành công!')
+  toast.success('Check-in thành công!', { duration: 3000 })
 }
 
 const handleCheckOut = () => {
-  alert('Check-out thành công!')
+  toast.error('Check-out thành công!', { duration: 3000 })
 }
+
+// Tự động cập nhật trạng thái khi quét mã QR
+onMounted(() => {
+  const interval = setInterval(() => {
+    // Giả lập trạng thái quét mã QR
+    const isScanned = Math.random() > 0.5 // 50% xác suất quét thành công
+    if (isScanned) {
+      toast.info('Mã QR đã được quét thành công!', { duration: 3000 })
+      clearInterval(interval) // Dừng kiểm tra sau khi quét thành công
+
+      // Chuyển đến trang xác nhận
+      router.push('/xac-nhan') // Thay '/xac-nhan' bằng đường dẫn trang xác nhận của bạn
+    }
+  }, 5000) // Kiểm tra mỗi 5 giây
+})
 </script>
 
 <style scoped>
 .check-in-check-out {
   padding: 20px;
+}
+
+.notes {
+  margin-bottom: 20px;
+  background-color: #f9f9f9;
+  padding: 10px;
+  border-left: 5px solid #007bff;
+  border-radius: 5px;
 }
 
 .room-info {
@@ -87,7 +119,7 @@ const handleCheckOut = () => {
 }
 
 .room-image {
-  width: 100%;
+  width: 80%; /* Thu nhỏ ảnh */
   height: auto;
   border-radius: 8px;
 }
