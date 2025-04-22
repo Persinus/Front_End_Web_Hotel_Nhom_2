@@ -3,18 +3,14 @@
     <!-- Logo -->
     <template #left>
       <div class="logo">
-        <a href="/" class="logo-link">
-          <i class="mdi mdi-hotel" style="margin-right: 8px;"></i> OceanView
-        </a>
+        <a href="/" class="logo-link">🏨 OceanView</a>
       </div>
     </template>
 
     <!-- Navigation -->
     <template #center>
       <va-navbar-item v-for="item in navItems" :key="item.title">
-        <a :href="item.link" class="nav-link">
-          <i :class="item.icon" style="margin-right: 5px;"></i> {{ item.title }}
-        </a>
+        <a :href="item.link" class="nav-link">{{ item.title }}</a>
       </va-navbar-item>
     </template>
 
@@ -24,26 +20,15 @@
       <va-button color="accent">Đăng ký</va-button>
     </template>
   </va-navbar>
-
-  <div class="icon-demo">
-    <!-- Biểu tượng Facebook -->
-    <i class="mdi mdi-facebook" style="font-size: 24px; color: #4267B2;"></i>
-
-    <!-- Biểu tượng Instagram -->
-    <i class="mdi mdi-instagram" style="font-size: 24px; color: #E1306C;"></i>
-
-    <!-- Biểu tượng Twitter -->
-    <i class="mdi mdi-twitter" style="font-size: 24px; color: #1DA1F2;"></i>
-  </div>
 </template>
 
 <script setup>
 const navItems = [
-  { title: 'Trang chủ', link: '/', icon: 'mdi mdi-home' },
-  { title: 'Đặt phòng', link: '/booking', icon: 'mdi mdi-calendar-check' },
-  { title: 'Dịch vụ', link: '/services', icon: 'mdi mdi-room-service' },
-  { title: 'Ưu đãi', link: '/promotions', icon: 'mdi mdi-tag' },
-  { title: 'Tài khoản', link: '/account', icon: 'mdi mdi-account' }
+  { title: 'Trang chủ', link: '/' },
+  { title: 'Đặt phòng', link: '/booking' },
+  { title: 'Dịch vụ', link: '/Service' },
+  { title: 'Ưu đãi', link: '/promotions' },
+  { title: 'Tài khoản', link: '/account' }
 ]
 </script>
 
@@ -71,7 +56,7 @@ const navItems = [
 .nav-link {
   text-decoration: none;
   color: white;
-  font-weight: 50;
+  font-weight: 500;
   padding: 10px 15px;
   transition: background-color 0.3s, color 0.3s;
   border-radius: 5px;
@@ -84,12 +69,6 @@ const navItems = [
 
 .va-button {
   font-weight: 600;
-}
-
-.icon-demo {
-  display: flex;
-  gap: 15px;
-  align-items: center;
 }
 </style>
 
