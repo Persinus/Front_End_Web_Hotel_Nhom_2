@@ -19,10 +19,7 @@
       <div class="slide-overlay">
         <h1>Chào mừng đến với OceanView Resort & Hotel</h1>
         <p>Trải nghiệm kỳ nghỉ tuyệt vời với dịch vụ đẳng cấp và view biển thơ mộng.</p>
-      </div>
-      <div class="slide-controls">
-        <va-button icon="chevron_left" @click="prevSlide" />
-        <va-button icon="chevron_right" @click="nextSlide" />
+        <va-button color="white" text-color="primary" class="explore-btn">Khám phá ngay</va-button>
       </div>
     </div>
 
@@ -151,12 +148,11 @@ const services = ref([
   font-size: 1.2rem;
 }
 
-.slide-controls {
-  position: absolute;
-  bottom: 16px;
-  right: 16px;
-  display: flex;
-  gap: 10px;
+.explore-btn {
+  margin-top: 20px;
+  font-size: 1rem;
+  padding: 10px 20px;
+  border-radius: 5px;
 }
 
 .video-section {
