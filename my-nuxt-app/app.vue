@@ -21,6 +21,7 @@
 // Sử dụng useHead để quản lý thẻ head
 useHead({
   link: [
+    { rel: 'stylesheet', href: 'https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css' },
     // Element Plus CSS
     { rel: 'stylesheet', href: 'https://cdn.jsdelivr.net/npm/element-plus/dist/index.css' },
     // Vuestic UI CSS
@@ -45,8 +46,11 @@ useHead({
     // Chart.js
     { src: 'https://cdn.jsdelivr.net/npm/chart.js' },
    
-    { rc: 'https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js' }, // Thêm Axios CDN
+    { src: 'https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js' }, // Thêm Axios CDN
   
+  // Bootstrap JS
+    { src: 'https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js' },
+
   ]
 })
 </script>

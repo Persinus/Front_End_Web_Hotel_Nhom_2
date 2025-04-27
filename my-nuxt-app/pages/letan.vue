@@ -1,7 +1,7 @@
 <template>
-  <div style="height: 100vh; display: flex;">
+  <div class="letan-page">
     <!-- Sidebar -->
-    <VaSidebar color="primary" style="width: 250px;">
+    <VaSidebar color="primary" class="sidebar">
       <VaSidebarItem
         v-for="item in sidebarItems"
         :key="item.key"
@@ -16,49 +16,51 @@
     </VaSidebar>
 
     <!-- Main content -->
-    <div style="flex: 1; padding: 20px;">
-      <h1>Trang Lễ Tân</h1>
+    <div class="main-content">
+      <h1 class="page-title">Trang Lễ Tân</h1>
 
       <!-- Quản lý phòng -->
-      <div v-if="currentTab === 'phong'">
-        <h2>Quản lý phòng</h2>
-        <p>Danh sách phòng, tình trạng phòng, và đặt phòng.</p>
+      <div v-if="currentTab === 'phong'" class="tab-content">
+        <h2 class="section-title">Quản lý phòng</h2>
+        <p class="section-description">Danh sách phòng, tình trạng phòng, và đặt phòng.</p>
 
         <!-- Table -->
-        <table class="custom-table">
-          <thead>
-            <tr>
-              <th>#</th>
-              <th>Tên phòng</th>
-              <th>Tiện nghi</th>
-              <th>Trạng thái</th>
-              <th>Hành động</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr
-              v-for="(room, index) in paginatedRooms"
-              :key="room.maPhong"
-            >
-              <td>{{ currentPage * itemsPerPage + index + 1 }}</td>
-              <td>{{ room.loaiPhong }}</td>
-              <td>{{ room.tienNghiList.join(', ') }}</td>
-              <td>
-                <span :class="getStatusClass(room.tinhTrang)">
-                  {{ getStatusText(room.tinhTrang) }}
-                </span>
-              </td>
-              <td>
-                <button
-                  class="btn-edit"
-                  @click="openEditModal(room)"
-                >
-                  <VaIcon name="edit" /> Sửa
-                </button>
-              </td>
-            </tr>
-          </tbody>
-        </table>
+        <div class="table-wrapper">
+          <table class="custom-table">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Tên phòng</th>
+                <th>Tiện nghi</th>
+                <th>Trạng thái</th>
+                <th>Hành động</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr
+                v-for="(room, index) in paginatedRooms"
+                :key="room.maPhong"
+              >
+                <td>{{ currentPage * itemsPerPage + index + 1 }}</td>
+                <td>{{ room.loaiPhong }}</td>
+                <td>{{ room.tienNghiList.join(', ') }}</td>
+                <td>
+                  <span :class="getStatusClass(room.tinhTrang)">
+                    {{ getStatusText(room.tinhTrang) }}
+                  </span>
+                </td>
+                <td>
+                  <button
+                    class="btn-edit"
+                    @click="openEditModal(room)"
+                  >
+                    <VaIcon name="edit" /> Sửa
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
 
         <!-- Pagination -->
         <div class="pagination">
@@ -96,16 +98,17 @@
           </select>
 
           <div class="modal-actions">
-            <button @click="saveChanges">Lưu</button>
-            <button @click="closeEditModal">Hủy</button>
+            <button class="btn-primary" @click="saveChanges">Lưu</button>
+            <button class="btn-secondary" @click="closeEditModal">Hủy</button>
           </div>
         </div>
       </div>
     </div>
   </div>
 </template>
+
 <script setup>
-import { ref, onMounted } from 'vue';
+import { ref, computed, onMounted } from 'vue';
 import { useNuxtApp } from '#app';
 
 // States
@@ -207,30 +210,70 @@ const getStatusClass = (status) => {
   }
 };
 </script>
+
 <style scoped>
-/* Sidebar styles */
-.va-sidebar {
+/* Layout styles */
+.letan-page {
+  display: flex;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.sidebar {
+  width: 250px;
   background-color: #2c3e50;
   color: white;
 }
-.va-sidebar-item.active {
+
+.sidebar .va-sidebar-item.active {
   background-color: #1abc9c;
   color: white;
 }
 
+/* Main content */
+.main-content {
+  flex: 1;
+  padding: 20px;
+  overflow-y: auto;
+}
+
+.page-title {
+  font-size: 2rem;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.section-title {
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+}
+
+.section-description {
+  margin-bottom: 20px;
+  color: #666;
+}
+
 /* Table styles */
+.table-wrapper {
+  overflow-x: auto;
+}
+
 .custom-table {
   width: 100%;
   border-collapse: collapse;
   margin-top: 20px;
 }
-.custom-table th, .custom-table td {
+
+.custom-table th,
+.custom-table td {
   border: 1px solid #ddd;
   padding: 10px;
 }
+
 .custom-table th {
   background-color: #f4f4f4;
 }
+
 .custom-table tr:nth-child(even) {
   background-color: #f9f9f9;
 }
@@ -242,12 +285,14 @@ const getStatusClass = (status) => {
   justify-content: center;
   gap: 10px;
 }
+
 .pagination button {
   padding: 5px 10px;
   border: none;
   background-color: #e0e0e0;
   cursor: pointer;
 }
+
 .pagination button.active {
   background-color: #007bff;
   color: white;
@@ -263,11 +308,63 @@ const getStatusClass = (status) => {
   padding: 20px;
   border-radius: 10px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
 }
+
 .modal-content {
   max-width: 400px;
 }
-.modal-actions button {
-  margin: 10px 5px 0;
+
+.modal-actions {
+  margin-top: 20px;
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.btn-primary {
+  background-color: #007bff;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.btn-secondary {
+  background-color: #ccc;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.btn-primary:hover {
+  background-color: #0056b3;
+}
+
+.btn-secondary:hover {
+  background-color: #bbb;
+}
+
+/* Status styles */
+.status-available {
+  color: green;
+  font-weight: bold;
+}
+
+.status-booked {
+  color: red;
+  font-weight: bold;
+}
+
+.status-in-use {
+  color: orange;
+  font-weight: bold;
+}
+
+.status-cleaning {
+  color: blue;
+  font-weight: bold;
 }
 </style>

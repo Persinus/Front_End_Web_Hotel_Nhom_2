@@ -11,7 +11,9 @@
 <template>
   <div class="home-container">
     <!-- Header -->
-    <TheHeader />
+    <header>
+      <TheHeader />
+    </header>
 
     <!-- Slideshow -->
     <div class="slideshow">
@@ -57,7 +59,9 @@
     </va-card>
 
     <!-- Footer -->
-    <TheFooter />
+    <footer>
+      <TheFooter />
+    </footer>
   </div>
 </template>
 
@@ -114,6 +118,12 @@ const services = ref([
 .home-container {
   font-family: 'Segoe UI', sans-serif;
   padding-bottom: 40px;
+}
+
+header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
 }
 
 .slideshow {
