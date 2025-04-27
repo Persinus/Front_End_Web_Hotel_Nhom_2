@@ -23,6 +23,7 @@ type NuxtAppInjections =
   InjectionType<typeof import("../../plugins/axios.js")> &
   InjectionType<typeof import("../../plugins/vuestic-ui")> &
   InjectionType<typeof import("../../plugins/qrcode.js")> &
+  InjectionType<typeof import("../../plugins/bootstrap.client")> &
   InjectionType<typeof import("../../plugins/element-plus")>
 
 declare module '#app' {

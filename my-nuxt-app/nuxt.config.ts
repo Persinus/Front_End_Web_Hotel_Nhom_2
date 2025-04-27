@@ -1,3 +1,5 @@
+
+
 // nuxt.config.js
 export default defineNuxtConfig({
   compatibilityDate: '2024-11-01', // Đảm bảo sử dụng phiên bản tương thích
@@ -6,7 +8,8 @@ export default defineNuxtConfig({
   plugins: [
     '~/plugins/axios.js', // Đường dẫn plugin Axios
     '~/plugins/vuestic-ui.ts', // Đường dẫn plugin Vuestic UI
-   '~/plugins/qrcode.js',
+    '~/plugins/qrcode.js',
+    '~/plugins/bootstrap.client.ts',
   
   ],
   pages: true, // Kích hoạt tự động định tuyến trang

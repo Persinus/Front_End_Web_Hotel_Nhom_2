@@ -41,7 +41,7 @@
         "../node_modules/h3"
       ],
       "consola": [
-        "../node_modules/consola"
+        "../node_modules/nuxt/node_modules/consola"
       ],
       "ofetch": [
         "../node_modules/ofetch"

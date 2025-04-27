@@ -13,16 +13,20 @@
       />
     </div>
 
+    <!-- Loading -->
     <va-loading v-if="loading" />
 
+    <!-- Hiển thị lỗi -->
     <va-alert v-if="error" type="danger">
       Lỗi: {{ error }}
     </va-alert>
 
+    <!-- Skeleton loading effect -->
     <div v-if="loading" class="skeleton-loading">
       <div class="skeleton-card" v-for="n in 4" :key="n"></div>
     </div>
 
+    <!-- Danh sách dịch vụ -->
     <div v-else-if="services.length" class="services-grid">
       <va-card
         v-for="service in services"
@@ -43,6 +47,7 @@
       </va-card>
     </div>
 
+    <!-- Nếu không có dịch vụ -->
     <va-alert v-else v-if="!loading" type="info" class="no-services">
       Không có dịch vụ nào.
     </va-alert>
@@ -50,57 +55,61 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue'; // Import Vue
-import { useNuxtApp } from '#app'; // Nuxt plugin
+import { ref, onMounted } from 'vue'
+import { useNuxtApp } from '#app'
 
-const services = ref([]); // Biến chứa danh sách dịch vụ
-const loading = ref(true); // Trạng thái tải
-const error = ref(null); // Biến chứa lỗi
-const sortOption = ref('price-asc'); // Lựa chọn lọc mặc định
+const services = ref([])
+const loading = ref(true)
+const error = ref(null)
+const sortOption = ref('price-asc')
 
 const sortOptions = [
   { value: 'price-asc', label: 'Giá: Nhỏ đến lớn' },
   { value: 'price-desc', label: 'Giá: Lớn đến nhỏ' },
   { value: 'name-asc', label: 'Tên: A-Z' },
   { value: 'name-desc', label: 'Tên: Z-A' },
-];
+]
 
-const { $api } = useNuxtApp(); // Sử dụng Axios từ plugin
+const { $api } = useNuxtApp()
 
 onMounted(async () => {
   try {
-    const response = await $api.get('/DichVu'); // Gọi API thông qua $api
-    console.log('Dữ liệu nhận được từ API:', response.data);
-
+    const response = await $api.get('/DichVu')
     if (Array.isArray(response.data)) {
-      services.value = response.data;
+      services.value = response.data
     } else {
-      error.value = 'Dữ liệu trả về không đúng định dạng';
+      error.value = 'Dữ liệu trả về không đúng định dạng'
     }
   } catch (err) {
-    console.error('Lỗi khi lấy dữ liệu:', err);
-    error.value = err.message;
+    error.value = err.message
   } finally {
-    loading.value = false;
+    loading.value = false
   }
-});
+})
 
 function sortServices() {
   if (sortOption.value === 'price-asc') {
-    services.value.sort((a, b) => a.donGia - b.donGia);
+    services.value.sort((a, b) => a.donGia - b.donGia)
   } else if (sortOption.value === 'price-desc') {
-    services.value.sort((a, b) => b.donGia - a.donGia);
+    services.value.sort((a, b) => b.donGia - a.donGia)
   } else if (sortOption.value === 'name-asc') {
-    services.value.sort((a, b) => a.tenDichVu.localeCompare(b.tenDichVu));
+    services.value.sort((a, b) => a.tenDichVu.localeCompare(b.tenDichVu))
   } else if (sortOption.value === 'name-desc') {
-    services.value.sort((a, b) => b.tenDichVu.localeCompare(a.tenDichVu));
+    services.value.sort((a, b) => b.tenDichVu.localeCompare(a.tenDichVu))
   }
 }
 </script>
 
-<style>
+<style scoped>
 .container {
   padding: 20px;
+}
+
+.header {
+  text-align: center;
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+  color: #333;
 }
 
 .filter-bar {
@@ -168,7 +177,7 @@ function sortServices() {
 }
 
 .service-title {
-  font-size: 1.8rem; /* Tiêu đề lớn hơn */
+  font-size: 1.8rem;
   font-weight: bold;
   margin: 10px 0;
   color: #333;
@@ -185,7 +194,7 @@ function sortServices() {
 }
 
 .service-price-button.free-service {
-  background-color: #d4edda; /* Màu xanh nhạt cho dịch vụ miễn phí */
+  background-color: #d4edda;
   color: #155724;
 }
 
@@ -207,13 +216,6 @@ function sortServices() {
 
 .service-button:hover {
   background-color: #0056b3;
-}
-
-.header {
-  text-align: center;
-  font-size: 2.5rem;
-  margin-bottom: 20px;
-  color: #333;
 }
 
 .no-services {
