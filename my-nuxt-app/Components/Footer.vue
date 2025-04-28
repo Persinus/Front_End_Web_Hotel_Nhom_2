@@ -1,39 +1,44 @@
 <template>
-  <va-card class="footer" color="#2c3e50" text-color="white" flat>
+  <footer class="footer">
     <div class="footer-container">
       <!-- Thông tin liên hệ -->
-      <div class="contact">
+      <div class="footer-section contact">
         <h3>OceanView Resort & Hotel</h3>
         <p>Lô 29, Đường Võ Nguyên Giáp, Quận Sơn Trà, Đà Nẵng</p>
         <p>📞 0236 123 4567 | ✉️ contact@oceanview.vn</p>
       </div>
 
       <!-- Mạng xã hội -->
-      <div class="social">
+      <div class="footer-section social">
         <h3>Kết nối với chúng tôi</h3>
         <div class="social-icons">
           <a href="#" target="_blank" aria-label="Facebook">
-            <va-icon name="mdi-facebook" color="white" size="24px" />
+            <i class="fab fa-facebook-f"></i>
           </a>
           <a href="#" target="_blank" aria-label="Instagram">
-            <va-icon name="mdi-instagram" color="white" size="24px" />
+            <i class="fab fa-instagram"></i>
           </a>
           <a href="#" target="_blank" aria-label="Twitter">
-            <va-icon name="mdi-twitter" color="white" size="24px" />
+            <i class="fab fa-twitter"></i>
           </a>
         </div>
       </div>
 
       <!-- Bản quyền -->
-      <div class="copy">
+      <div class="footer-section copy">
         <p>© {{ new Date().getFullYear() }} OceanView Hotel Management</p>
       </div>
     </div>
-  </va-card>
+  </footer>
 </template>
+
+<script setup>
+</script>
 
 <style scoped>
 .footer {
+  background-color: #2c3e50;
+  color: white;
   padding: 40px 20px;
   margin-top: 50px;
 }
@@ -46,21 +51,12 @@
   gap: 20px;
 }
 
-.contact {
+.footer-section {
   flex: 1;
-  text-align: left;
+  min-width: 250px;
 }
 
-.contact h3 {
-  margin-bottom: 10px;
-  font-size: 1.2rem;
-}
-
-.social {
-  flex: 1;
-  text-align: center;
-}
-
+.contact h3,
 .social h3 {
   margin-bottom: 10px;
   font-size: 1.2rem;
@@ -80,17 +76,35 @@
   height: 40px;
   background-color: rgba(255, 255, 255, 0.2);
   border-radius: 50%;
-  transition: background-color 0.3s;
+  color: white;
+  font-size: 1.2rem;
+  transition: background-color 0.3s, transform 0.3s;
 }
 
 .social-icons a:hover {
   background-color: rgba(255, 255, 255, 0.4);
+  transform: scale(1.1);
 }
 
 .copy {
-  flex: 1;
-  text-align: right;
+  text-align: center;
   font-size: 0.9rem;
   color: #b0b0b0;
+}
+
+@media (max-width: 768px) {
+  .footer-container {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .footer-section {
+    margin-bottom: 20px;
+  }
+
+  .copy {
+    margin-top: 20px;
+  }
 }
 </style>

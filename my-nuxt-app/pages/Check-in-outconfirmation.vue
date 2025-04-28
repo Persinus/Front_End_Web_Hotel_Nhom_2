@@ -63,8 +63,12 @@ import VueQrcode from '@chenfengyuan/vue-qrcode'
 import { ElButton, ElRow, ElCol } from 'element-plus'
 import { useToast } from 'vuestic-ui'
 import { useRouter } from 'vue-router'
+import { useNuxtApp } from '#app'
 
-const qrData = ref('https://hotel-booking-system.com/checkin/123456')
+const { $api } = useNuxtApp()
+
+const bookingId = ref('123456') // ID đặt phòng
+const qrData = ref(`https://hotel-booking-system.com/api/checkin/${bookingId.value}`)
 const expirationTime = computed(() => {
   const expiration = new Date()
   expiration.setMinutes(expiration.getMinutes() + 30)
@@ -74,12 +78,30 @@ const expirationTime = computed(() => {
 const toast = useToast()
 const router = useRouter()
 
-const handleCheckIn = () => {
-  toast.success('Check-in thành công!', { duration: 3000 })
+const handleCheckIn = async () => {
+  try {
+    const response = await $api.post(`/api/checkin/${bookingId.value}`)
+    if (response.status === 200) {
+      toast.success('Check-in thành công!', { duration: 3000 })
+    } else {
+      toast.error('Check-in thất bại!', { duration: 3000 })
+    }
+  } catch (error) {
+    toast.error('Lỗi khi check-in!', { duration: 3000 })
+  }
 }
 
-const handleCheckOut = () => {
-  toast.error('Check-out thành công!', { duration: 3000 })
+const handleCheckOut = async () => {
+  try {
+    const response = await $api.post(`/api/checkout/${bookingId.value}`)
+    if (response.status === 200) {
+      toast.success('Check-out thành công!', { duration: 3000 })
+    } else {
+      toast.error('Check-out thất bại!', { duration: 3000 })
+    }
+  } catch (error) {
+    toast.error('Lỗi khi check-out!', { duration: 3000 })
+  }
 }
 
 // Tự động cập nhật trạng thái khi quét mã QR

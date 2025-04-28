@@ -1,17 +1,9 @@
-<!-- Trang Mạnh Code xin đừng động vào  -->
-<!-- Trang Mạnh Code xin đừng động vào  -->
-<!-- Trang Mạnh Code xin đừng động vào  -->
-<!-- Trang Mạnh Code xin đừng động vào  -->
-<!-- Trang Mạnh Code xin đừng động vào  -->
-<!-- Trang Mạnh Code xin đừng động vào  -->
-<!-- Trang Mạnh Code xin đừng động vào  -->
-
-
-
 <template>
-  <div class="home-container">
+  <div :class="{'dark': theme.isDarkMode}" class="home-container">
     <!-- Header -->
-    <TheHeader />
+    <header>
+      <TheHeader />
+    </header>
 
     <!-- Slideshow -->
     <div class="slideshow">
@@ -57,7 +49,9 @@
     </va-card>
 
     <!-- Footer -->
-    <TheFooter />
+    <footer>
+      <TheFooter />
+    </footer>
   </div>
 </template>
 
@@ -65,6 +59,9 @@
 import { ref, onMounted } from 'vue'
 import TheHeader from '../Components/Header.vue'
 import TheFooter from '../Components/Footer.vue'
+import { useThemeStore } from '@/store/DarkMode'
+
+const theme = useThemeStore()
 
 const slides = [
   'https://images.unsplash.com/photo-1600047509510-0e322f6cc73f',
@@ -114,6 +111,12 @@ const services = ref([
 .home-container {
   font-family: 'Segoe UI', sans-serif;
   padding-bottom: 40px;
+}
+
+header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
 }
 
 .slideshow {
@@ -199,5 +202,10 @@ const services = ref([
   text-align: center;
   padding: 50px 20px;
   margin: 40px 20px;
+}
+
+.dark {
+  background-color: #333;
+  color: white;
 }
 </style>
