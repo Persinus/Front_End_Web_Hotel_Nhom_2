@@ -61,10 +61,10 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
-import { useThemeStore } from '@/store/DarkMode'
+import { ref, computed } from 'vue';
+import { useThemeStore } from '@/store/DarkMode';
 
-const theme = useThemeStore()
+const theme = useThemeStore();
 
 const navItems = [
   { title: 'Trang chủ', link: '/' },
@@ -72,38 +72,37 @@ const navItems = [
   { title: 'Dịch vụ', link: '/service' },
   { title: 'Ưu đãi', link: '/promotions' },
   { title: 'Tài khoản', link: '/account' },
-]
+];
 
-const isMenuOpen = ref(false)
-const isSettingsDropdownOpen = ref(false)
-const selectedLanguage = ref('vi')
+const isMenuOpen = ref(false);
+const isSettingsDropdownOpen = ref(false);
+const selectedLanguage = ref('vi');
 
 // Toggle mobile menu
 const toggleMenu = () => {
-  isMenuOpen.value = !isMenuOpen.value
-}
+  isMenuOpen.value = !isMenuOpen.value;
+};
 
 // Close mobile menu
 const closeMenu = () => {
-  isMenuOpen.value = false
-}
+  isMenuOpen.value = false;
+};
 
 // Toggle settings dropdown
 const toggleSettingsDropdown = () => {
-  isSettingsDropdownOpen.value = !isSettingsDropdownOpen.value
-}
+  isSettingsDropdownOpen.value = !isSettingsDropdownOpen.value;
+};
 
 // Toggle dark mode
-const isDarkMode = computed(() => theme.isDarkMode)
+const isDarkMode = computed(() => theme.isDarkMode);
 const toggleDarkMode = () => {
-  theme.toggleDarkMode()  // Update dark mode state in store
-}
+  theme.toggleDarkMode();
+};
 
 // Change language (placeholder for now)
 const changeLanguage = () => {
-  // Logic for changing language will go here in the future
-  console.log(`Language changed to: ${selectedLanguage.value}`)
-}
+  console.log(`Language changed to: ${selectedLanguage.value}`);
+};
 </script>
 
 <style scoped>

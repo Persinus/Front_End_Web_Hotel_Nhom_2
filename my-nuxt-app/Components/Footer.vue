@@ -47,7 +47,7 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-  align-items: flex-start;
+  align-items: center;
   gap: 20px;
 }
 
@@ -64,6 +64,7 @@
 
 .social-icons {
   display: flex;
+  justify-content: center;
   gap: 15px;
 }
 
