@@ -24,7 +24,10 @@ type NuxtAppInjections =
   InjectionType<typeof import("../../plugins/vuestic-ui")> &
   InjectionType<typeof import("../../plugins/qrcode.js")> &
   InjectionType<typeof import("../../plugins/bootstrap.client")> &
-  InjectionType<typeof import("../../plugins/element-plus")>
+  InjectionType<typeof import("../../plugins/pinia.js")> &
+  InjectionType<typeof import("../../plugins/Pinia.js")> &
+  InjectionType<typeof import("../../plugins/element-plus")> &
+  InjectionType<typeof import("../../plugins/i18n.js")>
 
 declare module '#app' {
   interface NuxtApp extends NuxtAppInjections { }

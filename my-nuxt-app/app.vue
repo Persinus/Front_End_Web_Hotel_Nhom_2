@@ -1,75 +1,45 @@
-
-
-<!-- Trang Chung cả nhóm ai merger mới đc vào xin đừng động vào  -->
-<!-- Trang Chung cả nhóm ai merger mới đc vào xin đừng động vào  -->
-<!-- Trang Chung cả nhóm ai merger mới đc vào xin đừng động vào  -->
-<!-- Trang Chung cả nhóm ai merger mới đc vào xin đừng động vào  -->
-<!-- Trang Chung cả nhóm ai merger mới đc vào xin đừng động vào  -->
-<!-- Trang Chung cả nhóm ai merger mới đc vào xin đừng động vào  -->
-<!-- Trang Chung cả nhóm ai merger mới đc vào xin đừng động vào  -->
-
-
-
 <template>
-  <div>
-    <!-- Hiển thị nội dung của các trang -->
-    <nuxt-page />
+  <div :class="{'dark': theme.isDarkMode}">
+    <NuxtPage />
   </div>
 </template>
-
 <script setup>
-// Sử dụng useHead để quản lý thẻ head
+import { useThemeStore } from './store/DarkMode' // Đảm bảo rằng store này đã được tạo và xuất khẩu đúng cách
+import { useHead } from '#app' // Nhập useHead từ Nuxt
+
+// Sử dụng Pinia store
+const theme = useThemeStore();
+
+// Khi component được load, kiểm tra và áp dụng dark mode
+theme.initializeDarkMode();
+
+// Toggle chế độ dark mode
+const toggleTheme = () => {
+  theme.toggleDarkMode();
+};
+
+// Quản lý thẻ head
 useHead({
   link: [
     { rel: 'stylesheet', href: 'https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css' },
-    // Element Plus CSS
     { rel: 'stylesheet', href: 'https://cdn.jsdelivr.net/npm/element-plus/dist/index.css' },
-    // Vuestic UI CSS
     { rel: 'stylesheet', href: 'https://unpkg.com/vuestic-ui/dist/vuestic-ui.css' },
-    // Font Awesome
     { rel: 'stylesheet', href: 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css' },
-    // Animate.css
-    { rel: 'stylesheet', href: 'https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css' } // Sửa ở đây
+    { rel: 'stylesheet', href: 'https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css' }
   ],
-
   script: [
-    // Tailwind CSS
     { src: 'https://cdn.tailwindcss.com' },
-    // Vue 3
     { src: 'https://unpkg.com/vue@3/dist/vue.global.js' },
-    // Element Plus
     { src: 'https://cdn.jsdelivr.net/npm/element-plus' },
-    // Vuestic UI
     { src: 'https://unpkg.com/vuestic-ui' },
-    // QR Code
     { src: 'https://cdn.jsdelivr.net/npm/qrcode.vue@3.4.1/dist/qrcode.vue.browser.min.js' },
-    // Chart.js
     { src: 'https://cdn.jsdelivr.net/npm/chart.js' },
-   
-    { src: 'https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js' }, // Thêm Axios CDN
-  
-  // Bootstrap JS
-    { src: 'https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js' },
-
+    { src: 'https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js' },
+    { src: 'https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js' }
   ]
 })
 </script>
 
-<style>
-/* Các kiểu dáng cho nav, logo và button */
-.nav {
-  /* Định dạng cho nav */
-}
+<style scoped>
 
-.logo {
-  /* Định dạng cho logo */
-}
-
-.auth-buttons .btn {
-  /* Định dạng cho button đăng nhập và đăng ký */
-}
-
-.auth-buttons .btn-primary {
-  /* Định dạng cho button đăng ký */
-}
 </style>

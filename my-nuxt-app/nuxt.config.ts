@@ -10,8 +10,10 @@ export default defineNuxtConfig({
     '~/plugins/vuestic-ui.ts', // Đường dẫn plugin Vuestic UI
     '~/plugins/qrcode.js',
     '~/plugins/bootstrap.client.ts',
+    '~/plugins/pinia.js'
   
   ],
+  
   pages: true, // Kích hoạt tự động định tuyến trang
   runtimeConfig: {
     public: {
