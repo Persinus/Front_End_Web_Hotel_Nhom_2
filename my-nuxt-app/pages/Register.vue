@@ -1,3 +1,13 @@
+
+<!-- Trang Thọ Code xin đừng động vào  -->
+<!-- Trang Thọ Code xin đừng động vào  -->
+<!-- Trang Thọ Code xin đừng động vào  -->
+<!-- Trang Thọ Code xin đừng động vào  -->
+<!-- Trang Thọ Code xin đừng động vào  -->
+<!-- Trang Thọ Code xin đừng động vào  -->
+<!-- Trang Thọ Code xin đừng động vào  -->
+
+
 <template>
   <div class="register-page min-h-screen flex items-center justify-center bg-white">
     <div class="register-container max-w-5xl w-full p-6 flex flex-col md:flex-row">

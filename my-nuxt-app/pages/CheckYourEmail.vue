@@ -1,3 +1,11 @@
+<!-- Trang Thọ Code xin đừng động vào  -->
+<!-- Trang Thọ Code xin đừng động vào  -->
+<!-- Trang Thọ Code xin đừng động vào  -->
+<!-- Trang Thọ Code xin đừng động vào  -->
+<!-- Trang Thọ Code xin đừng động vào  -->
+<!-- Trang Thọ Code xin đừng động vào  -->
+<!-- Trang Thọ Code xin đừng động vào  -->
+
 <template>
   <div class="check-email-page min-h-screen flex items-center justify-center bg-white">
     <div class="check-email-container max-w-md w-full px-6 py-12 text-center">

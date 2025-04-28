@@ -1,6 +1,4 @@
-import { defineNuxtPlugin } from '#app';
-import { createVuestic} from 'vuestic-ui';
-import 'vuestic-ui/dist/vuestic-ui.css';
+import { createVuestic } from 'vuestic-ui';
 
 export default defineNuxtPlugin((nuxtApp) => {
   nuxtApp.vueApp.use(createVuestic());

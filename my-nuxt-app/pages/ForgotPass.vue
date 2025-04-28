@@ -1,3 +1,11 @@
+<!-- Trang Thọ Code xin đừng động vào  -->
+<!-- Trang Thọ Code xin đừng động vào  -->
+<!-- Trang Thọ Code xin đừng động vào  -->
+<!-- Trang Thọ Code xin đừng động vào  -->
+<!-- Trang Thọ Code xin đừng động vào  -->
+<!-- Trang Thọ Code xin đừng động vào  -->
+<!-- Trang Thọ Code xin đừng động vào  -->
+
 <template>
   <div class="forgot-password-page min-h-screen flex items-center justify-center bg-white">
     <div class="forgot-form-container max-w-md w-full p-6">

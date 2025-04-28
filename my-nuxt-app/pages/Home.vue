@@ -1,27 +1,36 @@
+<!-- Trang Mạnh Code xin đừng động vào  -->
+<!-- Trang Mạnh Code xin đừng động vào  -->
+<!-- Trang Mạnh Code xin đừng động vào  -->
+<!-- Trang Mạnh Code xin đừng động vào  -->
+<!-- Trang Mạnh Code xin đừng động vào  -->
+<!-- Trang Mạnh Code xin đừng động vào  -->
+<!-- Trang Mạnh Code xin đừng động vào  -->
+
+
+
 <template>
   <div class="home-container">
     <!-- Header -->
     <TheHeader />
 
-    <!-- Promo Banner moved to top -->
-    <PromoBanner />
-
     <!-- Slideshow -->
-    <va-card class="slideshow" flat>
+    <div class="slideshow">
       <img :src="slides[currentSlide]" class="slide-img" />
-      <div class="slide-controls">
-        <va-button icon="chevron_left" @click="prevSlide" />
-        <va-button icon="chevron_right" @click="nextSlide" />
+      <div class="slide-overlay">
+        <h1>Chào mừng đến với OceanView Resort & Hotel</h1>
+        <p>Trải nghiệm kỳ nghỉ tuyệt vời với dịch vụ đẳng cấp và view biển thơ mộng.</p>
+        <va-button color="white" text-color="primary" class="explore-btn">Khám phá ngay</va-button>
       </div>
-    </va-card>
+    </div>
 
-    <!-- Giới thiệu -->
-    <va-card class="section about" outlined>
+    <!-- Video giới thiệu -->
+    <div class="video-section">
       <h2>Giới thiệu về khách sạn</h2>
-      <p>
-        Trải nghiệm sang trọng, đẳng cấp tại trung tâm thành phố biển Đà Nẵng. OceanView Resort & Hotel mang đến cho bạn kỳ nghỉ tuyệt vời với view biển thơ mộng, tiện nghi hiện đại và dịch vụ tận tâm.
-      </p>
-    </va-card>
+      <video controls autoplay muted loop class="intro-video">
+        <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4" />
+        Trình duyệt của bạn không hỗ trợ video.
+      </video>
+    </div>
 
     <!-- Dịch vụ nổi bật -->
     <va-card class="section services" outlined>
@@ -47,21 +56,6 @@
       <va-button color="white" text-color="primary" class="mt-2">Đặt ngay</va-button>
     </va-card>
 
-    <!-- Slogan & địa chỉ -->
-    <va-card class="slogan" outlined>
-      <h2>🌟 OceanView Resort & Hotel 🌟</h2>
-      <p>
-        Chào mừng quý khách đến với OceanView Resort & Hotel, tọa lạc ngay bên bờ biển Mỹ Khê – một trong những bãi biển đẹp nhất hành tinh. Khách sạn chúng tôi là điểm dừng chân lý tưởng cho chuyến nghỉ dưỡng, hội họp, hay chuyến du lịch khám phá Đà Nẵng của quý khách.
-      </p>
-      <va-list class="slogan-list">
-        <va-list-item>📍 Lô 29, Võ Nguyên Giáp, Quận Sơn Trà, TP. Đà Nẵng</va-list-item>
-        <va-list-item>🚗 Cách trung tâm chỉ 10 phút lái xe</va-list-item>
-        <va-list-item>🗺 Gần các điểm nổi bật: Ngũ Hành Sơn, Cầu Rồng, Hội An</va-list-item>
-        <va-list-item>🍜 Ẩm thực miền Trung đặc sắc, hải sản tươi sống</va-list-item>
-        <va-list-item>🏊‍♀️ Hồ bơi vô cực, spa cao cấp, buffet sáng miễn phí</va-list-item>
-      </va-list>
-    </va-card>
-
     <!-- Footer -->
     <TheFooter />
   </div>
@@ -71,7 +65,6 @@
 import { ref, onMounted } from 'vue'
 import TheHeader from '../Components/Header.vue'
 import TheFooter from '../Components/Footer.vue'
-import PromoBanner from '../Components/PromoBanner.vue'
 
 const slides = [
   'https://images.unsplash.com/photo-1600047509510-0e322f6cc73f',
@@ -122,28 +115,68 @@ const services = ref([
   font-family: 'Segoe UI', sans-serif;
   padding-bottom: 40px;
 }
+
 .slideshow {
   position: relative;
-  height: 400px;
+  height: 500px;
   overflow: hidden;
   margin-bottom: 30px;
 }
+
 .slide-img {
   width: 100%;
   height: 100%;
   object-fit: cover;
 }
-.slide-controls {
+
+.slide-overlay {
   position: absolute;
-  bottom: 16px;
-  right: 16px;
-  display: flex;
-  gap: 10px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  color: white;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
 }
+
+.slide-overlay h1 {
+  font-size: 2.5rem;
+  margin-bottom: 10px;
+}
+
+.slide-overlay p {
+  font-size: 1.2rem;
+}
+
+.explore-btn {
+  margin-top: 20px;
+  font-size: 1rem;
+  padding: 10px 20px;
+  border-radius: 5px;
+}
+
+.video-section {
+  text-align: center;
+  margin: 40px 20px;
+}
+
+.video-section h2 {
+  margin-bottom: 20px;
+  font-size: 2rem;
+}
+
+.intro-video {
+  width: 100%;
+  max-width: 800px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
 .section {
   margin: 40px 20px;
   padding: 20px;
 }
+
 .cards {
   display: flex;
   flex-wrap: wrap;
@@ -151,24 +184,20 @@ const services = ref([
   justify-content: center;
   margin-top: 20px;
 }
+
 .card {
   width: 260px;
 }
+
 .card-img {
   width: 100%;
   height: 160px;
   object-fit: cover;
 }
+
 .promo {
   text-align: center;
   padding: 50px 20px;
   margin: 40px 20px;
-}
-.slogan {
-  margin: 40px 20px;
-  padding: 30px;
-}
-.slogan-list {
-  margin-top: 20px;
 }
 </style>
