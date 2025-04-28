@@ -1,5 +1,5 @@
 <template>
-  <header class="header">
+  <header :class="['header', { 'dark': theme.isDarkMode }]">
     <div class="container">
       <!-- Logo -->
       <NuxtLink class="logo" to="/">🏨 OceanView</NuxtLink>
@@ -31,36 +31,85 @@
           <NuxtLink to="/register" class="btn btn-primary">Đăng ký</NuxtLink>
         </div>
       </nav>
+
+      <!-- Settings Icon and Dropdown -->
+      <div class="settings-dropdown">
+        <button @click="toggleSettingsDropdown" class="settings-icon">
+          <span class="gear-icon">⚙️</span>
+        </button>
+        <div v-if="isSettingsDropdownOpen" class="settings-menu">
+          <div>
+            <label for="darkModeSwitch">Chế độ tối:</label>
+            <input
+              id="darkModeSwitch"
+              type="checkbox"
+              v-model="isDarkMode"
+              @change="toggleDarkMode"
+            />
+          </div>
+          <div>
+            <label for="languageSwitch">Ngôn ngữ:</label>
+            <select id="languageSwitch" v-model="selectedLanguage" @change="changeLanguage">
+              <option value="vi">Tiếng Việt</option>
+              <option value="en">English</option>
+            </select>
+          </div>
+        </div>
+      </div>
     </div>
   </header>
 </template>
 
 <script setup>
 import { ref } from 'vue'
+import { useThemeStore } from '@/store/DarkMode'
+
+const theme = useThemeStore()
 
 const navItems = [
   { title: 'Trang chủ', link: '/' },
-  { title: 'Đặt phòng', link: '/booking' },
+  { title: 'Đặt phòng', link: '/Phong' },
   { title: 'Dịch vụ', link: '/service' },
   { title: 'Ưu đãi', link: '/promotions' },
   { title: 'Tài khoản', link: '/account' },
 ]
 
 const isMenuOpen = ref(false)
+const isSettingsDropdownOpen = ref(false)
+const selectedLanguage = ref('vi')
 
+// Toggle mobile menu
 const toggleMenu = () => {
   isMenuOpen.value = !isMenuOpen.value
 }
 
+// Close mobile menu
 const closeMenu = () => {
   isMenuOpen.value = false
+}
+
+// Toggle settings dropdown
+const toggleSettingsDropdown = () => {
+  isSettingsDropdownOpen.value = !isSettingsDropdownOpen.value
+}
+
+// Toggle dark mode
+const isDarkMode = computed(() => theme.isDarkMode)
+const toggleDarkMode = () => {
+  theme.toggleDarkMode()  // Update dark mode state in store
+}
+
+// Change language (placeholder for now)
+const changeLanguage = () => {
+  // Logic for changing language will go here in the future
+  console.log(`Language changed to: ${selectedLanguage.value}`)
 }
 </script>
 
 <style scoped>
 /* Header styles */
 .header {
-  background-color: #ffffff;
+  background-color: #ffffff; /* Màu nền sáng cho chế độ sáng */
   color: #333;
   padding: 10px 20px;
   display: flex;
@@ -72,6 +121,13 @@ const closeMenu = () => {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
+/* Dark mode styles */
+.header.dark {
+  background-color: #003366; /* Màu xanh dương đậm cho chế độ tối */
+  color: white; /* Chữ trắng khi ở chế độ tối */
+}
+
+/* Container styles */
 .container {
   display: flex;
   align-items: center;
@@ -81,11 +137,17 @@ const closeMenu = () => {
   margin: 0 auto;
 }
 
+/* Logo styles */
 .logo {
   font-size: 1.5rem;
   font-weight: bold;
   text-decoration: none;
   color: #4caf50;
+}
+
+/* Dark mode logo */
+.header.dark .logo {
+  color: #81c784;
 }
 
 /* Menu toggle button */
@@ -147,6 +209,11 @@ const closeMenu = () => {
   font-size: 1rem;
 }
 
+/* Dark mode navigation links */
+.header.dark .nav-link {
+  color: white;
+}
+
 .nav-link:hover,
 .nav-link.active {
   color: #4caf50;
@@ -189,37 +256,45 @@ const closeMenu = () => {
   background: #388e3c;
 }
 
-/* Responsive styles */
-@media (max-width: 768px) {
-  .menu-toggle {
-    display: block;
-  }
+/* Settings dropdown styles */
+.settings-dropdown {
+  position: relative;
+}
 
-  .nav {
-    position: absolute;
-    top: 100%;
-    left: 0;
-    width: 100%;
-    background-color: #ffffff;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 10px;
-    padding: 10px 20px;
-    display: none;
-  }
+.settings-icon {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1.5rem;
+}
 
-  .nav-open {
-    display: flex;
-  }
+.settings-menu {
+  position: absolute;
+  top: 35px;
+  right: 0;
+  background-color: white;
+  padding: 10px;
+  border: 1px solid #ccc;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  width: 200px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
 
-  .auth-buttons {
-    flex-direction: column;
-    gap: 10px;
-    margin-top: 10px;
-  }
+.settings-menu label {
+  font-size: 1rem;
+}
 
-  .auth-buttons .btn {
-    width: 100%;
-  }
+/* Dark mode styles for settings menu */
+.header.dark .settings-menu {
+  background-color: #333;
+  color: white;
+}
+
+.settings-menu select,
+.settings-menu input[type="checkbox"] {
+  padding: 5px;
+  border-radius: 5px;
 }
 </style>
