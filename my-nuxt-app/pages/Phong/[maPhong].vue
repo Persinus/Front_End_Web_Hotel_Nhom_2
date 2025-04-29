@@ -41,13 +41,20 @@
 
       <div class="actions">
         <va-button
-          :disabled="room.tinhTrang !== '1'"
-          color="primary"
-          class="book-button"
-          @click="bookRoom"
-        >
-          📩 Đặt phòng
-        </va-button>
+  :disabled="room.tinhTrang !== '1'"
+  color="primary"
+  class="book-button"
+>
+  <nuxt-link
+    :to="{
+      name: 'DatPhong',
+      params: { maPhong: room.maPhong }
+    }"
+    class="link-inside-button"
+  >
+    📩 Đặt phòng
+  </nuxt-link>
+</va-button>
         <va-button color="secondary" class="share-button" @click="shareRoom">
           📤 Chia sẻ phòng
         </va-button>
