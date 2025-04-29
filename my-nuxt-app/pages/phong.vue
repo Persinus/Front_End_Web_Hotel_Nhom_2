@@ -1,5 +1,8 @@
 <template>
-  <div class="container">
+  <header>
+    <TheHeader />
+  </header>
+  <div :class="['container', { 'dark-mode': themeStore.isDarkMode }]">
     <h1 class="header">Danh Sách Phòng</h1>
 
     <!-- Form lọc -->
@@ -34,46 +37,61 @@
       </div>
     </div>
 
-    <!-- Loading skeleton -->
-    <va-loading v-if="loading" />
-
-    <div v-if="error" class="error-message">
-      Lỗi: {{ error }}
-    </div>
-
-    <!-- Skeleton loading effect -->
-    <div v-if="loading" class="skeleton-loading">
-      <div class="skeleton-card" v-for="n in 4" :key="n"></div>
-    </div>
-
-    <!-- Danh sách phòng -->
-    <div v-else-if="filteredRooms.length" class="services-grid">
-      <div
-        v-for="room in filteredRooms"
-        :key="room.maPhong"
-        class="room-card animate__animated animate__fadeInUp"
-      >
-        <img :src="room.urlAnhChinh" alt="Hình ảnh phòng" class="room-image" />
-        <h2 class="room-title">{{ room.loaiPhong }}</h2>
-        <p class="room-price">Giá: <strong>{{ room.giaPhong }} VND</strong></p>
-        <p class="room-floor">Tầng: {{ room.tang }}</p>
-        <p class="room-bed-type">Kiểu giường: {{ room.kieuGiuong }}</p>
-        <span class="room-status" :class="room.trangThai === 'Còn trống' ? 'available' : 'booked'">{{ room.trangThai }}</span>
-        <nuxt-link :to="`/phong/${room.maPhong}`" class="view-details">Xem Chi Tiết</nuxt-link>
-        <button @click="addToCart(room)" class="add-to-cart-btn">🛒 Thêm vào giỏ</button>
+    <!-- Loading Skeleton -->
+    <VaInnerLoading :loading="loading" color="danger" type="rectangle-bounce">
+      <div v-if="error" class="error-message">
+        Lỗi: {{ error }}
       </div>
-    </div>
 
-    <!-- Nếu không có phòng -->
-    <va-alert v-else v-if="!loading" type="info" class="no-services">
-      Không có phòng nào.
-    </va-alert>
+      <!-- Danh sách phòng -->
+      <div v-else-if="filteredRooms.length" class="services-grid">
+        <VaCard
+          v-for="room in filteredRooms"
+          :key="room.maPhong"
+          class="room-card"
+          outlined
+        >
+          <img :src="room.urlAnhChinh" alt="Hình ảnh phòng" class="room-image" />
+          <VaCardTitle>
+            <div class="room-title">{{ room.loaiPhong }}</div>
+          </VaCardTitle>
+          <VaCardContent>
+            <p class="room-price">Giá: <strong>{{ room.giaPhong.toLocaleString() }} VND</strong></p>
+            <p class="room-floor">Tầng: {{ room.tang }}</p>
+            <p class="room-bed-type">Kiểu giường: {{ room.kieuGiuong }}</p>
+            <span
+              class="room-status"
+              :class="room.trangThai === 'Còn trống' ? 'available' : 'booked'"
+            >
+              {{ room.trangThai }}
+            </span>
+          </VaCardContent>
+          <VaCardActions>
+            <nuxt-link :to="`/phong/${room.maPhong}`" class="view-details">
+      <VaButton color="primary">Xem Chi Tiết</VaButton>
+    </nuxt-link>
+            <VaButton color="success" @click="addToCart(room)">🛒 Thêm vào giỏ</VaButton>
+          </VaCardActions>
+        </VaCard>
+      </div>
+
+      <!-- Nếu không có phòng -->
+      <VaAlert v-else v-if="!loading" type="info" class="no-services">
+        Không có phòng nào.
+      </VaAlert>
+    </VaInnerLoading>
   </div>
 </template>
 
 <script setup>
 import { ref, onMounted } from 'vue'
 import { useNuxtApp } from '#app'
+import { useThemeStore } from '~/store/DarkMode'
+import TheHeader from '../Components/Header.vue'
+import TheFooter from '../Components/Footer.vue'
+import { VaInnerLoading, VaCard, VaCardTitle, VaCardContent, VaCardActions, VaButton, VaAlert } from 'vuestic-ui'
+ 
+const themeStore = useThemeStore()
 
 const rooms = ref([])
 const filteredRooms = ref([])
@@ -84,6 +102,7 @@ const filters = ref({ maPhong: '', loaiPhong: '', giaPhong: '', tang: '', trangT
 const { $api } = useNuxtApp()
 
 onMounted(async () => {
+  themeStore.initializeDarkMode()
   try {
     const response = await $api.get('/PhongWithTienNghi')
     if (Array.isArray(response.data)) {
@@ -120,6 +139,14 @@ const sortRooms = (order) => {
 const addToCart = (room) => {
   alert(`Đã thêm phòng ${room.loaiPhong} vào giỏ hàng!`)
 }
+const viewRoomDetail = (maPhong) => {
+  // Programmatically navigate to the room detail page
+  this.$router.push(`/phong/${maPhong}`);
+
+  // Show an alert
+  alert(`Xem chi tiết phòng ${maPhong}`);
+};
+
 </script>
 
 <style scoped>
@@ -129,6 +156,11 @@ const addToCart = (room) => {
 
 .header {
   text-align: center;
+  margin-bottom: 20px;
+}
+
+.dark-mode-switch {
+  text-align: right;
   margin-bottom: 20px;
 }
 
@@ -246,5 +278,44 @@ button:hover {
 
 .view-details:hover {
   background-color: #0056b3;
+}
+
+/* Dark Mode Styles */
+.container.dark-mode {
+  background-color: #2c3e50;
+  color: #f0f0f0;
+}
+
+.container.dark-mode .filter-form {
+  background-color: #34495e;
+}
+
+.container.dark-mode .filter-group input,
+.container.dark-mode .filter-group select {
+  background-color: #2c3e50;
+  color: #f0f0f0;
+  border: 1px solid #555;
+}
+
+.container.dark-mode button {
+  background-color: #1abc9c;
+}
+
+.container.dark-mode button:hover {
+  background-color: #16a085;
+}
+
+.container.dark-mode .room-card {
+  background-color: #34495e;
+  color: #f0f0f0;
+  border: 1px solid #555;
+}
+
+.container.dark-mode .room-status.available {
+  color: #2ecc71;
+}
+
+.container.dark-mode .room-status.booked {
+  color: #e74c3c;
 }
 </style>

@@ -1,110 +1,131 @@
 <template>
   <footer class="footer">
     <div class="footer-container">
-      <!-- Thông tin liên hệ -->
-      <div class="footer-section contact">
-        <h3>OceanView Resort & Hotel</h3>
-        <p>Lô 29, Đường Võ Nguyên Giáp, Quận Sơn Trà, Đà Nẵng</p>
-        <p>📞 0236 123 4567 | ✉️ contact@oceanview.vn</p>
+      <!-- Thông tin công ty -->
+      <div class="footer-section company-info">
+        <img src="../Assets/logo.png" alt="Logo Mixivivu" class="logo" />
+        <p>Công ty TNHH Du Lịch và Dịch Vụ Mixivivu</p>
+        <p>
+          Tầng 7, số nhà 25, ngõ 38 phố Yên Lãng,<br />
+          phường Láng Hạ, quận Đống Đa, TP. Hà Nội
+        </p>
+        <p>
+          Mã số doanh nghiệp: 0110376372<br />
+          do Sở Kế hoạch và Đầu tư TP. Hà Nội cấp ngày 05/06/2023
+        </p>
       </div>
 
-      <!-- Mạng xã hội -->
-      <div class="footer-section social">
-        <h3>Kết nối với chúng tôi</h3>
-        <div class="social-icons">
-          <a href="#" target="_blank" aria-label="Facebook">
-            <i class="fab fa-facebook-f"></i>
-          </a>
-          <a href="#" target="_blank" aria-label="Instagram">
-            <i class="fab fa-instagram"></i>
-          </a>
-          <a href="#" target="_blank" aria-label="Twitter">
-            <i class="fab fa-twitter"></i>
-          </a>
-        </div>
+      <!-- Cột giới thiệu -->
+      <div class="footer-section">
+        <h3>Giới thiệu</h3>
+        <ul>
+          <li><a href="/about">Về chúng tôi</a></li>
+          <li><a href="/terms">Điều khoản và điều kiện</a></li>
+          <li><a href="/privacy">Chính sách riêng tư</a></li>
+          <li><a href="/guide">Hướng dẫn sử dụng</a></li>
+          <li><a href="/payment">Hình thức thanh toán</a></li>
+          <li><a href="/contact">Liên hệ</a></li>
+        </ul>
       </div>
 
-      <!-- Bản quyền -->
-      <div class="footer-section copy">
-        <p>© {{ new Date().getFullYear() }} OceanView Hotel Management</p>
+      <!-- Cột điểm đến -->
+      <div class="footer-section">
+        <h3>Điểm đến</h3>
+        <ul>
+          <li><a href="/ha-long">Hạ Long</a></li>
+          <li><a href="/ha-noi">Hà Nội</a></li>
+          <li><a href="/sapa">Sapa</a></li>
+          <li><a href="/ninh-binh">Ninh Bình</a></li>
+          <li><a href="/da-nang">Đà Nẵng</a></li>
+          <li><a href="/da-lat">Đà Lạt</a></li>
+          <li><a href="/nha-trang">Nha Trang</a></li>
+          <li><a href="/phu-quoc">Phú Quốc</a></li>
+          <li><a href="/quy-nhon">Quy Nhơn</a></li>
+        </ul>
       </div>
+
+      <!-- Cột khách sạn -->
+      <div class="footer-section">
+        <h3>Khách sạn</h3>
+        <ul>
+          <li><a href="/blog">Blog</a></li>
+          <li><a href="/rules">Quy định chung và lưu ý</a></li>
+          <li><a href="/faq">Câu hỏi thường gặp</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>Hotline: 0922222016 | Email: info@mixivivu.com</p>
     </div>
   </footer>
 </template>
 
 <script setup>
+// Không cần JS bổ sung cho component này
 </script>
 
 <style scoped>
 .footer {
-  background-color: #2c3e50;
-  color: white;
+  background-color: #0a1a32;
+  color: #fff;
   padding: 40px 20px;
-  margin-top: 50px;
+  font-size: 14px;
 }
 
 .footer-container {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
+
   align-items: center;
   gap: 20px;
+
 }
 
 .footer-section {
   flex: 1;
-  min-width: 250px;
+
 }
 
-.contact h3,
-.social h3 {
-  margin-bottom: 10px;
-  font-size: 1.2rem;
+.footer-section h3 {
+  font-size: 16px;
+ 
 }
+
 
 .social-icons {
   display: flex;
   justify-content: center;
   gap: 15px;
+
 }
 
-.social-icons a {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 40px;
-  height: 40px;
-  background-color: rgba(255, 255, 255, 0.2);
-  border-radius: 50%;
-  color: white;
-  font-size: 1.2rem;
-  transition: background-color 0.3s, transform 0.3s;
+.footer-section ul li a {
+  color: #b0c7f1;
+  text-decoration: none;
+  transition: color 0.3s ease;
 }
 
-.social-icons a:hover {
-  background-color: rgba(255, 255, 255, 0.4);
-  transform: scale(1.1);
+.footer-section ul li a:hover {
+  color: #fff;
 }
 
-.copy {
+.logo {
+  max-width: 120px;
+  margin-bottom: 15px;
+}
+
+.footer-bottom {
   text-align: center;
-  font-size: 0.9rem;
+  margin-top: 20px;
+  font-size: 14px;
   color: #b0b0b0;
 }
 
 @media (max-width: 768px) {
   .footer-container {
     flex-direction: column;
-    align-items: center;
     text-align: center;
-  }
-
-  .footer-section {
-    margin-bottom: 20px;
-  }
-
-  .copy {
-    margin-top: 20px;
   }
 }
 </style>

@@ -1,6 +1,3 @@
-
-
-// nuxt.config.js
 export default defineNuxtConfig({
   compatibilityDate: '2024-11-01', // Đảm bảo sử dụng phiên bản tương thích
   devtools: { enabled: true }, // Bật công cụ devtools
@@ -10,7 +7,7 @@ export default defineNuxtConfig({
     '~/plugins/vuestic-ui.ts', // Đường dẫn plugin Vuestic UI
     '~/plugins/qrcode.js',
     '~/plugins/bootstrap.client.ts',
-    '~/plugins/pinia.js'
+    '~/plugins/pinia.js',
   
   ],
   
