@@ -10,7 +10,11 @@
     "postinstall": "nuxt prepare"
   },
   "dependencies": {
+
+
     "@chenfengyuan/vue-qrcode": "^2.0.0",
+
+
     "@mdi/font": "^7.4.47",
     "@nuxtjs/i18n": "^9.5.3",
     "@nuxtjs/proxy": "^2.1.0",

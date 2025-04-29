@@ -72,21 +72,26 @@
 </template>
 
 <script setup>
-import { ref, computed } from 'vue'
-import { useThemeStore } from '@/store/DarkMode'
 
-const theme = useThemeStore()
+import { ref, computed } from 'vue';
+import { useThemeStore } from '@/store/DarkMode';
+
+
+const theme = useThemeStore();
 
 const navItems = [
   { title: 'Trang chủ', link: '/' },
   { title: 'Đặt phòng', link: '/Phong' },
   { title: 'Dịch vụ', link: '/service' },
   { title: 'Ưu đãi', link: '/promotions' },
-]
 
-const isMenuOpen = ref(false)
-const isSettingsDropdownOpen = ref(false)
-const selectedLanguage = ref('vi')
+  { title: 'Tài khoản', link: '/account' },
+];
+
+
+const isMenuOpen = ref(false);
+const isSettingsDropdownOpen = ref(false);
+const selectedLanguage = ref('vi');
 
 // Giả lập trạng thái đăng nhập
 const isLoggedIn = ref(false) // Đổi thành `true` nếu đã đăng nhập
@@ -94,29 +99,31 @@ const username = ref('Nguyễn Văn A') // Tên người dùng khi đã đăng n
 
 // Toggle mobile menu
 const toggleMenu = () => {
-  isMenuOpen.value = !isMenuOpen.value
-}
+  isMenuOpen.value = !isMenuOpen.value;
+};
 
 // Close mobile menu
 const closeMenu = () => {
-  isMenuOpen.value = false
-}
+  isMenuOpen.value = false;
+};
 
 // Toggle settings dropdown
 const toggleSettingsDropdown = () => {
-  isSettingsDropdownOpen.value = !isSettingsDropdownOpen.value
-}
+  isSettingsDropdownOpen.value = !isSettingsDropdownOpen.value;
+};
 
 // Toggle dark mode
-const isDarkMode = computed(() => theme.isDarkMode)
+const isDarkMode = computed(() => theme.isDarkMode);
 const toggleDarkMode = () => {
-  theme.toggleDarkMode()
-}
+
+  theme.toggleDarkMode();
+};
 
 // Change language (placeholder for now)
 const changeLanguage = () => {
-  console.log(`Language changed to: ${selectedLanguage.value}`)
-}
+  console.log(`Language changed to: ${selectedLanguage.value}`);
+};
+
 </script>
 
 <style scoped>
@@ -292,5 +299,12 @@ const changeLanguage = () => {
 .header.dark .settings-menu {
   background-color: #333;
   color: white;
+}
+
+
+.settings-menu select,
+.settings-menu input[type="checkbox"] {
+  padding: 5px;
+  border-radius: 5px;
 }
 </style>

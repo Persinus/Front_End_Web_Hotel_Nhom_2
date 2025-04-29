@@ -76,7 +76,10 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-  
+
+  align-items: center;
+  gap: 20px;
+
 }
 
 .footer-section {
@@ -89,13 +92,12 @@
  
 }
 
-.footer-section ul {
-  list-style: none;
-  padding: 0;
-}
 
-.footer-section ul li {
-  margin-bottom: 5px;
+.social-icons {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+
 }
 
 .footer-section ul li a {
