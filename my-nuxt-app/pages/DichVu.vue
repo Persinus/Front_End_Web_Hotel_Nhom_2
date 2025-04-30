@@ -24,7 +24,7 @@
     <div class="service-cards">
       <va-card
         v-for="service in filteredServices"
-        :key="service.maDichVu"
+        :key="service.maChiTietDichVu"
         class="service-card"
         outlined
       >
@@ -40,12 +40,9 @@
           </p>
         </va-card-content>
         <va-card-actions>
-          <va-button
-            color="primary"
-            @click="viewServiceDetail(service.maDichVu)"
-          >
-            Xem chi tiết
-          </va-button>
+          <nuxt-link :to="`/DichVu/${service.maChiTietDichVu}`" >
+            <va-button color="primary">Xem Chi Tiết</va-button>
+          </nuxt-link>
         </va-card-actions>
       </va-card>
     </div>
@@ -98,9 +95,7 @@ const filteredServices = computed(() => {
   })
 })
 
-const viewServiceDetail = (maDichVu) => {
-  router.push(`/DichVu/${maDichVu}`)
-}
+
 </script>
 
 <style scoped>

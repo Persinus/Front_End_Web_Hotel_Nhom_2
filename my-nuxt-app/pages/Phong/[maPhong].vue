@@ -1,6 +1,9 @@
 <!-- Trang Mạnh Code xin đừng động vào -->
 <template>
-  <div class="room-details-container">
+  <header>
+      <TheHeader />
+    </header> 
+  <div :class="['room-details-container', { 'dark-mode': theme.isDarkMode }]">
     <div class="room-gallery">
       <!-- Ảnh chính -->
       <div class="main-image" @click="openImage(0)">
@@ -41,20 +44,20 @@
 
       <div class="actions">
         <va-button
-  :disabled="room.tinhTrang !== '1'"
-  color="primary"
-  class="book-button"
->
-  <nuxt-link
-    :to="{
-      name: 'DatPhong',
-      params: { maPhong: room.maPhong }
-    }"
-    class="link-inside-button"
-  >
-    📩 Đặt phòng
-  </nuxt-link>
-</va-button>
+          :disabled="room.tinhTrang !== '1'"
+          color="primary"
+          class="book-button"
+        >
+          <nuxt-link
+            :to="{
+              name: 'DatPhong',
+              params: { maPhong: room.maPhong }
+            }"
+            class="link-inside-button"
+          >
+            📩 Đặt phòng
+          </nuxt-link>
+        </va-button>
         <va-button color="secondary" class="share-button" @click="shareRoom">
           📤 Chia sẻ phòng
         </va-button>
@@ -71,6 +74,10 @@
 import { ref, onMounted } from 'vue'
 import { useRoute } from 'vue-router'
 import { useNuxtApp } from '#app'
+import { useThemeStore } from '@/store/DarkMode'
+
+const theme = useThemeStore()
+theme.initializeDarkMode()
 
 const room = ref({ tienNghiList: [] })
 const loading = ref(true)
@@ -80,7 +87,7 @@ const route = useRoute()
 const { $api } = useNuxtApp()
 
 const maPhong = route.params.maPhong
-
+ import TheHeader from '../Components/Header.vue'
 const images = ref([])
 const subImages = ref([])
 const currentSlide = ref(0)
@@ -130,14 +137,6 @@ const shareRoom = async () => {
     alert('❌ Sao chép thất bại, vui lòng thử lại.')
   }
 }
-
-const bookRoom = () => {
-  if (room.value.tinhTrang === '1') {
-    alert('🎉 Đặt phòng thành công!')
-  } else {
-    alert('🚫 Phòng đã được đặt.')
-  }
-}
 </script>
 
 <style scoped>
@@ -148,6 +147,12 @@ const bookRoom = () => {
   padding: 20px;
   justify-content: center;
   align-items: stretch;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.room-details-container.dark-mode {
+  background-color: #2c3e50;
+  color: #f0f0f0;
 }
 
 .room-gallery {
@@ -207,12 +212,12 @@ const bookRoom = () => {
 }
 
 .modal-img {
-  max-width: 100vw; /* luôn tối đa theo chiều rộng màn hình */
-  max-height: 90vh; /* luôn tối đa theo chiều cao màn hình */
-  width: auto; /* tự động scale chiều ngang */
-  height: auto; /* tự động scale chiều cao */
+  max-width: 100vw;
+  max-height: 90vh;
+  width: auto;
+  height: auto;
   border-radius: 10px;
-  object-fit: contain; /* hình ảnh luôn fit trong khung mà không bị méo */
+  object-fit: contain;
 }
 
 .zoom-img {
@@ -238,8 +243,14 @@ const bookRoom = () => {
   justify-content: space-between;
   padding: 20px;
   border-radius: 10px;
-  background-color: #fff;
+  background-color: #e0b3ff; /* Màu tím nhạt */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.room-details-container.dark-mode .room-info {
+  background-color: #6a1b9a; /* Màu tím đậm cho Dark Mode */
+  color: #f0f0f0;
 }
 
 .info-content {
@@ -253,6 +264,10 @@ const bookRoom = () => {
   color: #2c3e50;
   border-bottom: 2px solid #4caf50;
   padding-bottom: 10px;
+}
+
+.room-details-container.dark-mode .room-title {
+  color: #000000;
 }
 
 .status-available {

@@ -1,4 +1,7 @@
 <template>
+   <header>
+      <TheHeader />
+    </header>
     <div class="booking-page">
       <!-- Bên trái: Thông tin phòng -->
       <div class="room-info">

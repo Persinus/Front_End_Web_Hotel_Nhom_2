@@ -1,4 +1,8 @@
 <template>
+  <header>
+      <TheHeader />
+    </header> 
+
     <div class="booking-page">
       <!-- Form tìm kiếm -->
       <div class="search-form">
@@ -72,7 +76,7 @@
   
   <script setup>
   import { ref, computed } from 'vue'
-  
+  import TheHeader from '../Components/Header.vue'
   const search = ref({
     checkIn: '',
     checkOut: '',

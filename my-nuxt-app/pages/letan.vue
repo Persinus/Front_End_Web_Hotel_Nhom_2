@@ -1,5 +1,5 @@
 <template>
-  <div class="letan-page">
+  <div :class="['letan-page', { 'dark-mode': theme.isDarkMode }]">
     <!-- Sidebar -->
     <VaSidebar color="primary" class="sidebar">
       <VaSidebarItem
@@ -110,8 +110,12 @@
 <script setup>
 import { ref, computed, onMounted } from 'vue';
 import { useNuxtApp } from '#app';
+import { useThemeStore } from '@/store/DarkMode';
 
 // States
+const theme = useThemeStore();
+theme.initializeDarkMode();
+
 const currentTab = ref('phong');
 const rooms = ref([]);
 const currentPage = ref(0); // Trang hiện tại
@@ -217,6 +221,12 @@ const getStatusClass = (status) => {
   display: flex;
   height: 100vh;
   overflow: hidden;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.letan-page.dark-mode {
+  background-color: #2c3e50;
+  color: #f0f0f0;
 }
 
 .sidebar {
@@ -243,14 +253,8 @@ const getStatusClass = (status) => {
   color: #333;
 }
 
-.section-title {
-  font-size: 1.5rem;
-  margin-bottom: 10px;
-}
-
-.section-description {
-  margin-bottom: 20px;
-  color: #666;
+.letan-page.dark-mode .page-title {
+  color: #f0f0f0;
 }
 
 /* Table styles */
@@ -274,77 +278,17 @@ const getStatusClass = (status) => {
   background-color: #f4f4f4;
 }
 
+.letan-page.dark-mode .custom-table th {
+  background-color: #34495e;
+  color: #f0f0f0;
+}
+
 .custom-table tr:nth-child(even) {
   background-color: #f9f9f9;
 }
 
-/* Pagination styles */
-.pagination {
-  margin-top: 20px;
-  display: flex;
-  justify-content: center;
-  gap: 10px;
-}
-
-.pagination button {
-  padding: 5px 10px;
-  border: none;
-  background-color: #e0e0e0;
-  cursor: pointer;
-}
-
-.pagination button.active {
-  background-color: #007bff;
-  color: white;
-}
-
-/* Modal styles */
-.modal {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background-color: white;
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-  z-index: 1000;
-}
-
-.modal-content {
-  max-width: 400px;
-}
-
-.modal-actions {
-  margin-top: 20px;
-  display: flex;
-  justify-content: flex-end;
-  gap: 10px;
-}
-
-.btn-primary {
-  background-color: #007bff;
-  color: white;
-  padding: 10px 15px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-.btn-secondary {
-  background-color: #ccc;
-  padding: 10px 15px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-.btn-primary:hover {
-  background-color: #0056b3;
-}
-
-.btn-secondary:hover {
-  background-color: #bbb;
+.letan-page.dark-mode .custom-table tr:nth-child(even) {
+  background-color: #3b4a5a;
 }
 
 /* Status styles */
