@@ -64,7 +64,7 @@ const bookService = () => {
 }
 
 const goBack = () => {
-  router.push('/Service')
+  router.push('/DichVu')
 }
 </script>
 

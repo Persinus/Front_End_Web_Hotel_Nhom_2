@@ -1,14 +1,11 @@
 <template>
-  <div :class="['rules-container', { 'dark-mode': isDarkMode }]">
+  <header>
+    <TheHeader />
+  </header>
+  <div :class="['rules-container', { 'dark-mode': theme.isDarkMode }]">
     <el-card shadow="hover" class="rules-card animated-card">
       <div class="header">
         <h1 class="rules-title">📜 Nội quy khách sạn</h1>
-        <el-switch
-          v-model="isDarkMode"
-          active-text="Dark Mode"
-          inactive-text="Light Mode"
-          class="dark-mode-switch"
-        />
       </div>
 
       <el-divider class="custom-divider" content-position="left">
@@ -42,15 +39,18 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { useThemeStore } from '@/store/DarkMode'
+import TheHeader from '../Components/Header.vue'
 
-const isDarkMode = ref(false)
+const theme = useThemeStore()
+
+// Khởi tạo trạng thái Dark Mode khi trang được tải
+theme.initializeDarkMode()
 </script>
 
 <style scoped>
 /* Layout chính */
 .rules-container {
-
   margin: 0 auto;
   padding: 40px 20px;
   background: linear-gradient(135deg, #f0f2f5, #e0e4eb);
@@ -110,13 +110,6 @@ const isDarkMode = ref(false)
 
 .rules-container.dark-mode .rules-title {
   color: #f0f0f0;
-}
-
-/* Switch chế độ Dark Mode */
-.dark-mode-switch {
-  position: absolute;
-  top: 20px;
-  right: 20px;
 }
 
 /* Divider tùy chỉnh */

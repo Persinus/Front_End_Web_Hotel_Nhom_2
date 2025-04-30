@@ -139,13 +139,7 @@ const sortRooms = (order) => {
 const addToCart = (room) => {
   alert(`Đã thêm phòng ${room.loaiPhong} vào giỏ hàng!`)
 }
-const viewRoomDetail = (maPhong) => {
-  // Programmatically navigate to the room detail page
-  this.$router.push(`/phong/${maPhong}`);
 
-  // Show an alert
-  alert(`Xem chi tiết phòng ${maPhong}`);
-};
 
 </script>
 
