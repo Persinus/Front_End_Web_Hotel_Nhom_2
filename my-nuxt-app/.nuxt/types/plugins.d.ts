@@ -26,8 +26,7 @@ type NuxtAppInjections =
   InjectionType<typeof import("../../plugins/bootstrap.client")> &
   InjectionType<typeof import("../../plugins/pinia.js")> &
   InjectionType<typeof import("../../plugins/Pinia.js")> &
-  InjectionType<typeof import("../../plugins/element-plus")> &
-  InjectionType<typeof import("../../plugins/i18n.js")>
+  InjectionType<typeof import("../../plugins/element-plus")>
 
 declare module '#app' {
   interface NuxtApp extends NuxtAppInjections { }
