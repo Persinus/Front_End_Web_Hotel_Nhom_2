@@ -1,8 +1,8 @@
 {
   "name": "nuxt-app",
- 
   "type": "module",
   "scripts": {
+     "start": "nuxt start",
     "build": "nuxt build",
     "dev": "nuxt dev",
     "generate": "nuxt generate",
