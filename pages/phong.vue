@@ -1,0 +1,310 @@
+<template>
+  <header>
+    <TheHeader />
+  </header>
+  <div :class="['container', { 'dark-mode': themeStore.isDarkMode }]">
+    <h1 class="header">{{ translations.title }}</h1>
+
+    <!-- Form lọc -->
+    <va-card outlined class="filter-form">
+      <div class="filter-group">
+        <label for="maPhong">{{ translations.roomId }}:</label>
+        <va-input
+          id="maPhong"
+          v-model="filters.maPhong"
+          :placeholder="translations.enterRoomId"
+          outlined
+          @input="filterRooms"
+        />
+      </div>
+      <div class="filter-group">
+        <label for="loaiPhong">{{ translations.roomType }}:</label>
+        <va-input
+          id="loaiPhong"
+          v-model="filters.loaiPhong"
+          :placeholder="translations.enterRoomType"
+          outlined
+          @input="filterRooms"
+        />
+      </div>
+      <div class="filter-group">
+        <label for="giaPhong">{{ translations.maxPrice }}:</label>
+        <va-input
+          id="giaPhong"
+          v-model="filters.giaPhong"
+          :placeholder="translations.enterMaxPrice"
+          outlined
+          type="number"
+          @input="filterRooms"
+        />
+      </div>
+      <div class="filter-group">
+        <label for="tang">{{ translations.floor }}:</label>
+        <va-input
+          id="tang"
+          v-model="filters.tang"
+          :placeholder="translations.enterFloor"
+          outlined
+          type="number"
+          @input="filterRooms"
+        />
+      </div>
+      <div class="filter-group">
+        <label for="trangThai">{{ translations.status }}:</label>
+        <va-select
+          id="trangThai"
+          v-model="filters.trangThai"
+          :options="[
+            { value: '', label: translations.all },
+            { value: 'Còn trống', label: translations.available },
+            { value: 'Đã đặt', label: translations.booked },
+          ]"
+          outlined
+          @change="filterRooms"
+        />
+      </div>
+      <div class="filter-actions">
+        <va-button color="primary" @click="sortRooms('asc')">{{ translations.sortAsc }}</va-button>
+        <va-button color="primary" @click="sortRooms('desc')">{{ translations.sortDesc }}</va-button>
+      </div>
+    </va-card>
+
+    <!-- Loading Skeleton -->
+    <VaInnerLoading :loading="loading" color="danger" type="rectangle-bounce">
+      <div v-if="error" class="error-message">
+        Lỗi: {{ error }}
+      </div>
+
+      <!-- Danh sách phòng -->
+      <div v-else-if="filteredRooms.length" class="services-grid">
+        <va-card
+          v-for="room in filteredRooms"
+          :key="room.maPhong"
+          class="room-card"
+          outlined
+        >
+          <img :src="room.urlAnhChinh" alt="Hình ảnh phòng" class="room-image" />
+          <va-card-title>
+            <div class="room-title">{{ room.loaiPhong }}</div>
+          </va-card-title>
+          <va-card-content>
+            <p class="room-price">{{ translations.price }}: <strong>{{ room.giaPhong.toLocaleString() }} VND</strong></p>
+            <p class="room-floor">{{ translations.floor }}: {{ room.tang }}</p>
+            <p class="room-bed-type">{{ translations.bedType }}: {{ room.kieuGiuong }}</p>
+            <span
+              class="room-status"
+              :class="room.trangThai === 'Còn trống' ? 'available' : 'booked'"
+            >
+              {{ room.trangThai === 'Còn trống' ? translations.available : translations.booked }}
+            </span>
+          </va-card-content>
+          <va-card-actions>
+            <nuxt-link :to="`/phong/${room.maPhong}`" class="view-details">
+              <va-button color="primary">{{ translations.viewDetails }}</va-button>
+            </nuxt-link>
+            <va-button color="success" @click="addToCart(room)">{{ translations.addToCart }}</va-button>
+          </va-card-actions>
+        </va-card>
+      </div>
+
+      <!-- Nếu không có phòng -->
+      <VaAlert v-else v-if="!loading" type="info" class="no-services">
+        {{ translations.noRooms }}
+      </VaAlert>
+    </VaInnerLoading>
+  </div>
+</template>
+
+<script setup>
+import { ref, computed, onMounted } from 'vue';
+import { useNuxtApp } from '#app';
+import { useThemeStore } from '~/store/DarkMode';
+import { useLanguageStore } from '~/store/Language';
+import TheHeader from '../Components/Header.vue';
+import TheFooter from '../Components/Footer.vue';
+import { VaInnerLoading, VaCard, VaCardTitle, VaCardContent, VaCardActions, VaButton, VaInput, VaSelect, VaAlert } from 'vuestic-ui';
+
+const themeStore = useThemeStore();
+const languageStore = useLanguageStore();
+
+const rooms = ref([]);
+const filteredRooms = ref([]);
+const loading = ref(true);
+const error = ref(null);
+const filters = ref({ maPhong: '', loaiPhong: '', giaPhong: '', tang: '', trangThai: '' });
+
+const { $api } = useNuxtApp();
+
+const translations = computed(() => {
+  const lang = languageStore.currentLanguage;
+  return {
+    title: lang === 'vn' ? 'Danh Sách Phòng' : 'Room List',
+    roomId: lang === 'vn' ? 'Mã phòng' : 'Room ID',
+    enterRoomId: lang === 'vn' ? 'Nhập mã phòng' : 'Enter Room ID',
+    roomType: lang === 'vn' ? 'Loại phòng' : 'Room Type',
+    enterRoomType: lang === 'vn' ? 'Nhập loại phòng' : 'Enter Room Type',
+    maxPrice: lang === 'vn' ? 'Giá tối đa' : 'Max Price',
+    enterMaxPrice: lang === 'vn' ? 'Nhập giá tối đa' : 'Enter Max Price',
+    floor: lang === 'vn' ? 'Tầng' : 'Floor',
+    enterFloor: lang === 'vn' ? 'Nhập tầng' : 'Enter Floor',
+    status: lang === 'vn' ? 'Trạng thái' : 'Status',
+    all: lang === 'vn' ? 'Tất cả' : 'All',
+    available: lang === 'vn' ? 'Còn trống' : 'Available',
+    booked: lang === 'vn' ? 'Đã đặt' : 'Booked',
+    sortAsc: lang === 'vn' ? 'Giá tăng dần' : 'Sort Ascending',
+    sortDesc: lang === 'vn' ? 'Giá giảm dần' : 'Sort Descending',
+    price: lang === 'vn' ? 'Giá' : 'Price',
+    bedType: lang === 'vn' ? 'Kiểu giường' : 'Bed Type',
+    viewDetails: lang === 'vn' ? 'Xem Chi Tiết' : 'View Details',
+    addToCart: lang === 'vn' ? 'Thêm vào giỏ' : 'Add to Cart',
+    noRooms: lang === 'vn' ? 'Không có phòng nào.' : 'No rooms available.',
+  };
+});
+
+onMounted(async () => {
+  themeStore.initializeDarkMode();
+  try {
+    const response = await $api.get('/PhongWithTienNghi');
+    if (Array.isArray(response.data)) {
+      rooms.value = response.data;
+      filteredRooms.value = response.data;
+    } else {
+      error.value = 'Dữ liệu trả về không đúng định dạng';
+    }
+  } catch (err) {
+    error.value = err.message;
+  } finally {
+    loading.value = false;
+  }
+});
+
+const filterRooms = () => {
+  filteredRooms.value = rooms.value.filter(room => {
+    return (
+      (filters.value.maPhong ? room.maPhong.includes(filters.value.maPhong) : true) &&
+      (filters.value.loaiPhong ? room.loaiPhong.includes(filters.value.loaiPhong) : true) &&
+      (filters.value.giaPhong ? room.giaPhong <= filters.value.giaPhong : true) &&
+      (filters.value.tang ? room.tang == filters.value.tang : true) &&
+      (filters.value.trangThai ? room.trangThai.includes(filters.value.trangThai) : true)
+    );
+  });
+};
+
+const sortRooms = (order) => {
+  filteredRooms.value = filteredRooms.value.sort((a, b) => {
+    return order === 'asc' ? a.giaPhong - b.giaPhong : b.giaPhong - a.giaPhong;
+  });
+};
+
+const addToCart = (room) => {
+  alert(`${translations.value.addToCart}: ${room.loaiPhong}`);
+};
+</script>
+
+<style scoped>
+.container {
+  padding: 20px;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.dark-mode-switch {
+  text-align: right;
+  margin-bottom: 20px;
+}
+
+.filter-form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  margin-bottom: 20px;
+  background-color: #f9f9f9;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.filter-group {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  flex: 1 1 calc(20% - 20px);
+}
+
+.filter-group label {
+  font-weight: bold;
+}
+
+.filter-actions {
+  display: flex;
+  gap: 10px;
+  flex: 1 1 100%;
+  justify-content: flex-end;
+}
+
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+.room-card {
+  border: 2px solid #ccc;
+  border-radius: 10px;
+  padding: 15px;
+  text-align: center;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s;
+}
+
+.room-card:hover {
+  transform: translateY(-5px);
+}
+
+.room-image {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 5px;
+}
+
+.room-status {
+  margin-top: 10px;
+  font-weight: bold;
+}
+
+.room-status.available {
+  color: green;
+}
+
+.room-status.booked {
+  color: red;
+}
+
+/* Dark Mode Styles */
+.container.dark-mode {
+  background-color: #2c3e50;
+  color: #f0f0f0;
+}
+
+.container.dark-mode .filter-form {
+  background-color: #34495e;
+}
+
+.container.dark-mode .room-card {
+  background-color: #34495e;
+  color: #f0f0f0;
+  border: 1px solid #555;
+}
+
+.container.dark-mode .room-status.available {
+  color: #2ecc71;
+}
+
+.container.dark-mode .room-status.booked {
+  color: #e74c3c;
+}
+</style>
