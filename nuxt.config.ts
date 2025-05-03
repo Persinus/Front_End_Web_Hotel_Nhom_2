@@ -1,5 +1,4 @@
-
-module.exports = defineNuxtConfig({
+export default defineNuxtConfig({
   compatibilityDate: '2024-11-01',
   devtools: { enabled: true },
   plugins: [
@@ -11,18 +10,20 @@ module.exports = defineNuxtConfig({
   ],
 
   nitro: {
-    preset: 'vercel', // Nitro preset cho Vercel
+    preset: 'vercel',
   },
-  ssr: true, // Chạy chế độ SSR (hoặc đặt false nếu SPA)
+
+  ssr: true,
   pages: true,
+
   runtimeConfig: {
+    apiBase: 'http://nhom2webkhachsan.runasp.net/api', // Chỉ dùng trong server
     public: {
-      apiBase: 'http://nhom2webkhachsan.runasp.net/api',
+      apiBase: '/api', // Sử dụng proxy hoặc middleware
     },
   },
+
   routeRules: {
-    // prerender index route by default
     '/': { prerender: true },
   },
-  
 });
