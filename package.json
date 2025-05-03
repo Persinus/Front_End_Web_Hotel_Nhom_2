@@ -7,7 +7,7 @@
     "dev": "nuxt dev",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
-    "postinstall": "nuxt prepare"
+   "postinstall": "echo Skipping nuxt prepare"
   },
   "dependencies": {
     "@chenfengyuan/vue-qrcode": "^2.0.0",
