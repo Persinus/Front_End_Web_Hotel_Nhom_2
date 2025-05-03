@@ -7,6 +7,7 @@ import vuestic_ui_hqacShNKIXnSGXRdnQVJxdKh5Qubw_dwVHT6INzPTHA from "../plugins/v
 import qrcode_bAGVCAwEAfUpSRXAcR75PuzMz3GzrPwt05qCBPgwl6M from "../plugins/qrcode.mjs";
 import Pinia_TaqBUrxeqb96wfLz1hRyFKYiTVI6IR8e1k1olmK4ayY from "../plugins/Pinia.mjs";
 import element_plus_h4WEk9dmnTz6XKdrgkoGJdGhsx59phe3Z9mq30V_CL8 from "../plugins/element-plus.mjs";
+import prerender_server_sqIxOBipVr4FbVMA9kqWL0wT8FPop6sKAXLVfifsJzk from "../node_modules/nuxt/dist/pages/runtime/plugins/prerender.server.mjs";
 const plugins = [
   unhead_k2P3m_ZDyjlr2mMYnoDPwavjsDN8hBlk9cFai0bbopU,
   plugin,
@@ -17,7 +18,8 @@ const plugins = [
   qrcode_bAGVCAwEAfUpSRXAcR75PuzMz3GzrPwt05qCBPgwl6M,
   Pinia_TaqBUrxeqb96wfLz1hRyFKYiTVI6IR8e1k1olmK4ayY,
   Pinia_TaqBUrxeqb96wfLz1hRyFKYiTVI6IR8e1k1olmK4ayY,
-  element_plus_h4WEk9dmnTz6XKdrgkoGJdGhsx59phe3Z9mq30V_CL8
+  element_plus_h4WEk9dmnTz6XKdrgkoGJdGhsx59phe3Z9mq30V_CL8,
+  prerender_server_sqIxOBipVr4FbVMA9kqWL0wT8FPop6sKAXLVfifsJzk
 ];
 export {
   plugins as default

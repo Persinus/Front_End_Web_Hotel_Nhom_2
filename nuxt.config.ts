@@ -9,6 +9,10 @@ module.exports = defineNuxtConfig({
     '~/plugins/bootstrap.client.ts',
     '~/plugins/pinia.js',
   ],
+  nitro: {
+    preset: 'vercel', // Nitro preset cho Vercel
+  },
+  ssr: true, // Chạy chế độ SSR (hoặc đặt false nếu SPA)
   pages: true,
   runtimeConfig: {
     public: {
@@ -19,5 +23,5 @@ module.exports = defineNuxtConfig({
     // prerender index route by default
     '/': { prerender: true },
   },
-
+  
 });
