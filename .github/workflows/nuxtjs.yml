@@ -2,7 +2,7 @@ name: Deploy Nuxt site to Pages  # Tên của workflow
 
 on:
   push:
-    branches: 
+    branches:
       - "main"  # Workflow được kích hoạt khi có sự kiện push vào nhánh 'main'
   workflow_dispatch:  # Cho phép bạn chạy workflow thủ công từ giao diện Actions trên GitHub
 
