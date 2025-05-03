@@ -9,6 +9,7 @@ module.exports = defineNuxtConfig({
     '~/plugins/bootstrap.client.ts',
     '~/plugins/pinia.js',
   ],
+
   nitro: {
     preset: 'vercel', // Nitro preset cho Vercel
   },
