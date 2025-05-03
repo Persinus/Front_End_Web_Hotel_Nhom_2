@@ -15,5 +15,9 @@ module.exports = defineNuxtConfig({
       apiBase: 'http://nhom2webkhachsan.runasp.net/api',
     },
   },
-  
+  routeRules: {
+    // prerender index route by default
+    '/': { prerender: true },
+  },
+
 });
