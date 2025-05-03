@@ -4,7 +4,7 @@ import { getContext, executeAsync } from 'file://C:/Users/admin/Documents/Front_
 import { createError as createError$1, sanitizeStatusCode, appendHeader } from 'file://C:/Users/admin/Documents/Front_End_Web_Hotel_Nhom_2/node_modules/h3/dist/index.mjs';
 import { START_LOCATION, createMemoryHistory, createRouter as createRouter$1, RouterView } from 'file://C:/Users/admin/Documents/Front_End_Web_Hotel_Nhom_2/node_modules/vue-router/dist/vue-router.node.mjs';
 import { toRouteMatcher, createRouter } from 'file://C:/Users/admin/Documents/Front_End_Web_Hotel_Nhom_2/node_modules/radix3/dist/index.mjs';
-import { defu } from 'file://C:/Users/admin/Documents/Front_End_Web_Hotel_Nhom_2/node_modules/defu/dist/defu.mjs';
+import defu$1, { defu } from 'file://C:/Users/admin/Documents/Front_End_Web_Hotel_Nhom_2/node_modules/defu/dist/defu.mjs';
 import { hasProtocol, joinURL, withQuery, isScriptProtocol } from 'file://C:/Users/admin/Documents/Front_End_Web_Hotel_Nhom_2/node_modules/ufo/dist/index.mjs';
 import axios from 'file://C:/Users/admin/Documents/Front_End_Web_Hotel_Nhom_2/node_modules/axios/index.js';
 import { createVuestic } from 'file://C:/Users/admin/Documents/Front_End_Web_Hotel_Nhom_2/node_modules/vuestic-ui/dist/esm-node/main.mjs';
@@ -919,12 +919,16 @@ function prerenderRoutes(path) {
 }
 
 let routes;
+let _routeRulesMatcher = void 0;
 const prerender_server_sqIxOBipVr4FbVMA9kqWL0wT8FPop6sKAXLVfifsJzk = defineNuxtPlugin(async () => {
   let __temp, __restore;
   if (routes && !routes.length) {
     return;
   }
-  useRuntimeConfig().nitro.routeRules;
+  const routeRules = useRuntimeConfig().nitro.routeRules;
+  if (routeRules && Object.values(routeRules).some((r) => r.prerender)) {
+    _routeRulesMatcher = toRouteMatcher(createRouter({ routes: routeRules }));
+  }
   routes || (routes = Array.from(processRoutes(([__temp, __restore] = executeAsync(() => {
     var _a, _b;
     return (_b = (_a = routerOptions).routes) == null ? void 0 : _b.call(_a, _routes);
@@ -934,19 +938,19 @@ const prerender_server_sqIxOBipVr4FbVMA9kqWL0wT8FPop6sKAXLVfifsJzk = defineNuxtP
 });
 const OPTIONAL_PARAM_RE = /^\/?:.*(?:\?|\(\.\*\)\*)$/;
 function shouldPrerender(path) {
-  return true;
+  return !_routeRulesMatcher || defu$1({}, ..._routeRulesMatcher.matchAll(path).reverse()).prerender;
 }
 function processRoutes(routes2, currentPath = "/", routesToPrerender = /* @__PURE__ */ new Set()) {
   var _a;
   for (const route of routes2) {
-    if (OPTIONAL_PARAM_RE.test(route.path) && !((_a = route.children) == null ? void 0 : _a.length) && shouldPrerender()) {
+    if (OPTIONAL_PARAM_RE.test(route.path) && !((_a = route.children) == null ? void 0 : _a.length) && shouldPrerender(currentPath)) {
       routesToPrerender.add(currentPath);
     }
     if (route.path.includes(":")) {
       continue;
     }
     const fullPath = joinURL(currentPath, route.path);
-    {
+    if (shouldPrerender(fullPath)) {
       routesToPrerender.add(fullPath);
     }
     if (route.children) {
