@@ -2,12 +2,12 @@
   "name": "nuxt-app",
   "type": "module",
   "scripts": {
-     "start": "nuxt start",
+    "start": "nuxt start",
     "build": "nuxt build",
     "dev": "nuxt dev",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
-   "postinstall": "echo Skipping nuxt prepare"
+    "postinstall": "echo Skipping nuxt prepare"
   },
   "dependencies": {
     "@chenfengyuan/vue-qrcode": "^2.0.0",
@@ -58,10 +58,7 @@
     "typescript": "^5.8.3"
   },
   "engines": {
-
-  "node": "22.x",
-
-
-  "npm": "10.x"
-}
+    "node": "22.x",
+    "npm": "10.x"
+  }
 }

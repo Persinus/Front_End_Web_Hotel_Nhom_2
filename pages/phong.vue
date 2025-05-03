@@ -54,7 +54,7 @@
         <va-select
           id="trangThai"
           v-model="filters.trangThai"
-          :options="[
+          :options="[ 
             { value: '', label: translations.all },
             { value: 'Còn trống', label: translations.available },
             { value: 'Đã đặt', label: translations.booked },
@@ -117,11 +117,9 @@
 
 <script setup>
 import { ref, computed, onMounted } from 'vue';
-import { useNuxtApp } from '#app';
 import { useThemeStore } from '~/store/DarkMode';
 import { useLanguageStore } from '~/store/Language';
 import TheHeader from '../Components/Header.vue';
-import TheFooter from '../Components/Footer.vue';
 import { VaInnerLoading, VaCard, VaCardTitle, VaCardContent, VaCardActions, VaButton, VaInput, VaSelect, VaAlert } from 'vuestic-ui';
 
 const themeStore = useThemeStore();
@@ -133,44 +131,16 @@ const loading = ref(true);
 const error = ref(null);
 const filters = ref({ maPhong: '', loaiPhong: '', giaPhong: '', tang: '', trangThai: '' });
 
-const { $api } = useNuxtApp();
-
 const translations = computed(() => {
   const lang = languageStore.currentLanguage;
-  return {
-    title: lang === 'vn' ? 'Danh Sách Phòng' : 'Room List',
-    roomId: lang === 'vn' ? 'Mã phòng' : 'Room ID',
-    enterRoomId: lang === 'vn' ? 'Nhập mã phòng' : 'Enter Room ID',
-    roomType: lang === 'vn' ? 'Loại phòng' : 'Room Type',
-    enterRoomType: lang === 'vn' ? 'Nhập loại phòng' : 'Enter Room Type',
-    maxPrice: lang === 'vn' ? 'Giá tối đa' : 'Max Price',
-    enterMaxPrice: lang === 'vn' ? 'Nhập giá tối đa' : 'Enter Max Price',
-    floor: lang === 'vn' ? 'Tầng' : 'Floor',
-    enterFloor: lang === 'vn' ? 'Nhập tầng' : 'Enter Floor',
-    status: lang === 'vn' ? 'Trạng thái' : 'Status',
-    all: lang === 'vn' ? 'Tất cả' : 'All',
-    available: lang === 'vn' ? 'Còn trống' : 'Available',
-    booked: lang === 'vn' ? 'Đã đặt' : 'Booked',
-    sortAsc: lang === 'vn' ? 'Giá tăng dần' : 'Sort Ascending',
-    sortDesc: lang === 'vn' ? 'Giá giảm dần' : 'Sort Descending',
-    price: lang === 'vn' ? 'Giá' : 'Price',
-    bedType: lang === 'vn' ? 'Kiểu giường' : 'Bed Type',
-    viewDetails: lang === 'vn' ? 'Xem Chi Tiết' : 'View Details',
-    addToCart: lang === 'vn' ? 'Thêm vào giỏ' : 'Add to Cart',
-    noRooms: lang === 'vn' ? 'Không có phòng nào.' : 'No rooms available.',
-  };
+  return languageStore.t;
 });
 
 onMounted(async () => {
-  themeStore.initializeDarkMode();
   try {
-    const response = await $api.get('/PhongWithTienNghi');
-    if (Array.isArray(response.data)) {
-      rooms.value = response.data;
-      filteredRooms.value = response.data;
-    } else {
-      error.value = 'Dữ liệu trả về không đúng định dạng';
-    }
+    const response = await $fetch('/api/phong'); // Gọi middleware
+    rooms.value = response;
+    filteredRooms.value = response;
   } catch (err) {
     error.value = err.message;
   } finally {
@@ -179,7 +149,7 @@ onMounted(async () => {
 });
 
 const filterRooms = () => {
-  filteredRooms.value = rooms.value.filter(room => {
+  filteredRooms.value = rooms.value.filter((room) => {
     return (
       (filters.value.maPhong ? room.maPhong.includes(filters.value.maPhong) : true) &&
       (filters.value.loaiPhong ? room.loaiPhong.includes(filters.value.loaiPhong) : true) &&
