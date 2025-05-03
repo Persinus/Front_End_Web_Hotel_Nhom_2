@@ -21,7 +21,7 @@
     "apexcharts": "^4.5.0",
     "axios": "^1.9.0",
     "bootstrap": "^5.3.5",
-    "bulma": "^1.0.3",
+    "bulma": "^1.0.4",
     "chart.js": "^4.4.9",
     "dayjs": "^1.11.13",
     "defu": "^6.1.4",
