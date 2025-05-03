@@ -65,10 +65,6 @@ declare module 'nuxt/schema' {
   }
   interface PublicRuntimeConfig {
    apiBase: string,
-
-   routerBase: string,
-
-   baseURL: string,
   }
 }
 declare module 'vue' {
