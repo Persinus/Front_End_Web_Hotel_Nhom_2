@@ -47,6 +47,7 @@ jobs:
         uses: actions/configure-pages@v5  # Cấu hình tự động cho dự án Nuxt.js với GitHub Pages
         with:
           static_site_generator: nuxt  # Tự động thêm `router.base` và đặt target là `static`
+          enablement: true  # Bật việc tự động kích hoạt Pages nếu chưa được cấu hình
 
       - name: Restore cache
         uses: actions/cache@v4  # Phục hồi cache đã lưu trước đó
