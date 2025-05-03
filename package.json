@@ -13,7 +13,7 @@
     "@chenfengyuan/vue-qrcode": "^2.0.0",
     "@mdi/font": "^7.4.47",
     "@microsoft/signalr": "^8.0.7",
-    "@nuxtjs/i18n": "^9.5.3",
+    "@nuxtjs/i18n": "^9.5.4",
     "@nuxtjs/proxy": "^2.1.0",
     "@popperjs/core": "^2.11.6",
     "@vuelidate/core": "^2.0.3",
