@@ -49,3 +49,6 @@ export default defineNuxtConfig({
 
 // Lệnh sau sẽ tạo thư mục dist chứa các file tĩnh của ứng dụng, sẵn sàng để triển khai trên các dịch vụ hosting như Netlify, Vercel, hoặc GitHub Pages.
 
+//npx nuxi generate để tạo static site
+//npm run build để build ứng dụng
+//npm run preview để xem trước ứng dụng đã build
