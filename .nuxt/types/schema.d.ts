@@ -59,6 +59,8 @@ declare module 'nuxt/schema' {
       cdnURL: string,
    },
 
+   apiBase: string,
+
    nitro: {
       envPrefix: string,
    },
