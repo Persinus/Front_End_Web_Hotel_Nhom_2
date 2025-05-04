@@ -82,10 +82,10 @@ const theme = useThemeStore();
 const navItems = [
   { title: 'Trang chủ', link: '/' },
   { title: 'Đặt phòng', link: '/Phong' },
-  { title: 'Dịch vụ', link: '/service' },
-  { title: 'Ưu đãi', link: '/promotions' },
+  { title: 'Dịch vụ', link: '/DichVu' },
+  { title: 'Nội quy', link: '/HotelRegulations' },
 
-  { title: 'Tài khoản', link: '/account' },
+  { title: 'Game', link: '/Trangchoigame' },
 ];
 
 

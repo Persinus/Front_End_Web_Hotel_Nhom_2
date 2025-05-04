@@ -9,7 +9,7 @@
       </div>
 
       <el-divider class="custom-divider" content-position="left">
-        <img src="https://i.imgur.com/1.png" alt="Icon" class="rule-icon" />
+        <img src="https://www.pinterest.com/pin/609604499595806135/" class="rule-icon" />
         1. Xuất trình giấy tờ
       </el-divider>
       <div class="rule-section">

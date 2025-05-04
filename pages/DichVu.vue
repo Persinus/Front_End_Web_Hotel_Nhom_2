@@ -1,7 +1,7 @@
 <template>
-   <header>
-      <TheHeader />
-    </header>
+  <header>
+    <TheHeader />
+  </header>
   <div :class="['service-list-container', { 'dark-mode': theme.isDarkMode }]">
     <h1 class="page-title">Danh sách dịch vụ</h1>
 
@@ -40,62 +40,58 @@
           </p>
         </va-card-content>
         <va-card-actions>
-          <nuxt-link :to="`/DichVu/${service.maChiTietDichVu}`" >
+          <nuxt-link :to="`/DichVu/${service.maChiTietDichVu}`">
             <va-button color="primary">Xem Chi Tiết</va-button>
           </nuxt-link>
         </va-card-actions>
       </va-card>
     </div>
+
+    <!-- Route con -->
+    <NuxtChild />
   </div>
 </template>
 
 <script setup>
-import { ref, computed, onMounted } from 'vue'
-import { useRouter } from 'vue-router'
-import { useNuxtApp } from '#app'
-import { useThemeStore } from '@/store/DarkMode'
-import TheHeader from '../Components/Header.vue'
-import TheFooter from '../Components/Footer.vue'
-const theme = useThemeStore()
-const services = ref([])
-const filterName = ref('')
-const filterPrice = ref(null)
+import { ref, computed, onMounted } from 'vue';
+import { useThemeStore } from '@/store/DarkMode';
+import TheHeader from '../Components/Header.vue';
+
+const theme = useThemeStore();
+const services = ref([]);
+const filterName = ref('');
+const filterPrice = ref(null);
 
 const priceOptions = [
   { value: 'low', label: 'Dưới 500,000 VND' },
   { value: 'medium', label: '500,000 - 1,000,000 VND' },
   { value: 'high', label: 'Trên 1,000,000 VND' },
-]
-
-const { $api } = useNuxtApp()
-const router = useRouter()
+];
 
 onMounted(async () => {
   try {
-    const response = await $api.get('/DichVu')
-    services.value = response.data
+    const response = await $fetch('/api/dichvu'); // Gọi middleware
+    services.value = response;
   } catch (error) {
-    console.error('Lỗi khi lấy danh sách dịch vụ:', error)
+    console.error('Lỗi khi lấy danh sách dịch vụ:', error);
   }
-})
+});
 
 const filteredServices = computed(() => {
   return services.value.filter((service) => {
     const matchesName = service.tenDichVu
       .toLowerCase()
-      .includes(filterName.value.toLowerCase())
+      .includes(filterName.value.toLowerCase());
     const matchesPrice =
       !filterPrice.value ||
       (filterPrice.value === 'low' && service.donGia < 500000) ||
       (filterPrice.value === 'medium' &&
         service.donGia >= 500000 &&
         service.donGia <= 1000000) ||
-      (filterPrice.value === 'high' && service.donGia > 1000000)
-    return matchesName && matchesPrice
-  })
-})
-
-
+      (filterPrice.value === 'high' && service.donGia > 1000000);
+    return matchesName && matchesPrice;
+  });
+});
 </script>
 
 <style scoped>
