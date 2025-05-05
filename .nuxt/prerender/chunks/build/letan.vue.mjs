@@ -1,6 +1,6 @@
 import { ref, computed, resolveComponent, mergeProps, unref, withCtx, createTextVNode, toDisplayString, createVNode, createBlock, openBlock, Fragment, renderList, useSSRContext } from 'file://C:/Users/admin/Documents/Front_End_Web_Hotel_Nhom_2/node_modules/vue/index.mjs';
 import { ssrRenderAttrs, ssrRenderComponent, ssrRenderList, ssrInterpolate, ssrRenderClass, ssrRenderAttr, ssrIncludeBooleanAttr, ssrLooseContain, ssrLooseEqual } from 'file://C:/Users/admin/Documents/Front_End_Web_Hotel_Nhom_2/node_modules/vue/server-renderer/index.mjs';
-import { a as useThemeStore, b as useNuxtApp } from './server.mjs';
+import { a as useThemeStore } from './server.mjs';
 import { _ as _export_sfc } from './_plugin-vue_export-helper.mjs';
 import 'file://C:/Users/admin/Documents/Front_End_Web_Hotel_Nhom_2/node_modules/hookable/dist/index.mjs';
 import 'file://C:/Users/admin/Documents/Front_End_Web_Hotel_Nhom_2/node_modules/unctx/dist/index.mjs';
@@ -36,6 +36,7 @@ import 'file://C:/Users/admin/Documents/Front_End_Web_Hotel_Nhom_2/node_modules/
 import 'file://C:/Users/admin/Documents/Front_End_Web_Hotel_Nhom_2/node_modules/unhead/dist/plugins.mjs';
 
 const itemsPerPage = 5;
+const itemsPerPageService = 5;
 const _sfc_main = {
   __name: "letan",
   __ssrInlineRender: true,
@@ -44,21 +45,31 @@ const _sfc_main = {
     theme.initializeDarkMode();
     const currentTab = ref("phong");
     const rooms = ref([]);
+    const services = ref([]);
     const currentPage = ref(0);
+    const currentPageService = ref(0);
     const showEditModal = ref(false);
+    const showEditServiceModal = ref(false);
     const editingRoom = ref(null);
+    const editingService = ref(null);
     const sidebarItems = [
       { key: "khachhang", title: "Khách hàng", icon: "person" },
       { key: "phong", title: "Phòng", icon: "hotel" },
       { key: "dichvu", title: "Dịch vụ", icon: "shopping_cart" },
       { key: "caidat", title: "Cài đặt", icon: "settings" }
     ];
-    const { $api } = useNuxtApp();
     const paginatedRooms = computed(() => {
       const start = currentPage.value * itemsPerPage;
       return rooms.value.slice(start, start + itemsPerPage);
     });
     const totalPages = computed(() => Math.ceil(rooms.value.length / itemsPerPage));
+    const paginatedServices = computed(() => {
+      const start = currentPageService.value * itemsPerPageService;
+      return services.value.slice(start, start + itemsPerPageService);
+    });
+    const totalPagesService = computed(
+      () => Math.ceil(services.value.length / itemsPerPageService)
+    );
     const getStatusText = (status) => {
       switch (status) {
         case "1":
@@ -95,7 +106,7 @@ const _sfc_main = {
       const _component_VaSidebarItemTitle = resolveComponent("VaSidebarItemTitle");
       _push(`<div${ssrRenderAttrs(mergeProps({
         class: ["letan-page", { "dark-mode": unref(theme).isDarkMode }]
-      }, _attrs))} data-v-3fddae5d>`);
+      }, _attrs))} data-v-9074db44>`);
       _push(ssrRenderComponent(_component_VaSidebar, {
         color: "primary",
         class: "sidebar"
@@ -200,24 +211,44 @@ const _sfc_main = {
         }),
         _: 1
       }, _parent));
-      _push(`<div class="main-content" data-v-3fddae5d><h1 class="page-title" data-v-3fddae5d>Trang Lễ Tân</h1>`);
+      _push(`<div class="main-content" data-v-9074db44><h1 class="page-title" data-v-9074db44>Trang Lễ Tân</h1>`);
       if (currentTab.value === "phong") {
-        _push(`<div class="tab-content" data-v-3fddae5d><h2 class="section-title" data-v-3fddae5d>Quản lý phòng</h2><p class="section-description" data-v-3fddae5d>Danh sách phòng, tình trạng phòng, và đặt phòng.</p><div class="table-wrapper" data-v-3fddae5d><table class="custom-table" data-v-3fddae5d><thead data-v-3fddae5d><tr data-v-3fddae5d><th data-v-3fddae5d>#</th><th data-v-3fddae5d>Tên phòng</th><th data-v-3fddae5d>Tiện nghi</th><th data-v-3fddae5d>Trạng thái</th><th data-v-3fddae5d>Hành động</th></tr></thead><tbody data-v-3fddae5d><!--[-->`);
+        _push(`<div class="tab-content" data-v-9074db44><h2 class="section-title" data-v-9074db44>Quản lý phòng</h2><p class="section-description" data-v-9074db44>Danh sách phòng, tình trạng phòng, và đặt phòng.</p><div class="table-wrapper" data-v-9074db44><table class="custom-table" data-v-9074db44><thead data-v-9074db44><tr data-v-9074db44><th data-v-9074db44>#</th><th data-v-9074db44>Tên phòng</th><th data-v-9074db44>Tiện nghi</th><th data-v-9074db44>Trạng thái</th><th data-v-9074db44>Hành động</th></tr></thead><tbody data-v-9074db44><!--[-->`);
         ssrRenderList(paginatedRooms.value, (room, index) => {
-          _push(`<tr data-v-3fddae5d><td data-v-3fddae5d>${ssrInterpolate(currentPage.value * itemsPerPage + index + 1)}</td><td data-v-3fddae5d>${ssrInterpolate(room.loaiPhong)}</td><td data-v-3fddae5d>${ssrInterpolate(room.tienNghiList.join(", "))}</td><td data-v-3fddae5d><span class="${ssrRenderClass(getStatusClass(room.tinhTrang))}" data-v-3fddae5d>${ssrInterpolate(getStatusText(room.tinhTrang))}</span></td><td data-v-3fddae5d><button class="btn-edit" data-v-3fddae5d>`);
+          _push(`<tr data-v-9074db44><td data-v-9074db44>${ssrInterpolate(currentPage.value * itemsPerPage + index + 1)}</td><td data-v-9074db44>${ssrInterpolate(room.loaiPhong)}</td><td data-v-9074db44>${ssrInterpolate(room.tienNghiList.join(", "))}</td><td data-v-9074db44><span class="${ssrRenderClass(getStatusClass(room.tinhTrang))}" data-v-9074db44>${ssrInterpolate(getStatusText(room.tinhTrang))}</span></td><td data-v-9074db44><button class="btn-edit" data-v-9074db44>`);
           _push(ssrRenderComponent(_component_VaIcon, { name: "edit" }, null, _parent));
           _push(` Sửa </button></td></tr>`);
         });
-        _push(`<!--]--></tbody></table></div><div class="pagination" data-v-3fddae5d><!--[-->`);
+        _push(`<!--]--></tbody></table></div><div class="pagination" data-v-9074db44><!--[-->`);
         ssrRenderList(totalPages.value, (page) => {
-          _push(`<button class="${ssrRenderClass({ active: currentPage.value === page - 1 })}" data-v-3fddae5d>${ssrInterpolate(page)}</button>`);
+          _push(`<button class="${ssrRenderClass({ active: currentPage.value === page - 1 })}" data-v-9074db44>${ssrInterpolate(page)}</button>`);
         });
         _push(`<!--]--></div></div>`);
       } else {
         _push(`<!---->`);
       }
       if (showEditModal.value) {
-        _push(`<div class="modal" data-v-3fddae5d><div class="modal-content" data-v-3fddae5d><h3 data-v-3fddae5d>Sửa thông tin phòng</h3><label for="roomName" data-v-3fddae5d>Tên phòng:</label><input id="roomName" type="text"${ssrRenderAttr("value", editingRoom.value.loaiPhong)} data-v-3fddae5d><label for="roomStatus" data-v-3fddae5d>Trạng thái:</label><select id="roomStatus" data-v-3fddae5d><option value="1" data-v-3fddae5d${ssrIncludeBooleanAttr(Array.isArray(editingRoom.value.tinhTrang) ? ssrLooseContain(editingRoom.value.tinhTrang, "1") : ssrLooseEqual(editingRoom.value.tinhTrang, "1")) ? " selected" : ""}>Còn Trống</option><option value="2" data-v-3fddae5d${ssrIncludeBooleanAttr(Array.isArray(editingRoom.value.tinhTrang) ? ssrLooseContain(editingRoom.value.tinhTrang, "2") : ssrLooseEqual(editingRoom.value.tinhTrang, "2")) ? " selected" : ""}>Đã Đặt</option><option value="3" data-v-3fddae5d${ssrIncludeBooleanAttr(Array.isArray(editingRoom.value.tinhTrang) ? ssrLooseContain(editingRoom.value.tinhTrang, "3") : ssrLooseEqual(editingRoom.value.tinhTrang, "3")) ? " selected" : ""}>Đang Sử Dụng</option><option value="4" data-v-3fddae5d${ssrIncludeBooleanAttr(Array.isArray(editingRoom.value.tinhTrang) ? ssrLooseContain(editingRoom.value.tinhTrang, "4") : ssrLooseEqual(editingRoom.value.tinhTrang, "4")) ? " selected" : ""}>Đang Vệ Sinh</option></select><div class="modal-actions" data-v-3fddae5d><button class="btn-primary" data-v-3fddae5d>Lưu</button><button class="btn-secondary" data-v-3fddae5d>Hủy</button></div></div></div>`);
+        _push(`<div class="modal" data-v-9074db44><div class="modal-content" data-v-9074db44><h3 data-v-9074db44>Sửa thông tin phòng</h3><label for="roomName" data-v-9074db44>Tên phòng:</label><input id="roomName" type="text"${ssrRenderAttr("value", editingRoom.value.loaiPhong)} data-v-9074db44><label for="roomStatus" data-v-9074db44>Trạng thái:</label><select id="roomStatus" data-v-9074db44><option value="1" data-v-9074db44${ssrIncludeBooleanAttr(Array.isArray(editingRoom.value.tinhTrang) ? ssrLooseContain(editingRoom.value.tinhTrang, "1") : ssrLooseEqual(editingRoom.value.tinhTrang, "1")) ? " selected" : ""}>Còn Trống</option><option value="2" data-v-9074db44${ssrIncludeBooleanAttr(Array.isArray(editingRoom.value.tinhTrang) ? ssrLooseContain(editingRoom.value.tinhTrang, "2") : ssrLooseEqual(editingRoom.value.tinhTrang, "2")) ? " selected" : ""}>Đã Đặt</option><option value="3" data-v-9074db44${ssrIncludeBooleanAttr(Array.isArray(editingRoom.value.tinhTrang) ? ssrLooseContain(editingRoom.value.tinhTrang, "3") : ssrLooseEqual(editingRoom.value.tinhTrang, "3")) ? " selected" : ""}>Đang Sử Dụng</option><option value="4" data-v-9074db44${ssrIncludeBooleanAttr(Array.isArray(editingRoom.value.tinhTrang) ? ssrLooseContain(editingRoom.value.tinhTrang, "4") : ssrLooseEqual(editingRoom.value.tinhTrang, "4")) ? " selected" : ""}>Đang Vệ Sinh</option></select><div class="modal-actions" data-v-9074db44><button class="btn-primary" data-v-9074db44>Lưu</button><button class="btn-secondary" data-v-9074db44>Hủy</button></div></div></div>`);
+      } else {
+        _push(`<!---->`);
+      }
+      if (currentTab.value === "dichvu") {
+        _push(`<div class="tab-content" data-v-9074db44><h2 class="section-title" data-v-9074db44>Quản lý dịch vụ</h2><p class="section-description" data-v-9074db44>Danh sách dịch vụ và giá cả.</p><div class="table-wrapper" data-v-9074db44><table class="custom-table" data-v-9074db44><thead data-v-9074db44><tr data-v-9074db44><th data-v-9074db44>#</th><th data-v-9074db44>Tên dịch vụ</th><th data-v-9074db44>Giá</th><th data-v-9074db44>Hành động</th></tr></thead><tbody data-v-9074db44><!--[-->`);
+        ssrRenderList(paginatedServices.value, (service, index) => {
+          _push(`<tr data-v-9074db44><td data-v-9074db44>${ssrInterpolate(currentPageService.value * itemsPerPageService + index + 1)}</td><td data-v-9074db44>${ssrInterpolate(service.tenDichVu)}</td><td data-v-9074db44>${ssrInterpolate(service.donGia.toLocaleString())} VND</td><td data-v-9074db44><button class="btn-edit" data-v-9074db44>`);
+          _push(ssrRenderComponent(_component_VaIcon, { name: "edit" }, null, _parent));
+          _push(` Sửa </button></td></tr>`);
+        });
+        _push(`<!--]--></tbody></table></div><div class="pagination" data-v-9074db44><!--[-->`);
+        ssrRenderList(totalPagesService.value, (page) => {
+          _push(`<button class="${ssrRenderClass({ active: currentPageService.value === page - 1 })}" data-v-9074db44>${ssrInterpolate(page)}</button>`);
+        });
+        _push(`<!--]--></div></div>`);
+      } else {
+        _push(`<!---->`);
+      }
+      if (showEditServiceModal.value) {
+        _push(`<div class="modal" data-v-9074db44><div class="modal-content" data-v-9074db44><h3 data-v-9074db44>Sửa thông tin dịch vụ</h3><label for="serviceName" data-v-9074db44>Tên dịch vụ:</label><input id="serviceName" type="text"${ssrRenderAttr("value", editingService.value.tenDichVu)} data-v-9074db44><label for="servicePrice" data-v-9074db44>Giá:</label><input id="servicePrice" type="number"${ssrRenderAttr("value", editingService.value.donGia)} data-v-9074db44><div class="modal-actions" data-v-9074db44><button class="btn-primary" data-v-9074db44>Lưu</button><button class="btn-secondary" data-v-9074db44>Hủy</button></div></div></div>`);
       } else {
         _push(`<!---->`);
       }
@@ -231,7 +262,7 @@ _sfc_main.setup = (props, ctx) => {
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("pages/letan.vue");
   return _sfc_setup ? _sfc_setup(props, ctx) : void 0;
 };
-const letan = /* @__PURE__ */ _export_sfc(_sfc_main, [["__scopeId", "data-v-3fddae5d"]]);
+const letan = /* @__PURE__ */ _export_sfc(_sfc_main, [["__scopeId", "data-v-9074db44"]]);
 
 export { letan as default };
 //# sourceMappingURL=letan.vue.mjs.map

@@ -607,7 +607,7 @@ function _expandFromEnv(value) {
 const _inlineRuntimeConfig = {
   "app": {
     "baseURL": "/",
-    "buildId": "705b536d-f6e5-4d9e-93cf-7c9279bf21de",
+    "buildId": "e1848159-f35d-416d-a978-fb9a79b8740f",
     "buildAssetsDir": "/_nuxt/",
     "cdnURL": ""
   },
@@ -637,9 +637,7 @@ const _inlineRuntimeConfig = {
       }
     }
   },
-  "public": {
-    "apiBase": "http://nhom2webkhachsan.runasp.net/api"
-  }
+  "public": {}
 };
 const envOptions = {
   prefix: "NITRO_",

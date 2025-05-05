@@ -1,6 +1,6 @@
 import { ref, mergeProps, useSSRContext } from 'vue';
 import { ssrRenderAttrs, ssrRenderList, ssrInterpolate, ssrRenderClass, ssrRenderAttr } from 'vue/server-renderer';
-import { b as useNuxtApp } from './server.mjs';
+import { c as useNuxtApp } from './server.mjs';
 import { _ as _export_sfc } from './_plugin-vue_export-helper.mjs';
 import '../_/nitro.mjs';
 import 'node:http';

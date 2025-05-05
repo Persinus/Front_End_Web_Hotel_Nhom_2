@@ -2,7 +2,7 @@ import { _ as __nuxt_component_0 } from './nuxt-link.mjs';
 import { ref, resolveComponent, unref, withCtx, createTextVNode, createVNode, toDisplayString, useSSRContext } from 'file://C:/Users/admin/Documents/Front_End_Web_Hotel_Nhom_2/node_modules/vue/index.mjs';
 import { ssrRenderComponent, ssrRenderClass, ssrRenderAttr, ssrRenderList, ssrInterpolate } from 'file://C:/Users/admin/Documents/Front_End_Web_Hotel_Nhom_2/node_modules/vue/server-renderer/index.mjs';
 import { useRoute } from 'file://C:/Users/admin/Documents/Front_End_Web_Hotel_Nhom_2/node_modules/vue-router/dist/vue-router.node.mjs';
-import { a as useThemeStore, b as useNuxtApp } from './server.mjs';
+import { a as useThemeStore, c as useNuxtApp } from './server.mjs';
 import { T as TheHeader } from './Header.vue.mjs';
 import { _ as _export_sfc } from './_plugin-vue_export-helper.mjs';
 import 'file://C:/Users/admin/Documents/Front_End_Web_Hotel_Nhom_2/node_modules/ufo/dist/index.mjs';

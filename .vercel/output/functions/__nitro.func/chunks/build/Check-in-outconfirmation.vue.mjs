@@ -4,7 +4,7 @@ import VueQrcode from '@chenfengyuan/vue-qrcode';
 import { ElRow, ElCol, ElButton } from 'element-plus';
 import { useToast } from 'vuestic-ui';
 import { useRouter } from 'vue-router';
-import { b as useNuxtApp } from './server.mjs';
+import { c as useNuxtApp } from './server.mjs';
 import { _ as _export_sfc } from './_plugin-vue_export-helper.mjs';
 import '../_/nitro.mjs';
 import 'node:http';

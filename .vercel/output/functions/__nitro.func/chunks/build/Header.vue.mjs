@@ -12,9 +12,9 @@ const _sfc_main = {
     const navItems = [
       { title: "Trang chủ", link: "/" },
       { title: "Đặt phòng", link: "/Phong" },
-      { title: "Dịch vụ", link: "/service" },
-      { title: "Ưu đãi", link: "/promotions" },
-      { title: "Tài khoản", link: "/account" }
+      { title: "Dịch vụ", link: "/DichVu" },
+      { title: "Nội quy", link: "/HotelRegulations" },
+      { title: "Game", link: "/Trangchoigame" }
     ];
     const isMenuOpen = ref(false);
     const isSettingsDropdownOpen = ref(false);
@@ -36,7 +36,7 @@ const _sfc_main = {
       const _component_va_switch = resolveComponent("va-switch");
       _push(`<header${ssrRenderAttrs(mergeProps({
         class: ["header", { "dark": unref(theme).isDarkMode }]
-      }, _attrs))} data-v-86373829><div class="container" data-v-86373829>`);
+      }, _attrs))} data-v-4600a3da><div class="container" data-v-4600a3da>`);
       _push(ssrRenderComponent(_component_NuxtLink, {
         class: "logo",
         to: "/"
@@ -52,9 +52,9 @@ const _sfc_main = {
         }),
         _: 1
       }, _parent));
-      _push(`<button class="menu-toggle" data-v-86373829><span class="menu-icon" data-v-86373829></span></button><nav class="${ssrRenderClass(["nav", { "nav-open": isMenuOpen.value }])}" data-v-86373829><ul class="nav-list" data-v-86373829><!--[-->`);
+      _push(`<button class="menu-toggle" data-v-4600a3da><span class="menu-icon" data-v-4600a3da></span></button><nav class="${ssrRenderClass(["nav", { "nav-open": isMenuOpen.value }])}" data-v-4600a3da><ul class="nav-list" data-v-4600a3da><!--[-->`);
       ssrRenderList(navItems, (item) => {
-        _push(`<li class="nav-item" data-v-86373829>`);
+        _push(`<li class="nav-item" data-v-4600a3da>`);
         _push(ssrRenderComponent(_component_NuxtLink, {
           class: "nav-link",
           to: item.link,
@@ -75,9 +75,9 @@ const _sfc_main = {
         }, _parent));
         _push(`</li>`);
       });
-      _push(`<!--]--></ul></nav><div class="auth-section" data-v-86373829>`);
+      _push(`<!--]--></ul></nav><div class="auth-section" data-v-4600a3da>`);
       if (!isLoggedIn.value) {
-        _push(`<div class="auth-buttons" data-v-86373829>`);
+        _push(`<div class="auth-buttons" data-v-4600a3da>`);
         _push(ssrRenderComponent(_component_NuxtLink, {
           to: "/login",
           class: "btn btn-outline"
@@ -95,18 +95,18 @@ const _sfc_main = {
         }, _parent));
         _push(`</div>`);
       } else {
-        _push(`<div class="user-avatar" data-v-86373829><img src="https://i.imgur.com/6VBx3io.png" alt="Avatar" class="avatar" data-v-86373829><span class="username" data-v-86373829>${ssrInterpolate(username.value)}</span></div>`);
+        _push(`<div class="user-avatar" data-v-4600a3da><img src="https://i.imgur.com/6VBx3io.png" alt="Avatar" class="avatar" data-v-4600a3da><span class="username" data-v-4600a3da>${ssrInterpolate(username.value)}</span></div>`);
       }
-      _push(`</div><div class="settings-dropdown" data-v-86373829><button class="settings-icon" data-v-86373829><span class="gear-icon" data-v-86373829>⚙️</span></button>`);
+      _push(`</div><div class="settings-dropdown" data-v-4600a3da><button class="settings-icon" data-v-4600a3da><span class="gear-icon" data-v-4600a3da>⚙️</span></button>`);
       if (isSettingsDropdownOpen.value) {
-        _push(`<div class="settings-menu" data-v-86373829><div class="settings-item" data-v-86373829><label for="darkModeSwitch" data-v-86373829>Chế độ tối:</label>`);
+        _push(`<div class="settings-menu" data-v-4600a3da><div class="settings-item" data-v-4600a3da><label for="darkModeSwitch" data-v-4600a3da>Chế độ tối:</label>`);
         _push(ssrRenderComponent(_component_va_switch, {
           id: "darkModeSwitch",
           modelValue: isDarkMode.value,
           "onUpdate:modelValue": ($event) => isDarkMode.value = $event,
           onChange: toggleDarkMode
         }, null, _parent));
-        _push(`<div class="va-text-center" data-v-86373829></div></div><div class="settings-item" data-v-86373829><label for="languageSwitch" data-v-86373829>Ngôn ngữ:</label>`);
+        _push(`<div class="va-text-center" data-v-4600a3da></div></div><div class="settings-item" data-v-4600a3da><label for="languageSwitch" data-v-4600a3da>Ngôn ngữ:</label>`);
         _push(ssrRenderComponent(_component_va_switch, {
           id: "languageSwitch",
           modelValue: selectedLanguage.value,
@@ -129,7 +129,7 @@ _sfc_main.setup = (props, ctx) => {
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("Components/Header.vue");
   return _sfc_setup ? _sfc_setup(props, ctx) : void 0;
 };
-const TheHeader = /* @__PURE__ */ _export_sfc(_sfc_main, [["__scopeId", "data-v-86373829"]]);
+const TheHeader = /* @__PURE__ */ _export_sfc(_sfc_main, [["__scopeId", "data-v-4600a3da"]]);
 
 export { TheHeader as T };
 //# sourceMappingURL=Header.vue.mjs.map

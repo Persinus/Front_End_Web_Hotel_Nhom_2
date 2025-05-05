@@ -404,16 +404,9 @@ const _routes = [
     component: () => import('./phong.vue.mjs')
   },
   {
-    name: "DichVu",
-    path: "/DichVu",
-    component: () => import('./DichVu.vue.mjs'),
-    children: [
-      {
-        name: "DichVu-DichVu",
-        path: ":DichVu()",
-        component: () => import('./_DichVu_.vue.mjs')
-      }
-    ]
+    name: "dichvu",
+    path: "/dichvu",
+    component: () => import('./dichvu.vue.mjs')
   },
   {
     name: "hoadon",
@@ -509,6 +502,11 @@ const _routes = [
     name: "Check-in-outconfirmation",
     path: "/Check-in-outconfirmation",
     component: () => import('./Check-in-outconfirmation.vue.mjs')
+  },
+  {
+    name: "DichVu-maChiTietDichVu",
+    path: "/DichVu/:maChiTietDichVu()",
+    component: () => import('./_maChiTietDichVu_.vue.mjs')
   }
 ];
 
@@ -1306,5 +1304,5 @@ const server = /*#__PURE__*/Object.freeze({
   default: entry$1
 });
 
-export { useThemeStore as a, useNuxtApp as b, useLanguageStore as c, useRouter as d, useRuntimeConfig as e, nuxtLinkDefaults as f, navigateTo as n, resolveRouteObject as r, server as s, useHead as u };
+export { useThemeStore as a, useLanguageStore as b, useNuxtApp as c, useRouter as d, useRuntimeConfig as e, nuxtLinkDefaults as f, navigateTo as n, resolveRouteObject as r, server as s, useHead as u };
 //# sourceMappingURL=server.mjs.map
