@@ -31,5 +31,6 @@ export { setInterval } from '#app/compat/interval';
 export { useLogin } from '../composables/useLogin';
 export { useRegister } from '../composables/useRegister';
 export { default as useServiceData } from '../composables/useServiceData';
+export { axiosBase } from '../utils/axiosBase';
 export { useNuxtDevTools } from '../node_modules/@nuxt/devtools/dist/runtime/use-nuxt-devtools';
 export { definePageMeta } from '../node_modules/nuxt/dist/pages/runtime/composables';
