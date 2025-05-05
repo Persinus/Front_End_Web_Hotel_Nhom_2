@@ -121,6 +121,7 @@ import { useThemeStore } from '~/store/DarkMode';
 import { useLanguageStore } from '~/store/Language';
 import TheHeader from '../Components/Header.vue';
 import { VaInnerLoading, VaCard, VaCardTitle, VaCardContent, VaCardActions, VaButton, VaInput, VaSelect, VaAlert } from 'vuestic-ui';
+import { axiosBase } from '~/utils/axiosBase'; // Import axiosBase
 
 const themeStore = useThemeStore();
 const languageStore = useLanguageStore();
@@ -138,11 +139,13 @@ const translations = computed(() => {
 
 onMounted(async () => {
   try {
-    const response = await $fetch('/api/phong'); // Gọi middleware
-    rooms.value = response;
-    filteredRooms.value = response;
+    // Gọi API bằng axiosBase
+    const response = await axiosBase.get('/PhongWithTienNghi');
+    rooms.value = response.data;
+    filteredRooms.value = response.data;
   } catch (err) {
-    error.value = err.message;
+    error.value = err.message || 'Lỗi khi gọi API';
+    console.error('Lỗi khi gọi API:', err);
   } finally {
     loading.value = false;
   }
