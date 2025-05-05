@@ -4,7 +4,7 @@ import VueQrcode from 'file://C:/Users/admin/Documents/Front_End_Web_Hotel_Nhom_
 import { ElRow, ElCol, ElButton } from 'file://C:/Users/admin/Documents/Front_End_Web_Hotel_Nhom_2/node_modules/element-plus/es/index.mjs';
 import { useToast } from 'file://C:/Users/admin/Documents/Front_End_Web_Hotel_Nhom_2/node_modules/vuestic-ui/dist/esm-node/main.mjs';
 import { useRouter } from 'file://C:/Users/admin/Documents/Front_End_Web_Hotel_Nhom_2/node_modules/vue-router/dist/vue-router.node.mjs';
-import { b as useNuxtApp } from './server.mjs';
+import { c as useNuxtApp } from './server.mjs';
 import { _ as _export_sfc } from './_plugin-vue_export-helper.mjs';
 import 'file://C:/Users/admin/Documents/Front_End_Web_Hotel_Nhom_2/node_modules/hookable/dist/index.mjs';
 import 'file://C:/Users/admin/Documents/Front_End_Web_Hotel_Nhom_2/node_modules/unctx/dist/index.mjs';

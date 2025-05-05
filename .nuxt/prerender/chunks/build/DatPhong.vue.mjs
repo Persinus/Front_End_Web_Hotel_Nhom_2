@@ -1,7 +1,7 @@
 import { ref, resolveComponent, withCtx, createBlock, openBlock, createVNode, toDisplayString, createTextVNode, Fragment, renderList, useSSRContext } from 'file://C:/Users/admin/Documents/Front_End_Web_Hotel_Nhom_2/node_modules/vue/index.mjs';
 import { ssrRenderComponent, ssrInterpolate, ssrRenderList, ssrRenderAttr, ssrRenderClass } from 'file://C:/Users/admin/Documents/Front_End_Web_Hotel_Nhom_2/node_modules/vue/server-renderer/index.mjs';
 import { useRoute } from 'file://C:/Users/admin/Documents/Front_End_Web_Hotel_Nhom_2/node_modules/vue-router/dist/vue-router.node.mjs';
-import { b as useNuxtApp } from './server.mjs';
+import { c as useNuxtApp } from './server.mjs';
 import { _ as _export_sfc } from './_plugin-vue_export-helper.mjs';
 import 'file://C:/Users/admin/Documents/Front_End_Web_Hotel_Nhom_2/node_modules/hookable/dist/index.mjs';
 import 'file://C:/Users/admin/Documents/Front_End_Web_Hotel_Nhom_2/node_modules/unctx/dist/index.mjs';

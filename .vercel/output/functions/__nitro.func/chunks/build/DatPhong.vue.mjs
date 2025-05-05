@@ -1,7 +1,7 @@
 import { ref, resolveComponent, withCtx, createBlock, openBlock, createVNode, toDisplayString, createTextVNode, Fragment, renderList, useSSRContext } from 'vue';
 import { ssrRenderComponent, ssrInterpolate, ssrRenderList, ssrRenderAttr, ssrRenderClass } from 'vue/server-renderer';
 import { useRoute } from 'vue-router';
-import { b as useNuxtApp } from './server.mjs';
+import { c as useNuxtApp } from './server.mjs';
 import { _ as _export_sfc } from './_plugin-vue_export-helper.mjs';
 import '../_/nitro.mjs';
 import 'node:http';

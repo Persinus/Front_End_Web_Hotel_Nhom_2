@@ -34,28 +34,27 @@ const _sfc_main = {
     return (_ctx, _push, _parent, _attrs) => {
       const _component_el_card = resolveComponent("el-card");
       const _component_el_divider = resolveComponent("el-divider");
-      _push(`<!--[--><header data-v-6e68409c>`);
+      _push(`<!--[--><header data-v-0ce68e21>`);
       _push(ssrRenderComponent(TheHeader, null, null, _parent));
-      _push(`</header><div class="${ssrRenderClass(["rules-container", { "dark-mode": unref(theme).isDarkMode }])}" data-v-6e68409c>`);
+      _push(`</header><div class="${ssrRenderClass(["rules-container", { "dark-mode": unref(theme).isDarkMode }])}" data-v-0ce68e21>`);
       _push(ssrRenderComponent(_component_el_card, {
         shadow: "hover",
         class: "rules-card animated-card"
       }, {
         default: withCtx((_, _push2, _parent2, _scopeId) => {
           if (_push2) {
-            _push2(`<div class="header" data-v-6e68409c${_scopeId}><h1 class="rules-title" data-v-6e68409c${_scopeId}>📜 Nội quy khách sạn</h1></div>`);
+            _push2(`<div class="header" data-v-0ce68e21${_scopeId}><h1 class="rules-title" data-v-0ce68e21${_scopeId}>📜 Nội quy khách sạn</h1></div>`);
             _push2(ssrRenderComponent(_component_el_divider, {
               class: "custom-divider",
               "content-position": "left"
             }, {
               default: withCtx((_2, _push3, _parent3, _scopeId2) => {
                 if (_push3) {
-                  _push3(`<img src="https://i.imgur.com/1.png" alt="Icon" class="rule-icon" data-v-6e68409c${_scopeId2}> 1. Xuất trình giấy tờ `);
+                  _push3(`<img src="https://www.pinterest.com/pin/609604499595806135/" class="rule-icon" data-v-0ce68e21${_scopeId2}> 1. Xuất trình giấy tờ `);
                 } else {
                   return [
                     createVNode("img", {
-                      src: "https://i.imgur.com/1.png",
-                      alt: "Icon",
+                      src: "https://www.pinterest.com/pin/609604499595806135/",
                       class: "rule-icon"
                     }),
                     createTextVNode(" 1. Xuất trình giấy tờ ")
@@ -64,14 +63,14 @@ const _sfc_main = {
               }),
               _: 1
             }, _parent2, _scopeId));
-            _push2(`<div class="rule-section" data-v-6e68409c${_scopeId}><p class="vi" data-v-6e68409c${_scopeId}>📌 Quý khách vui lòng xuất trình đầy đủ giấy tờ hợp lệ như Chứng minh nhân dân hoặc Hộ chiếu còn hạn thị thực để khách sạn đăng ký với cơ quan có thẩm quyền.</p><p class="en" data-v-6e68409c${_scopeId}>👉 Please present your Identity Card or Passport with valid entry and exit Visa at Reception desk upon check in.</p></div>`);
+            _push2(`<div class="rule-section" data-v-0ce68e21${_scopeId}><p class="vi" data-v-0ce68e21${_scopeId}>📌 Quý khách vui lòng xuất trình đầy đủ giấy tờ hợp lệ như Chứng minh nhân dân hoặc Hộ chiếu còn hạn thị thực để khách sạn đăng ký với cơ quan có thẩm quyền.</p><p class="en" data-v-0ce68e21${_scopeId}>👉 Please present your Identity Card or Passport with valid entry and exit Visa at Reception desk upon check in.</p></div>`);
             _push2(ssrRenderComponent(_component_el_divider, {
               class: "custom-divider",
               "content-position": "left"
             }, {
               default: withCtx((_2, _push3, _parent3, _scopeId2) => {
                 if (_push3) {
-                  _push3(`<img src="https://i.imgur.com/2.png" alt="Icon" class="rule-icon" data-v-6e68409c${_scopeId2}> 2. Giờ nhận &amp; trả phòng `);
+                  _push3(`<img src="https://i.imgur.com/2.png" alt="Icon" class="rule-icon" data-v-0ce68e21${_scopeId2}> 2. Giờ nhận &amp; trả phòng `);
                 } else {
                   return [
                     createVNode("img", {
@@ -85,14 +84,14 @@ const _sfc_main = {
               }),
               _: 1
             }, _parent2, _scopeId));
-            _push2(`<div class="rule-section" data-v-6e68409c${_scopeId}><p class="vi" data-v-6e68409c${_scopeId}>🕒 Giờ nhận phòng từ <strong data-v-6e68409c${_scopeId}>14:00</strong> và giờ trả phòng là trước <strong data-v-6e68409c${_scopeId}>12:00 trưa</strong>. Việc nhận phòng sớm hoặc trả phòng trễ sẽ bị tính thêm phí theo quy định.</p><p class="en" data-v-6e68409c${_scopeId}>👉 Check-in time is from <strong data-v-6e68409c${_scopeId}>14:00</strong> and check-out is before <strong data-v-6e68409c${_scopeId}>12:00 noon</strong>. Early check-in or late check-out will be charged extra fees.</p></div>`);
+            _push2(`<div class="rule-section" data-v-0ce68e21${_scopeId}><p class="vi" data-v-0ce68e21${_scopeId}>🕒 Giờ nhận phòng từ <strong data-v-0ce68e21${_scopeId}>14:00</strong> và giờ trả phòng là trước <strong data-v-0ce68e21${_scopeId}>12:00 trưa</strong>. Việc nhận phòng sớm hoặc trả phòng trễ sẽ bị tính thêm phí theo quy định.</p><p class="en" data-v-0ce68e21${_scopeId}>👉 Check-in time is from <strong data-v-0ce68e21${_scopeId}>14:00</strong> and check-out is before <strong data-v-0ce68e21${_scopeId}>12:00 noon</strong>. Early check-in or late check-out will be charged extra fees.</p></div>`);
             _push2(ssrRenderComponent(_component_el_divider, {
               class: "custom-divider",
               "content-position": "left"
             }, {
               default: withCtx((_2, _push3, _parent3, _scopeId2) => {
                 if (_push3) {
-                  _push3(`<img src="https://i.imgur.com/3.png" alt="Icon" class="rule-icon" data-v-6e68409c${_scopeId2}> 3. Chìa khóa phòng `);
+                  _push3(`<img src="https://i.imgur.com/3.png" alt="Icon" class="rule-icon" data-v-0ce68e21${_scopeId2}> 3. Chìa khóa phòng `);
                 } else {
                   return [
                     createVNode("img", {
@@ -106,7 +105,7 @@ const _sfc_main = {
               }),
               _: 1
             }, _parent2, _scopeId));
-            _push2(`<div class="rule-section" data-v-6e68409c${_scopeId}><p class="vi" data-v-6e68409c${_scopeId}>🔑 Vui lòng gửi lại chìa khóa phòng tại quầy lễ tân khi trả phòng. Nếu mất chìa khóa, khách sạn sẽ tính phí theo quy định.</p><p class="en" data-v-6e68409c${_scopeId}>👉 Please return your room key card upon check-out at reception desk. In case the card is lost, the fee will be charged accordingly.</p></div>`);
+            _push2(`<div class="rule-section" data-v-0ce68e21${_scopeId}><p class="vi" data-v-0ce68e21${_scopeId}>🔑 Vui lòng gửi lại chìa khóa phòng tại quầy lễ tân khi trả phòng. Nếu mất chìa khóa, khách sạn sẽ tính phí theo quy định.</p><p class="en" data-v-0ce68e21${_scopeId}>👉 Please return your room key card upon check-out at reception desk. In case the card is lost, the fee will be charged accordingly.</p></div>`);
           } else {
             return [
               createVNode("div", { class: "header" }, [
@@ -118,8 +117,7 @@ const _sfc_main = {
               }, {
                 default: withCtx(() => [
                   createVNode("img", {
-                    src: "https://i.imgur.com/1.png",
-                    alt: "Icon",
+                    src: "https://www.pinterest.com/pin/609604499595806135/",
                     class: "rule-icon"
                   }),
                   createTextVNode(" 1. Xuất trình giấy tờ ")
@@ -193,7 +191,7 @@ _sfc_main.setup = (props, ctx) => {
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("pages/HotelRegulations.vue");
   return _sfc_setup ? _sfc_setup(props, ctx) : void 0;
 };
-const HotelRegulations = /* @__PURE__ */ _export_sfc(_sfc_main, [["__scopeId", "data-v-6e68409c"]]);
+const HotelRegulations = /* @__PURE__ */ _export_sfc(_sfc_main, [["__scopeId", "data-v-0ce68e21"]]);
 
 export { HotelRegulations as default };
 //# sourceMappingURL=HotelRegulations.vue.mjs.map

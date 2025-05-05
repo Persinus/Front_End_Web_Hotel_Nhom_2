@@ -1,6 +1,6 @@
 import { defineComponent, ref, h, resolveComponent, computed } from 'file://C:/Users/admin/Documents/Front_End_Web_Hotel_Nhom_2/node_modules/vue/index.mjs';
 import { parseQuery, hasProtocol, joinURL, withTrailingSlash, withoutTrailingSlash } from 'file://C:/Users/admin/Documents/Front_End_Web_Hotel_Nhom_2/node_modules/ufo/dist/index.mjs';
-import { d as useRouter, b as useNuxtApp, r as resolveRouteObject, e as useRuntimeConfig, n as navigateTo, f as nuxtLinkDefaults } from './server.mjs';
+import { d as useRouter, c as useNuxtApp, r as resolveRouteObject, e as useRuntimeConfig, n as navigateTo, f as nuxtLinkDefaults } from './server.mjs';
 
 const firstNonUndefined = (...args) => args.find((arg) => arg !== void 0);
 // @__NO_SIDE_EFFECTS__

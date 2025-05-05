@@ -1,7 +1,7 @@
 import { _ as __nuxt_component_0 } from './nuxt-link.mjs';
 import { ref, computed, unref, withCtx, createTextVNode, toDisplayString, createVNode, createBlock, openBlock, Fragment, renderList, createCommentVNode, useSSRContext } from 'vue';
 import { ssrRenderComponent, ssrRenderClass, ssrInterpolate, ssrRenderList, ssrRenderAttr } from 'vue/server-renderer';
-import { a as useThemeStore, c as useLanguageStore, b as useNuxtApp } from './server.mjs';
+import { a as useThemeStore, b as useLanguageStore } from './server.mjs';
 import { T as TheHeader } from './Header.vue.mjs';
 import { VaCard, VaInput, VaSelect, VaButton, VaInnerLoading, VaCardTitle, VaCardContent, VaCardActions, VaAlert } from 'vuestic-ui';
 import { _ as _export_sfc } from './_plugin-vue_export-helper.mjs';
@@ -36,31 +36,9 @@ const _sfc_main = {
     const loading = ref(true);
     const error = ref(null);
     const filters = ref({ maPhong: "", loaiPhong: "", giaPhong: "", tang: "", trangThai: "" });
-    const { $api } = useNuxtApp();
     const translations = computed(() => {
-      const lang = languageStore.currentLanguage;
-      return {
-        title: lang === "vn" ? "Danh Sách Phòng" : "Room List",
-        roomId: lang === "vn" ? "Mã phòng" : "Room ID",
-        enterRoomId: lang === "vn" ? "Nhập mã phòng" : "Enter Room ID",
-        roomType: lang === "vn" ? "Loại phòng" : "Room Type",
-        enterRoomType: lang === "vn" ? "Nhập loại phòng" : "Enter Room Type",
-        maxPrice: lang === "vn" ? "Giá tối đa" : "Max Price",
-        enterMaxPrice: lang === "vn" ? "Nhập giá tối đa" : "Enter Max Price",
-        floor: lang === "vn" ? "Tầng" : "Floor",
-        enterFloor: lang === "vn" ? "Nhập tầng" : "Enter Floor",
-        status: lang === "vn" ? "Trạng thái" : "Status",
-        all: lang === "vn" ? "Tất cả" : "All",
-        available: lang === "vn" ? "Còn trống" : "Available",
-        booked: lang === "vn" ? "Đã đặt" : "Booked",
-        sortAsc: lang === "vn" ? "Giá tăng dần" : "Sort Ascending",
-        sortDesc: lang === "vn" ? "Giá giảm dần" : "Sort Descending",
-        price: lang === "vn" ? "Giá" : "Price",
-        bedType: lang === "vn" ? "Kiểu giường" : "Bed Type",
-        viewDetails: lang === "vn" ? "Xem Chi Tiết" : "View Details",
-        addToCart: lang === "vn" ? "Thêm vào giỏ" : "Add to Cart",
-        noRooms: lang === "vn" ? "Không có phòng nào." : "No rooms available."
-      };
+      languageStore.currentLanguage;
+      return languageStore.t;
     });
     const filterRooms = () => {
       filteredRooms.value = rooms.value.filter((room) => {
@@ -77,16 +55,16 @@ const _sfc_main = {
     };
     return (_ctx, _push, _parent, _attrs) => {
       const _component_nuxt_link = __nuxt_component_0;
-      _push(`<!--[--><header data-v-b14486ec>`);
+      _push(`<!--[--><header data-v-efe1fd0d>`);
       _push(ssrRenderComponent(TheHeader, null, null, _parent));
-      _push(`</header><div class="${ssrRenderClass(["container", { "dark-mode": unref(themeStore).isDarkMode }])}" data-v-b14486ec><h1 class="header" data-v-b14486ec>${ssrInterpolate(translations.value.title)}</h1>`);
+      _push(`</header><div class="${ssrRenderClass(["container", { "dark-mode": unref(themeStore).isDarkMode }])}" data-v-efe1fd0d><h1 class="header" data-v-efe1fd0d>${ssrInterpolate(translations.value.title)}</h1>`);
       _push(ssrRenderComponent(unref(VaCard), {
         outlined: "",
         class: "filter-form"
       }, {
         default: withCtx((_, _push2, _parent2, _scopeId) => {
           if (_push2) {
-            _push2(`<div class="filter-group" data-v-b14486ec${_scopeId}><label for="maPhong" data-v-b14486ec${_scopeId}>${ssrInterpolate(translations.value.roomId)}:</label>`);
+            _push2(`<div class="filter-group" data-v-efe1fd0d${_scopeId}><label for="maPhong" data-v-efe1fd0d${_scopeId}>${ssrInterpolate(translations.value.roomId)}:</label>`);
             _push2(ssrRenderComponent(unref(VaInput), {
               id: "maPhong",
               modelValue: filters.value.maPhong,
@@ -95,7 +73,7 @@ const _sfc_main = {
               outlined: "",
               onInput: filterRooms
             }, null, _parent2, _scopeId));
-            _push2(`</div><div class="filter-group" data-v-b14486ec${_scopeId}><label for="loaiPhong" data-v-b14486ec${_scopeId}>${ssrInterpolate(translations.value.roomType)}:</label>`);
+            _push2(`</div><div class="filter-group" data-v-efe1fd0d${_scopeId}><label for="loaiPhong" data-v-efe1fd0d${_scopeId}>${ssrInterpolate(translations.value.roomType)}:</label>`);
             _push2(ssrRenderComponent(unref(VaInput), {
               id: "loaiPhong",
               modelValue: filters.value.loaiPhong,
@@ -104,7 +82,7 @@ const _sfc_main = {
               outlined: "",
               onInput: filterRooms
             }, null, _parent2, _scopeId));
-            _push2(`</div><div class="filter-group" data-v-b14486ec${_scopeId}><label for="giaPhong" data-v-b14486ec${_scopeId}>${ssrInterpolate(translations.value.maxPrice)}:</label>`);
+            _push2(`</div><div class="filter-group" data-v-efe1fd0d${_scopeId}><label for="giaPhong" data-v-efe1fd0d${_scopeId}>${ssrInterpolate(translations.value.maxPrice)}:</label>`);
             _push2(ssrRenderComponent(unref(VaInput), {
               id: "giaPhong",
               modelValue: filters.value.giaPhong,
@@ -114,7 +92,7 @@ const _sfc_main = {
               type: "number",
               onInput: filterRooms
             }, null, _parent2, _scopeId));
-            _push2(`</div><div class="filter-group" data-v-b14486ec${_scopeId}><label for="tang" data-v-b14486ec${_scopeId}>${ssrInterpolate(translations.value.floor)}:</label>`);
+            _push2(`</div><div class="filter-group" data-v-efe1fd0d${_scopeId}><label for="tang" data-v-efe1fd0d${_scopeId}>${ssrInterpolate(translations.value.floor)}:</label>`);
             _push2(ssrRenderComponent(unref(VaInput), {
               id: "tang",
               modelValue: filters.value.tang,
@@ -124,7 +102,7 @@ const _sfc_main = {
               type: "number",
               onInput: filterRooms
             }, null, _parent2, _scopeId));
-            _push2(`</div><div class="filter-group" data-v-b14486ec${_scopeId}><label for="trangThai" data-v-b14486ec${_scopeId}>${ssrInterpolate(translations.value.status)}:</label>`);
+            _push2(`</div><div class="filter-group" data-v-efe1fd0d${_scopeId}><label for="trangThai" data-v-efe1fd0d${_scopeId}>${ssrInterpolate(translations.value.status)}:</label>`);
             _push2(ssrRenderComponent(unref(VaSelect), {
               id: "trangThai",
               modelValue: filters.value.trangThai,
@@ -137,7 +115,7 @@ const _sfc_main = {
               outlined: "",
               onChange: filterRooms
             }, null, _parent2, _scopeId));
-            _push2(`</div><div class="filter-actions" data-v-b14486ec${_scopeId}>`);
+            _push2(`</div><div class="filter-actions" data-v-efe1fd0d${_scopeId}>`);
             _push2(ssrRenderComponent(unref(VaButton), {
               color: "primary",
               onClick: ($event) => sortRooms("asc")
@@ -265,9 +243,9 @@ const _sfc_main = {
         default: withCtx((_, _push2, _parent2, _scopeId) => {
           if (_push2) {
             if (error.value) {
-              _push2(`<div class="error-message" data-v-b14486ec${_scopeId}> Lỗi: ${ssrInterpolate(error.value)}</div>`);
+              _push2(`<div class="error-message" data-v-efe1fd0d${_scopeId}> Lỗi: ${ssrInterpolate(error.value)}</div>`);
             } else if (filteredRooms.value.length) {
-              _push2(`<div class="services-grid" data-v-b14486ec${_scopeId}><!--[-->`);
+              _push2(`<div class="services-grid" data-v-efe1fd0d${_scopeId}><!--[-->`);
               ssrRenderList(filteredRooms.value, (room) => {
                 _push2(ssrRenderComponent(unref(VaCard), {
                   key: room.maPhong,
@@ -276,11 +254,11 @@ const _sfc_main = {
                 }, {
                   default: withCtx((_2, _push3, _parent3, _scopeId2) => {
                     if (_push3) {
-                      _push3(`<img${ssrRenderAttr("src", room.urlAnhChinh)} alt="Hình ảnh phòng" class="room-image" data-v-b14486ec${_scopeId2}>`);
+                      _push3(`<img${ssrRenderAttr("src", room.urlAnhChinh)} alt="Hình ảnh phòng" class="room-image" data-v-efe1fd0d${_scopeId2}>`);
                       _push3(ssrRenderComponent(unref(VaCardTitle), null, {
                         default: withCtx((_3, _push4, _parent4, _scopeId3) => {
                           if (_push4) {
-                            _push4(`<div class="room-title" data-v-b14486ec${_scopeId3}>${ssrInterpolate(room.loaiPhong)}</div>`);
+                            _push4(`<div class="room-title" data-v-efe1fd0d${_scopeId3}>${ssrInterpolate(room.loaiPhong)}</div>`);
                           } else {
                             return [
                               createVNode("div", { class: "room-title" }, toDisplayString(room.loaiPhong), 1)
@@ -292,7 +270,7 @@ const _sfc_main = {
                       _push3(ssrRenderComponent(unref(VaCardContent), null, {
                         default: withCtx((_3, _push4, _parent4, _scopeId3) => {
                           if (_push4) {
-                            _push4(`<p class="room-price" data-v-b14486ec${_scopeId3}>${ssrInterpolate(translations.value.price)}: <strong data-v-b14486ec${_scopeId3}>${ssrInterpolate(room.giaPhong.toLocaleString())} VND</strong></p><p class="room-floor" data-v-b14486ec${_scopeId3}>${ssrInterpolate(translations.value.floor)}: ${ssrInterpolate(room.tang)}</p><p class="room-bed-type" data-v-b14486ec${_scopeId3}>${ssrInterpolate(translations.value.bedType)}: ${ssrInterpolate(room.kieuGiuong)}</p><span class="${ssrRenderClass([room.trangThai === "Còn trống" ? "available" : "booked", "room-status"])}" data-v-b14486ec${_scopeId3}>${ssrInterpolate(room.trangThai === "Còn trống" ? translations.value.available : translations.value.booked)}</span>`);
+                            _push4(`<p class="room-price" data-v-efe1fd0d${_scopeId3}>${ssrInterpolate(translations.value.price)}: <strong data-v-efe1fd0d${_scopeId3}>${ssrInterpolate(room.giaPhong.toLocaleString())} VND</strong></p><p class="room-floor" data-v-efe1fd0d${_scopeId3}>${ssrInterpolate(translations.value.floor)}: ${ssrInterpolate(room.tang)}</p><p class="room-bed-type" data-v-efe1fd0d${_scopeId3}>${ssrInterpolate(translations.value.bedType)}: ${ssrInterpolate(room.kieuGiuong)}</p><span class="${ssrRenderClass([room.trangThai === "Còn trống" ? "available" : "booked", "room-status"])}" data-v-efe1fd0d${_scopeId3}>${ssrInterpolate(room.trangThai === "Còn trống" ? translations.value.available : translations.value.booked)}</span>`);
                           } else {
                             return [
                               createVNode("p", { class: "room-price" }, [
@@ -573,7 +551,7 @@ _sfc_main.setup = (props, ctx) => {
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("pages/phong.vue");
   return _sfc_setup ? _sfc_setup(props, ctx) : void 0;
 };
-const phong = /* @__PURE__ */ _export_sfc(_sfc_main, [["__scopeId", "data-v-b14486ec"]]);
+const phong = /* @__PURE__ */ _export_sfc(_sfc_main, [["__scopeId", "data-v-efe1fd0d"]]);
 
 export { phong as default };
 //# sourceMappingURL=phong.vue.mjs.map

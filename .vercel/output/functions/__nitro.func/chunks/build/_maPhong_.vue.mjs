@@ -2,7 +2,7 @@ import { _ as __nuxt_component_0 } from './nuxt-link.mjs';
 import { ref, resolveComponent, unref, withCtx, createTextVNode, createVNode, toDisplayString, useSSRContext } from 'vue';
 import { ssrRenderComponent, ssrRenderClass, ssrRenderAttr, ssrRenderList, ssrInterpolate } from 'vue/server-renderer';
 import { useRoute } from 'vue-router';
-import { a as useThemeStore, b as useNuxtApp } from './server.mjs';
+import { a as useThemeStore, c as useNuxtApp } from './server.mjs';
 import { T as TheHeader } from './Header.vue.mjs';
 import { _ as _export_sfc } from './_plugin-vue_export-helper.mjs';
 import '../_/nitro.mjs';

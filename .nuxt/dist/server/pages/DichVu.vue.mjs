@@ -1,17 +1,13 @@
 import __nuxt_component_0 from "../node_modules/nuxt/dist/app/components/nuxt-link.mjs";
 import { ref, computed, resolveComponent, unref, withCtx, createVNode, toDisplayString, createTextVNode, useSSRContext } from "vue";
 import { ssrRenderComponent, ssrRenderClass, ssrRenderList, ssrRenderAttr, ssrInterpolate } from "vue/server-renderer";
-import { useRouter } from "vue-router";
-import { useNuxtApp } from "../node_modules/nuxt/dist/app/nuxt.mjs";
-import "C:/Users/admin/Documents/Front_End_Web_Hotel_Nhom_2/node_modules/klona/dist/index.mjs";
-import "C:/Users/admin/Documents/Front_End_Web_Hotel_Nhom_2/node_modules/defu/dist/defu.mjs";
-import "#internal/nuxt/paths";
 import { useThemeStore } from "../store/DarkMode.mjs";
 import TheHeader from "../Components/Header.vue.mjs";
+import "../utils/axiosBase.mjs";
 /* empty css             */
 import _export_sfc from "../_virtual/_plugin-vue_export-helper.mjs";
 const _sfc_main = {
-  __name: "DichVu",
+  __name: "dichvu",
   __ssrInlineRender: true,
   setup(__props) {
     const theme = useThemeStore();
@@ -23,8 +19,6 @@ const _sfc_main = {
       { value: "medium", label: "500,000 - 1,000,000 VND" },
       { value: "high", label: "Trên 1,000,000 VND" }
     ];
-    const { $api } = useNuxtApp();
-    useRouter();
     const filteredServices = computed(() => {
       return services.value.filter((service) => {
         const matchesName = service.tenDichVu.toLowerCase().includes(filterName.value.toLowerCase());
@@ -41,9 +35,10 @@ const _sfc_main = {
       const _component_va_card_actions = resolveComponent("va-card-actions");
       const _component_nuxt_link = __nuxt_component_0;
       const _component_va_button = resolveComponent("va-button");
-      _push(`<!--[--><header data-v-4cb1ec28>`);
+      const _component_NuxtChild = resolveComponent("NuxtChild");
+      _push(`<!--[--><header data-v-10ec7810>`);
       _push(ssrRenderComponent(TheHeader, null, null, _parent));
-      _push(`</header><div class="${ssrRenderClass(["service-list-container", { "dark-mode": unref(theme).isDarkMode }])}" data-v-4cb1ec28><h1 class="page-title" data-v-4cb1ec28>Danh sách dịch vụ</h1><div class="filter-bar" data-v-4cb1ec28>`);
+      _push(`</header><div class="${ssrRenderClass(["service-list-container", { "dark-mode": unref(theme).isDarkMode }])}" data-v-10ec7810><h1 class="page-title" data-v-10ec7810>Danh sách dịch vụ</h1><div class="filter-bar" data-v-10ec7810>`);
       _push(ssrRenderComponent(_component_va_input, {
         modelValue: filterName.value,
         "onUpdate:modelValue": ($event) => filterName.value = $event,
@@ -57,7 +52,7 @@ const _sfc_main = {
         placeholder: "Lọc theo giá",
         class: "filter-select"
       }, null, _parent));
-      _push(`</div><div class="service-cards" data-v-4cb1ec28><!--[-->`);
+      _push(`</div><div class="service-cards" data-v-10ec7810><!--[-->`);
       ssrRenderList(filteredServices.value, (service) => {
         _push(ssrRenderComponent(_component_va_card, {
           key: service.maChiTietDichVu,
@@ -66,11 +61,11 @@ const _sfc_main = {
         }, {
           default: withCtx((_, _push2, _parent2, _scopeId) => {
             if (_push2) {
-              _push2(`<img${ssrRenderAttr("src", service.urlAnh)} alt="Hình ảnh dịch vụ" class="service-image" data-v-4cb1ec28${_scopeId}>`);
+              _push2(`<img${ssrRenderAttr("src", service.urlAnh)} alt="Hình ảnh dịch vụ" class="service-image" data-v-10ec7810${_scopeId}>`);
               _push2(ssrRenderComponent(_component_va_card_title, null, {
                 default: withCtx((_2, _push3, _parent3, _scopeId2) => {
                   if (_push3) {
-                    _push3(`<div class="service-title"${ssrRenderAttr("title", service.tenDichVu)} data-v-4cb1ec28${_scopeId2}>${ssrInterpolate(service.tenDichVu)}</div>`);
+                    _push3(`<div class="service-title"${ssrRenderAttr("title", service.tenDichVu)} data-v-10ec7810${_scopeId2}>${ssrInterpolate(service.tenDichVu)}</div>`);
                   } else {
                     return [
                       createVNode("div", {
@@ -85,7 +80,7 @@ const _sfc_main = {
               _push2(ssrRenderComponent(_component_va_card_content, null, {
                 default: withCtx((_2, _push3, _parent3, _scopeId2) => {
                   if (_push3) {
-                    _push3(`<p class="service-price" data-v-4cb1ec28${_scopeId2}>${ssrInterpolate(service.donGia.toLocaleString())} VND / 1 đêm </p>`);
+                    _push3(`<p class="service-price" data-v-10ec7810${_scopeId2}>${ssrInterpolate(service.donGia.toLocaleString())} VND / 1 đêm </p>`);
                   } else {
                     return [
                       createVNode("p", { class: "service-price" }, toDisplayString(service.donGia.toLocaleString()) + " VND / 1 đêm ", 1)
@@ -193,18 +188,20 @@ const _sfc_main = {
           _: 2
         }, _parent));
       });
-      _push(`<!--]--></div></div><!--]-->`);
+      _push(`<!--]--></div>`);
+      _push(ssrRenderComponent(_component_NuxtChild, null, null, _parent));
+      _push(`</div><!--]-->`);
     };
   }
 };
 const _sfc_setup = _sfc_main.setup;
 _sfc_main.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
-  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("pages/DichVu.vue");
+  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("pages/dichvu.vue");
   return _sfc_setup ? _sfc_setup(props, ctx) : void 0;
 };
-const DichVu = /* @__PURE__ */ _export_sfc(_sfc_main, [["__scopeId", "data-v-4cb1ec28"]]);
+const dichvu = /* @__PURE__ */ _export_sfc(_sfc_main, [["__scopeId", "data-v-10ec7810"]]);
 export {
-  DichVu as default
+  dichvu as default
 };
-//# sourceMappingURL=DichVu.vue.mjs.map
+//# sourceMappingURL=dichvu.vue.mjs.map

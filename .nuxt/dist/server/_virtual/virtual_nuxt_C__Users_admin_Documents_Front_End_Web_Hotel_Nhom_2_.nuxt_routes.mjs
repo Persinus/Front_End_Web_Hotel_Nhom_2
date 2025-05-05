@@ -22,16 +22,9 @@ const _routes = [
     component: () => import("../pages/phong.vue.mjs")
   },
   {
-    name: "DichVu",
-    path: "/DichVu",
-    component: () => import("../pages/DichVu.vue.mjs"),
-    children: [
-      {
-        name: "DichVu-DichVu",
-        path: ":DichVu()",
-        component: () => import("../pages/DichVu/_DichVu_.vue.mjs")
-      }
-    ]
+    name: "dichvu",
+    path: "/dichvu",
+    component: () => import("../pages/dichvu.vue.mjs")
   },
   {
     name: "hoadon",
@@ -127,6 +120,11 @@ const _routes = [
     name: "Check-in-outconfirmation",
     path: "/Check-in-outconfirmation",
     component: () => import("../pages/Check-in-outconfirmation.vue.mjs")
+  },
+  {
+    name: "DichVu-maChiTietDichVu",
+    path: "/DichVu/:maChiTietDichVu()",
+    component: () => import("../pages/DichVu/_maChiTietDichVu_.vue.mjs")
   }
 ];
 export {
