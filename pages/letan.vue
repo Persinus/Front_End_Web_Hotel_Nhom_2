@@ -103,25 +103,105 @@
           </div>
         </div>
       </div>
+
+      <!-- Quản lý dịch vụ -->
+      <div v-if="currentTab === 'dichvu'" class="tab-content">
+        <h2 class="section-title">Quản lý dịch vụ</h2>
+        <p class="section-description">Danh sách dịch vụ và giá cả.</p>
+
+        <!-- Table -->
+        <div class="table-wrapper">
+          <table class="custom-table">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Tên dịch vụ</th>
+                <th>Giá</th>
+                <th>Hành động</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr
+                v-for="(service, index) in paginatedServices"
+                :key="service.maDichVu"
+              >
+                <td>{{ currentPageService * itemsPerPageService + index + 1 }}</td>
+                <td>{{ service.tenDichVu }}</td>
+                <td>{{ service.donGia.toLocaleString() }} VND</td>
+                <td>
+                  <button
+                    class="btn-edit"
+                    @click="openEditServiceModal(service)"
+                  >
+                    <VaIcon name="edit" /> Sửa
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Pagination -->
+        <div class="pagination">
+          <button
+            v-for="page in totalPagesService"
+            :key="page"
+            :class="{ active: currentPageService === page - 1 }"
+            @click="currentPageService = page - 1"
+          >
+            {{ page }}
+          </button>
+        </div>
+      </div>
+
+      <!-- Modal sửa dịch vụ -->
+      <div v-if="showEditServiceModal" class="modal">
+        <div class="modal-content">
+          <h3>Sửa thông tin dịch vụ</h3>
+          <label for="serviceName">Tên dịch vụ:</label>
+          <input
+            id="serviceName"
+            type="text"
+            v-model="editingService.tenDichVu"
+          />
+
+          <label for="servicePrice">Giá:</label>
+          <input
+            id="servicePrice"
+            type="number"
+            v-model="editingService.donGia"
+          />
+
+          <div class="modal-actions">
+            <button class="btn-primary" @click="saveServiceChanges">Lưu</button>
+            <button class="btn-secondary" @click="closeEditServiceModal">Hủy</button>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </template>
 
 <script setup>
 import { ref, computed, onMounted } from 'vue';
-import { useNuxtApp } from '#app';
 import { useThemeStore } from '@/store/DarkMode';
+import { axiosBase } from '~/utils/axiosBase'; // Import axiosBase
 
 // States
 const theme = useThemeStore();
 theme.initializeDarkMode();
 
-const currentTab = ref('phong');
+const currentTab = ref('phong'); // Tab mặc định
 const rooms = ref([]);
-const currentPage = ref(0); // Trang hiện tại
+const services = ref([]);
+const currentPage = ref(0); // Trang hiện tại cho phòng
+const currentPageService = ref(0); // Trang hiện tại cho dịch vụ
 const itemsPerPage = 5; // Số lượng phòng trên mỗi trang
+const itemsPerPageService = 5; // Số lượng dịch vụ trên mỗi trang
 const showEditModal = ref(false);
+const showEditServiceModal = ref(false);
 const editingRoom = ref(null);
+const editingService = ref(null);
 
 // Sidebar items
 const sidebarItems = [
@@ -131,30 +211,39 @@ const sidebarItems = [
   { key: 'caidat', title: 'Cài đặt', icon: 'settings' },
 ];
 
-// API setup
-const { $api } = useNuxtApp();
-
 // Lấy danh sách phòng
 onMounted(async () => {
   try {
-    const response = await $api.get('/PhongWithTienNghi');
-    rooms.value = response.data.map((room) => ({
+    const responseRooms = await axiosBase.get('/PhongWithTienNghi');
+    rooms.value = responseRooms.data.map((room) => ({
       ...room,
-      tienNghiList: JSON.parse(room.tienNghi),
+      tienNghiList: JSON.parse(room.tienNghi), // Chuyển đổi chuỗi JSON thành mảng
     }));
+
+    const responseServices = await axiosBase.get('/dichvu');
+    services.value = responseServices.data;
   } catch (error) {
-    console.error('Lỗi khi lấy dữ liệu phòng:', error);
+    console.error('Lỗi khi lấy dữ liệu:', error);
   }
 });
 
-// Pagination logic
+// Pagination logic cho phòng
 const paginatedRooms = computed(() => {
   const start = currentPage.value * itemsPerPage;
   return rooms.value.slice(start, start + itemsPerPage);
 });
 const totalPages = computed(() => Math.ceil(rooms.value.length / itemsPerPage));
 
-// Modal logic
+// Pagination logic cho dịch vụ
+const paginatedServices = computed(() => {
+  const start = currentPageService.value * itemsPerPageService;
+  return services.value.slice(start, start + itemsPerPageService);
+});
+const totalPagesService = computed(() =>
+  Math.ceil(services.value.length / itemsPerPageService)
+);
+
+// Modal logic cho phòng
 const openEditModal = (room) => {
   editingRoom.value = { ...room }; // Tạo bản sao để chỉnh sửa
   showEditModal.value = true;
@@ -165,11 +254,11 @@ const closeEditModal = () => {
   editingRoom.value = null;
 };
 
-// Lưu thay đổi
+// Lưu thay đổi phòng
 const saveChanges = async () => {
   try {
     const updatedRoom = editingRoom.value;
-    await $api.put(`/Phong/${updatedRoom.maPhong}`, updatedRoom);
+    await axiosBase.put(`/Phong/${updatedRoom.maPhong}`, updatedRoom);
     // Cập nhật danh sách phòng
     const roomIndex = rooms.value.findIndex(
       (room) => room.maPhong === updatedRoom.maPhong
@@ -180,6 +269,35 @@ const saveChanges = async () => {
     closeEditModal();
   } catch (error) {
     console.error('Lỗi khi cập nhật phòng:', error);
+  }
+};
+
+// Modal logic cho dịch vụ
+const openEditServiceModal = (service) => {
+  editingService.value = { ...service }; // Tạo bản sao để chỉnh sửa
+  showEditServiceModal.value = true;
+};
+
+const closeEditServiceModal = () => {
+  showEditServiceModal.value = false;
+  editingService.value = null;
+};
+
+// Lưu thay đổi dịch vụ
+const saveServiceChanges = async () => {
+  try {
+    const updatedService = editingService.value;
+    await axiosBase.put(`/DichVu/${updatedService.maDichVu}`, updatedService);
+    // Cập nhật danh sách dịch vụ
+    const serviceIndex = services.value.findIndex(
+      (service) => service.maDichVu === updatedService.maDichVu
+    );
+    if (serviceIndex !== -1) {
+      services.value[serviceIndex] = { ...updatedService };
+    }
+    closeEditServiceModal();
+  } catch (error) {
+    console.error('Lỗi khi cập nhật dịch vụ:', error);
   }
 };
 

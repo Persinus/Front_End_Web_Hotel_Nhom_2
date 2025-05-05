@@ -13,6 +13,7 @@
 <script setup>
 import { ref, onMounted } from 'vue';
 import { useRoute } from 'vue-router';
+import { axiosBase } from '~/utils/axiosBase'; // Import axiosBase
 
 const route = useRoute();
 const service = ref({});
@@ -20,9 +21,9 @@ const service = ref({});
 onMounted(async () => {
   const maChiTietDichVu = route.params.maChiTietDichVu; // Lấy mã chi tiết dịch vụ từ URL
   try {
-    // Gọi middleware để lấy chi tiết dịch vụ
-    const response = await $fetch(`http://nhom2webkhachsan.runasp.net/api/DichVu/${maChiTietDichVu}`);
-    service.value = response;
+    // Gọi API bằng axiosBase
+    const response = await axiosBase.get(`/DichVu/${maChiTietDichVu}`);
+    service.value = response.data;
   } catch (error) {
     console.error('Lỗi khi lấy chi tiết dịch vụ:', error);
   }

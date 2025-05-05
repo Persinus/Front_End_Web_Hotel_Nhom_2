@@ -4,7 +4,6 @@ import { resolve, dirname, join } from 'node:path';
 import nodeCrypto from 'node:crypto';
 import { parentPort, threadId } from 'node:worker_threads';
 import { defineEventHandler, handleCacheHeaders, splitCookiesString, createEvent, fetchWithEvent, isEvent, eventHandler, setHeaders, sendRedirect, proxyRequest, getRequestHeader, setResponseHeaders, setResponseStatus, send, getRequestHeaders, setResponseHeader, getRequestURL, getResponseHeader, createApp, createRouter as createRouter$1, toNodeListener, lazyEventHandler, getResponseStatus, createError, getRouterParam, readBody, getQuery as getQuery$1, getResponseStatusText } from 'file://C:/Users/admin/Documents/Front_End_Web_Hotel_Nhom_2/node_modules/h3/dist/index.mjs';
-import axios from 'file://C:/Users/admin/Documents/Front_End_Web_Hotel_Nhom_2/node_modules/axios/index.js';
 import { createRenderer, getRequestDependencies, getPreloadLinks, getPrefetchLinks } from 'file://C:/Users/admin/Documents/Front_End_Web_Hotel_Nhom_2/node_modules/vue-bundle-renderer/dist/runtime.mjs';
 import destr from 'file://C:/Users/admin/Documents/Front_End_Web_Hotel_Nhom_2/node_modules/destr/dist/index.mjs';
 import { parseURL, withoutBase, joinURL, getQuery, withQuery, withTrailingSlash, joinRelativeURL } from 'file://C:/Users/admin/Documents/Front_End_Web_Hotel_Nhom_2/node_modules/ufo/dist/index.mjs';
@@ -648,10 +647,7 @@ const _inlineRuntimeConfig = {
       }
     }
   },
-  "public": {
-    "apiBase": "/api"
-  },
-  "apiBase": "http://nhom2webkhachsan.runasp.net/api"
+  "public": {}
 };
 const envOptions = {
   prefix: "NITRO_",
@@ -1110,15 +1106,9 @@ const plugins = [
 _2VdsCsKepP2jFRWGYSo23uzUoMOn1sJmEV7dKmQKAxo
 ];
 
-const _lazy_Xk5OMf = () => Promise.resolve().then(function () { return dichvu$1; });
-const _lazy_ziAbyI = () => Promise.resolve().then(function () { return _maChiTietDichVu_$1; });
-const _lazy_Osbr_j = () => Promise.resolve().then(function () { return phong$1; });
 const _lazy_HAZexb = () => Promise.resolve().then(function () { return renderer$1; });
 
 const handlers = [
-  { route: '/api/dichvu', handler: _lazy_Xk5OMf, lazy: true, middleware: false, method: undefined },
-  { route: '/api/dichvu/:maChiTietDichVu', handler: _lazy_ziAbyI, lazy: true, middleware: false, method: undefined },
-  { route: '/api/phong', handler: _lazy_Osbr_j, lazy: true, middleware: false, method: undefined },
   { route: '/__nuxt_error', handler: _lazy_HAZexb, lazy: true, middleware: false, method: undefined },
   { route: '/**', handler: _lazy_HAZexb, lazy: true, middleware: false, method: undefined }
 ];
@@ -1430,67 +1420,6 @@ const template$1 = (messages) => {
 const errorDev = /*#__PURE__*/Object.freeze({
   __proto__: null,
   template: template$1
-});
-
-const dichvu = defineEventHandler(async (event) => {
-  var _a;
-  const config = useRuntimeConfig();
-  try {
-    const res = await axios.get(`${config.apiBase}/DichVu`);
-    return res.data;
-  } catch (error) {
-    const axiosError = error;
-    throw createError({
-      statusCode: ((_a = axiosError.response) == null ? void 0 : _a.status) || 500,
-      statusMessage: axiosError.message || "Internal Server Error"
-    });
-  }
-});
-
-const dichvu$1 = /*#__PURE__*/Object.freeze({
-  __proto__: null,
-  default: dichvu
-});
-
-const _maChiTietDichVu_ = defineEventHandler(async (event) => {
-  var _a, _b, _c;
-  const config = useRuntimeConfig();
-  const { maChiTietDichVu } = event.context.params || {};
-  try {
-    const res = await axios.get(`${config.apiBase}/DichVu/${maChiTietDichVu}`);
-    return res.data;
-  } catch (error) {
-    const axiosError = error;
-    throw createError({
-      statusCode: ((_a = axiosError.response) == null ? void 0 : _a.status) || 500,
-      statusMessage: ((_c = (_b = axiosError.response) == null ? void 0 : _b.data) == null ? void 0 : _c.message) || "Internal Server Error"
-    });
-  }
-});
-
-const _maChiTietDichVu_$1 = /*#__PURE__*/Object.freeze({
-  __proto__: null,
-  default: _maChiTietDichVu_
-});
-
-const phong = defineEventHandler(async (event) => {
-  var _a;
-  const config = useRuntimeConfig();
-  try {
-    const res = await axios.get(`${config.apiBase}/PhongWithTienNghi`);
-    return res.data;
-  } catch (error) {
-    const axiosError = error;
-    throw createError({
-      statusCode: ((_a = axiosError.response) == null ? void 0 : _a.status) || 500,
-      statusMessage: axiosError.message || "Internal Server Error"
-    });
-  }
-});
-
-const phong$1 = /*#__PURE__*/Object.freeze({
-  __proto__: null,
-  default: phong
 });
 
 const VueResolver = (_, value) => {
