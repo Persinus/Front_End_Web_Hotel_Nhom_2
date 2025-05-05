@@ -16,13 +16,7 @@ export default defineNuxtConfig({
   ssr: true,
   pages: true,
 
-  runtimeConfig: {
-    apiBase: 'http://nhom2webkhachsan.runasp.net/api', // Chỉ dùng trong server
-    public: {
-      apiBase: '/api', // Sử dụng proxy hoặc middleware
-    },
-  },
-
+  // Không cần cấu hình proxy nữa
   routeRules: {
     '/': { prerender: true },
   },
