@@ -56,6 +56,7 @@
 import { ref, computed, onMounted } from 'vue';
 import { useThemeStore } from '@/store/DarkMode';
 import TheHeader from '../Components/Header.vue';
+import { axiosBase } from '~/utils/axiosBase'; // Import axiosBase
 
 const theme = useThemeStore();
 const services = ref([]);
@@ -70,8 +71,9 @@ const priceOptions = [
 
 onMounted(async () => {
   try {
-    const response = await $fetch('/api/dichvu'); // Gọi middleware
-    services.value = response;
+    // Gọi API bằng axiosBase
+    const response = await axiosBase.get('/dichvu');
+    services.value = response.data;
   } catch (error) {
     console.error('Lỗi khi lấy danh sách dịch vụ:', error);
   }
