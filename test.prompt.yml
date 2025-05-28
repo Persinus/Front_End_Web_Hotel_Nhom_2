@@ -1,6 +1,6 @@
 messages:
   - role: system
-    content: ''
+    content: hello
   - role: user
     content: ''
 model: xai/grok-3
