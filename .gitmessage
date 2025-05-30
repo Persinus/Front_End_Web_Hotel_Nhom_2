@@ -1,0 +1,47 @@
+# 🌊 OceanView Hotel Management - Git Commit Template
+# ---------------------------------------------------
+# 📌 Format: <Prefix>: <Tóm tắt ngắn>
+# 📝 (Dòng thứ 2 trở đi): Mô tả chi tiết hơn (nếu cần)
+#
+# 🧠 Mục tiêu:
+# - Giúp team hiểu rõ thay đổi trong từng commit
+# - Dễ bảo trì, dễ review, dễ mở rộng về sau
+#
+# 🔁 Prefix gợi ý:
+# Add:     🎉 Thêm mới tính năng, file, component
+#          ▸ Add: booking calendar page
+# Fix:     🛠️  Sửa lỗi logic, lỗi UI, lỗi crash
+#          ▸ Fix: login redirect after refresh
+# Update:  ♻️ Cập nhật nội dung, logic nhỏ, màu sắc, tên biến
+#          ▸ Update: navbar icon colors
+# Ref:     ✨ Refactor code, đổi cấu trúc mà không thay đổi chức năng
+#          ▸ Ref: move auth utils to composables
+# Cut:     🔥 Xoá code thừa, tính năng cũ không dùng nữa
+#          ▸ Cut: remove unused modal
+# Bump:    📦 Nâng phiên bản package, framework, dependencies
+#          ▸ Bump: upgrade Nuxt 3.10 -> 3.11
+# Docs:    📚 Thêm hoặc chỉnh sửa tài liệu, README, hướng dẫn
+#          ▸ Docs: update setup instructions
+# Style:   🎨 Sửa format, ESLint, tailwind, spacing, class UI
+#          ▸ Style: fix button spacing in booking form
+# Test:    ✅ Viết mới hoặc sửa test (unit/integration)
+#          ▸ Test: add test for login validation
+# Chore:   🔧 Việc phụ trợ (build, CI/CD, cấu hình, gitignore)
+#          ▸ Chore: configure eslint + prettier
+
+# ---------------------------------------------------
+# ❗ Ví dụ hoàn chỉnh:
+# Add: Implement room booking calendar
+# Tạo giao diện chọn ngày, giờ và phòng để đặt phòng.
+
+# Fix: Validate email field in register form
+# Check định dạng email và hiển thị lỗi nếu sai.
+
+# Update: Change accent color to match brand guideline
+# Cập nhật màu primary trong tailwind.config.js
+
+# ---------------------------------------------------
+# ❗ Ghi nhớ:
+# - Không dùng commit kiểu: "update", "fix bug", "change something"
+# - Luôn viết rõ lý do commit là gì, làm gì, thay đổi gì
+# - Viết ngắn gọn, không dài dòng, không cần viết tiêu đề hoa
