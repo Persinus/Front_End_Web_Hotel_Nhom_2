@@ -4,3 +4,33 @@ node_modules/
 
 # Ignore Vite cache
 node_modules/.cache/vite/
+
+.# Ignore environment variables
+.env
+# Ignore logs
+logs/
+# Ignore temporary files
+*.log
+# Ignore IDE specific files
+.vscode/
+# Ignore build artifacts
+dist/
+# Ignore coverage reports
+coverage/
+# Ignore local configuration files
+*.local
+# Ignore package lock files
+package-lock.json
+# Ignore Yarn lock files
+yarn.lock
+# Ignore npm debug files
+npm-debug.log*
+# Ignore temporary files created by editors
+*.tmp
+# Ignore system files
+.DS_Store
+# Ignore test output
+test-output/
+# Ignore specific IDE configurations
+
+package.json
