@@ -36,7 +36,7 @@ import Pagination from '~/Component_Vuestic/Pagination.vue'
 import Counter from '~/Component_Vuestic/Counter.vue'
 import Layout from '~/Component_Vuestic/Layout.vue'
 import List from '~/Component_Vuestic/List.vue'
-
+import Navbar from '~/Component_Vuestic/NavBar.vue'
 
 
 const options = [
@@ -65,6 +65,7 @@ const options = [
     'Pagination',
     'Counter',
     'Layout',
+    'Navbar',
  
 ]
 
@@ -91,6 +92,7 @@ const componentsMap = {
     Counter,
     Layout,
     List,
+    Navbar,
     
 }
 

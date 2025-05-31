@@ -36,8 +36,8 @@
 
 <script setup>
 import { useThemeStore } from '@/store/DarkMode'
-import TheHeader from '../Components/Header.vue'
-import RuleSection from '../Components/RuleSection.vue'
+import TheHeader from '../components/Header.vue'
+import RuleSection from '../components/RuleSection.vue'
 
 const theme = useThemeStore()
 theme.initializeDarkMode()

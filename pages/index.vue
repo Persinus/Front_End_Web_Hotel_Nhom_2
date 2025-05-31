@@ -1,211 +1,242 @@
 <template>
-  <div :class="{'dark': theme.isDarkMode}" class="home-container">
-    <!-- Header -->
-    <header>
-      <TheHeader />
-    </header>
+  <div class="home-landing">
+    <TheHeader />
 
-    <!-- Slideshow -->
-    <div class="slideshow">
-      <img :src="slides[currentSlide]" class="slide-img" />
-      <div class="slide-overlay">
-        <h1>Chào mừng đến với OceanView Resort & Hotel</h1>
-        <p>Trải nghiệm kỳ nghỉ tuyệt vời với dịch vụ đẳng cấp và view biển thơ mộng.</p>
-        <va-button color="white" text-color="primary" class="explore-btn">Khám phá ngay</va-button>
+    <!-- Hero Section -->
+    <section class="hero">
+      <div class="hero-content">
+        <h1>Khám phá những địa điểm hấp dẫn nhất</h1>
+        <p>Tìm kiếm cuộc phiêu lưu tiếp theo của bạn cùng chúng tôi</p>
+        <va-button color="primary" class="hero-btn">Khám phá ngay</va-button>
+        <div class="hero-search">
+          <va-input placeholder="Tìm kiếm điểm đến, khách sạn..." class="search-input" />
+          <va-button color="primary" class="search-btn">Tìm kiếm</va-button>
+        </div>
+        <div class="hero-tags">
+          <va-chip v-for="tag in tags" :key="tag" class="mr-2">{{ tag }}</va-chip>
+        </div>
       </div>
-    </div>
+      <img class="hero-bg" src="https://i.imgur.com/0y8Ftya.png" alt="Earth" />
+    </section>
 
-    <!-- Video giới thiệu -->
-    <div class="video-section">
-      <h2>Giới thiệu về khách sạn</h2>
-      <video controls autoplay muted loop class="intro-video">
-        <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4" />
-        Trình duyệt của bạn không hỗ trợ video.
-      </video>
-    </div>
-
-    <!-- Dịch vụ nổi bật -->
-    <va-card class="section services" outlined>
-      <h2>Dịch vụ nổi bật</h2>
-      <div class="cards">
-        <va-card v-for="service in services" :key="service.title" class="card" outlined>
-          <img :src="service.image" class="card-img" />
-          <va-card-title>{{ service.title }}</va-card-title>
-          <va-card-content>
-            <p>{{ service.description }}</p>
-          </va-card-content>
-          <va-card-actions>
-            <va-button preset="plain" color="primary">Xem chi tiết</va-button>
-          </va-card-actions>
+    <!-- Điểm đến phổ biến -->
+    <section class="section">
+      <div class="section-header">
+        <h2>Điểm đến phổ biến</h2>
+        <va-button preset="plain" color="primary" class="see-all">Xem tất cả</va-button>
+      </div>
+      <div class="card-row">
+        <va-card v-for="item in destinations" :key="item.title" class="mini-card" outlined>
+          <img :src="item.img" class="mini-card-img" />
+          <va-card-title>{{ item.title }}</va-card-title>
         </va-card>
       </div>
-    </va-card>
+    </section>
 
-    <!-- Ưu đãi đặc biệt -->
-    <va-card class="promo" color="info" gradient>
-      <h2>🎉 Ưu đãi đặc biệt</h2>
-      <p>Giảm 20% khi đặt phòng trong tuần này! Áp dụng đến 15/04/2025.</p>
-      <va-button color="white" text-color="primary" class="mt-2">Đặt ngay</va-button>
-    </va-card>
+    <!-- Khách sạn và Nhà hàng -->
+    <section class="section">
+      <div class="section-header">
+        <h2>Khách sạn và Nhà hàng</h2>
+        <va-button preset="plain" color="primary" class="see-all">Xem tất cả</va-button>
+      </div>
+      <div class="card-row">
+        <va-card v-for="item in hotels" :key="item.title" class="hotel-card" outlined>
+          <img :src="item.img" class="hotel-card-img" />
+          <va-card-title>{{ item.title }}</va-card-title>
+          <va-card-content>
+            <div class="stars">
+              <va-icon name="star" color="warning" v-for="n in item.stars" :key="n" />
+            </div>
+            <p>{{ item.desc }}</p>
+          </va-card-content>
+        </va-card>
+      </div>
+    </section>
 
-    <!-- Footer -->
-    <footer>
-      <TheFooter />
-    </footer>
+    <!-- Mẹo và Bài viết du lịch -->
+    <section class="section">
+      <div class="section-header">
+        <h2>Mẹo và Bài viết du lịch</h2>
+        <va-button preset="plain" color="primary" class="see-all">Xem tất cả</va-button>
+      </div>
+      <div class="card-row">
+        <va-card v-for="item in articles" :key="item.title" class="article-card" outlined>
+          <img :src="item.img" class="article-card-img" />
+          <va-card-title>{{ item.title }}</va-card-title>
+          <va-card-content>
+            <p>{{ item.desc }}</p>
+          </va-card-content>
+        </va-card>
+      </div>
+    </section>
+
+    <!-- Hoạt động -->
+    <section class="section">
+      <div class="section-header">
+        <h2>Hoạt động</h2>
+        <va-button preset="plain" color="primary" class="see-all">Xem tất cả</va-button>
+      </div>
+      <div class="card-row">
+        <va-card v-for="item in activities" :key="item.title" class="activity-card" outlined>
+          <img :src="item.img" class="activity-card-img" />
+          <va-card-title>{{ item.title }}</va-card-title>
+        </va-card>
+      </div>
+    </section>
+
+    <!-- Về chúng tôi -->
+    <section class="section about">
+      <div class="about-content">
+        <img src="https://images.unsplash.com/photo-1515378791036-0648a3ef77b2" class="about-img" />
+        <div>
+          <h2>Về chúng tôi</h2>
+          <p>
+            Chúng tôi đam mê du lịch và khách sạn. Sứ mệnh của chúng tôi là giúp bạn khám phá những địa điểm và trải nghiệm tốt nhất trên khắp thế giới.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <TheFooter />
   </div>
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue'
-import TheHeader from '../Components/Header.vue'
-import TheFooter from '../Components/Footer.vue'
-import { useThemeStore } from '@/store/DarkMode'
+import { ref } from 'vue'
+import TheHeader from '../components/Header.vue'
+import TheFooter from '../components/Footer.vue'
 
-const theme = useThemeStore()
+const tags = ['Biển', 'Núi', 'Thành phố', 'Thiên nhiên', 'Phiêu lưu']
 
-const slides = [
-  'https://i.pinimg.com/474x/37/1b/9d/371b9db419f921678ba63cd57e49b129.jpg',
-  'https://i.pinimg.com/474x/6e/56/24/6e5624ec98a5cc44fd9711950a2b6a16.jpg',
-  'https://i.pinimg.com/474x/9c/63/85/9c6385dd9d75757283b356754077afe7.jpg'
+const destinations = [
+  { title: 'Bali', img: 'https://images.unsplash.com/photo-1506744038136-46273834b3fb' },
+  { title: 'Rome', img: 'https://images.unsplash.com/photo-1467269204594-9661b134dd2b' },
+  { title: 'Santorini', img: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e' },
+  { title: 'Paris', img: 'https://images.unsplash.com/photo-1465101046530-73398c7f28ca' },
+  { title: 'London', img: 'https://images.unsplash.com/photo-1465101178521-c1a9136a3b99' },
+  { title: 'Tokyo', img: 'https://images.unsplash.com/photo-1505761671935-60b3a7427bad' },
 ]
 
-const currentSlide = ref(0)
+const hotels = [
+  { title: 'Sunset Resort', img: 'https://images.unsplash.com/photo-1506744038136-46273834b3fb', stars: 5, desc: 'Khu nghỉ dưỡng sang trọng với view biển.' },
+  { title: 'Mountain Lodge', img: 'https://images.unsplash.com/photo-1467269204594-9661b134dd2b', stars: 4, desc: 'Lodge ấm cúng trong núi.' },
+  { title: 'City Hotel', img: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e', stars: 4, desc: 'Khách sạn hiện đại tại trung tâm thành phố.' },
+]
 
-const nextSlide = () => {
-  currentSlide.value = (currentSlide.value + 1) % slides.length
-}
+const articles = [
+  { title: 'Hành trình dài đến Ocean', img: 'https://images.unsplash.com/photo-1515378791036-0648a3ef77b2', desc: 'Mẹo cho chuyến đi dài của bạn.' },
+  { title: 'Trải nghiệm văn hóa', img: 'https://images.unsplash.com/photo-1465101046530-73398c7f28ca', desc: 'Khám phá văn hóa và truyền thống địa phương.' },
+  { title: 'Ba lô tuyệt vời', img: 'https://images.unsplash.com/photo-1465101178521-c1a9136a3b99', desc: 'Cách đóng gói cho cuộc phiêu lưu của bạn.' },
+]
 
-const prevSlide = () => {
-  currentSlide.value = (currentSlide.value - 1 + slides.length) % slides.length
-}
-
-onMounted(() => {
-  setInterval(nextSlide, 5000)
-})
-
-const services = ref([
-  {
-    title: 'Phòng Deluxe View Biển',
-    description: 'Không gian hiện đại, tiện nghi, tầm nhìn biển rộng mở.',
-    image: 'https://images.unsplash.com/photo-1560347876-aeef00ee58a1'
-  },
-  {
-    title: 'Spa & Chăm sóc sức khỏe',
-    description: 'Thư giãn tuyệt đối với liệu pháp chăm sóc chuyên sâu.',
-    image: 'https://images.unsplash.com/photo-1600508771804-06cbfb62b8d6'
-  },
-  {
-    title: 'Ẩm thực & Nhà hàng',
-    description: 'Thưởng thức món ngon Á – Âu trong không gian sang trọng.',
-    image: 'https://images.unsplash.com/photo-1555992336-cbf2e4fc9c79'
-  },
-  {
-    title: 'Tour khám phá Đà Nẵng',
-    description: 'Trọn gói city tour – khám phá các địa danh nổi tiếng.',
-    image: 'https://images.unsplash.com/photo-1533106418989-88406c7cc8e1'
-  }
-])
+const activities = [
+  { title: 'Lướt sóng', img: 'https://images.unsplash.com/photo-1506744038136-46273834b3fb' },
+  { title: 'Leo núi', img: 'https://images.unsplash.com/photo-1467269204594-9661b134dd2b' },
+  { title: 'Kayak', img: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e' },
+]
 </script>
 
 <style scoped>
-.home-container {
+.home-landing {
+  background: #fafbfc;
+  min-height: 100vh;
   font-family: 'Segoe UI', sans-serif;
-  padding-bottom: 40px;
 }
-
-header {
-  position: sticky;
-  top: 0;
-  z-index: 1000;
-}
-
-.slideshow {
+.hero {
   position: relative;
-  height: 500px;
+  background: #181c2a;
+  color: #fff;
+  padding: 60px 0 120px 0;
+  text-align: center;
   overflow: hidden;
-  margin-bottom: 30px;
 }
-
-.slide-img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+.hero-content {
+  position: relative;
+  z-index: 2;
+  max-width: 700px;
+  margin: 0 auto;
 }
-
-.slide-overlay {
+.hero-bg {
   position: absolute;
-  top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
-  text-align: center;
-  color: white;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
+  bottom: 0;
+  width: 100vw;
+  max-width: 900px;
+  transform: translateX(-50%);
+  z-index: 1;
+  opacity: 0.9;
 }
-
-.slide-overlay h1 {
-  font-size: 2.5rem;
-  margin-bottom: 10px;
+.hero-btn {
+  margin: 24px 0 16px 0;
+  font-size: 1.1rem;
+  padding: 12px 32px;
+  border-radius: 8px;
 }
-
-.slide-overlay p {
-  font-size: 1.2rem;
-}
-
-.explore-btn {
-  margin-top: 20px;
-  font-size: 1rem;
-  padding: 10px 20px;
-  border-radius: 5px;
-}
-
-.video-section {
-  text-align: center;
-  margin: 40px 20px;
-}
-
-.video-section h2 {
-  margin-bottom: 20px;
-  font-size: 2rem;
-}
-
-.intro-video {
-  width: 100%;
-  max-width: 800px;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-}
-
-.section {
-  margin: 40px 20px;
-  padding: 20px;
-}
-
-.cards {
+.hero-search {
   display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
   justify-content: center;
-  margin-top: 20px;
+  gap: 8px;
+  margin: 24px 0 12px 0;
 }
-
-.card {
-  width: 260px;
+.search-input {
+  min-width: 240px;
 }
-
-.card-img {
+.hero-tags {
+  margin-top: 12px;
+}
+.section {
+  margin: 48px auto 0 auto;
+  max-width: 1200px;
+  padding: 0 16px;
+}
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 18px;
+}
+.see-all {
+  font-size: 0.95rem;
+  padding: 0 8px;
+}
+.card-row {
+  display: flex;
+  gap: 18px;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+}
+.mini-card, .hotel-card, .article-card, .activity-card {
+  width: 180px;
+  min-width: 180px;
+  border-radius: 12px;
+  overflow: hidden;
+}
+.mini-card-img, .hotel-card-img, .article-card-img, .activity-card-img {
   width: 100%;
+  height: 110px;
+  object-fit: cover;
+  border-radius: 12px 12px 0 0;
+}
+.hotel-card-img { height: 120px; }
+.article-card-img { height: 120px; }
+.activity-card-img { height: 120px; }
+.stars {
+  margin: 6px 0;
+}
+.about {
+  margin-top: 60px;
+}
+.about-content {
+  display: flex;
+  gap: 32px;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.about-img {
+  width: 220px;
   height: 160px;
   object-fit: cover;
-}
-
-.promo {
-  text-align: center;
-  padding: 50px 20px;
-  margin: 40px 20px;
-}
-
-.dark {
-  background-color: #333;
-  color: white;
+  border-radius: 12px;
 }
 </style>

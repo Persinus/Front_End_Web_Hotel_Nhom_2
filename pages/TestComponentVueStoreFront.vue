@@ -19,12 +19,16 @@ import CardDetail from '@/Component_VueStoreFront/CardDetail.vue'
 import RatingForm from '@/Component_VueStoreFront/RatingForm.vue'
 import NewsletterBox from '@/Component_VueStoreFront/NewsletterBox.vue'
 import FormFields from '~/Component_VueStoreFront/FormFields.vue'
+import Phong1 from '~/Component_VueStoreFront/Phong1.vue'
+import MegaMenu from '~/Component_VueStoreFront/MegaMenu.vue'
 
 const options = [
   { label: 'CardDetail', value: 'CardDetail' },
   { label: 'RatingForm', value: 'RatingForm' },
   { label: 'NewsletterBox', value: 'NewsletterBox' },
   { label: 'FormFields', value: 'FormFields' },
+  { label: 'Phong1', value: 'Phong1' },
+  { label: 'MegaMenu', value: 'MegaMenu' },
 ]
 const selected = ref('CardDetail')
 
@@ -33,6 +37,8 @@ const componentsMap = {
   RatingForm,
   NewsletterBox,
   FormFields,
+  Phong1,
+  MegaMenu,
 }
 
 const selectedComponent = computed(() => componentsMap[selected.value ? selected.value : selected])

@@ -118,7 +118,7 @@
 import { ref, computed, onMounted } from 'vue';
 import { useThemeStore } from '~/store/DarkMode';
 import { useLanguageStore } from '~/store/Language';
-import TheHeader from '../Components/Header.vue';
+import TheHeader from '../components/Header.vue';
 import { VaInnerLoading, VaCard, VaCardTitle, VaCardContent, VaCardActions, VaButton, VaInput, VaSelect, VaAlert } from 'vuestic-ui';
 import { axiosBase } from '~/utils/axiosBase'; // Import axiosBase
 
