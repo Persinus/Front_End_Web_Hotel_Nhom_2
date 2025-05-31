@@ -1,4 +1,3 @@
-
 <!-- Trang Thọ Code xin đừng động vào  -->
 <!-- Trang Thọ Code xin đừng động vào  -->
 <!-- Trang Thọ Code xin đừng động vào  -->
@@ -72,12 +71,11 @@
       <!-- Form đăng nhập email -->
       <form @submit.prevent="emailLogin">
         <div class="mb-4">
-          <label for="email" class="block text-sm font-normal text-gray-600 mb-1">Your email</label>
+          <label for="email" class="block text-sm font-normal text-gray-600 mb-1">Your username</label>
           <va-input 
             v-model="formEmail" 
             id="email"
-            type="email"
-            placeholder="Email address"
+            placeholder="Username"
             class="w-full"
             required
           />
@@ -109,13 +107,25 @@
           </div>
         </div>
         
+        <!-- Error message display -->
+        <va-alert
+          v-if="loginError"
+          class="mt-2 mb-2"
+          color="danger"
+          outlined
+        >
+          {{ loginError }}
+        </va-alert>
+
         <va-button
           type="submit" 
           class="w-full mt-4"
           color="#f0f0f0"
           text-color="#333"
+          :loading="isLoading"
+          :disabled="isLoading"
         >
-          Log in
+          {{ isLoading ? 'Logging in...' : 'Log in' }}
         </va-button>
       </form>
 
@@ -135,6 +145,10 @@
 
 <script setup>
 import { useLogin } from '@/composables/useLogin'
+import { onMounted } from 'vue'
+import { useRouter } from 'vue-router'
+
+const router = useRouter()
 
 const {
   email,
@@ -145,7 +159,17 @@ const {
   togglePassword,
   emailLogin,
   facebookLogin,
+  isLoading,
+  loginError
 } = useLogin()
+
+// Check if user is already logged in
+onMounted(() => {
+  const token = localStorage.getItem('userToken')
+  if (token) {
+    router.push('/')
+  }
+})
 
 // Thêm hàm đăng nhập Google
 const googleLogin = () => {

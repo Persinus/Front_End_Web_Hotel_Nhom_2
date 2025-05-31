@@ -1,4 +1,5 @@
 import { ref, onMounted } from 'vue'
+import { useRouter } from 'vue-router'
 
 export function useLogin() {
   const email = ref('')
@@ -6,6 +7,9 @@ export function useLogin() {
   const formEmail = ref('')
   const formPassword = ref('')
   const showPassword = ref(false)
+  const isLoading = ref(false)
+  const loginError = ref('')
+  const router = useRouter()
 
   const images = [
     'https://i.pinimg.com/474x/a0/fb/38/a0fb38a030da2a14a39767bfd21d48d2.jpg',
@@ -18,12 +22,45 @@ export function useLogin() {
     showPassword.value = !showPassword.value
   }
 
-  const emailLogin = () => {
-    if (formEmail.value === 'admin@example.com' && formPassword.value === 'password') {
-      email.value = `Đăng nhập email: ${formEmail.value}`
-      facebookName.value = ''
-    } else {
-      alert('Sai email hoặc mật khẩu!')
+  const emailLogin = async () => {
+    try {
+      isLoading.value = true
+      loginError.value = ''
+      
+      const response = await fetch('https://nhom2webkhachsan.runasp.net/api/allowanonymous/dangnhap', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          tenTaiKhoan: formEmail.value,
+          matKhau: formPassword.value
+        })
+      })
+      
+      const data = await response.json()
+      
+      if (response.ok) {
+        // Save auth token or user data to localStorage or state management
+        localStorage.setItem('userToken', data.token || 'dummy-token')
+        localStorage.setItem('userName', formEmail.value)
+        
+        // Redirect to home page or dashboard
+        email.value = `Đăng nhập thành công: ${formEmail.value}`
+        facebookName.value = ''
+        
+        // Redirect after successful login
+        setTimeout(() => {
+          router.push('/')
+        }, 1000)
+      } else {
+        loginError.value = data.message || 'Sai tên tài khoản hoặc mật khẩu!'
+      }
+    } catch (error) {
+      loginError.value = 'Lỗi kết nối đến máy chủ. Vui lòng thử lại sau.'
+      console.error('Login error:', error)
+    } finally {
+      isLoading.value = false
     }
   }
 
@@ -102,5 +139,7 @@ export function useLogin() {
     togglePassword,
     emailLogin,
     facebookLogin,
+    isLoading,
+    loginError
   }
 }
