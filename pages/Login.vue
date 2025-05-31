@@ -147,8 +147,10 @@
 import { useLogin } from '@/composables/useLogin'
 import { onMounted } from 'vue'
 import { useRouter } from 'vue-router'
+import { useAuthStore } from '@/store/Auth'
 
 const router = useRouter()
+const authStore = useAuthStore()
 
 const {
   email,
@@ -165,8 +167,11 @@ const {
 
 // Check if user is already logged in
 onMounted(() => {
-  const token = localStorage.getItem('userToken')
-  if (token) {
+  // Khởi tạo Auth từ localStorage nếu cần
+  authStore.initAuth()
+  
+  // Kiểm tra xem người dùng đã đăng nhập chưa
+  if (authStore.isAuthenticated) {
     router.push('/')
   }
 })

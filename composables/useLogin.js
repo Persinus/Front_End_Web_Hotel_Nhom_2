@@ -1,5 +1,6 @@
 import { ref, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
+import { useAuthStore } from '@/store/Auth'
 
 export function useLogin() {
   const email = ref('')
@@ -7,10 +8,11 @@ export function useLogin() {
   const formEmail = ref('')
   const formPassword = ref('')
   const showPassword = ref(false)
-  const isLoading = ref(false)
   const loginError = ref('')
   const router = useRouter()
-
+  
+  // Sử dụng Pinia auth store
+  const authStore = useAuthStore()
   const images = [
     'https://i.pinimg.com/474x/a0/fb/38/a0fb38a030da2a14a39767bfd21d48d2.jpg',
     'https://i.pinimg.com/474x/d4/54/76/d45476a670996cd4ae936d99ad0b24e2.jpg',
@@ -24,48 +26,36 @@ export function useLogin() {
 
   const emailLogin = async () => {
     try {
-      isLoading.value = true
       loginError.value = ''
       
-      const response = await fetch('https://nhom2webkhachsan.runasp.net/api/allowanonymous/dangnhap', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          tenTaiKhoan: formEmail.value,
-          matKhau: formPassword.value
-        })
-      })
+      const result = await authStore.login(formEmail.value, formPassword.value)
       
-      const data = await response.json()
-      
-      if (response.ok) {
-        // Save auth token or user data to localStorage or state management
-        localStorage.setItem('userToken', data.token || 'dummy-token')
-        localStorage.setItem('userName', formEmail.value)
-        
-        // Redirect to home page or dashboard
+      if (result.success) {
+        // Đăng nhập thành công
         email.value = `Đăng nhập thành công: ${formEmail.value}`
         facebookName.value = ''
         
-        // Redirect after successful login
+        // Chuyển hướng sau khi đăng nhập thành công
         setTimeout(() => {
           router.push('/')
         }, 1000)
       } else {
-        loginError.value = data.message || 'Sai tên tài khoản hoặc mật khẩu!'
+        loginError.value = result.error
       }
     } catch (error) {
       loginError.value = 'Lỗi kết nối đến máy chủ. Vui lòng thử lại sau.'
       console.error('Login error:', error)
-    } finally {
-      isLoading.value = false
     }
   }
-
   const handleCredentialResponse = (response) => {
     const payload = JSON.parse(atob(response.credential.split('.')[1]))
+    
+    // Sử dụng authStore để đăng nhập Google
+    authStore.loginWithGoogle({
+      email: payload.email,
+      name: payload.name || payload.email.split('@')[0]
+    })
+    
     email.value = `Đăng nhập bằng Google: ${payload.email}`
     facebookName.value = ''
   }
@@ -74,6 +64,12 @@ export function useLogin() {
     FB.login((response) => {
       if (response.status === 'connected') {
         FB.api('/me', { fields: 'name,email' }, (userInfo) => {
+          // Sử dụng authStore để đăng nhập Facebook
+          authStore.loginWithFacebook({
+            email: userInfo.email,
+            name: userInfo.name
+          })
+          
           facebookName.value = `Đăng nhập Facebook: ${userInfo.name}`
           email.value = `Email: ${userInfo.email}`
         })
@@ -82,8 +78,10 @@ export function useLogin() {
       }
     }, { scope: 'email' })
   }
-
   onMounted(() => {
+    // Khởi tạo auth từ localStorage
+    authStore.initAuth()
+    
     setInterval(() => {
       currentImageIndex.value = (currentImageIndex.value + 1) % images.length
     }, 4000)
@@ -127,7 +125,6 @@ export function useLogin() {
     fbScript.src = 'https://connect.facebook.net/en_US/sdk.js'
     document.head.appendChild(fbScript)
   })
-
   return {
     email,
     facebookName,
@@ -139,7 +136,7 @@ export function useLogin() {
     togglePassword,
     emailLogin,
     facebookLogin,
-    isLoading,
+    isLoading: computed(() => authStore.isLoading),
     loginError
   }
 }
