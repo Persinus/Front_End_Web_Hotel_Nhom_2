@@ -76,7 +76,7 @@
   
   <script setup>
   import { ref, computed } from 'vue'
-  import TheHeader from '@/components/Header.vue'
+  import TheHeader from '~/Component/Header.vue'
   const search = ref({
     checkIn: '',
     checkOut: '',

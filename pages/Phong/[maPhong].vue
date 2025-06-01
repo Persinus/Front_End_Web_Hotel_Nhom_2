@@ -100,7 +100,7 @@ const route = useRoute()
 const { $api } = useNuxtApp()
 
 const maPhong = route.params.maPhong
- import TheHeader from '../Components/Header.vue'
+ import TheHeader from '../../Component/Header.vue'
 const images = ref([])
 const subImages = ref([])
 const currentSlide = ref(0)

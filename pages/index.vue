@@ -103,8 +103,8 @@
 
 <script setup>
 import { ref } from 'vue'
-import TheHeader from '../components/Header.vue'
-import TheFooter from '../components/Footer.vue'
+import TheHeader from '../Component/Header.vue'
+import TheFooter from '../Component/Footer.vue'
 
 const tags = ['Biển', 'Núi', 'Thành phố', 'Thiên nhiên', 'Phiêu lưu']
 
