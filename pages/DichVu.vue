@@ -55,7 +55,7 @@
 <script setup>
 import { ref, computed, onMounted } from 'vue';
 import { useThemeStore } from '@/store/DarkMode';
-import TheHeader from '../components/Header.vue';
+import TheHeader from '../Component/Header.vue';
 import { axiosBase } from '~/utils/axiosBase'; // Import axiosBase
 
 const theme = useThemeStore();

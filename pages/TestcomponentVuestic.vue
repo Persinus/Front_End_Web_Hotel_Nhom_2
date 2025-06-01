@@ -37,6 +37,8 @@ import Counter from '~/Component_Vuestic/Counter.vue'
 import Layout from '~/Component_Vuestic/Layout.vue'
 import List from '~/Component_Vuestic/List.vue'
 import Navbar from '~/Component_Vuestic/NavBar.vue'
+import Card1 from '~/Component_VueStoreFront/Card.vue'
+import Card from '~/Component_Vuestic/Card.vue'
 
 
 const options = [
@@ -66,7 +68,8 @@ const options = [
     'Counter',
     'Layout',
     'Navbar',
- 
+    'Card',
+    'Card1'
 ]
 
 const selected = ref('Alert')
@@ -87,13 +90,14 @@ const componentsMap = {
   Rating,
   Select,
   Toast,
-    Stepped,
-    Pagination,
-    Counter,
-    Layout,
-    List,
-    Navbar,
-    
+  Stepped,
+  Pagination,
+  Counter,
+  Layout,
+  List,
+  Navbar,
+  Card,
+  Card1
 }
 
 const selectedComponent = computed(() => componentsMap[selected.value])
