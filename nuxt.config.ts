@@ -11,6 +11,12 @@ export default defineNuxtConfig({
 
   nitro: {
     preset: 'vercel',
+     storage: {
+      cache: {
+        driver: 'fs', // Sử dụng file system để lưu cache (hoặc dùng 'memory')
+        base: './.nitro/cache', // Đường dẫn lưu cache
+      }
+    }
   },
 
   ssr: true,
