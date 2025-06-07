@@ -1,228 +1,146 @@
-<template>
-  <header>
-    <TheHeader />
-  </header>
-  <div :class="['service-list-container', { 'dark-mode': theme.isDarkMode }]">
-    <h1 class="page-title">Danh sách dịch vụ</h1>
-
-    <!-- Bộ lọc -->
-    <div class="filter-bar">
-      <va-input
-        v-model="filterName"
-        placeholder="Tìm kiếm theo tên dịch vụ"
-        class="filter-input"
-      />
-      <va-select
-        v-model="filterPrice"
-        :options="priceOptions"
-        placeholder="Lọc theo giá"
-        class="filter-select"
-      />
-    </div>
-
-    <!-- Danh sách dịch vụ -->
-    <div class="service-cards">
-      <va-card
-        v-for="service in filteredServices"
-        :key="service.maChiTietDichVu"
-        class="service-card"
-        outlined
-      >
-        <img :src="service.urlAnh" alt="Hình ảnh dịch vụ" class="service-image" />
-        <va-card-title>
-          <div class="service-title" :title="service.tenDichVu">
-            {{ service.tenDichVu }}
-          </div>
-        </va-card-title>
-        <va-card-content>
-          <p class="service-price">
-            {{ service.donGia.toLocaleString() }} VND / 1 đêm
-          </p>
-        </va-card-content>
-        <va-card-actions>
-          <nuxt-link :to="`/DichVu/${service.maChiTietDichVu}`">
-            <va-button color="primary">Xem Chi Tiết</va-button>
-          </nuxt-link>
-        </va-card-actions>
-      </va-card>
-    </div>
-
-    <!-- Route con -->
-    <NuxtChild />
-  </div>
-</template>
-
 <script setup>
-import { ref, computed, onMounted } from 'vue';
-import { useThemeStore } from '@/store/DarkMode';
-import TheHeader from '../Component/Header.vue';
-import { axiosBase } from '~/utils/axiosBase'; // Import axiosBase
+import { ref, computed, onMounted } from "vue";
+import { axiosBase } from "../utils/axiosBase";
+import CardService from "../Component/CardService.vue";
+import TheHeader from "../Component/Header.vue";
+import Pagination from "../Component/Pagination.vue";
 
-const theme = useThemeStore();
 const services = ref([]);
-const filterName = ref('');
-const filterPrice = ref(null);
-
-const priceOptions = [
-  { value: 'low', label: 'Dưới 500,000 VND' },
-  { value: 'medium', label: '500,000 - 1,000,000 VND' },
-  { value: 'high', label: 'Trên 1,000,000 VND' },
-];
+const loading = ref(true);
+const error = ref(null);
+const page = ref(1);
+const pageSize = 8;
 
 onMounted(async () => {
   try {
-    // Gọi API bằng axiosBase
-    const response = await axiosBase.get('/dichvu');
-    services.value = response.data;
-  } catch (error) {
-    console.error('Lỗi khi lấy danh sách dịch vụ:', error);
+    const res = await axiosBase.get("/TatCaTruyCap/dichvu");
+    services.value = res.data;
+  } catch (err) {
+    error.value = err.message || "Lỗi khi gọi API";
+  } finally {
+    loading.value = false;
   }
 });
 
-const filteredServices = computed(() => {
-  return services.value.filter((service) => {
-    const matchesName = service.tenDichVu
-      .toLowerCase()
-      .includes(filterName.value.toLowerCase());
-    const matchesPrice =
-      !filterPrice.value ||
-      (filterPrice.value === 'low' && service.donGia < 500000) ||
-      (filterPrice.value === 'medium' &&
-        service.donGia >= 500000 &&
-        service.donGia <= 1000000) ||
-      (filterPrice.value === 'high' && service.donGia > 1000000);
-    return matchesName && matchesPrice;
-  });
-});
+// Phân trang
+const totalPages = computed(() => Math.ceil(services.value.length / pageSize));
+const pagedServices = computed(() =>
+  services.value.slice((page.value - 1) * pageSize, page.value * pageSize)
+);
 </script>
 
+<template>
+  <TheHeader />
+  <div class="page-container">
+    <div v-if="loading" class="modal-loading">
+      <div class="modal-loading-backdrop"></div>
+      <div class="modal-loading-content">
+        <span class="loader"></span>
+        <span>Đang tải dữ liệu...</span>
+      </div>
+    </div>
+    <div v-if="error" class="error-message">{{ error }}</div>
+    <div v-else>
+      <CardService :services="pagedServices" />
+      <Pagination
+        v-model="page"
+        :total-pages="totalPages"
+        class="mt-6"
+      />
+    </div>
+  </div>
+</template>
+
 <style scoped>
-/* Container styles */
-.service-list-container {
-  padding: 20px;
-  transition: background-color 0.3s, color 0.3s;
-  
+.page-container {
+  padding: 40px 30px 40px 30px;
 }
 
-.service-list-container.dark-mode {
-  background-color: #000000; /* Nền đen */
-  color: #f0f0f0;
-}
-
-/* Page title */
-.page-title {
-  font-size: 2rem;
-  font-weight: bold;
-  color: #2c3e50;
-  text-align: center;
-  margin-bottom: 30px;
-}
-
-.service-list-container.dark-mode .page-title {
-  color: #f0f0f0;
-}
-
-/* Filter bar */
-.filter-bar {
-  display: flex;
-  gap: 20px;
-  margin-bottom: 20px;
-}
-
-.filter-input {
-  flex: 2;
-}
-
-.filter-select {
-  flex: 1;
-}
-
-/* Service cards */
-.service-cards {
+.services-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 20px;
-  justify-content: center;
-}
-
-@media (max-width: 1024px) {
-  .service-cards {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-@media (max-width: 768px) {
-  .service-cards {
-    grid-template-columns: 1fr;
-  }
+  gap: 32px 28px;
+  justify-items: center;
 }
 
 .service-card {
-  border-radius: 10px;
-  overflow: hidden;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  transition: transform 0.3s, background-color 0.3s;
-  background-color: #ffffff; /* Nền trắng mặc định */
+  max-width: 220px;
+  margin: 0 auto;
 }
 
-.service-card:hover {
-  transform: translateY(-5px);
+/* Responsive: 4 -> 3 -> 2 -> 1 card mỗi hàng */
+@media (max-width: 1200px) {
+  .services-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+@media (max-width: 900px) {
+  .services-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (max-width: 600px) {
+  .services-grid {
+    grid-template-columns: 1fr;
+  }
+  .service-card {
+    max-width: 100%;
+  }
 }
 
-
-.service-list-container.dark-mode .service-card .va-card-title,
-.service-list-container.dark-mode .service-card .va-card-content,
-
-
-.service-list-container.dark-mode .service-card .va-card-actions {
-  background-color: #6a0dad; /* Nền tím cho nội dung thẻ */
-  color: #ffffff; /* Chữ trắng */
+/* Center pagination */
+.mt-6 {
+  margin-top: 32px;
+  display: flex;
+  justify-content: center;
 }
 
-.service-image {
-  width: 100%;
-  height: 200px;
-  object-fit: cover;
+.modal-loading {
+  position: fixed;
+  z-index: 9999;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.service-title {
-  font-size: 1.2rem;
-  font-weight: bold;
-  color: #333;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+.modal-loading-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.25);
 }
 
-.service-title:hover {
-  text-decoration: underline;
+.modal-loading-content {
+  position: relative;
+  background: #fff;
+  padding: 32px 40px;
+  border-radius: 12px;
+  box-shadow: 0 4px 24px #0002;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 1;
 }
 
-.service-list-container.dark-mode .service-title {
-  color: #ffffff; /* Chữ trắng */
+.loader {
+  width: 36px;
+  height: 36px;
+  border: 4px solid #0ea5e9;
+  border-top: 4px solid #fff;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-bottom: 12px;
 }
 
-.service-price {
-  font-size: 1rem;
-  font-weight: bold;
-  color: #4caf50;
-  margin-top: 10px;
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
 }
 
-.service-list-container.dark-mode .service-price {
-  color: #ffcc00; /* Màu vàng để nổi bật */
-}
-
-.va-button {
-  width: 100%;
-}
-
-.service-list-container.dark-mode .va-button {
-  background-color: #0056b3; /* Nút màu xanh lam */
-  color: #ffffff;
-}
-
-.service-list-container.dark-mode .va-button:hover {
-  background-color: #003d80; /* Màu xanh lam đậm hơn khi hover */
+.error-message {
+  color: red;
+  text-align: center;
+  margin-top: 20px;
 }
 </style>
