@@ -146,7 +146,6 @@
                   <span>4.8</span>
                 </div>
               </div>
-              >>>>>>> origin/main
             </div>
           </div>
 
@@ -189,59 +188,7 @@
           </va-button>
         </div>
 
-        <div class="hotels-grid">
-          <div class="hotel-card" v-for="item in hotels" :key="item.title">
-            <div class="hotel-image-container">
-              <img :src="item.img" class="hotel-img" />
-              <div class="hotel-badge">
-                <va-icon name="verified" size="small" />
-                Được xác minh
-              </div>
-              <button class="wishlist-btn">
-                <va-icon name="favorite_border" />
-              </button>
-            </div>
-
-            <div class="hotel-content">
-              <div class="hotel-header">
-                <h3 class="hotel-title">{{ item.title }}</h3>
-                <div class="hotel-rating">
-                  <div class="stars">
-                    <va-icon
-                      name="star"
-                      color="warning"
-                      v-for="n in item.stars"
-                      :key="n"
-                      size="small"
-                    />
-                  </div>
-                  <span class="rating-text">{{ item.stars }}.0</span>
-                </div>
-              </div>
-
-              <p class="hotel-desc">{{ item.desc }}</p>
-
-              <div class="hotel-amenities">
-                <span
-                  class="amenity"
-                  v-for="amenity in item.amenities || ['WiFi', 'Bể bơi', 'Spa']"
-                  :key="amenity"
-                >
-                  {{ amenity }}
-                </span>
-              </div>
-
-              <div class="hotel-footer">
-                <div class="price-group">
-                  <span class="price-label">Từ</span>
-                  <span class="price">{{ item.price || "1,200,000" }}₫</span>
-                  <span class="price-unit">/đêm</span>
-                </div>
-                <va-button color="primary" size="small"> Đặt ngay </va-button>
-              </div>
-            </div>
-          </div>
-        </div>
+        <HomeHotelCard :hotels="hotels" />
       </div>
     </section>
 
@@ -375,7 +322,6 @@
             />
             <va-button color="primary" size="large"> Đăng ký </va-button>
           </div>
-          >>>>>>> origin/main
         </div>
       </div>
     </section>
@@ -388,7 +334,7 @@
 import { ref } from "vue";
 import TheHeader from "../Component/Header.vue";
 import TheFooter from "../Component/Footer.vue";
-
+import HomeHotelCard from "../Component/HomeHotelCard.vue";
 const searchQuery = ref("");
 const email = ref("");
 
