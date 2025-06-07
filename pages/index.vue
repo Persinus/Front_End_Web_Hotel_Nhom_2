@@ -26,7 +26,12 @@
         <va-button preset="plain" color="primary" class="see-all">Xem tất cả</va-button>
       </div>
       <div class="card-row">
-        <va-card v-for="item in destinations" :key="item.title" class="mini-card" outlined>
+        <va-card
+          v-for="item in destinations"
+          :key="item.title"
+          class="mini-card"
+          outlined
+        >
           <img :src="item.img" class="mini-card-img" />
           <va-card-title>{{ item.title }}</va-card-title>
         </va-card>
@@ -77,7 +82,12 @@
         <va-button preset="plain" color="primary" class="see-all">Xem tất cả</va-button>
       </div>
       <div class="card-row">
-        <va-card v-for="item in activities" :key="item.title" class="activity-card" outlined>
+        <va-card
+          v-for="item in activities"
+          :key="item.title"
+          class="activity-card"
+          outlined
+        >
           <img :src="item.img" class="activity-card-img" />
           <va-card-title>{{ item.title }}</va-card-title>
         </va-card>
@@ -87,11 +97,15 @@
     <!-- Về chúng tôi -->
     <section class="section about">
       <div class="about-content">
-        <img src="https://images.unsplash.com/photo-1515378791036-0648a3ef77b2" class="about-img" />
+        <img
+          src="https://images.unsplash.com/photo-1515378791036-0648a3ef77b2"
+          class="about-img"
+        />
         <div>
           <h2>Về chúng tôi</h2>
           <p>
-            Chúng tôi đam mê du lịch và khách sạn. Sứ mệnh của chúng tôi là giúp bạn khám phá những địa điểm và trải nghiệm tốt nhất trên khắp thế giới.
+            Chúng tôi đam mê du lịch và khách sạn. Sứ mệnh của chúng tôi là giúp bạn khám
+            phá những địa điểm và trải nghiệm tốt nhất trên khắp thế giới.
           </p>
         </div>
       </div>
@@ -102,45 +116,84 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
-import TheHeader from '../Component/Header.vue'
-import TheFooter from '../Component/Footer.vue'
+import { ref } from "vue";
+import TheHeader from "../Component/Header.vue";
+import TheFooter from "../Component/Footer.vue";
 
-const tags = ['Biển', 'Núi', 'Thành phố', 'Thiên nhiên', 'Phiêu lưu']
+const tags = ["Biển", "Núi", "Thành phố", "Thiên nhiên", "Phiêu lưu"];
 
 const destinations = [
-  { title: 'Bali', img: 'https://images.unsplash.com/photo-1506744038136-46273834b3fb' },
-  { title: 'Rome', img: 'https://images.unsplash.com/photo-1467269204594-9661b134dd2b' },
-  { title: 'Santorini', img: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e' },
-  { title: 'Paris', img: 'https://images.unsplash.com/photo-1465101046530-73398c7f28ca' },
-  { title: 'London', img: 'https://images.unsplash.com/photo-1465101178521-c1a9136a3b99' },
-  { title: 'Tokyo', img: 'https://images.unsplash.com/photo-1505761671935-60b3a7427bad' },
-]
+  { title: "Bali", img: "https://images.unsplash.com/photo-1506744038136-46273834b3fb" },
+  { title: "Rome", img: "https://images.unsplash.com/photo-1467269204594-9661b134dd2b" },
+  {
+    title: "Santorini",
+    img: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e",
+  },
+  { title: "Paris", img: "https://images.unsplash.com/photo-1465101046530-73398c7f28ca" },
+  {
+    title: "London",
+    img: "https://images.unsplash.com/photo-1465101178521-c1a9136a3b99",
+  },
+  { title: "Tokyo", img: "https://images.unsplash.com/photo-1505761671935-60b3a7427bad" },
+];
 
 const hotels = [
-  { title: 'Sunset Resort', img: 'https://images.unsplash.com/photo-1506744038136-46273834b3fb', stars: 5, desc: 'Khu nghỉ dưỡng sang trọng với view biển.' },
-  { title: 'Mountain Lodge', img: 'https://images.unsplash.com/photo-1467269204594-9661b134dd2b', stars: 4, desc: 'Lodge ấm cúng trong núi.' },
-  { title: 'City Hotel', img: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e', stars: 4, desc: 'Khách sạn hiện đại tại trung tâm thành phố.' },
-]
+  {
+    title: "Sunset Resort",
+    img: "https://images.unsplash.com/photo-1506744038136-46273834b3fb",
+    stars: 5,
+    desc: "Khu nghỉ dưỡng sang trọng với view biển.",
+  },
+  {
+    title: "Mountain Lodge",
+    img: "https://images.unsplash.com/photo-1467269204594-9661b134dd2b",
+    stars: 4,
+    desc: "Lodge ấm cúng trong núi.",
+  },
+  {
+    title: "City Hotel",
+    img: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e",
+    stars: 4,
+    desc: "Khách sạn hiện đại tại trung tâm thành phố.",
+  },
+];
 
 const articles = [
-  { title: 'Hành trình dài đến Ocean', img: 'https://images.unsplash.com/photo-1515378791036-0648a3ef77b2', desc: 'Mẹo cho chuyến đi dài của bạn.' },
-  { title: 'Trải nghiệm văn hóa', img: 'https://images.unsplash.com/photo-1465101046530-73398c7f28ca', desc: 'Khám phá văn hóa và truyền thống địa phương.' },
-  { title: 'Ba lô tuyệt vời', img: 'https://images.unsplash.com/photo-1465101178521-c1a9136a3b99', desc: 'Cách đóng gói cho cuộc phiêu lưu của bạn.' },
-]
+  {
+    title: "Hành trình dài đến Ocean",
+    img: "https://images.unsplash.com/photo-1515378791036-0648a3ef77b2",
+    desc: "Mẹo cho chuyến đi dài của bạn.",
+  },
+  {
+    title: "Trải nghiệm văn hóa",
+    img: "https://images.unsplash.com/photo-1465101046530-73398c7f28ca",
+    desc: "Khám phá văn hóa và truyền thống địa phương.",
+  },
+  {
+    title: "Ba lô tuyệt vời",
+    img: "https://images.unsplash.com/photo-1465101178521-c1a9136a3b99",
+    desc: "Cách đóng gói cho cuộc phiêu lưu của bạn.",
+  },
+];
 
 const activities = [
-  { title: 'Lướt sóng', img: 'https://images.unsplash.com/photo-1506744038136-46273834b3fb' },
-  { title: 'Leo núi', img: 'https://images.unsplash.com/photo-1467269204594-9661b134dd2b' },
-  { title: 'Kayak', img: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e' },
-]
+  {
+    title: "Lướt sóng",
+    img: "https://images.unsplash.com/photo-1506744038136-46273834b3fb",
+  },
+  {
+    title: "Leo núi",
+    img: "https://images.unsplash.com/photo-1467269204594-9661b134dd2b",
+  },
+  { title: "Kayak", img: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e" },
+];
 </script>
 
 <style scoped>
 .home-landing {
   background: #fafbfc;
   min-height: 100vh;
-  font-family: 'Segoe UI', sans-serif;
+  font-family: "Segoe UI", sans-serif;
 }
 .hero {
   position: relative;
@@ -158,11 +211,11 @@ const activities = [
 }
 .hero-bg {
   position: absolute;
-  left: 50%;
+  left: 0;
   bottom: 0;
-  width: 100vw;
-  max-width: 900px;
-  transform: translateX(-50%);
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
   z-index: 1;
   opacity: 0.9;
 }
@@ -205,21 +258,33 @@ const activities = [
   flex-wrap: wrap;
   justify-content: flex-start;
 }
-.mini-card, .hotel-card, .article-card, .activity-card {
+.mini-card,
+.hotel-card,
+.article-card,
+.activity-card {
   width: 180px;
   min-width: 180px;
   border-radius: 12px;
   overflow: hidden;
 }
-.mini-card-img, .hotel-card-img, .article-card-img, .activity-card-img {
+.mini-card-img,
+.hotel-card-img,
+.article-card-img,
+.activity-card-img {
   width: 100%;
   height: 110px;
   object-fit: cover;
   border-radius: 12px 12px 0 0;
 }
-.hotel-card-img { height: 120px; }
-.article-card-img { height: 120px; }
-.activity-card-img { height: 120px; }
+.hotel-card-img {
+  height: 120px;
+}
+.article-card-img {
+  height: 120px;
+}
+.activity-card-img {
+  height: 120px;
+}
 .stars {
   margin: 6px 0;
 }
