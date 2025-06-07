@@ -2,7 +2,7 @@
 
 Object.defineProperty(exports, '__esModule', { value: true });
 
-var trigger = require('../../tooltip/src/trigger2.js');
+var trigger = require('../../tooltip/src/trigger.js');
 var popper = require('../../popper/src/popper.js');
 var runtime = require('../../../utils/vue/props/runtime.js');
 var aria = require('../../../constants/aria.js');

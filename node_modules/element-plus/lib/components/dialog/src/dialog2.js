@@ -4,7 +4,7 @@ Object.defineProperty(exports, '__esModule', { value: true });
 
 var dialogContent = require('./dialog-content.js');
 var runtime = require('../../../utils/vue/props/runtime.js');
-var teleport = require('../../teleport/src/teleport.js');
+var teleport = require('../../teleport/src/teleport2.js');
 var event = require('../../../constants/event.js');
 var types = require('../../../utils/types.js');
 
