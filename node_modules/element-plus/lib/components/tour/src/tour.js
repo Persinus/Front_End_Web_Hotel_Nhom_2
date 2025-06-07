@@ -5,7 +5,7 @@ Object.defineProperty(exports, '__esModule', { value: true });
 var content = require('./content.js');
 var runtime = require('../../../utils/vue/props/runtime.js');
 var icon = require('../../../utils/vue/icon.js');
-var teleport = require('../../teleport/src/teleport.js');
+var teleport = require('../../teleport/src/teleport2.js');
 var event = require('../../../constants/event.js');
 var types = require('../../../utils/types.js');
 

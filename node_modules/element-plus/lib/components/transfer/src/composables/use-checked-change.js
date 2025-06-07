@@ -2,7 +2,7 @@
 
 Object.defineProperty(exports, '__esModule', { value: true });
 
-var transfer = require('../transfer.js');
+var transfer = require('../transfer2.js');
 
 const useCheckedChange = (checkedState, emit) => {
   const onSourceCheckedChange = (val, movedKeys) => {
