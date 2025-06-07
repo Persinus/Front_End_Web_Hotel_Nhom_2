@@ -1,32 +1,45 @@
 <script setup>
-import { ref, computed, onMounted } from 'vue'
-import { axiosBase } from '../utils/axiosBase'
-import CardRooms from '../Component/CardRooms.vue'
-import TheHeader from '../Component/Header.vue'
-const rooms = ref([])
-const loading = ref(true)
-const error = ref(null)
+import { ref, computed, onMounted } from "vue";
+import { axiosBase } from "../utils/axiosBase";
+import CardRooms from "../Component/CardRooms.vue";
+import TheHeader from "../Component/Header.vue";
+import Pagination from "../Component/Pagination.vue";
+
+const rooms = ref([]);
+const loading = ref(true);
+const error = ref(null);
+const page = ref(1);
+const pageSize = 8;
 
 onMounted(async () => {
   try {
-    const res = await axiosBase.get('/TatCaTruyCap/phong')
-    rooms.value = res.data
+    const res = await axiosBase.get("/TatCaTruyCap/phong-rutgon");
+    rooms.value = res.data;
   } catch (err) {
-    error.value = err.message || 'Lỗi khi gọi API'
+    error.value = err.message || "Lỗi khi gọi API";
   } finally {
-    loading.value = false
+    loading.value = false;
   }
-})
+});
 
 // Tính toán các giá trị max/min cho badge
-const maxRating = computed(() => Math.max(...rooms.value.map(r => r.soSaoTrungBinh || 0)))
-const maxPrice = computed(() => Math.max(...rooms.value.map(r => r.giaPhong || 0)))
-const minPrice = computed(() => Math.min(...rooms.value.map(r => r.giaPhong || 0)))
-// Số lượt đặt giả lập (nếu chưa có trường này từ API)
+const maxRating = computed(() =>
+  Math.max(...rooms.value.map((r) => r.soSaoTrungBinh || 0))
+);
+const maxPrice = computed(() => Math.max(...rooms.value.map((r) => r.giaPhong || 0)));
+const minPrice = computed(() => Math.min(...rooms.value.map((r) => r.giaPhong || 0)));
 const bookedMap = computed(() =>
-  Object.fromEntries(rooms.value.map(r => [r.maPhong, Math.floor(Math.random() * 500) + 1]))
-)
-const maxBooked = computed(() => Math.max(...Object.values(bookedMap.value)))
+  Object.fromEntries(
+    rooms.value.map((r) => [r.maPhong, Math.floor(Math.random() * 500) + 1])
+  )
+);
+const maxBooked = computed(() => Math.max(...Object.values(bookedMap.value)));
+
+// Phân trang
+const totalPages = computed(() => Math.ceil(rooms.value.length / pageSize));
+const pagedRooms = computed(() =>
+  rooms.value.slice((page.value - 1) * pageSize, page.value * pageSize)
+);
 </script>
 
 <template>
@@ -42,12 +55,17 @@ const maxBooked = computed(() => Math.max(...Object.values(bookedMap.value)))
     <div v-if="error" class="error-message">{{ error }}</div>
     <div v-else>
       <CardRooms
-        :rooms="rooms"
+        :rooms="pagedRooms"
         :max-rating="maxRating"
         :max-booked="maxBooked"
         :max-price="maxPrice"
         :min-price="minPrice"
         :booked-map="bookedMap"
+      />
+      <Pagination
+        v-model="page"
+        :total-pages="totalPages"
+        class="mt-6"
       />
     </div>
   </div>
@@ -55,19 +73,46 @@ const maxBooked = computed(() => Math.max(...Object.values(bookedMap.value)))
 
 <style scoped>
 .page-container {
-  padding: 40px 30px 40px 30px; /* lề ngoài lớn hơn */
+  padding: 40px 30px 40px 30px;
 }
 
 .services-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 32px 28px; /* tăng khoảng cách giữa các card */
+  gap: 32px 28px;
   justify-items: center;
 }
 
 .hotel-card {
-  max-width: 220px; /* card nhỏ lại */
+  max-width: 220px;
   margin: 0 auto;
+}
+
+/* Responsive: 4 -> 3 -> 2 -> 1 card mỗi hàng */
+@media (max-width: 1200px) {
+  .services-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+@media (max-width: 900px) {
+  .services-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (max-width: 600px) {
+  .services-grid {
+    grid-template-columns: 1fr;
+  }
+  .hotel-card {
+    max-width: 100%;
+  }
+}
+
+/* Center pagination */
+.mt-6 {
+  margin-top: 32px;
+  display: flex;
+  justify-content: center;
 }
 
 .modal-loading {
@@ -113,5 +158,9 @@ const maxBooked = computed(() => Math.max(...Object.values(bookedMap.value)))
   }
 }
 
-
+.error-message {
+  color: red;
+  text-align: center;
+  margin-top: 20px;
+}
 </style>
