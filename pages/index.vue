@@ -11,14 +11,14 @@
           <span>Đáng tin cậy từ 2015</span>
         </div>
         <h1 class="hero-title">
-          Khám phá những địa điểm 
+          Khám phá những địa điểm
           <span class="highlight">hấp dẫn nhất</span>
         </h1>
         <p class="hero-subtitle">
-          Tìm kiếm cuộc phiêu lưu tiếp theo của bạn cùng chúng tôi.<br>
+          Tìm kiếm cuộc phiêu lưu tiếp theo của bạn cùng chúng tôi.<br />
           Hơn 10,000+ khách sạn và điểm đến trên toàn thế giới.
         </p>
-        
+
         <div class="hero-search-container">
           <div class="search-tabs">
             <button class="search-tab active">
@@ -34,36 +34,28 @@
               Thuê xe
             </button>
           </div>
-          
+
           <div class="hero-search">
             <div class="search-field">
               <va-icon name="location_on" class="search-icon" />
-              <va-input 
-                placeholder="Điểm đến hoặc tên khách sạn..." 
+              <va-input
+                placeholder="Điểm đến hoặc tên khách sạn..."
                 class="search-input"
                 v-model="searchQuery"
               />
             </div>
             <div class="search-field date-field">
               <va-icon name="calendar_today" class="search-icon" />
-              <va-input 
-                placeholder="Ngày nhận phòng" 
-                class="search-input"
-                type="date"
-              />
+              <va-input placeholder="Ngày nhận phòng" class="search-input" type="date" />
             </div>
             <div class="search-field date-field">
               <va-icon name="calendar_today" class="search-icon" />
-              <va-input 
-                placeholder="Ngày trả phòng" 
-                class="search-input"
-                type="date"
-              />
+              <va-input placeholder="Ngày trả phòng" class="search-input" type="date" />
             </div>
             <div class="search-field guest-field">
               <va-icon name="person" class="search-icon" />
-              <va-select 
-                placeholder="Khách" 
+              <va-select
+                placeholder="Khách"
                 class="search-input"
                 :options="guestOptions"
               />
@@ -91,7 +83,11 @@
         </div>
       </div>
       <div class="hero-visual">
-        <img class="hero-bg" src="https://i.imgur.com/0y8Ftya.png" alt="Travel Destinations" />
+        <img
+          class="hero-bg"
+          src="https://i.imgur.com/0y8Ftya.png"
+          alt="Travel Destinations"
+        />
         <div class="floating-cards">
           <div class="floating-card">
             <va-icon name="star" color="warning" />
@@ -137,29 +133,34 @@
             <va-icon name="arrow_forward" size="small" />
           </va-button>
         </div>
-        
+
         <div class="destinations-grid">
           <div class="destination-card featured" v-if="destinations[0]">
             <img :src="destinations[0].img" class="destination-img" />
             <div class="destination-overlay">
               <div class="destination-content">
                 <h3>{{ destinations[0].title }}</h3>
-                <p>{{ destinations[0].hotels || '120+' }} khách sạn</p>
+                <p>{{ destinations[0].hotels || "120+" }} khách sạn</p>
                 <div class="destination-rating">
                   <va-icon name="star" color="warning" size="small" />
                   <span>4.8</span>
                 </div>
               </div>
+              >>>>>>> origin/main
             </div>
           </div>
-          
+
           <div class="destinations-list">
-            <div class="destination-card" v-for="item in destinations.slice(1)" :key="item.title">
+            <div
+              class="destination-card"
+              v-for="item in destinations.slice(1)"
+              :key="item.title"
+            >
               <img :src="item.img" class="destination-img" />
               <div class="destination-overlay">
                 <div class="destination-content">
                   <h4>{{ item.title }}</h4>
-                  <p>{{ item.hotels || '80+' }} khách sạn</p>
+                  <p>{{ item.hotels || "80+" }} khách sạn</p>
                   <div class="destination-rating">
                     <va-icon name="star" color="warning" size="small" />
                     <span>4.{{ Math.floor(Math.random() * 3) + 6 }}</span>
@@ -178,14 +179,16 @@
         <div class="section-header">
           <div class="section-title-group">
             <h2 class="section-title">Khách sạn nổi bật</h2>
-            <p class="section-subtitle">Những lựa chọn hàng đầu được khách hàng tin tưởng</p>
+            <p class="section-subtitle">
+              Những lựa chọn hàng đầu được khách hàng tin tưởng
+            </p>
           </div>
           <va-button preset="plain" color="primary" class="see-all">
             Xem tất cả
             <va-icon name="arrow_forward" size="small" />
           </va-button>
         </div>
-        
+
         <div class="hotels-grid">
           <div class="hotel-card" v-for="item in hotels" :key="item.title">
             <div class="hotel-image-container">
@@ -198,35 +201,43 @@
                 <va-icon name="favorite_border" />
               </button>
             </div>
-            
+
             <div class="hotel-content">
               <div class="hotel-header">
                 <h3 class="hotel-title">{{ item.title }}</h3>
                 <div class="hotel-rating">
                   <div class="stars">
-                    <va-icon name="star" color="warning" v-for="n in item.stars" :key="n" size="small" />
+                    <va-icon
+                      name="star"
+                      color="warning"
+                      v-for="n in item.stars"
+                      :key="n"
+                      size="small"
+                    />
                   </div>
                   <span class="rating-text">{{ item.stars }}.0</span>
                 </div>
               </div>
-              
+
               <p class="hotel-desc">{{ item.desc }}</p>
-              
+
               <div class="hotel-amenities">
-                <span class="amenity" v-for="amenity in item.amenities || ['WiFi', 'Bể bơi', 'Spa']" :key="amenity">
+                <span
+                  class="amenity"
+                  v-for="amenity in item.amenities || ['WiFi', 'Bể bơi', 'Spa']"
+                  :key="amenity"
+                >
                   {{ amenity }}
                 </span>
               </div>
-              
+
               <div class="hotel-footer">
                 <div class="price-group">
                   <span class="price-label">Từ</span>
-                  <span class="price">{{ item.price || '1,200,000' }}₫</span>
+                  <span class="price">{{ item.price || "1,200,000" }}₫</span>
                   <span class="price-unit">/đêm</span>
                 </div>
-                <va-button color="primary" size="small">
-                  Đặt ngay
-                </va-button>
+                <va-button color="primary" size="small"> Đặt ngay </va-button>
               </div>
             </div>
           </div>
@@ -246,16 +257,17 @@
             <h2>Tiết kiệm đến 40% cho kỳ nghỉ tiếp theo</h2>
             <p>Đặt phòng ngay hôm nay và nhận ngay ưu đãi hấp dẫn</p>
             <div class="deals-actions">
-              <va-button color="primary" size="large">
-                Khám phá ưu đãi
-              </va-button>
+              <va-button color="primary" size="large"> Khám phá ưu đãi </va-button>
               <va-button preset="plain" color="primary" size="large">
                 Tìm hiểu thêm
               </va-button>
             </div>
           </div>
           <div class="deals-visual">
-            <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945" alt="Special Deals" />
+            <img
+              src="https://images.unsplash.com/photo-1566073771259-6a8506099945"
+              alt="Special Deals"
+            />
           </div>
         </div>
       </div>
@@ -274,19 +286,19 @@
             <va-icon name="arrow_forward" size="small" />
           </va-button>
         </div>
-        
+
         <div class="articles-grid">
           <article class="article-card" v-for="item in articles" :key="item.title">
             <div class="article-image">
               <img :src="item.img" :alt="item.title" />
-              <div class="article-category">{{ item.category || 'Mẹo du lịch' }}</div>
+              <div class="article-category">{{ item.category || "Mẹo du lịch" }}</div>
             </div>
             <div class="article-content">
               <h3 class="article-title">{{ item.title }}</h3>
               <p class="article-desc">{{ item.desc }}</p>
               <div class="article-meta">
-                <span class="article-date">{{ item.date || '5 ngày trước' }}</span>
-                <span class="article-read-time">{{ item.readTime || '3 phút đọc' }}</span>
+                <span class="article-date">{{ item.date || "5 ngày trước" }}</span>
+                <span class="article-read-time">{{ item.readTime || "3 phút đọc" }}</span>
               </div>
             </div>
           </article>
@@ -295,11 +307,15 @@
     </section>
 
     <!-- Về chúng tôi -->
+
     <section class="section about-section">
       <div class="container">
         <div class="about-content">
           <div class="about-visual">
-            <img src="https://images.unsplash.com/photo-1515378791036-0648a3ef77b2" class="about-img" />
+            <img
+              src="https://images.unsplash.com/photo-1515378791036-0648a3ef77b2"
+              class="about-img"
+            />
             <div class="about-stats">
               <div class="about-stat">
                 <span class="stat-number">8+</span>
@@ -311,7 +327,7 @@
               </div>
             </div>
           </div>
-          
+
           <div class="about-text">
             <div class="about-badge">
               <va-icon name="verified" />
@@ -319,9 +335,9 @@
             </div>
             <h2>Đối tác đáng tin cậy cho mọi chuyến đi</h2>
             <p>
-              Chúng tôi đam mê du lịch và khách sạn. Với hơn 8 năm kinh nghiệm trong ngành, 
-              sứ mệnh của chúng tôi là giúp bạn khám phá những địa điểm và trải nghiệm tốt nhất 
-              trên khắp thế giới với giá cả hợp lý nhất.
+              Chúng tôi đam mê du lịch và khách sạn. Với hơn 8 năm kinh nghiệm trong
+              ngành, sứ mệnh của chúng tôi là giúp bạn khám phá những địa điểm và trải
+              nghiệm tốt nhất trên khắp thế giới với giá cả hợp lý nhất.
             </p>
             <div class="about-features">
               <div class="feature-item">
@@ -337,9 +353,7 @@
                 <span>Giá tốt nhất được đảm bảo</span>
               </div>
             </div>
-            <va-button color="primary" size="large">
-              Tìm hiểu thêm
-            </va-button>
+            <va-button color="primary" size="large"> Tìm hiểu thêm </va-button>
           </div>
         </div>
       </div>
@@ -354,15 +368,14 @@
             <p>Đăng ký nhận bản tin để cập nhật những ưu đãi và điểm đến mới nhất</p>
           </div>
           <div class="newsletter-form">
-            <va-input 
-              placeholder="Nhập email của bạn..." 
+            <va-input
+              placeholder="Nhập email của bạn..."
               class="newsletter-input"
               v-model="email"
             />
-            <va-button color="primary" size="large">
-              Đăng ký
-            </va-button>
+            <va-button color="primary" size="large"> Đăng ký </va-button>
           </div>
+          >>>>>>> origin/main
         </div>
       </div>
     </section>
@@ -372,113 +385,138 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
-import TheHeader from '../Component/Header.vue'
-import TheFooter from '../Component/Footer.vue'
+import { ref } from "vue";
+import TheHeader from "../Component/Header.vue";
+import TheFooter from "../Component/Footer.vue";
 
-const searchQuery = ref('')
-const email = ref('')
+const searchQuery = ref("");
+const email = ref("");
 
-const guestOptions = [
-  '1 khách',
-  '2 khách', 
-  '3 khách',
-  '4+ khách'
-]
+const guestOptions = ["1 khách", "2 khách", "3 khách", "4+ khách"];
 
 const quickActions = [
   {
-    title: 'Đặt phòng nhanh',
-    desc: 'Tìm và đặt phòng chỉ trong vài phút',
-    icon: 'hotel',
-    color: 'primary',
-    buttonText: 'Đặt ngay'
+    title: "Đặt phòng nhanh",
+    desc: "Tìm và đặt phòng chỉ trong vài phút",
+    icon: "hotel",
+    color: "primary",
+    buttonText: "Đặt ngay",
   },
   {
-    title: 'Ưu đãi độc quyền',
-    desc: 'Nhận giá tốt nhất chỉ có tại đây',
-    icon: 'local_offer',
-    color: 'success',
-    buttonText: 'Xem ưu đãi'
+    title: "Ưu đãi độc quyền",
+    desc: "Nhận giá tốt nhất chỉ có tại đây",
+    icon: "local_offer",
+    color: "success",
+    buttonText: "Xem ưu đãi",
   },
   {
-    title: 'Hỗ trợ 24/7',
-    desc: 'Đội ngũ hỗ trợ luôn sẵn sàng giúp bạn',
-    icon: 'support_agent',
-    color: 'info',
-    buttonText: 'Liên hệ'
-  }
-]
+    title: "Hỗ trợ 24/7",
+    desc: "Đội ngũ hỗ trợ luôn sẵn sàng giúp bạn",
+    icon: "support_agent",
+    color: "info",
+    buttonText: "Liên hệ",
+  },
+];
 
 const destinations = [
-  { title: 'Bali', img: 'https://images.unsplash.com/photo-1506744038136-46273834b3fb', hotels: '150+' },
-  { title: 'Rome', img: 'https://images.unsplash.com/photo-1467269204594-9661b134dd2b', hotels: '200+' },
-  { title: 'Santorini', img: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e', hotels: '80+' },
-  { title: 'Paris', img: 'https://images.unsplash.com/photo-1465101046530-73398c7f28ca', hotels: '300+' },
-  { title: 'London', img: 'https://images.unsplash.com/photo-1465101178521-c1a9136a3b99', hotels: '250+' },
-  { title: 'Tokyo', img: 'https://images.unsplash.com/photo-1505761671935-60b3a7427bad', hotels: '180+' },
-]
+  {
+    title: "Bali",
+    img: "https://images.unsplash.com/photo-1506744038136-46273834b3fb",
+    hotels: "150+",
+  },
+  {
+    title: "Rome",
+    img: "https://images.unsplash.com/photo-1467269204594-9661b134dd2b",
+    hotels: "200+",
+  },
+  {
+    title: "Santorini",
+    img: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e",
+    hotels: "80+",
+  },
+  {
+    title: "Paris",
+    img: "https://images.unsplash.com/photo-1465101046530-73398c7f28ca",
+    hotels: "300+",
+  },
+  {
+    title: "London",
+    img: "https://images.unsplash.com/photo-1465101178521-c1a9136a3b99",
+    hotels: "250+",
+  },
+  {
+    title: "Tokyo",
+    img: "https://images.unsplash.com/photo-1505761671935-60b3a7427bad",
+    hotels: "180+",
+  },
+];
 
 const hotels = [
-  { 
-    title: 'Sunset Resort & Spa', 
-    img: 'https://images.unsplash.com/photo-1566073771259-6a8506099945', 
-    stars: 5, 
-    desc: 'Khu nghỉ dưỡng sang trọng với view biển tuyệt đẹp và dịch vụ spa đẳng cấp thế giới.',
-    amenities: ['WiFi miễn phí', 'Bể bơi', 'Spa', 'Nhà hàng'],
-    price: '2,500,000'
+  {
+    title: "Sunset Resort & Spa",
+    img: "https://images.unsplash.com/photo-1566073771259-6a8506099945",
+    stars: 5,
+    desc:
+      "Khu nghỉ dưỡng sang trọng với view biển tuyệt đẹp và dịch vụ spa đẳng cấp thế giới.",
+    amenities: ["WiFi miễn phí", "Bể bơi", "Spa", "Nhà hàng"],
+    price: "2,500,000",
   },
-  { 
-    title: 'Mountain Grand Lodge', 
-    img: 'https://images.unsplash.com/photo-1467269204594-9661b134dd2b', 
-    stars: 4, 
-    desc: 'Lodge ấm cúng trong núi với không gian yên tĩnh và phong cảnh thiên nhiên tuyệt vời.',
-    amenities: ['WiFi miễn phí', 'Nhà hàng', 'Bar', 'Gym'],
-    price: '1,800,000'
+  {
+    title: "Mountain Grand Lodge",
+    img: "https://images.unsplash.com/photo-1467269204594-9661b134dd2b",
+    stars: 4,
+    desc:
+      "Lodge ấm cúng trong núi với không gian yên tĩnh và phong cảnh thiên nhiên tuyệt vời.",
+    amenities: ["WiFi miễn phí", "Nhà hàng", "Bar", "Gym"],
+    price: "1,800,000",
   },
-  { 
-    title: 'Metropolitan Hotel', 
-    img: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e', 
-    stars: 4, 
-    desc: 'Khách sạn hiện đại tại trung tâm thành phố với tiện nghi đầy đủ và dịch vụ chuyên nghiệp.',
-    amenities: ['WiFi miễn phí', 'Phòng gym', 'Trung tâm thương mại', 'Concierge'],
-    price: '1,200,000'
+  {
+    title: "Metropolitan Hotel",
+    img: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e",
+    stars: 4,
+    desc:
+      "Khách sạn hiện đại tại trung tâm thành phố với tiện nghi đầy đủ và dịch vụ chuyên nghiệp.",
+    amenities: ["WiFi miễn phí", "Phòng gym", "Trung tâm thương mại", "Concierge"],
+    price: "1,200,000",
   },
-]
+];
 
 const articles = [
-  { 
-    title: 'Hành trình khám phá bờ biển tuyệt đẹp', 
-    img: 'https://images.unsplash.com/photo-1515378791036-0648a3ef77b2', 
-    desc: 'Những mẹo hữu ích cho chuyến đi dài ngày khám phá các bờ biển đẹp nhất thế giới.',
-    category: 'Hướng dẫn',
-    date: '3 ngày trước',
-    readTime: '5 phút đọc'
+  {
+    title: "Hành trình khám phá bờ biển tuyệt đẹp",
+    img: "https://images.unsplash.com/photo-1515378791036-0648a3ef77b2",
+    desc:
+      "Những mẹo hữu ích cho chuyến đi dài ngày khám phá các bờ biển đẹp nhất thế giới.",
+    category: "Hướng dẫn",
+    date: "3 ngày trước",
+    readTime: "5 phút đọc",
   },
-  { 
-    title: 'Trải nghiệm văn hóa địa phương', 
-    img: 'https://images.unsplash.com/photo-1465101046530-73398c7f28ca', 
-    desc: 'Cách hòa mình vào văn hóa và truyền thống địa phương để có trải nghiệm du lịch ý nghĩa.',
-    category: 'Văn hóa',
-    date: '1 tuần trước',
-    readTime: '4 phút đọc'
+  {
+    title: "Trải nghiệm văn hóa địa phương",
+    img: "https://images.unsplash.com/photo-1465101046530-73398c7f28ca",
+    desc:
+      "Cách hòa mình vào văn hóa và truyền thống địa phương để có trải nghiệm du lịch ý nghĩa.",
+    category: "Văn hóa",
+    date: "1 tuần trước",
+    readTime: "4 phút đọc",
   },
-  { 
-    title: 'Bí quyết đóng gói hành lý thông minh', 
-    img: 'https://images.unsplash.com/photo-1465101178521-c1a9136a3b99', 
-    desc: 'Hướng dẫn chi tiết cách đóng gói hành lý hiệu quả cho mọi loại hình du lịch.',
-    category: 'Mẹo hay',
-    date: '2 tuần trước',
-    readTime: '3 phút đọc'
+  {
+    title: "Bí quyết đóng gói hành lý thông minh",
+    img: "https://images.unsplash.com/photo-1465101178521-c1a9136a3b99",
+    desc: "Hướng dẫn chi tiết cách đóng gói hành lý hiệu quả cho mọi loại hình du lịch.",
+    category: "Mẹo hay",
+    date: "2 tuần trước",
+    readTime: "3 phút đọc",
   },
-]
+];
 </script>
 
 <style scoped>
 .home-landing {
   background: #fafbfc;
   min-height: 100vh;
-  font-family: 'Inter', 'Segoe UI', sans-serif;
+
+  font-family: "Inter", "Segoe UI", sans-serif;
 }
 
 .container {
@@ -547,6 +585,7 @@ const articles = [
   font-size: 1.2rem;
   line-height: 1.6;
   margin-bottom: 40px;
+
   opacity: 0.9;
 }
 
@@ -677,8 +716,13 @@ const articles = [
 }
 
 @keyframes float {
-  0%, 100% { transform: translateY(0px); }
-  50% { transform: translateY(-10px); }
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
 }
 
 /* Quick Actions */
@@ -775,6 +819,7 @@ const articles = [
 .destination-card {
   position: relative;
   border-radius: 16px;
+
   overflow: hidden;
   cursor: pointer;
   transition: transform 0.3s ease;
@@ -1212,39 +1257,39 @@ const articles = [
     text-align: center;
     padding: 60px 0 80px 0;
   }
-  
+
   .hero-title {
     font-size: 2.5rem;
   }
-  
+
   .hero-search {
     flex-direction: column;
   }
-  
+
   .hero-stats {
     justify-content: center;
   }
-  
+
   .destinations-grid {
     grid-template-columns: 1fr;
     height: auto;
   }
-  
+
   .destinations-list {
     grid-template-columns: 1fr;
   }
-  
+
   .deals-banner,
   .about-content {
     grid-template-columns: 1fr;
     text-align: center;
   }
-  
+
   .newsletter-content {
     flex-direction: column;
     text-align: center;
   }
-  
+
   .newsletter-form {
     min-width: auto;
     width: 100%;

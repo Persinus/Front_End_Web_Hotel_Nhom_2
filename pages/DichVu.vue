@@ -2,7 +2,7 @@
   <header>
     <TheHeader />
   </header>
-  
+
   <div :class="['service-list-container', { 'dark-mode': theme.isDarkMode }]">
     <!-- Background Animation -->
     <div class="background-animation">
@@ -23,9 +23,10 @@
           <span class="title-highlight">Đẳng cấp</span>
         </h1>
         <p class="page-subtitle">
-          Khám phá những dịch vụ cao cấp được thiết kế đặc biệt để mang đến trải nghiệm hoàn hảo
+          Khám phá những dịch vụ cao cấp được thiết kế đặc biệt để mang đến trải nghiệm
+          hoàn hảo
         </p>
-        
+
         <!-- Service Stats -->
         <div class="service-stats">
           <div class="stat-item">
@@ -54,7 +55,7 @@
           </h2>
           <p>Lọc theo nhu cầu của bạn</p>
         </div>
-        
+
         <div class="filter-bar">
           <div class="filter-group">
             <label class="filter-label">
@@ -71,7 +72,7 @@
               />
             </div>
           </div>
-          
+
           <div class="filter-group">
             <label class="filter-label">
               <va-icon name="attach_money" />
@@ -85,7 +86,7 @@
               @update:model-value="onFilterChange"
             />
           </div>
-          
+
           <div class="filter-group">
             <label class="filter-label">
               <va-icon name="sort" />
@@ -99,23 +100,27 @@
               @update:model-value="onFilterChange"
             />
           </div>
-          
+
           <div class="filter-actions">
-            <button class="clear-filters-btn" @click="clearFilters" v-if="hasActiveFilters">
+            <button
+              class="clear-filters-btn"
+              @click="clearFilters"
+              v-if="hasActiveFilters"
+            >
               <va-icon name="clear" />
               Xóa bộ lọc
             </button>
           </div>
         </div>
-        
+
         <!-- Quick Filters -->
         <div class="quick-filters">
           <h3>Danh mục phổ biến</h3>
           <div class="category-chips">
-            <div 
-              class="category-chip" 
-              :class="{ 'active': selectedCategory === category.value }"
-              v-for="category in serviceCategories" 
+            <div
+              class="category-chip"
+              :class="{ active: selectedCategory === category.value }"
+              v-for="category in serviceCategories"
               :key="category.value"
               @click="selectCategory(category.value)"
             >
@@ -132,24 +137,25 @@
       <div class="results-header">
         <div class="results-info">
           <h2>
-            Tìm thấy <span class="highlight-number">{{ filteredServices.length }}</span> dịch vụ
+            Tìm thấy
+            <span class="highlight-number">{{ filteredServices.length }}</span> dịch vụ
           </h2>
           <p>{{ getResultsDescription() }}</p>
         </div>
-        
+
         <div class="view-controls">
           <div class="view-toggle">
-            <button 
-              class="view-btn" 
-              :class="{ 'active': viewMode === 'grid' }"
+            <button
+              class="view-btn"
+              :class="{ active: viewMode === 'grid' }"
               @click="viewMode = 'grid'"
               title="Xem dạng lưới"
             >
               <va-icon name="grid_view" />
             </button>
-            <button 
-              class="view-btn" 
-              :class="{ 'active': viewMode === 'list' }"
+            <button
+              class="view-btn"
+              :class="{ active: viewMode === 'list' }"
               @click="viewMode = 'list'"
               title="Xem dạng danh sách"
             >
@@ -162,7 +168,7 @@
 
     <!-- Service Cards -->
     <section class="services-section">
-      <div class="service-cards" :class="[`view-${viewMode}`, { 'loading': isLoading }]">
+      <div class="service-cards" :class="[`view-${viewMode}`, { loading: isLoading }]">
         <div
           v-for="(service, index) in filteredServices"
           :key="service.maChiTietDichVu"
@@ -171,9 +177,9 @@
           @click="navigateToDetail(service.maChiTietDichVu)"
         >
           <div class="service-image-container">
-            <img 
-              :src="service.urlAnh || getDefaultServiceImage()" 
-              :alt="service.tenDichVu" 
+            <img
+              :src="service.urlAnh || getDefaultServiceImage()"
+              :alt="service.tenDichVu"
               class="service-image"
               @error="handleImageError"
             />
@@ -183,7 +189,11 @@
                 <span>{{ getServiceCategory(service.tenDichVu) }}</span>
               </div>
             </div>
-            <button class="favorite-btn" @click.stop="toggleFavorite(service)" :class="{ 'active': service.isFavorite }">
+            <button
+              class="favorite-btn"
+              @click.stop="toggleFavorite(service)"
+              :class="{ active: service.isFavorite }"
+            >
               <va-icon :name="service.isFavorite ? 'favorite' : 'favorite_border'" />
             </button>
             <div class="service-badge" v-if="service.isPopular">
@@ -191,7 +201,7 @@
               <span>Phổ biến</span>
             </div>
           </div>
-          
+
           <div class="service-content">
             <div class="service-header">
               <h3 class="service-title" :title="service.tenDichVu">
@@ -199,23 +209,33 @@
               </h3>
               <div class="service-rating">
                 <div class="stars">
-                  <va-icon name="star" v-for="n in 5" :key="n" class="star" :class="{ 'filled': n <= getServiceRating() }" />
+                  <va-icon
+                    name="star"
+                    v-for="n in 5"
+                    :key="n"
+                    class="star"
+                    :class="{ filled: n <= getServiceRating() }"
+                  />
                 </div>
                 <span class="rating-text">{{ getServiceRating() }}/5</span>
               </div>
             </div>
-            
+
             <p class="service-description">
               {{ getServiceDescription(service.tenDichVu) }}
             </p>
-            
+
             <div class="service-features">
-              <div class="feature-item" v-for="feature in getServiceFeatures(service.tenDichVu)" :key="feature">
+              <div
+                class="feature-item"
+                v-for="feature in getServiceFeatures(service.tenDichVu)"
+                :key="feature"
+              >
                 <va-icon name="check_circle" />
                 <span>{{ feature }}</span>
               </div>
             </div>
-            
+
             <div class="service-footer">
               <div class="price-section">
                 <div class="price-main">
@@ -225,9 +245,12 @@
                 <div class="price-unit">/ đêm</div>
                 <div class="price-note">Đã bao gồm VAT</div>
               </div>
-              
+
               <div class="service-actions">
-                <button class="detail-btn" @click.stop="navigateToDetail(service.maChiTietDichVu)">
+                <button
+                  class="detail-btn"
+                  @click.stop="navigateToDetail(service.maChiTietDichVu)"
+                >
                   <va-icon name="visibility" />
                   <span>Chi tiết</span>
                 </button>
@@ -240,7 +263,7 @@
           </div>
         </div>
       </div>
-      
+
       <!-- Empty State -->
       <div v-if="filteredServices.length === 0 && !isLoading" class="empty-state">
         <div class="empty-icon">
@@ -253,7 +276,7 @@
           Xóa bộ lọc
         </button>
       </div>
-      
+
       <!-- Loading State -->
       <div v-if="isLoading" class="loading-state">
         <div class="loading-spinner">
@@ -287,9 +310,12 @@
     <NuxtChild />
 
     <!-- Toast Notification -->
-    <div v-if="showToast" class="toast" :class="[toastType, { 'show': showToast }]">
+    <div v-if="showToast" class="toast" :class="[toastType, { show: showToast }]">
       <div class="toast-content">
-        <va-icon :name="toastType === 'success' ? 'check_circle' : 'info'" class="toast-icon" />
+        <va-icon
+          :name="toastType === 'success' ? 'check_circle' : 'info'"
+          class="toast-icon"
+        />
         <span>{{ toastMessage }}</span>
       </div>
     </div>
@@ -297,55 +323,60 @@
 </template>
 
 <script setup>
-import { ref, computed, onMounted, watch } from 'vue';
-import { useThemeStore } from '@/store/DarkMode';
-import { useRouter } from 'vue-router';
-import TheHeader from '../Component/Header.vue';
-import { axiosBase } from '~/utils/axiosBase';
+import { ref, computed, onMounted, watch } from "vue";
+import { useThemeStore } from "@/store/DarkMode";
+import { useRouter } from "vue-router";
+import TheHeader from "../Component/Header.vue";
+import { axiosBase } from "~/utils/axiosBase";
 
 const theme = useThemeStore();
 const router = useRouter();
 
 // Reactive data
 const services = ref([]);
-const filterName = ref('');
+const filterName = ref("");
 const filterPrice = ref(null);
-const sortBy = ref('name');
-const selectedCategory = ref('');
-const viewMode = ref('grid');
+const sortBy = ref("name");
+const selectedCategory = ref("");
+const viewMode = ref("grid");
 const isLoading = ref(true);
 const isVisible = ref(false);
 const showToast = ref(false);
-const toastMessage = ref('');
-const toastType = ref('success');
+const toastMessage = ref("");
+const toastType = ref("success");
 
 // Filter options
 const priceOptions = [
-  { value: null, text: 'Tất cả mức giá' },
-  { value: 'low', text: 'Dưới 500,000₫' },
-  { value: 'medium', text: '500,000₫ - 1,000,000₫' },
-  { value: 'high', text: 'Trên 1,000,000₫' },
+  { value: null, text: "Tất cả mức giá" },
+  { value: "low", text: "Dưới 500,000₫" },
+  { value: "medium", text: "500,000₫ - 1,000,000₫" },
+  { value: "high", text: "Trên 1,000,000₫" },
 ];
 
 const sortOptions = [
-  { value: 'name', text: 'Tên A-Z' },
-  { value: 'price-asc', text: 'Giá tăng dần' },
-  { value: 'price-desc', text: 'Giá giảm dần' },
-  { value: 'popular', text: 'Phổ biến nhất' },
+  { value: "name", text: "Tên A-Z" },
+  { value: "price-asc", text: "Giá tăng dần" },
+  { value: "price-desc", text: "Giá giảm dần" },
+  { value: "popular", text: "Phổ biến nhất" },
 ];
 
 const serviceCategories = [
-  { value: '', label: 'Tất cả', icon: 'apps' },
-  { value: 'spa', label: 'Spa & Wellness', icon: 'spa' },
-  { value: 'food', label: 'Ẩm thực', icon: 'restaurant' },
-  { value: 'transport', label: 'Vận chuyển', icon: 'directions_car' },
-  { value: 'entertainment', label: 'Giải trí', icon: 'sports_esports' },
-  { value: 'business', label: 'Doanh nghiệp', icon: 'business_center' },
+  { value: "", label: "Tất cả", icon: "apps" },
+  { value: "spa", label: "Spa & Wellness", icon: "spa" },
+  { value: "food", label: "Ẩm thực", icon: "restaurant" },
+  { value: "transport", label: "Vận chuyển", icon: "directions_car" },
+  { value: "entertainment", label: "Giải trí", icon: "sports_esports" },
+  { value: "business", label: "Doanh nghiệp", icon: "business_center" },
 ];
 
 // Computed properties
 const hasActiveFilters = computed(() => {
-  return filterName.value || filterPrice.value || selectedCategory.value || sortBy.value !== 'name';
+  return (
+    filterName.value ||
+    filterPrice.value ||
+    selectedCategory.value ||
+    sortBy.value !== "name"
+  );
 });
 
 const filteredServices = computed(() => {
@@ -353,43 +384,47 @@ const filteredServices = computed(() => {
 
   // Filter by name
   if (filterName.value) {
-    filtered = filtered.filter(service =>
+    filtered = filtered.filter((service) =>
       service.tenDichVu.toLowerCase().includes(filterName.value.toLowerCase())
     );
   }
 
   // Filter by price
   if (filterPrice.value) {
-    filtered = filtered.filter(service => {
+    filtered = filtered.filter((service) => {
       const price = service.donGia;
       switch (filterPrice.value) {
-        case 'low': return price < 500000;
-        case 'medium': return price >= 500000 && price <= 1000000;
-        case 'high': return price > 1000000;
-        default: return true;
+        case "low":
+          return price < 500000;
+        case "medium":
+          return price >= 500000 && price <= 1000000;
+        case "high":
+          return price > 1000000;
+        default:
+          return true;
       }
     });
   }
 
   // Filter by category
   if (selectedCategory.value) {
-    filtered = filtered.filter(service =>
+    filtered = filtered.filter((service) =>
       getServiceCategory(service.tenDichVu).toLowerCase().includes(selectedCategory.value)
     );
   }
 
   // Sort
   switch (sortBy.value) {
-    case 'name':
+    case "name":
       filtered.sort((a, b) => a.tenDichVu.localeCompare(b.tenDichVu));
       break;
-    case 'price-asc':
+    case "price-asc":
       filtered.sort((a, b) => a.donGia - b.donGia);
       break;
-    case 'price-desc':
+    case "price-desc":
       filtered.sort((a, b) => b.donGia - a.donGia);
       break;
-    case 'popular':
+    case "popular":
       filtered.sort((a, b) => (b.isPopular ? 1 : 0) - (a.isPopular ? 1 : 0));
       break;
   }
@@ -399,59 +434,61 @@ const filteredServices = computed(() => {
 
 // Methods
 const formatPrice = (price) => {
-  return new Intl.NumberFormat('vi-VN').format(price);
+  return new Intl.NumberFormat("vi-VN").format(price);
 };
 
 const getServiceIcon = (serviceName) => {
   const name = serviceName.toLowerCase();
-  if (name.includes('spa') || name.includes('massage')) return 'spa';
-  if (name.includes('ăn') || name.includes('thức ăn') || name.includes('buffet')) return 'restaurant';
-  if (name.includes('xe') || name.includes('đưa đón')) return 'directions_car';
-  if (name.includes('game') || name.includes('giải trí')) return 'sports_esports';
-  if (name.includes('hội nghị') || name.includes('meeting')) return 'business_center';
-  return 'room_service';
+  if (name.includes("spa") || name.includes("massage")) return "spa";
+  if (name.includes("ăn") || name.includes("thức ăn") || name.includes("buffet"))
+    return "restaurant";
+  if (name.includes("xe") || name.includes("đưa đón")) return "directions_car";
+  if (name.includes("game") || name.includes("giải trí")) return "sports_esports";
+  if (name.includes("hội nghị") || name.includes("meeting")) return "business_center";
+  return "room_service";
 };
 
 const getServiceCategory = (serviceName) => {
   const name = serviceName.toLowerCase();
-  if (name.includes('spa') || name.includes('massage')) return 'Spa & Wellness';
-  if (name.includes('ăn') || name.includes('thức ăn') || name.includes('buffet')) return 'Ẩm thực';
-  if (name.includes('xe') || name.includes('đưa đón')) return 'Vận chuyển';
-  if (name.includes('game') || name.includes('giải trí')) return 'Giải trí';
-  if (name.includes('hội nghị') || name.includes('meeting')) return 'Doanh nghiệp';
-  return 'Dịch vụ khác';
+  if (name.includes("spa") || name.includes("massage")) return "Spa & Wellness";
+  if (name.includes("ăn") || name.includes("thức ăn") || name.includes("buffet"))
+    return "Ẩm thực";
+  if (name.includes("xe") || name.includes("đưa đón")) return "Vận chuyển";
+  if (name.includes("game") || name.includes("giải trí")) return "Giải trí";
+  if (name.includes("hội nghị") || name.includes("meeting")) return "Doanh nghiệp";
+  return "Dịch vụ khác";
 };
 
 const getServiceDescription = (serviceName) => {
   const descriptions = {
-    'spa': 'Thư giãn và tái tạo năng lượng với các liệu pháp chuyên nghiệp',
-    'massage': 'Massage thư giãn với kỹ thuật truyền thống và hiện đại',
-    'buffet': 'Thưởng thức ẩm thực đa dạng với chất lượng cao cấp',
-    'xe': 'Dịch vụ vận chuyển an toàn và tiện lợi',
-    'game': 'Giải trí đa dạng cho mọi lứa tuổi'
+    spa: "Thư giãn và tái tạo năng lượng với các liệu pháp chuyên nghiệp",
+    massage: "Massage thư giãn với kỹ thuật truyền thống và hiện đại",
+    buffet: "Thưởng thức ẩm thực đa dạng với chất lượng cao cấp",
+    xe: "Dịch vụ vận chuyển an toàn và tiện lợi",
+    game: "Giải trí đa dạng cho mọi lứa tuổi",
   };
-  
+
   const name = serviceName.toLowerCase();
   for (const [key, desc] of Object.entries(descriptions)) {
     if (name.includes(key)) return desc;
   }
-  return 'Dịch vụ chất lượng cao với đội ngũ chuyên nghiệp';
+  return "Dịch vụ chất lượng cao với đội ngũ chuyên nghiệp";
 };
 
 const getServiceFeatures = (serviceName) => {
   const features = {
-    'spa': ['Chuyên viên có kinh nghiệm', 'Sản phẩm thiên nhiên', 'Không gian riêng tư'],
-    'massage': ['Kỹ thuật chuyên nghiệp', 'Thời gian linh hoạt', 'Giá cả hợp lý'],
-    'buffet': ['Đa dạng món ăn', 'Nguyên liệu tươi ngon', 'Phục vụ 24/7'],
-    'xe': ['Xe đời mới', 'Tài xế kinh nghiệm', 'An toàn tuyệt đối'],
-    'game': ['Thiết bị hiện đại', 'Không gian rộng rãi', 'Giá ưu đãi']
+    spa: ["Chuyên viên có kinh nghiệm", "Sản phẩm thiên nhiên", "Không gian riêng tư"],
+    massage: ["Kỹ thuật chuyên nghiệp", "Thời gian linh hoạt", "Giá cả hợp lý"],
+    buffet: ["Đa dạng món ăn", "Nguyên liệu tươi ngon", "Phục vụ 24/7"],
+    xe: ["Xe đời mới", "Tài xế kinh nghiệm", "An toàn tuyệt đối"],
+    game: ["Thiết bị hiện đại", "Không gian rộng rãi", "Giá ưu đãi"],
   };
-  
+
   const name = serviceName.toLowerCase();
   for (const [key, featureList] of Object.entries(features)) {
     if (name.includes(key)) return featureList;
   }
-  return ['Chất lượng cao', 'Giá cả hợp lý', 'Dịch vụ tận tâm'];
+  return ["Chất lượng cao", "Giá cả hợp lý", "Dịch vụ tận tâm"];
 };
 
 const getServiceRating = () => {
@@ -459,7 +496,7 @@ const getServiceRating = () => {
 };
 
 const getDefaultServiceImage = () => {
-  return 'https://images.unsplash.com/photo-1571896349842-33c89424de2d';
+  return "https://images.unsplash.com/photo-1571896349842-33c89424de2d";
 };
 
 const handleImageError = (event) => {
@@ -473,21 +510,21 @@ const navigateToDetail = (serviceId) => {
 const toggleFavorite = (service) => {
   service.isFavorite = !service.isFavorite;
   showToastMessage(
-    service.isFavorite ? 'Đã thêm vào yêu thích' : 'Đã xóa khỏi yêu thích',
-    'success'
+    service.isFavorite ? "Đã thêm vào yêu thích" : "Đã xóa khỏi yêu thích",
+    "success"
   );
 };
 
 const selectCategory = (category) => {
-  selectedCategory.value = selectedCategory.value === category ? '' : category;
+  selectedCategory.value = selectedCategory.value === category ? "" : category;
   onFilterChange();
 };
 
 const clearFilters = () => {
-  filterName.value = '';
+  filterName.value = "";
   filterPrice.value = null;
-  sortBy.value = 'name';
-  selectedCategory.value = '';
+  sortBy.value = "name";
+  selectedCategory.value = "";
 };
 
 const onFilterChange = () => {
@@ -496,16 +533,16 @@ const onFilterChange = () => {
 
 const getResultsDescription = () => {
   if (hasActiveFilters.value) {
-    return 'Kết quả được lọc theo tiêu chí của bạn';
+    return "Kết quả được lọc theo tiêu chí của bạn";
   }
-  return 'Tất cả dịch vụ có sẵn';
+  return "Tất cả dịch vụ có sẵn";
 };
 
-const showToastMessage = (message, type = 'success') => {
+const showToastMessage = (message, type = "success") => {
   toastMessage.value = message;
   toastType.value = type;
   showToast.value = true;
-  
+
   setTimeout(() => {
     showToast.value = false;
   }, 3000);
@@ -515,21 +552,21 @@ const showToastMessage = (message, type = 'success') => {
 onMounted(async () => {
   try {
     isLoading.value = true;
-    const response = await axiosBase.get('/dichvu');
-    
+    const response = await axiosBase.get("/dichvu");
+
     // Add some mock properties for enhanced UX
-    services.value = response.data.map(service => ({
+    services.value = response.data.map((service) => ({
       ...service,
       isFavorite: false,
-      isPopular: Math.random() > 0.7 // 30% chance to be popular
+      isPopular: Math.random() > 0.7, // 30% chance to be popular
     }));
-    
+
     setTimeout(() => {
       isVisible.value = true;
     }, 100);
   } catch (error) {
-    console.error('Lỗi khi lấy danh sách dịch vụ:', error);
-    showToastMessage('Không thể tải danh sách dịch vụ', 'error');
+    console.error("Lỗi khi lấy danh sách dịch vụ:", error);
+    showToastMessage("Không thể tải danh sách dịch vụ", "error");
   } finally {
     isLoading.value = false;
   }
@@ -540,7 +577,7 @@ onMounted(async () => {
 .service-list-container {
   min-height: 100vh;
   background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-  font-family: 'Inter', 'Segoe UI', sans-serif;
+  font-family: "Inter", "Segoe UI", sans-serif;
   position: relative;
   overflow-x: hidden;
 }
@@ -601,7 +638,8 @@ onMounted(async () => {
 }
 
 @keyframes float {
-  0%, 100% {
+  0%,
+  100% {
     transform: translateY(0px) rotate(0deg);
     opacity: 0.7;
   }
@@ -646,8 +684,13 @@ onMounted(async () => {
 }
 
 @keyframes pulse {
-  0%, 100% { transform: scale(1); }
-  50% { transform: scale(1.05); }
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
 }
 
 .page-title {
@@ -1402,8 +1445,12 @@ onMounted(async () => {
 }
 
 @keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
 .loading-state p {
@@ -1531,20 +1578,20 @@ onMounted(async () => {
     grid-template-columns: 1fr;
     gap: 16px;
   }
-  
+
   .service-stats {
     gap: 24px;
   }
-  
+
   .stat-number {
     font-size: 2rem;
   }
-  
+
   .cta-content {
     flex-direction: column;
     text-align: center;
   }
-  
+
   .cta-actions {
     flex-direction: column;
     width: 100%;
@@ -1555,44 +1602,44 @@ onMounted(async () => {
   .page-title {
     font-size: 2.5rem;
   }
-  
+
   .hero-section {
     padding: 60px 20px;
   }
-  
+
   .filter-container {
     padding: 24px;
   }
-  
+
   .service-stats {
     flex-direction: column;
     gap: 16px;
   }
-  
+
   .category-chips {
     justify-content: center;
   }
-  
+
   .results-header {
     flex-direction: column;
     gap: 16px;
     text-align: center;
   }
-  
+
   .service-cards.view-grid {
     grid-template-columns: 1fr;
   }
-  
+
   .service-actions {
     flex-direction: column;
   }
-  
+
   .toast {
     right: 16px;
     left: 16px;
     transform: translateY(-100px);
   }
-  
+
   .toast.show {
     transform: translateY(0);
   }
@@ -1602,18 +1649,18 @@ onMounted(async () => {
   .floating-shape {
     display: none;
   }
-  
+
   .filter-container {
     margin: 0 16px;
     padding: 20px;
   }
-  
+
   .service-footer {
     flex-direction: column;
     gap: 16px;
     align-items: stretch;
   }
-  
+
   .service-actions {
     justify-content: space-between;
   }
