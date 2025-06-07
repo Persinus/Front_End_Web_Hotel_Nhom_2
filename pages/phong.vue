@@ -1,6 +1,6 @@
 <script setup>
 import { ref, computed, onMounted } from "vue";
-import { axiosBase } from "../utils/axiosBase";
+import axios from "axios";
 import CardRooms from "../Component/CardRooms.vue";
 import TheHeader from "../Component/Header.vue";
 import Pagination from "../Component/Pagination.vue";
@@ -13,7 +13,8 @@ const pageSize = 8;
 
 onMounted(async () => {
   try {
-    const res = await axiosBase.get("/TatCaTruyCap/phong-rutgon");
+    // Đổi sang gọi API cache nội bộ
+    const res = await axios.get("/api/my-data");
     rooms.value = res.data;
   } catch (err) {
     error.value = err.message || "Lỗi khi gọi API";
@@ -62,11 +63,7 @@ const pagedRooms = computed(() =>
         :min-price="minPrice"
         :booked-map="bookedMap"
       />
-      <Pagination
-        v-model="page"
-        :total-pages="totalPages"
-        class="mt-6"
-      />
+      <Pagination v-model="page" :total-pages="totalPages" class="mt-6" />
     </div>
   </div>
 </template>
@@ -74,6 +71,8 @@ const pagedRooms = computed(() =>
 <style scoped>
 .page-container {
   padding: 40px 30px 40px 30px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  min-height: 100vh;
 }
 
 .services-grid {
