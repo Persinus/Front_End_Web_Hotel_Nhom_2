@@ -1,4 +1,0 @@
-const HotelRegulations_vue_vue_type_style_index_0_scoped_87a98f43_lang = ".rules-wrapper[data-v-87a98f43]{background:linear-gradient(90deg,#f8f9fb,#e6edf5);color:#333;min-height:100vh;transition:all .3s ease}.rules-wrapper.dark[data-v-87a98f43]{background:linear-gradient(90deg,#1f2c3c,#15202b);color:#f0f0f0}.rules-content[data-v-87a98f43]{margin:0 auto;max-width:960px;padding:50px 20px}.rules-card[data-v-87a98f43]{background-color:#fff;border-radius:20px;box-shadow:0 12px 32px #00000026;padding:40px 30px}.rules-wrapper.dark .rules-card[data-v-87a98f43]{background-color:#2a3a4a}.title[data-v-87a98f43]{color:#2c3e50;font-size:2rem;margin-bottom:40px;text-align:center}.rules-wrapper.dark .title[data-v-87a98f43]{color:#fff}";
-
-export { HotelRegulations_vue_vue_type_style_index_0_scoped_87a98f43_lang as H };
-//# sourceMappingURL=HotelRegulations-styles-1.mjs-CAYD3wbr.mjs.map

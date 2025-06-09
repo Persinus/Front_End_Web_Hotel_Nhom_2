@@ -15,64 +15,62 @@
 </template>
 
 <script setup>
-import { ref, computed } from 'vue'
-import Alert from '@/Component_Vuestic/Alert.vue'
-import Button from '@/Component_Vuestic/Button.vue'
-import Carousel from '~/Component_Vuestic/Carousel.vue'
-import DataTable from '~/Component_Vuestic/DataTable.vue'
-import Icon from '~/Component_Vuestic/Icon.vue'
-import Modal from '@/Component_Vuestic/Modal.vue'
-import TableClickable from '@/Component_Vuestic/Table_Clickable.vue'
-import Label from '~/Component_Vuestic/Label.vue'
-import Date_Input from '~/Component_Vuestic/Date_Input.vue'
-import FileUpload from '~/Component_Vuestic/FileUpload.vue'
-import Form from '~/Component_Vuestic/Form.vue'
-import Radio from '~/Component_Vuestic/Radio.vue'
-import Rating from '~/Component_Vuestic/Rating.vue'
-import Select from '~/Component_Vuestic/Select.vue'
-import Toast from '~/Component_Vuestic/Toast.vue'
-import Stepped from '~/Component_Vuestic/Stepped.vue'
-import Pagination from '~/Component_Vuestic/Pagination.vue'
-import Counter from '~/Component_Vuestic/Counter.vue'
-import Layout from '~/Component_Vuestic/Layout.vue'
-import List from '~/Component_Vuestic/List.vue'
-import Navbar from '~/Component_Vuestic/NavBar.vue'
-import Card1 from '~/Component_VueStoreFront/Card.vue'
-import Card from '~/Component_Vuestic/Card.vue'
-
+import { ref, computed } from "vue";
+import Alert from "@/Component_Vuestic/Alert.vue";
+import Button from "@/Component_Vuestic/Button.vue";
+import Carousel from "~/Component_Vuestic/Carousel.vue";
+import DataTable from "~/Component_Vuestic/DataTable.vue";
+import Icon from "~/Component_Vuestic/Icon.vue";
+import Modal from "@/Component_Vuestic/Modal.vue";
+import TableClickable from "@/Component_Vuestic/Table_Clickable.vue";
+import Label from "~/Component_Vuestic/Label.vue";
+import Date_Input from "~/Component_Vuestic/Date_Input.vue";
+import FileUpload from "~/Component_Vuestic/FileUpload.vue";
+import Radio from "~/Component_Vuestic/Radio.vue";
+import Rating from "~/Component_Vuestic/Rating.vue";
+import Select from "~/Component_Vuestic/Select.vue";
+import Toast from "~/Component_Vuestic/Toast.vue";
+import Stepped from "~/Component_Vuestic/Stepped.vue";
+import Pagination from "~/Component_Vuestic/Pagination.vue";
+import Counter from "~/Component_Vuestic/Counter.vue";
+import Layout from "~/Component_Vuestic/Layout.vue";
+import List from "~/Component_Vuestic/List.vue";
+import Navbar from "~/Component_Vuestic/NavBar.vue";
+import Card1 from "~/Component_VueStoreFront/Card.vue";
+import Card from "~/Component_Vuestic/Card.vue";
 
 const options = [
-  'Alert',
-  'Button',
-  'Carousel',
-  'DataTable',
-  'Icon',
-  'Modal',
-  'TableClickable',
-  'Label',
-  'Date_Input',
-  'FileUpload',
-  'Form',
-  'Radio',
-  'Rating',
-  'Select',
-  'Toast',
-  'Stepped',
-    'Pagination',
-  
-    'Layout',
-    'List',
-    'Toast',
-    'Stepped',
-    'Pagination',
-    'Counter',
-    'Layout',
-    'Navbar',
-    'Card',
-    'Card1'
-]
+  "Alert",
+  "Button",
+  "Carousel",
+  "DataTable",
+  "Icon",
+  "Modal",
+  "TableClickable",
+  "Label",
+  "Date_Input",
+  "FileUpload",
 
-const selected = ref('Alert')
+  "Radio",
+  "Rating",
+  "Select",
+  "Toast",
+  "Stepped",
+  "Pagination",
+
+  "Layout",
+  "List",
+  "Toast",
+  "Stepped",
+  "Pagination",
+  "Counter",
+  "Layout",
+  "Navbar",
+  "Card",
+  "Card1",
+];
+
+const selected = ref("Alert");
 
 const componentsMap = {
   Alert,
@@ -85,7 +83,7 @@ const componentsMap = {
   Label,
   Date_Input,
   FileUpload,
-  Form,
+
   Radio,
   Rating,
   Select,
@@ -97,15 +95,14 @@ const componentsMap = {
   List,
   Navbar,
   Card,
-  Card1
-}
+  Card1,
+};
 
-const selectedComponent = computed(() => componentsMap[selected.value])
+const selectedComponent = computed(() => componentsMap[selected.value]);
 </script>
 
 <style scoped>
 .ui-demo-layout {
- 
   min-height: 400px;
   max-width: 900px;
   margin: 20px auto;

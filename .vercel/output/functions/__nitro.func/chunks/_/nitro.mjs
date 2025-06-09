@@ -3,7 +3,9 @@ import https from 'node:https';
 import { EventEmitter } from 'node:events';
 import { Buffer as Buffer$1 } from 'node:buffer';
 import { promises, existsSync } from 'node:fs';
-import { resolve, dirname, join } from 'node:path';
+import { resolve, dirname, relative, join } from 'node:path';
+import { watch as watch$1 } from 'chokidar';
+import anymatch from 'anymatch';
 import { createHash } from 'node:crypto';
 
 const suspectProtoRx = /"(?:_|\\u0{2}5[Ff]){2}(?:p|\\u0{2}70)(?:r|\\u0{2}72)(?:o|\\u0{2}6[Ff])(?:t|\\u0{2}74)(?:o|\\u0{2}6[Ff])(?:_|\\u0{2}5[Ff]){2}"\s*:/;
@@ -2881,11 +2883,11 @@ function defineDriver$1(factory) {
   return factory;
 }
 
-const DRIVER_NAME$1 = "memory";
+const DRIVER_NAME$2 = "memory";
 const memory = defineDriver$1(() => {
   const data = /* @__PURE__ */ new Map();
   return {
-    name: DRIVER_NAME$1,
+    name: DRIVER_NAME$2,
     getInstance: () => data,
     hasItem(key) {
       return data.has(key);
@@ -3434,6 +3436,117 @@ async function rmRecursive(dir) {
   );
 }
 
+const PATH_TRAVERSE_RE$1 = /\.\.:|\.\.$/;
+const DRIVER_NAME$1 = "fs";
+const unstorage_47drivers_47fs = defineDriver((userOptions = {}) => {
+  if (!userOptions.base) {
+    throw createRequiredError(DRIVER_NAME$1, "base");
+  }
+  const base = resolve(userOptions.base);
+  const ignore = anymatch(
+    userOptions.ignore || ["**/node_modules/**", "**/.git/**"]
+  );
+  const r = (key) => {
+    if (PATH_TRAVERSE_RE$1.test(key)) {
+      throw createError(
+        DRIVER_NAME$1,
+        `Invalid key: ${JSON.stringify(key)}. It should not contain .. segments`
+      );
+    }
+    const resolved = join(base, key.replace(/:/g, "/"));
+    return resolved;
+  };
+  let _watcher;
+  const _unwatch = async () => {
+    if (_watcher) {
+      await _watcher.close();
+      _watcher = void 0;
+    }
+  };
+  return {
+    name: DRIVER_NAME$1,
+    options: userOptions,
+    flags: {
+      maxDepth: true
+    },
+    hasItem(key) {
+      return existsSync(r(key));
+    },
+    getItem(key) {
+      return readFile(r(key), "utf8");
+    },
+    getItemRaw(key) {
+      return readFile(r(key));
+    },
+    async getMeta(key) {
+      const { atime, mtime, size, birthtime, ctime } = await promises.stat(r(key)).catch(() => ({}));
+      return { atime, mtime, size, birthtime, ctime };
+    },
+    setItem(key, value) {
+      if (userOptions.readOnly) {
+        return;
+      }
+      return writeFile(r(key), value, "utf8");
+    },
+    setItemRaw(key, value) {
+      if (userOptions.readOnly) {
+        return;
+      }
+      return writeFile(r(key), value);
+    },
+    removeItem(key) {
+      if (userOptions.readOnly) {
+        return;
+      }
+      return unlink(r(key));
+    },
+    getKeys(_base, topts) {
+      return readdirRecursive(r("."), ignore, topts?.maxDepth);
+    },
+    async clear() {
+      if (userOptions.readOnly || userOptions.noClear) {
+        return;
+      }
+      await rmRecursive(r("."));
+    },
+    async dispose() {
+      if (_watcher) {
+        await _watcher.close();
+      }
+    },
+    async watch(callback) {
+      if (_watcher) {
+        return _unwatch;
+      }
+      await new Promise((resolve2, reject) => {
+        const watchOptions = {
+          ignoreInitial: true,
+          ...userOptions.watchOptions
+        };
+        if (!watchOptions.ignored) {
+          watchOptions.ignored = [];
+        } else if (Array.isArray(watchOptions.ignored)) {
+          watchOptions.ignored = [...watchOptions.ignored];
+        } else {
+          watchOptions.ignored = [watchOptions.ignored];
+        }
+        watchOptions.ignored.push(ignore);
+        _watcher = watch$1(base, watchOptions).on("ready", () => {
+          resolve2();
+        }).on("error", reject).on("all", (eventName, path) => {
+          path = relative(base, path);
+          if (eventName === "change" || eventName === "add") {
+            callback("update", path);
+          } else if (eventName === "unlink") {
+            callback("remove", path);
+          }
+        });
+      });
+      return _unwatch;
+    }
+  };
+});
+
 const PATH_TRAVERSE_RE = /\.\.:|\.\.$/;
 const DRIVER_NAME = "fs-lite";
 const unstorage_47drivers_47fs_45lite = defineDriver((opts = {}) => {
@@ -3504,6 +3617,7 @@ const storage = createStorage({});
 
 storage.mount('/assets', assets);
 
+storage.mount('cache', unstorage_47drivers_47fs({"driver":"fs","base":"./.nitro/cache"}));
 storage.mount('data', unstorage_47drivers_47fs_45lite({"driver":"fsLite","base":"./.data/kv"}));
 
 function useStorage(base = "") {
@@ -4228,7 +4342,7 @@ function _expandFromEnv(value) {
 const _inlineRuntimeConfig = {
   "app": {
     "baseURL": "/",
-    "buildId": "948e8651-e823-4cba-84d0-99fe974f79d4",
+    "buildId": "58a80b53-479d-4dbf-a4cd-ea0837403cd6",
     "buildAssetsDir": "/_nuxt/",
     "cdnURL": ""
   },
@@ -4655,9 +4769,11 @@ const plugins = [
 
 const _SxA8c9 = defineEventHandler(() => {});
 
+const _lazy__Yn_Tq = () => import('../routes/api/my-data.mjs');
 const _lazy_HAZexb = () => import('../routes/renderer.mjs').then(function (n) { return n.r; });
 
 const handlers = [
+  { route: '/api/my-data', handler: _lazy__Yn_Tq, lazy: true, middleware: false, method: undefined },
   { route: '/__nuxt_error', handler: _lazy_HAZexb, lazy: true, middleware: false, method: undefined },
   { route: '/__nuxt_island/**', handler: _SxA8c9, lazy: false, middleware: false, method: undefined },
   { route: '/**', handler: _lazy_HAZexb, lazy: true, middleware: false, method: undefined }
@@ -4840,5 +4956,5 @@ function defineRenderHandler(render) {
   });
 }
 
-export { $fetch as $, setCookie as A, getCookie as B, deleteCookie as C, withTrailingSlash as D, withoutTrailingSlash as E, useRuntimeConfig as a, getResponseStatus as b, getQuery as c, defineRenderHandler as d, createError$1 as e, getRouteRules as f, getResponseStatusText as g, hasProtocol as h, isScriptProtocol as i, joinRelativeURL as j, joinURL as k, getContext as l, createHooks as m, executeAsync as n, toRouteMatcher as o, parseQuery as p, createRouter$1 as q, defu as r, sanitizeStatusCode as s, toNodeListener as t, useNitroApp as u, destr as v, withQuery as w, klona as x, getRequestHeader as y, isEqual as z };
+export { $fetch as $, getRequestHeader as A, isEqual as B, setCookie as C, getCookie as D, deleteCookie as E, withTrailingSlash as F, withoutTrailingSlash as G, useStorage as a, useRuntimeConfig as b, getResponseStatus as c, defineEventHandler as d, defineRenderHandler as e, getQuery as f, getResponseStatusText as g, createError$1 as h, getRouteRules as i, joinRelativeURL as j, hasProtocol as k, isScriptProtocol as l, joinURL as m, getContext as n, createHooks as o, parseQuery as p, executeAsync as q, toRouteMatcher as r, sanitizeStatusCode as s, toNodeListener as t, useNitroApp as u, createRouter$1 as v, withQuery as w, defu as x, destr as y, klona as z };
 //# sourceMappingURL=nitro.mjs.map

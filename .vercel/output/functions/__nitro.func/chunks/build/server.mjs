@@ -1,19 +1,20 @@
-import { resolveComponent, withCtx, createTextVNode, h, hasInjectionContext, getCurrentInstance, inject, useSSRContext, defineComponent, createElementBlock, shallowRef, provide, cloneVNode, ref, Suspense, Fragment, createApp, shallowReactive, toRef, onErrorCaptured, onServerPrefetch, unref, createVNode, resolveDynamicComponent, reactive, effectScope, isReadonly, isRef, isShallow, isReactive, toRaw, defineAsyncComponent, mergeProps, getCurrentScope } from 'vue';
-import { h as hasProtocol, i as isScriptProtocol, k as joinURL, w as withQuery, s as sanitizeStatusCode, l as getContext, $ as $fetch, m as createHooks, n as executeAsync, e as createError$1, o as toRouteMatcher, q as createRouter$1, r as defu } from '../_/nitro.mjs';
+import { resolveComponent, withCtx, createTextVNode, h, hasInjectionContext, getCurrentInstance, inject, useSSRContext, defineComponent, ref, Suspense, Fragment, createElementBlock, shallowRef, provide, cloneVNode, createApp, shallowReactive, toRef, onErrorCaptured, onServerPrefetch, unref, createVNode, resolveDynamicComponent, reactive, effectScope, isReadonly, isRef, isShallow, isReactive, toRaw, defineAsyncComponent, mergeProps, getCurrentScope } from 'vue';
+import { k as hasProtocol, l as isScriptProtocol, m as joinURL, w as withQuery, s as sanitizeStatusCode, n as getContext, $ as $fetch, o as createHooks, q as executeAsync, h as createError$1, r as toRouteMatcher, v as createRouter$1, x as defu } from '../_/nitro.mjs';
 import { u as useHead$1, h as headSymbol, b as baseURL } from '../routes/renderer.mjs';
 import { RouterView, createMemoryHistory, createRouter, START_LOCATION } from 'vue-router';
 import axios from 'axios';
 import { createVuestic } from 'vuestic-ui';
-import QrcodeVue from 'qrcode.vue';
+import QRCodeVue from 'qrcode.vue';
 import { defineStore, createPinia } from 'pinia';
 import { ssrRenderComponent, ssrRenderSuspense, ssrRenderVNode, ssrRenderAttrs } from 'vue/server-renderer';
-import ElementPlus from 'element-plus';
 import 'node:http';
 import 'node:https';
 import 'node:events';
 import 'node:buffer';
 import 'node:fs';
 import 'node:path';
+import 'chokidar';
+import 'anymatch';
 import 'node:crypto';
 import 'vue-bundle-renderer/runtime';
 import 'unhead/server';
@@ -47,7 +48,7 @@ function createNuxtApp(options) {
     globalName: "nuxt",
     versions: {
       get nuxt() {
-        return "3.17.4";
+        return "3.17.5";
       },
       get vue() {
         return nuxtApp.vueApp.version;
@@ -390,117 +391,124 @@ const _routes = [
   {
     name: "index",
     path: "/",
-    component: () => import('./index-k-dz9N9E.mjs')
+    component: () => import('./index-BWSuQJXx.mjs')
   },
   {
     name: "letan",
     path: "/letan",
-    component: () => import('./letan-8pXtUnM-.mjs')
+    component: () => import('./letan-DylXhiC8.mjs')
   },
   {
     name: "Login",
     path: "/Login",
-    component: () => import('./Login-BTl5Cgu9.mjs')
+    component: () => import('./Login-O2vWZ8H7.mjs')
   },
   {
     name: "phong",
     path: "/phong",
-    component: () => import('./phong-CgLm0Z7m.mjs')
+    component: () => import('./phong-BWKhu0E7.mjs')
   },
   {
-    name: "dichvu",
-    path: "/dichvu",
-    component: () => import('./dichvu-Bfl4dUjg.mjs')
+    name: "DichVu",
+    path: "/DichVu",
+    component: () => import('./DichVu-B6tX9vDK.mjs'),
+    children: [
+      {
+        name: "DichVu-maChiTietDichVu",
+        path: ":maChiTietDichVu()",
+        component: () => import('./_maChiTietDichVu_-DJvk-PZK.mjs')
+      }
+    ]
   },
   {
     name: "hoadon",
     path: "/hoadon",
-    component: () => import('./hoadon-fD3MwFbO.mjs')
+    component: () => import('./hoadon-BSW-IH6i.mjs')
   },
   {
     name: "Booking",
     path: "/Booking",
-    component: () => import('./Booking-BbL8iMRv.mjs')
+    component: () => import('./Booking-B1CEoJKs.mjs')
   },
   {
     name: "Payment",
     path: "/Payment",
-    component: () => import('./Payment-qd7nVUXR.mjs')
+    component: () => import('./Payment-CwXsFVTj.mjs')
   },
   {
     name: "Profile",
     path: "/Profile",
-    component: () => import('./Profile-DaAvpHw5.mjs')
+    component: () => import('./Profile-DY7j4SKs.mjs')
   },
   {
     name: "RoomMap",
     path: "/RoomMap",
-    component: () => import('./RoomMap-DGHIdu7v.mjs')
+    component: () => import('./RoomMap-QGmmOI8R.mjs')
   },
   {
     name: "RoomMNG",
     path: "/RoomMNG",
-    component: () => import('./RoomMNG-CVD9clbx.mjs')
+    component: () => import('./RoomMNG-CdsJvmpC.mjs')
   },
   {
     name: "DatPhong",
     path: "/DatPhong",
-    component: () => import('./DatPhong-q4S5wFEm.mjs')
+    component: () => import('./DatPhong-ButS0eDy.mjs')
   },
   {
     name: "Register",
     path: "/Register",
-    component: () => import('./Register-IpeaC8i8.mjs')
+    component: () => import('./Register-BYpFKWDt.mjs')
   },
   {
     name: "ForgotPass",
     path: "/ForgotPass",
-    component: () => import('./ForgotPass-Cln7NnH-.mjs')
+    component: () => import('./ForgotPass-uR_2Gx3U.mjs')
   },
   {
     name: "DangNhapPhu",
     path: "/DangNhapPhu",
-    component: () => import('./DangNhapPhu-DSmeRRJL.mjs')
+    component: () => import('./DangNhapPhu-ClY6ekMY.mjs')
+  },
+  {
+    name: "ExamplePage",
+    path: "/ExamplePage",
+    component: () => import('./ExamplePage-DMQoQa5g.mjs')
   },
   {
     name: "PasswordReset",
     path: "/PasswordReset",
-    component: () => import('./PasswordReset-CMcycVOM.mjs')
+    component: () => import('./PasswordReset-BhxnhHYl.mjs')
   },
   {
     name: "CheckYourEmail",
     path: "/CheckYourEmail",
-    component: () => import('./CheckYourEmail-BIQcSLN0.mjs')
+    component: () => import('./CheckYourEmail-C4CbsFcV.mjs')
   },
   {
     name: "SetNewPassword",
     path: "/SetNewPassword",
-    component: () => import('./SetNewPassword-BH2MRokD.mjs')
+    component: () => import('./SetNewPassword-Cq_nl589.mjs')
   },
   {
     name: "Phong-maPhong",
     path: "/Phong/:maPhong()",
-    component: () => import('./_maPhong_-CV4Gc0qM.mjs')
+    component: () => import('./_maPhong_-n6Q1Zdco.mjs')
   },
   {
     name: "HotelRegulations",
     path: "/HotelRegulations",
-    component: () => import('./HotelRegulations-vofl3vX2.mjs')
+    component: () => import('./HotelRegulations-TzpsVRMd.mjs')
   },
   {
     name: "TestcomponentVuestic",
     path: "/TestcomponentVuestic",
-    component: () => import('./TestcomponentVuestic-DtfjUJ9Y.mjs')
+    component: () => import('./TestcomponentVuestic-DANQLdKt.mjs')
   },
   {
     name: "Check-in-outconfirmation",
     path: "/Check-in-outconfirmation",
-    component: () => import('./Check-in-outconfirmation-c_X3SlMW.mjs')
-  },
-  {
-    name: "DichVu-maChiTietDichVu",
-    path: "/DichVu/:maChiTietDichVu()",
-    component: () => import('./_maChiTietDichVu_-DiDi02br.mjs')
+    component: () => import('./Check-in-outconfirmation-DUIwh9Yy.mjs')
   },
   {
     name: "TestComponentVueStoreFront",
@@ -904,7 +912,7 @@ const vuestic_ui_hqacShNKIXnSGXRdnQVJxdKh5Qubw_dwVHT6INzPTHA = /* @__PURE__ */ d
   nuxtApp.vueApp.use(createVuestic());
 });
 const qrcode_bAGVCAwEAfUpSRXAcR75PuzMz3GzrPwt05qCBPgwl6M = /* @__PURE__ */ defineNuxtPlugin((nuxtApp) => {
-  nuxtApp.provide("QRCodeVue", QrcodeVue);
+  nuxtApp.provide("QRCodeVue", QRCodeVue);
 });
 const Pinia_TaqBUrxeqb96wfLz1hRyFKYiTVI6IR8e1k1olmK4ayY = /* @__PURE__ */ defineNuxtPlugin((nuxtApp) => {
   nuxtApp.vueApp.use(createPinia());
@@ -1005,51 +1013,13 @@ const Toast_f3zu3dEnOuiRpFa4lJFCkRuFfEjcOlQnzzrwdrqUAMY = defineComponent({
     };
   }
 });
-defineComponent({
-  name: "ServerPlaceholder",
-  render() {
-    return createElementBlock("div");
-  }
-});
-const clientOnlySymbol = Symbol.for("nuxt:client-only");
-defineComponent({
-  name: "ClientOnly",
-  inheritAttrs: false,
-  props: ["fallback", "placeholder", "placeholderTag", "fallbackTag"],
-  setup(props, { slots, attrs }) {
-    const mounted = shallowRef(false);
-    const vm = getCurrentInstance();
-    if (vm) {
-      vm._nuxtClientOnly = true;
-    }
-    provide(clientOnlySymbol, true);
-    return () => {
-      var _a;
-      if (mounted.value) {
-        const vnodes = (_a = slots.default) == null ? void 0 : _a.call(slots);
-        if (vnodes && vnodes.length === 1) {
-          return [cloneVNode(vnodes[0], attrs)];
-        }
-        return vnodes;
-      }
-      const slot = slots.fallback || slots.placeholder;
-      if (slot) {
-        return slot();
-      }
-      const fallbackStr = props.fallback || props.placeholder || "";
-      const fallbackTag = props.fallbackTag || props.placeholderTag || "span";
-      return createElementBlock(fallbackTag, attrs, fallbackStr);
-    };
-  }
-});
+const element_plus_h4WEk9dmnTz6XKdrgkoGJdGhsx59phe3Z9mq30V_CL8 = () => {
+};
 function useRequestEvent(nuxtApp) {
   var _a;
   nuxtApp || (nuxtApp = useNuxtApp());
   return (_a = nuxtApp.ssrContext) == null ? void 0 : _a.event;
 }
-const element_plus_h4WEk9dmnTz6XKdrgkoGJdGhsx59phe3Z9mq30V_CL8 = /* @__PURE__ */ defineNuxtPlugin((nuxtApp) => {
-  nuxtApp.vueApp.use(ElementPlus);
-});
 const prerender_server_sqIxOBipVr4FbVMA9kqWL0wT8FPop6sKAXLVfifsJzk = /* @__PURE__ */ defineNuxtPlugin(async () => {
   {
     return;
@@ -1072,14 +1042,11 @@ const plugins = [
 const defineRouteProvider = (name = "RouteProvider") => defineComponent({
   name,
   props: {
-    vnode: {
-      type: Object,
-      required: true
-    },
     route: {
       type: Object,
       required: true
     },
+    vnode: Object,
     vnodeRef: Object,
     renderKey: String,
     trackRootNodes: Boolean
@@ -1096,6 +1063,9 @@ const defineRouteProvider = (name = "RouteProvider") => defineComponent({
     }
     provide(PageRouteSymbol, shallowReactive(route));
     return () => {
+      if (!props.vnode) {
+        return props.vnode;
+      }
       return h(props.vnode, { ref: props.vnodeRef });
     };
   }
@@ -1161,6 +1131,43 @@ const useThemeStore = defineStore("theme", {
     },
     toggleDarkMode() {
     }
+  }
+});
+defineComponent({
+  name: "ServerPlaceholder",
+  render() {
+    return createElementBlock("div");
+  }
+});
+const clientOnlySymbol = Symbol.for("nuxt:client-only");
+defineComponent({
+  name: "ClientOnly",
+  inheritAttrs: false,
+  props: ["fallback", "placeholder", "placeholderTag", "fallbackTag"],
+  setup(props, { slots, attrs }) {
+    const mounted = shallowRef(false);
+    const vm = getCurrentInstance();
+    if (vm) {
+      vm._nuxtClientOnly = true;
+    }
+    provide(clientOnlySymbol, true);
+    return () => {
+      var _a;
+      if (mounted.value) {
+        const vnodes = (_a = slots.default) == null ? void 0 : _a.call(slots);
+        if (vnodes && vnodes.length === 1) {
+          return [cloneVNode(vnodes[0], attrs)];
+        }
+        return vnodes;
+      }
+      const slot = slots.fallback || slots.placeholder;
+      if (slot) {
+        return h(slot);
+      }
+      const fallbackStr = props.fallback || props.placeholder || "";
+      const fallbackTag = props.fallbackTag || props.placeholderTag || "span";
+      return createElementBlock(fallbackTag, attrs, fallbackStr);
+    };
   }
 });
 const useLanguageStore = defineStore("language", {
@@ -1298,8 +1305,8 @@ const _sfc_main$1 = {
     const statusMessage = _error.statusMessage ?? (is404 ? "Page Not Found" : "Internal Server Error");
     const description = _error.message || _error.toString();
     const stack = void 0;
-    const _Error404 = defineAsyncComponent(() => import('./error-404-Cpzpgcfz.mjs'));
-    const _Error = defineAsyncComponent(() => import('./error-500-Bwjiz-jJ.mjs'));
+    const _Error404 = defineAsyncComponent(() => import('./error-404-BVktxZIB.mjs'));
+    const _Error = defineAsyncComponent(() => import('./error-500-BgKCsY6z.mjs'));
     const ErrorTemplate = is404 ? _Error404 : _Error;
     return (_ctx, _push, _parent, _attrs) => {
       _push(ssrRenderComponent(unref(ErrorTemplate), mergeProps({ statusCode: unref(statusCode), statusMessage: unref(statusMessage), description: unref(description), stack: unref(stack) }, _attrs), null, _parent));
