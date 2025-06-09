@@ -9,10 +9,12 @@ export default defineEventHandler(async (event) => {
   }
 
   // Nếu không có cache, gọi API thực tế
-  const data = await $fetch('https://nhom2webkhachsan.runasp.net/api/tatcatruycap/phong-rutgon');
-
-  // Lưu dữ liệu vào cache với TTL 10 phút (600 giây)
-  await cache.setItem(cacheKey, data, { ttl: 600 });
-
-  return data;
+  try {
+    const data = await $fetch('https://nhom2webkhachsan.runasp.net/api/tatcatruycap/phong-rutgon');
+    await cache.setItem(cacheKey, data, { ttl: 600 });
+    return data;
+  } catch (err) {
+    console.error('FETCH ERROR:', err);
+    throw createError({ statusCode: 500, statusMessage: 'Lỗi lấy dữ liệu phòng', data: err });
+  }
 });
