@@ -2,7 +2,7 @@
   <header>
     <TheHeader />
   </header>
-  
+
   <div class="booking-page">
     <!-- Background Animation -->
     <div class="background-animation">
@@ -14,21 +14,27 @@
     <!-- Progress Steps -->
     <div class="progress-container">
       <div class="progress-steps">
-        <div class="step" :class="{ 'active': currentStep >= 1, 'completed': currentStep > 1 }">
+        <div
+          class="step"
+          :class="{ active: currentStep >= 1, completed: currentStep > 1 }"
+        >
           <div class="step-circle">
             <va-icon :name="currentStep > 1 ? 'check' : 'hotel'" />
           </div>
           <span class="step-label">Thông tin phòng</span>
         </div>
-        <div class="progress-line" :class="{ 'active': currentStep >= 2 }"></div>
-        <div class="step" :class="{ 'active': currentStep >= 2, 'completed': currentStep > 2 }">
+        <div class="progress-line" :class="{ active: currentStep >= 2 }"></div>
+        <div
+          class="step"
+          :class="{ active: currentStep >= 2, completed: currentStep > 2 }"
+        >
           <div class="step-circle">
             <va-icon :name="currentStep > 2 ? 'check' : 'person'" />
           </div>
           <span class="step-label">Thông tin khách</span>
         </div>
-        <div class="progress-line" :class="{ 'active': currentStep >= 3 }"></div>
-        <div class="step" :class="{ 'active': currentStep >= 3 }">
+        <div class="progress-line" :class="{ active: currentStep >= 3 }"></div>
+        <div class="step" :class="{ active: currentStep >= 3 }">
           <div class="step-circle">
             <va-icon name="payment" />
           </div>
@@ -47,7 +53,7 @@
               <p>Đang tải thông tin phòng...</p>
             </div>
           </div>
-          
+
           <div v-else class="room-content">
             <!-- Room Header -->
             <div class="room-header">
@@ -67,8 +73,8 @@
             <!-- Room Gallery -->
             <div class="room-gallery">
               <div class="main-image">
-                <img 
-                  :src="roomImages[currentImageIndex]" 
+                <img
+                  :src="roomImages[currentImageIndex]"
                   :alt="roomData.loaiPhong"
                   class="room-image"
                 />
@@ -81,11 +87,11 @@
                   </button>
                 </div>
                 <div class="image-indicators">
-                  <span 
-                    v-for="(img, index) in roomImages" 
+                  <span
+                    v-for="(img, index) in roomImages"
                     :key="index"
                     class="indicator"
-                    :class="{ 'active': index === currentImageIndex }"
+                    :class="{ active: index === currentImageIndex }"
                     @click="currentImageIndex = index"
                   ></span>
                 </div>
@@ -104,7 +110,7 @@
                     <span class="detail-value">{{ roomData.maPhong }}</span>
                   </div>
                 </div>
-                
+
                 <div class="detail-item">
                   <div class="detail-icon">
                     <va-icon name="layers" />
@@ -114,7 +120,7 @@
                     <span class="detail-value">{{ roomData.tang }}</span>
                   </div>
                 </div>
-                
+
                 <div class="detail-item">
                   <div class="detail-icon">
                     <va-icon name="bed" />
@@ -124,14 +130,16 @@
                     <span class="detail-value">{{ roomData.kieuGiuong }}</span>
                   </div>
                 </div>
-                
+
                 <div class="detail-item price-item">
                   <div class="detail-icon">
                     <va-icon name="attach_money" />
                   </div>
                   <div class="detail-content">
                     <span class="detail-label">Giá phòng</span>
-                    <span class="detail-value price">{{ formatPrice(roomData.giaPhong) }}₫</span>
+                    <span class="detail-value price"
+                      >{{ formatPrice(roomData.giaPhong) }}₫</span
+                    >
                   </div>
                 </div>
               </div>
@@ -153,9 +161,9 @@
                 Tiện nghi phòng
               </h3>
               <div class="amenities-grid">
-                <div 
-                  v-for="(amenity, index) in parsedAmenities" 
-                  :key="index" 
+                <div
+                  v-for="(amenity, index) in parsedAmenities"
+                  :key="index"
                   class="amenity-item"
                   :style="{ animationDelay: `${index * 0.1}s` }"
                 >
@@ -169,9 +177,14 @@
 
             <!-- Room Status -->
             <div class="room-status">
-              <div class="status-indicator" :class="roomData.tinhTrang === '1' ? 'available' : 'unavailable'">
+              <div
+                class="status-indicator"
+                :class="roomData.tinhTrang === '1' ? 'available' : 'unavailable'"
+              >
                 <va-icon :name="roomData.tinhTrang === '1' ? 'check_circle' : 'cancel'" />
-                <span>{{ roomData.tinhTrang === '1' ? 'Phòng còn trống' : 'Phòng đã được đặt' }}</span>
+                <span>{{
+                  roomData.tinhTrang === "1" ? "Phòng còn trống" : "Phòng đã được đặt"
+                }}</span>
               </div>
             </div>
 
@@ -205,7 +218,7 @@
                 <va-icon name="person" />
                 Thông tin cá nhân
               </h3>
-              
+
               <div class="form-group">
                 <div class="input-wrapper">
                   <va-icon name="credit_card" class="input-icon" />
@@ -243,7 +256,7 @@
                 <va-icon name="calendar_today" />
                 Thời gian lưu trú
               </h3>
-              
+
               <div class="date-inputs">
                 <div class="form-group">
                   <div class="input-wrapper">
@@ -296,7 +309,7 @@
                 <va-icon name="people" />
                 Số lượng khách
               </h3>
-              
+
               <div class="guest-counters">
                 <div class="counter-group">
                   <div class="counter-info">
@@ -307,16 +320,16 @@
                     </div>
                   </div>
                   <div class="counter-controls">
-                    <button 
-                      class="counter-btn" 
+                    <button
+                      class="counter-btn"
                       @click="decrementGuests('soNguoiLon')"
                       :disabled="bookingData.soNguoiLon <= 1"
                     >
                       <va-icon name="remove" />
                     </button>
                     <span class="counter-value">{{ bookingData.soNguoiLon }}</span>
-                    <button 
-                      class="counter-btn" 
+                    <button
+                      class="counter-btn"
                       @click="incrementGuests('soNguoiLon')"
                       :disabled="bookingData.soNguoiLon >= 10"
                     >
@@ -334,16 +347,16 @@
                     </div>
                   </div>
                   <div class="counter-controls">
-                    <button 
-                      class="counter-btn" 
+                    <button
+                      class="counter-btn"
                       @click="decrementGuests('soTreEm')"
                       :disabled="bookingData.soTreEm <= 0"
                     >
                       <va-icon name="remove" />
                     </button>
                     <span class="counter-value">{{ bookingData.soTreEm }}</span>
-                    <button 
-                      class="counter-btn" 
+                    <button
+                      class="counter-btn"
                       @click="incrementGuests('soTreEm')"
                       :disabled="bookingData.soTreEm >= 10"
                     >
@@ -360,7 +373,7 @@
                 <va-icon name="note" />
                 Yêu cầu đặc biệt
               </h3>
-              
+
               <div class="form-group">
                 <va-textarea
                   v-model="bookingData.yeuCau"
@@ -379,7 +392,7 @@
                 <va-icon name="receipt" />
                 Tóm tắt đặt phòng
               </h3>
-              
+
               <div class="summary-details">
                 <div class="summary-row">
                   <span>Loại phòng:</span>
@@ -408,24 +421,66 @@
               </div>
             </div>
 
+            <!-- Dịch vụ kèm theo -->
+            <div class="form-section">
+              <h3 class="section-title">
+                <va-icon name="room_service" />
+                Dịch vụ kèm theo
+              </h3>
+              <va-select
+                v-model="selectedServices"
+                :options="serviceOptions"
+                multiple
+                placeholder="Chọn dịch vụ"
+                class="service-dropdown"
+                :clearable="false"
+                track-by="maDichVu"
+                label="tenDichVu"
+              >
+                <template #option="{ option }">
+                  <div class="service-option">
+                    <img :src="option.hinhAnhDichVu" alt="" class="service-img" />
+                    <span>{{ option.tenDichVu }}</span>
+                    <span class="service-price"
+                      >{{ formatPrice(option.donGia) }}₫/{{ option.donViTinh }}</span
+                    >
+                  </div>
+                </template>
+                <template #selected="{ option }">
+                  <span>{{ option.tenDichVu }}</span>
+                </template>
+              </va-select>
+              <div v-if="selectedServices.length" class="service-counter-list">
+                <div v-for="service in selectedServices" :key="service.maDichVu">
+                  <img :src="service.hinhAnhDichVu" alt="" class="service-img-small" />
+                  <span>{{ service.tenDichVu }}</span>
+                  <div class="counter">
+                    <button @click="decrease(service)">-</button>
+                    <span>{{ service.soLuong }}</span>
+                    <button @click="increase(service)">+</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
             <!-- Submit Button -->
             <div class="form-actions">
               <button
                 class="submit-button"
                 :disabled="!isFormValid || roomData.tinhTrang !== '1' || isSubmitting"
                 @click="submitBooking"
-                :class="{ 'loading': isSubmitting }"
+                :class="{ loading: isSubmitting }"
               >
                 <div class="btn-content">
                   <va-icon name="hotel" v-if="!isSubmitting" />
                   <div v-else class="loading-spinner-btn"></div>
-                  <span>{{ isSubmitting ? 'Đang xử lý...' : 'Xác nhận đặt phòng' }}</span>
+                  <span>{{ isSubmitting ? "Đang xử lý..." : "Xác nhận đặt phòng" }}</span>
                 </div>
               </button>
-              
+
               <p class="form-note">
                 <va-icon name="info" />
-                Bằng cách đặt phòng, bạn đồng ý với 
+                Bằng cách đặt phòng, bạn đồng ý với
                 <a href="#" class="terms-link">Điều khoản & Điều kiện</a> của chúng tôi
               </p>
             </div>
@@ -441,19 +496,23 @@
           <va-icon name="check_circle" />
         </div>
         <h3>Đặt phòng thành công!</h3>
-        <p>Cảm ơn bạn đã chọn khách sạn của chúng tôi. Chúng tôi sẽ liên hệ với bạn trong thời gian sớm nhất.</p>
+        <p>
+          Cảm ơn bạn đã chọn khách sạn của chúng tôi. Chúng tôi sẽ liên hệ với bạn trong
+          thời gian sớm nhất.
+        </p>
         <div class="modal-actions">
-          <button class="btn-primary" @click="closeSuccessModal">
-            Hoàn tất
-          </button>
+          <button class="btn-primary" @click="closeSuccessModal">Hoàn tất</button>
         </div>
       </div>
     </div>
 
     <!-- Toast Notification -->
-    <div v-if="showToast" class="toast" :class="[toastType, { 'show': showToast }]">
+    <div v-if="showToast" class="toast" :class="[toastType, { show: showToast }]">
       <div class="toast-content">
-        <va-icon :name="toastType === 'success' ? 'check_circle' : 'error'" class="toast-icon" />
+        <va-icon
+          :name="toastType === 'success' ? 'check_circle' : 'error'"
+          class="toast-icon"
+        />
         <span>{{ toastMessage }}</span>
       </div>
     </div>
@@ -461,238 +520,256 @@
 </template>
 
 <script setup>
-import { ref, computed, onMounted, watch } from 'vue'
-import { useRoute } from 'vue-router'
-import { useNuxtApp } from '#app'
+import { ref, computed, onMounted, watch } from "vue";
+import { useRoute } from "vue-router";
+import { useNuxtApp } from "#app";
 
-const route = useRoute()
-const { $api } = useNuxtApp()
+const route = useRoute();
+const { $api } = useNuxtApp();
 
 // Reactive data
 const bookingData = ref({
-  cccd: '',
-  sdt: '',
-  ngayNhan: '',
-  ngayTra: '',
+  cccd: "",
+  sdt: "",
+  ngayNhan: "",
+  ngayTra: "",
   soNguoiLon: 1,
   soTreEm: 0,
-  yeuCau: ''
-})
+  yeuCau: "",
+});
 
 const roomData = ref({
   tienNghiList: [],
-  giaPhong: 0
-})
+  giaPhong: 0,
+});
 
-const loading = ref(true)
-const isVisible = ref(false)
-const isSubmitting = ref(false)
-const showSuccessModal = ref(false)
-const showToast = ref(false)
-const toastMessage = ref('')
-const toastType = ref('success')
-const currentStep = ref(1)
-const currentImageIndex = ref(0)
+const loading = ref(true);
+const isVisible = ref(false);
+const isSubmitting = ref(false);
+const showSuccessModal = ref(false);
+const showToast = ref(false);
+const toastMessage = ref("");
+const toastType = ref("success");
+const currentStep = ref(1);
+const currentImageIndex = ref(0);
+let selectedServices = [];
 
 const errors = ref({
-  cccd: '',
-  sdt: '',
-  ngayNhan: '',
-  ngayTra: ''
-})
+  cccd: "",
+  sdt: "",
+  ngayNhan: "",
+  ngayTra: "",
+});
 
-const maPhong = route.params.maPhong
+const maPhong = route.params.maPhong;
 
 // Room images (placeholder)
 const roomImages = ref([
-  'https://images.unsplash.com/photo-1566073771259-6a8506099945',
-  'https://images.unsplash.com/photo-1582719478250-c89cae4dc85b',
-  'https://images.unsplash.com/photo-1595576508898-0ad5c879a061'
-])
+  "https://images.unsplash.com/photo-1566073771259-6a8506099945",
+  "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b",
+  "https://images.unsplash.com/photo-1595576508898-0ad5c879a061",
+]);
 
 // Urgency message
-const urgencyMessage = ref('')
+const urgencyMessage = ref("");
 
 // Computed properties
 const minDate = computed(() => {
-  return new Date().toISOString().split('T')[0]
-})
+  return new Date().toISOString().split("T")[0];
+});
 
 const totalNights = computed(() => {
-  if (!bookingData.value.ngayNhan || !bookingData.value.ngayTra) return 0
-  const checkIn = new Date(bookingData.value.ngayNhan)
-  const checkOut = new Date(bookingData.value.ngayTra)
-  const diffTime = checkOut - checkIn
-  return Math.ceil(diffTime / (1000 * 60 * 60 * 24))
-})
+  if (!bookingData.value.ngayNhan || !bookingData.value.ngayTra) return 0;
+  const checkIn = new Date(bookingData.value.ngayNhan);
+  const checkOut = new Date(bookingData.value.ngayTra);
+  const diffTime = checkOut - checkIn;
+  return Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+});
 
 const totalPrice = computed(() => {
-  return roomData.value.giaPhong * totalNights.value
-})
+  return roomData.value.giaPhong * totalNights.value;
+});
 
 const isFormValid = computed(() => {
-  return bookingData.value.cccd && 
-         bookingData.value.sdt && 
-         bookingData.value.ngayNhan && 
-         bookingData.value.ngayTra &&
-         !Object.values(errors.value).some(error => error)
-})
+  return (
+    bookingData.value.cccd &&
+    bookingData.value.sdt &&
+    bookingData.value.ngayNhan &&
+    bookingData.value.ngayTra &&
+    !Object.values(errors.value).some((error) => error)
+  );
+});
 
 const parsedAmenities = computed(() => {
-  return roomData.value.tienNghiList || []
-})
+  return roomData.value.tienNghiList || [];
+});
 
 // Methods
 const formatPrice = (price) => {
-  return new Intl.NumberFormat('vi-VN').format(price)
-}
+  return new Intl.NumberFormat("vi-VN").format(price);
+};
 
 const validateField = (field) => {
   switch (field) {
-    case 'cccd':
-      errors.value.cccd = bookingData.value.cccd.length < 9 ? 'CCCD phải có ít nhất 9 số' : ''
-      break
-    case 'sdt':
-      const phoneRegex = /^[0-9]{10,11}$/
-      errors.value.sdt = !phoneRegex.test(bookingData.value.sdt) ? 'Số điện thoại không hợp lệ' : ''
-      break
-    case 'ngayNhan':
-      const today = new Date().toISOString().split('T')[0]
-      errors.value.ngayNhan = bookingData.value.ngayNhan < today ? 'Ngày nhận phòng không thể là quá khứ' : ''
-      break
-    case 'ngayTra':
-      errors.value.ngayTra = bookingData.value.ngayTra <= bookingData.value.ngayNhan ? 'Ngày trả phòng phải sau ngày nhận phòng' : ''
-      break
+    case "cccd":
+      errors.value.cccd =
+        bookingData.value.cccd.length < 9 ? "CCCD phải có ít nhất 9 số" : "";
+      break;
+    case "sdt":
+      const phoneRegex = /^[0-9]{10,11}$/;
+      errors.value.sdt = !phoneRegex.test(bookingData.value.sdt)
+        ? "Số điện thoại không hợp lệ"
+        : "";
+      break;
+    case "ngayNhan":
+      const today = new Date().toISOString().split("T")[0];
+      errors.value.ngayNhan =
+        bookingData.value.ngayNhan < today ? "Ngày nhận phòng không thể là quá khứ" : "";
+      break;
+    case "ngayTra":
+      errors.value.ngayTra =
+        bookingData.value.ngayTra <= bookingData.value.ngayNhan
+          ? "Ngày trả phòng phải sau ngày nhận phòng"
+          : "";
+      break;
   }
-}
+};
 
 const incrementGuests = (type) => {
-  if (type === 'soNguoiLon' && bookingData.value.soNguoiLon < 10) {
-    bookingData.value.soNguoiLon++
-  } else if (type === 'soTreEm' && bookingData.value.soTreEm < 10) {
-    bookingData.value.soTreEm++
+  if (type === "soNguoiLon" && bookingData.value.soNguoiLon < 10) {
+    bookingData.value.soNguoiLon++;
+  } else if (type === "soTreEm" && bookingData.value.soTreEm < 10) {
+    bookingData.value.soTreEm++;
   }
-}
+};
 
 const decrementGuests = (type) => {
-  if (type === 'soNguoiLon' && bookingData.value.soNguoiLon > 1) {
-    bookingData.value.soNguoiLon--
-  } else if (type === 'soTreEm' && bookingData.value.soTreEm > 0) {
-    bookingData.value.soTreEm--
+  if (type === "soNguoiLon" && bookingData.value.soNguoiLon > 1) {
+    bookingData.value.soNguoiLon--;
+  } else if (type === "soTreEm" && bookingData.value.soTreEm > 0) {
+    bookingData.value.soTreEm--;
   }
-}
+};
 
 const nextImage = () => {
-  currentImageIndex.value = (currentImageIndex.value + 1) % roomImages.value.length
-}
+  currentImageIndex.value = (currentImageIndex.value + 1) % roomImages.value.length;
+};
 
 const prevImage = () => {
-  currentImageIndex.value = currentImageIndex.value === 0 ? roomImages.value.length - 1 : currentImageIndex.value - 1
-}
+  currentImageIndex.value =
+    currentImageIndex.value === 0
+      ? roomImages.value.length - 1
+      : currentImageIndex.value - 1;
+};
 
-const showToastMessage = (message, type = 'success') => {
-  toastMessage.value = message
-  toastType.value = type
-  showToast.value = true
-  
+const showToastMessage = (message, type = "success") => {
+  toastMessage.value = message;
+  toastType.value = type;
+  showToast.value = true;
+
   setTimeout(() => {
-    showToast.value = false
-  }, 3000)
-}
+    showToast.value = false;
+  }, 3000);
+};
 
 const submitBooking = async () => {
   if (!isFormValid.value) {
-    showToastMessage('Vui lòng điền đầy đủ thông tin!', 'error')
-    return
+    showToastMessage("Vui lòng điền đầy đủ thông tin!", "error");
+    return;
   }
 
-  isSubmitting.value = true
-  currentStep.value = 3
+  isSubmitting.value = true;
+  currentStep.value = 3;
 
   try {
     // Simulate API call
-    await new Promise(resolve => setTimeout(resolve, 2000))
-    
-    showSuccessModal.value = true
-    showToastMessage('Đặt phòng thành công!')
-    
-    console.log('Dữ liệu đặt phòng:', {
+    await new Promise((resolve) => setTimeout(resolve, 2000));
+
+    showSuccessModal.value = true;
+    showToastMessage("Đặt phòng thành công!");
+
+    console.log("Dữ liệu đặt phòng:", {
       ...bookingData.value,
       maPhong: maPhong,
-      tongTien: totalPrice.value
-    })
+      tongTien: totalPrice.value,
+    });
   } catch (error) {
-    showToastMessage('Có lỗi xảy ra. Vui lòng thử lại!', 'error')
+    showToastMessage("Có lỗi xảy ra. Vui lòng thử lại!", "error");
   } finally {
-    isSubmitting.value = false
+    isSubmitting.value = false;
   }
-}
+};
 
 const closeSuccessModal = () => {
-  showSuccessModal.value = false
+  showSuccessModal.value = false;
   // Reset form or redirect
-}
+};
 
 const getAmenityIcon = (amenity) => {
   const icons = {
     "Máy lạnh": "https://cdn-icons-png.flaticon.com/512/606/606792.png",
-    "Tivi": "https://cdn-icons-png.flaticon.com/512/5110/5110853.png",
+    Tivi: "https://cdn-icons-png.flaticon.com/512/5110/5110853.png",
     "Wifi miễn phí": "https://cdn-icons-png.flaticon.com/512/2957/2957496.png",
-    "Minibar": "https://cdn-icons-png.flaticon.com/512/1511/1511863.png",
+    Minibar: "https://cdn-icons-png.flaticon.com/512/1511/1511863.png",
     "Bộ trà/cà phê": "https://cdn-icons-png.flaticon.com/512/892/892668.png",
-    "Tivi 55 inch": "https://cdn-icons-png.flaticon.com/512/1762/1762766.png"
-  }
-  return icons[amenity] || "https://cdn-icons-png.flaticon.com/512/565/565547.png"
-}
+    "Tivi 55 inch": "https://cdn-icons-png.flaticon.com/512/1762/1762766.png",
+  };
+  return icons[amenity] || "https://cdn-icons-png.flaticon.com/512/565/565547.png";
+};
 
 const generateUrgencyMessage = () => {
   const messages = [
     "12 người khác đang xem phòng này",
     "Đã có 3 lượt đặt trong 24h qua",
-    "Ưu đãi kết thúc trong 2 giờ nữa"
-  ]
-  urgencyMessage.value = messages[Math.floor(Math.random() * messages.length)]
-}
+    "Ưu đãi kết thúc trong 2 giờ nữa",
+  ];
+  urgencyMessage.value = messages[Math.floor(Math.random() * messages.length)];
+};
 
 // Lifecycle
 onMounted(async () => {
   try {
-    const response = await $api.get(`http://nhom2webkhachsan.runasp.net/api/PhongWithTienNghi/${maPhong}`)
+    const response = await $api.get(
+      `http://nhom2webkhachsan.runasp.net/api/PhongWithTienNghi/${maPhong}`
+    );
     if (response.data) {
       roomData.value = {
         ...response.data,
-        tienNghiList: JSON.parse(response.data.tienNghi || '[]')
-      }
-      currentStep.value = 1
+        tienNghiList: JSON.parse(response.data.tienNghi || "[]"),
+      };
+      currentStep.value = 1;
     } else {
-      showToastMessage('Không tìm thấy thông tin phòng.', 'error')
+      showToastMessage("Không tìm thấy thông tin phòng.", "error");
     }
   } catch (error) {
-    showToastMessage('Lỗi khi tải thông tin phòng.', 'error')
-    console.error('Lỗi:', error)
+    showToastMessage("Lỗi khi tải thông tin phòng.", "error");
+    console.error("Lỗi:", error);
   } finally {
-    loading.value = false
+    loading.value = false;
     setTimeout(() => {
-      isVisible.value = true
-    }, 100)
+      isVisible.value = true;
+    }, 100);
   }
-  
-  generateUrgencyMessage()
-})
+
+  generateUrgencyMessage();
+});
 
 // Watch for form changes to update step
-watch(() => [bookingData.value.cccd, bookingData.value.sdt], () => {
-  if (bookingData.value.cccd && bookingData.value.sdt) {
-    currentStep.value = 2
+watch(
+  () => [bookingData.value.cccd, bookingData.value.sdt],
+  () => {
+    if (bookingData.value.cccd && bookingData.value.sdt) {
+      currentStep.value = 2;
+    }
   }
-})
+);
 </script>
 
 <style scoped>
 .booking-page {
   min-height: 100vh;
   background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-  font-family: 'Inter', 'Segoe UI', sans-serif;
+  font-family: "Inter", "Segoe UI", sans-serif;
   position: relative;
   overflow-x: hidden;
 }
@@ -740,7 +817,8 @@ watch(() => [bookingData.value.cccd, bookingData.value.sdt], () => {
 }
 
 @keyframes float {
-  0%, 100% {
+  0%,
+  100% {
     transform: translateY(0px) rotate(0deg);
     opacity: 0.7;
   }
@@ -875,8 +953,12 @@ watch(() => [bookingData.value.cccd, bookingData.value.sdt], () => {
 }
 
 @keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
 /* Room Content */
@@ -1213,7 +1295,8 @@ watch(() => [bookingData.value.cccd, bookingData.value.sdt], () => {
 }
 
 @keyframes pulse {
-  0%, 100% {
+  0%,
+  100% {
     transform: scale(1);
   }
   50% {
@@ -1590,8 +1673,12 @@ watch(() => [bookingData.value.cccd, bookingData.value.sdt], () => {
 }
 
 @keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 @keyframes slideInUp {
@@ -1695,7 +1782,7 @@ watch(() => [bookingData.value.cccd, bookingData.value.sdt], () => {
     grid-template-columns: 1fr;
     gap: 24px;
   }
-  
+
   .booking-form {
     position: static;
   }
@@ -1706,46 +1793,46 @@ watch(() => [bookingData.value.cccd, bookingData.value.sdt], () => {
     flex-direction: column;
     gap: 16px;
   }
-  
+
   .progress-line {
     width: 2px;
     height: 40px;
   }
-  
+
   .detail-grid {
     grid-template-columns: 1fr;
   }
-  
+
   .detail-item.price-item {
     grid-column: span 1;
   }
-  
+
   .date-inputs {
     grid-template-columns: 1fr;
   }
-  
+
   .amenities-grid {
     grid-template-columns: 1fr;
   }
-  
+
   .form-content {
     padding: 0 20px 20px 20px;
   }
-  
+
   .form-header {
     padding: 20px 20px 0 20px;
   }
-  
+
   .room-content {
     padding: 20px;
   }
-  
+
   .toast {
     right: 16px;
     left: 16px;
     transform: translateY(-100px);
   }
-  
+
   .toast.show {
     transform: translateY(0);
   }
