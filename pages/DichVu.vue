@@ -169,99 +169,7 @@
     <!-- Service Cards -->
     <section class="services-section">
       <div class="service-cards" :class="[`view-${viewMode}`, { loading: isLoading }]">
-        <div
-          v-for="(service, index) in filteredServices"
-          :key="service.maChiTietDichVu"
-          class="service-card"
-          :style="{ animationDelay: `${index * 0.1}s` }"
-          @click="navigateToDetail(service.maChiTietDichVu)"
-        >
-          <div class="service-image-container">
-            <img
-              :src="service.urlAnh || getDefaultServiceImage()"
-              :alt="service.tenDichVu"
-              class="service-image"
-              @error="handleImageError"
-            />
-            <div class="image-overlay">
-              <div class="service-category">
-                <va-icon :name="getServiceIcon(service.tenDichVu)" />
-                <span>{{ getServiceCategory(service.tenDichVu) }}</span>
-              </div>
-            </div>
-            <button
-              class="favorite-btn"
-              @click.stop="toggleFavorite(service)"
-              :class="{ active: service.isFavorite }"
-            >
-              <va-icon :name="service.isFavorite ? 'favorite' : 'favorite_border'" />
-            </button>
-            <div class="service-badge" v-if="service.isPopular">
-              <va-icon name="star" />
-              <span>Phổ biến</span>
-            </div>
-          </div>
-
-          <div class="service-content">
-            <div class="service-header">
-              <h3 class="service-title" :title="service.tenDichVu">
-                {{ service.tenDichVu }}
-              </h3>
-              <div class="service-rating">
-                <div class="stars">
-                  <va-icon
-                    name="star"
-                    v-for="n in 5"
-                    :key="n"
-                    class="star"
-                    :class="{ filled: n <= getServiceRating() }"
-                  />
-                </div>
-                <span class="rating-text">{{ getServiceRating() }}/5</span>
-              </div>
-            </div>
-
-            <p class="service-description">
-              {{ getServiceDescription(service.tenDichVu) }}
-            </p>
-
-            <div class="service-features">
-              <div
-                class="feature-item"
-                v-for="feature in getServiceFeatures(service.tenDichVu)"
-                :key="feature"
-              >
-                <va-icon name="check_circle" />
-                <span>{{ feature }}</span>
-              </div>
-            </div>
-
-            <div class="service-footer">
-              <div class="price-section">
-                <div class="price-main">
-                  <span class="currency">₫</span>
-                  <span class="price">{{ formatPrice(service.donGia) }}</span>
-                </div>
-                <div class="price-unit">/ đêm</div>
-                <div class="price-note">Đã bao gồm VAT</div>
-              </div>
-
-              <div class="service-actions">
-                <button
-                  class="detail-btn"
-                  @click.stop="navigateToDetail(service.maChiTietDichVu)"
-                >
-                  <va-icon name="visibility" />
-                  <span>Chi tiết</span>
-                </button>
-                <button class="book-btn">
-                  <va-icon name="add_shopping_cart" />
-                  <span>Đặt ngay</span>
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
+        <CardService :services="filteredServices" />
       </div>
 
       <!-- Empty State -->
@@ -327,6 +235,7 @@ import { ref, computed, onMounted, watch } from "vue";
 import { useThemeStore } from "@/store/DarkMode";
 import { useRouter } from "vue-router";
 import TheHeader from "../Component/Header.vue";
+import CardService from "../Component/CardService.vue"; // Đảm bảo đúng đường dẫn
 import { axiosBase } from "~/utils/axiosBase";
 
 const theme = useThemeStore();
@@ -552,15 +461,14 @@ const showToastMessage = (message, type = "success") => {
 onMounted(async () => {
   try {
     isLoading.value = true;
-    const response = await axiosBase.get("/dichvu");
-
-    // Add some mock properties for enhanced UX
-    services.value = response.data.map((service) => ({
+    const response = await axiosBase.get("/TatCaTruyCap/dichvu");
+    // Đảm bảo lấy đúng mảng dịch vụ
+    const arr = Array.isArray(response.data) ? response.data : response.data.data;
+    services.value = (arr || []).map((service) => ({
       ...service,
       isFavorite: false,
-      isPopular: Math.random() > 0.7, // 30% chance to be popular
+      isPopular: Math.random() > 0.7,
     }));
-
     setTimeout(() => {
       isVisible.value = true;
     }, 100);
@@ -1597,7 +1505,6 @@ onMounted(async () => {
     width: 100%;
   }
 }
-
 @media (max-width: 768px) {
   .page-title {
     font-size: 2.5rem;
