@@ -1,7 +1,7 @@
 <template>
   <div class="services-grid">
     <div v-for="service in services" :key="service.maDichVu" class="service-card">
-      <div class="service-image-wrapper">
+      <div class="service-image-container">
         <img
           class="service-image"
           :src="
@@ -14,7 +14,21 @@
           class="service-status"
           :class="service.trangThai === 'Hết hàng' ? 'status-out' : 'status-available'"
         >
+          <va-icon
+            :name="service.trangThai === 'Hết hàng' ? 'block' : 'check_circle'"
+            :color="service.trangThai === 'Hết hàng' ? 'danger' : 'success'"
+            size="small"
+          />
           {{ service.trangThai === "Hết hàng" ? "Hết hàng" : "Còn" }}
+        </div>
+        <!-- Overlay chỉ hiện khi hover vào ảnh -->
+        <div class="overlay-content">
+          <div style="font-size: 1.1rem; font-weight: 700">
+            Mã dịch vụ: {{ service.maDichVu }}
+          </div>
+          <div>{{ service.tenDichVu }}</div>
+          <div>Giá: {{ formatPrice(service.donGia) }}</div>
+          <div>Trạng thái: {{ service.trangThai }}</div>
         </div>
       </div>
       <div class="service-card-content">
@@ -41,7 +55,6 @@
 const props = defineProps({
   services: { type: Array, required: true },
 });
-
 function formatPrice(val) {
   if (!val) return "";
   return val.toLocaleString("vi-VN") + "₫";
@@ -73,11 +86,12 @@ function formatPrice(val) {
 .service-card:hover {
   box-shadow: 0 2px 12px #0002;
 }
-.service-image-wrapper {
+.service-image-container {
   position: relative;
   width: 100%;
   aspect-ratio: 4/3;
   overflow: hidden;
+  cursor: pointer;
 }
 .service-image {
   width: 100%;
@@ -102,6 +116,29 @@ function formatPrice(val) {
 }
 .status-available {
   background: #22c55e;
+}
+
+/* Overlay giống CardRooms */
+.overlay-content {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.7);
+  color: #fff;
+  padding: 10px;
+  font-size: 0.9rem;
+  opacity: 0;
+  transition: opacity 0.3s;
+  z-index: 1;
+}
+.service-image-container:hover .overlay-content {
+  opacity: 1;
 }
 .service-card-content {
   padding: 10px 10px 10px 10px;
