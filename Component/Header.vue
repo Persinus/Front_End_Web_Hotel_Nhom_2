@@ -1,12 +1,14 @@
 <template>
-  <header :class="['header', { 'dark': theme.isDarkMode, 'scrolled': isScrolled }]">
+  <header :class="['header', { dark: theme.isDarkMode, scrolled: isScrolled }]">
     <div class="container">
       <!-- Logo Section -->
       <NuxtLink class="logo" to="/">
         <div class="logo-icon">
           <svg viewBox="0 0 24 24" class="logo-svg">
-            <path d="M12 2L2 7v10c0 5.55 3.84 10 9 11 1.16.21 2.76.21 3.91 0 5.16-1 9-5.45 9-11V7l-10-5z"/>
-            <path d="M12 7v5l4 2-4 2v5"/>
+            <path
+              d="M12 2L2 7v10c0 5.55 3.84 10 9 11 1.16.21 2.76.21 3.91 0 5.16-1 9-5.45 9-11V7l-10-5z"
+            />
+            <path d="M12 7v5l4 2-4 2v5" />
           </svg>
         </div>
         <div class="logo-text">
@@ -15,14 +17,7 @@
         </div>
       </NuxtLink>
 
-      <!-- Mobile Menu Toggle -->
-      <button class="menu-toggle" @click="toggleMenu" :class="{ 'active': isMenuOpen }">
-        <span class="hamburger-line"></span>
-        <span class="hamburger-line"></span>
-        <span class="hamburger-line"></span>
-      </button>
-
-      <!-- Navigation -->
+      <!-- Navigation (menu bar) bên trái -->
       <nav :class="['nav', { 'nav-open': isMenuOpen }]">
         <ul class="nav-list">
           <li v-for="item in navItems" :key="item.title" class="nav-item">
@@ -40,65 +35,16 @@
         </ul>
       </nav>
 
-      <!-- Right Section -->
+      <!-- Đăng nhập/Đăng ký và DarkMode sát phải -->
       <div class="header-actions">
-        <!-- Language Selector -->
-        <div class="language-selector">
-          <va-select
-            v-model="selectedLanguage"
-            :options="languageOptions"
-            class="language-select"
-            preset="bordered"
-            :max-visible-options="3"
-          >
-            <template #prepend>
-              <va-icon name="language" size="small" />
-            </template>
-          </va-select>
-        </div>
-
-        <!-- Currency Selector -->
-        <div class="currency-selector">
-          <va-select
-            v-model="selectedCurrency"
-            :options="currencyOptions"
-            class="currency-select"
-            preset="bordered"
-            :max-visible-options="3"
-          >
-            <template #prepend>
-              <va-icon name="attach_money" size="small" />
-            </template>
-          </va-select>
-        </div>
-
         <!-- Theme Toggle -->
-        <button class="theme-toggle" @click="handleToggleDarkMode" :title="isDarkMode ? 'Chuyển sang Light Mode' : 'Chuyển sang Dark Mode'">
+        <button
+          class="theme-toggle"
+          @click="handleToggleDarkMode"
+          :title="isDarkMode ? 'Chuyển sang Light Mode' : 'Chuyển sang Dark Mode'"
+        >
           <va-icon :name="isDarkMode ? 'light_mode' : 'dark_mode'" />
         </button>
-
-        <!-- Notifications (if logged in) -->
-        <div v-if="isLoggedIn" class="notifications">
-          <button class="notification-btn" @click="toggleNotifications">
-            <va-icon name="notifications" />
-            <span v-if="notificationCount > 0" class="notification-badge">{{ notificationCount }}</span>
-          </button>
-          <div v-if="showNotifications" class="notification-dropdown">
-            <div class="notification-header">
-              <h4>Thông báo</h4>
-              <button class="mark-all-read" @click="markAllAsRead">Đánh dấu đã đọc</button>
-            </div>
-            <div class="notification-list">
-              <div v-for="notification in notifications" :key="notification.id" class="notification-item">
-                <div class="notification-content">
-                  <p>{{ notification.message }}</p>
-                  <span class="notification-time">{{ notification.time }}</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
         <!-- Auth Section -->
         <div class="auth-section">
           <template v-if="isLoggedIn">
@@ -107,35 +53,45 @@
                 <div class="user-avatar">
                   <div class="avatar-container">
                     <img
-                      :src="userProfile?.HinhAnhURL && userProfile.HinhAnhURL !== 'string'
-                        ? userProfile.HinhAnhURL
-                        : 'https://i.pinimg.com/736x/cd/62/46/cd624642b71af4a1d73f69b1290c751a.jpg'"
+                      :src="
+                        userProfile?.HinhAnhURL && userProfile.HinhAnhURL !== 'string'
+                          ? userProfile.HinhAnhURL
+                          : 'https://i.pinimg.com/736x/cd/62/46/cd624642b71af4a1d73f69b1290c751a.jpg'
+                      "
                       alt="Avatar"
                       class="avatar"
                     />
                     <div class="status-indicator online"></div>
                   </div>
                   <div class="user-info">
-                    <span class="username">{{ userProfile?.HoTen || userProfile?.TenTaiKhoan || 'Người dùng' }}</span>
+                    <span class="username">{{
+                      userProfile?.HoTen || userProfile?.TenTaiKhoan || "Người dùng"
+                    }}</span>
                     <span class="user-role">{{ userProfile?.Vaitro }}</span>
                   </div>
                   <va-icon name="expand_more" size="small" class="dropdown-arrow" />
                 </div>
               </template>
-              
+
               <div class="dropdown-content">
                 <div class="user-profile-section">
                   <div class="profile-header">
-                    <img :src="userProfile?.HinhAnhURL || 'https://i.pinimg.com/736x/cd/62/46/cd624642b71af4a1d73f69b1290c751a.jpg'" class="profile-avatar" />
+                    <img
+                      :src="
+                        userProfile?.HinhAnhURL ||
+                        'https://i.pinimg.com/736x/cd/62/46/cd624642b71af4a1d73f69b1290c751a.jpg'
+                      "
+                      class="profile-avatar"
+                    />
                     <div>
-                      <h4>{{ userProfile?.HoTen || 'Người dùng' }}</h4>
+                      <h4>{{ userProfile?.HoTen || "Người dùng" }}</h4>
                       <p>{{ userProfile?.Email }}</p>
                     </div>
                   </div>
                 </div>
-                
+
                 <div class="dropdown-divider"></div>
-                
+
                 <div class="dropdown-menu-items">
                   <NuxtLink to="/profile" class="dropdown-item">
                     <va-icon name="person" />
@@ -154,9 +110,9 @@
                     <span>Cài đặt</span>
                   </NuxtLink>
                 </div>
-                
+
                 <div class="dropdown-divider"></div>
-                
+
                 <div class="dropdown-item logout-item" @click="logout">
                   <va-icon name="logout" />
                   <span>Đăng xuất</span>
@@ -164,7 +120,7 @@
               </div>
             </DropDown>
           </template>
-          
+
           <template v-else>
             <div class="auth-buttons">
               <NuxtLink to="/DangNhapPhu" class="btn btn-outline">
@@ -180,110 +136,106 @@
         </div>
       </div>
     </div>
-    
-    <!-- Mobile Navigation Overlay -->
-    <div v-if="isMenuOpen" class="mobile-overlay" @click="closeMenu"></div>
-    
+
     <!-- Progress Bar -->
     <div class="scroll-progress" :style="{ width: scrollProgress + '%' }"></div>
   </header>
 </template>
 
 <script setup>
-import { ref, computed, onMounted, onUnmounted, watch } from 'vue'
-import { useThemeStore } from '@/store/DarkMode'
-import { usePhanQuyenStore } from '@/store/PhanQuyenCookie'
-import { axiosBase } from '~/utils/axiosBase'
-import DropDown from './DropDown.vue'
+import { ref, computed, onMounted, onUnmounted, watch } from "vue";
+import { useThemeStore } from "@/store/DarkMode";
+import { usePhanQuyenStore } from "@/store/PhanQuyenCookie";
+import { axiosBase } from "~/utils/axiosBase";
+import DropDown from "./DropDown.vue";
 
-const theme = useThemeStore()
+const theme = useThemeStore();
 const navItems = [
-  { title: 'Trang chủ', link: '/', icon: 'home' },
-  { title: 'Đặt phòng', link: '/Phong', icon: 'hotel' },
-  { title: 'Dịch vụ', link: '/DichVu', icon: 'room_service' },
-  { title: 'Nội quy', link: '/HotelRegulations', icon: 'rule' },
-  { title: 'Game', link: '/Trangchoigame', icon: 'games' },
-]
+  { title: "Trang chủ", link: "/", icon: "home" },
+  { title: "Đặt phòng", link: "/Phong", icon: "hotel" },
+  { title: "Dịch vụ", link: "/DichVu", icon: "room_service" },
+  { title: "Nội quy", link: "/HotelRegulations", icon: "rule" },
+];
 
-const languageOptions = [
-  { text: '🇻🇳 Tiếng Việt', value: 'vi' },
-  { text: '🇺🇸 English', value: 'en' },
-  { text: '🇯🇵 日本語', value: 'ja' },
-]
+const isMenuOpen = ref(false);
+const isScrolled = ref(false);
+const scrollProgress = ref(0);
 
-const currencyOptions = [
-  { text: 'VND', value: 'vnd' },
-  { text: 'USD', value: 'usd' },
-  { text: 'EUR', value: 'eur' },
-]
-
-const isMenuOpen = ref(false)
-const isScrolled = ref(false)
-const scrollProgress = ref(0)
-const selectedLanguage = ref('vi')
-const selectedCurrency = ref('vnd')
-const showNotifications = ref(false)
-const notificationCount = ref(3)
+const showNotifications = ref(false);
+const notificationCount = ref(3);
 const notifications = ref([
-  { id: 1, message: 'Đặt phòng của bạn đã được xác nhận', time: '5 phút trước' },
-  { id: 2, message: 'Ưu đãi đặc biệt: Giảm 20% cho lần đặt tiếp theo', time: '1 giờ trước' },
-  { id: 3, message: 'Check-in sớm đã được chấp thuận', time: '2 giờ trước' },
-])
+  { id: 1, message: "Đặt phòng của bạn đã được xác nhận", time: "5 phút trước" },
+  {
+    id: 2,
+    message: "Ưu đãi đặc biệt: Giảm 20% cho lần đặt tiếp theo",
+    time: "1 giờ trước",
+  },
+  { id: 3, message: "Check-in sớm đã được chấp thuận", time: "2 giờ trước" },
+]);
 
-const phanQuyenStore = usePhanQuyenStore()
-const isLoggedIn = computed(() => phanQuyenStore.isLoggedIn())
-const userProfile = ref(null)
+const phanQuyenStore = usePhanQuyenStore();
+const isLoggedIn = computed(() => phanQuyenStore.isLoggedIn());
+const userProfile = ref(null);
 const isDarkMode = computed({
   get: () => theme.isDarkMode,
-  set: (val) => theme.setDarkMode(val)
-})
+  set: (val) => theme.setDarkMode(val),
+});
 
-const toggleMenu = () => { isMenuOpen.value = !isMenuOpen.value }
-const closeMenu = () => { isMenuOpen.value = false }
-const toggleNotifications = () => { showNotifications.value = !showNotifications.value }
-const markAllAsRead = () => { notificationCount.value = 0 }
+const toggleMenu = () => {
+  isMenuOpen.value = !isMenuOpen.value;
+};
+const closeMenu = () => {
+  isMenuOpen.value = false;
+};
+const toggleNotifications = () => {
+  showNotifications.value = !showNotifications.value;
+};
+const markAllAsRead = () => {
+  notificationCount.value = 0;
+};
 
 const logout = () => {
-  phanQuyenStore.logout()
-  userProfile.value = null
-  window.location.href = '/'
-}
+  phanQuyenStore.logout();
+  userProfile.value = null;
+  window.location.href = "/";
+};
 
 const handleScroll = () => {
-  const scrollTop = window.pageYOffset || document.documentElement.scrollTop
-  isScrolled.value = scrollTop > 50
-  
-  const winScroll = document.body.scrollTop || document.documentElement.scrollTop
-  const height = document.documentElement.scrollHeight - document.documentElement.clientHeight
-  scrollProgress.value = (winScroll / height) * 100
-}
+  const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+  isScrolled.value = scrollTop > 50;
+
+  const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+  const height =
+    document.documentElement.scrollHeight - document.documentElement.clientHeight;
+  scrollProgress.value = (winScroll / height) * 100;
+};
 
 const fetchProfile = async () => {
   try {
-    const res = await axiosBase.get('/xacthuc/profile')
-    userProfile.value = res.data.profile
+    const res = await axiosBase.get("/xacthuc/profile");
+    userProfile.value = res.data.profile;
   } catch {
-    userProfile.value = null
+    userProfile.value = null;
   }
-}
+};
 
 function handleToggleDarkMode() {
-  theme.toggleDarkMode()
+  theme.toggleDarkMode();
 }
 
 onMounted(() => {
-  if (isLoggedIn.value) fetchProfile()
-  window.addEventListener('scroll', handleScroll)
-})
+  if (isLoggedIn.value) fetchProfile();
+  window.addEventListener("scroll", handleScroll);
+});
 
 onUnmounted(() => {
-  window.removeEventListener('scroll', handleScroll)
-})
+  window.removeEventListener("scroll", handleScroll);
+});
 
-watch(isLoggedIn, (val) => { 
-  if (val) fetchProfile() 
-  else userProfile.value = null 
-})
+watch(isLoggedIn, (val) => {
+  if (val) fetchProfile();
+  else userProfile.value = null;
+});
 </script>
 
 <style scoped>
@@ -426,7 +378,7 @@ watch(isLoggedIn, (val) => {
 }
 
 .nav-link.active::after {
-  content: '';
+  content: "";
   position: absolute;
   bottom: -2px;
   left: 50%;
@@ -857,11 +809,11 @@ watch(isLoggedIn, (val) => {
     padding: 0 16px;
     height: 64px;
   }
-  
+
   .menu-toggle {
     display: flex;
   }
-  
+
   .nav {
     position: fixed;
     top: 64px;
@@ -875,51 +827,51 @@ watch(isLoggedIn, (val) => {
     transition: all 0.3s ease;
     z-index: 1000;
   }
-  
+
   .nav.nav-open {
     transform: translateY(0);
     opacity: 1;
     visibility: visible;
   }
-  
+
   .header.dark .nav {
     background: #0f172a;
   }
-  
+
   .nav-list {
     flex-direction: column;
     padding: 20px;
     gap: 4px;
   }
-  
+
   .nav-link {
     padding: 16px;
     border-radius: 8px;
     font-size: 1rem;
   }
-  
+
   .mobile-overlay {
     display: block;
   }
-  
+
   .header-actions {
     gap: 8px;
   }
-  
+
   .theme-toggle,
   .notification-btn {
     width: 36px;
     height: 36px;
   }
-  
+
   .user-info {
     display: none;
   }
-  
+
   .brand-tagline {
     display: none;
   }
-  
+
   .logo-icon {
     width: 40px;
     height: 40px;
@@ -931,17 +883,17 @@ watch(isLoggedIn, (val) => {
     flex-direction: column;
     gap: 8px;
   }
-  
+
   .btn {
     padding: 8px 16px;
     font-size: 0.85rem;
   }
-  
+
   .notification-dropdown {
     width: calc(100vw - 32px);
     right: -140px;
   }
-  
+
   .dropdown-content {
     width: calc(100vw - 32px);
     right: -120px;
