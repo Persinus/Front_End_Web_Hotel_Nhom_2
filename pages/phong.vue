@@ -1,6 +1,6 @@
 <script setup>
-import { ref, computed, onMounted } from "vue";
-import axios from "axios";
+import { ref, computed, watch, onMounted } from "vue";
+import { axiosBase } from "../utils/axiosBase";
 import CardRooms from "../Component/CardRooms.vue";
 import TheHeader from "../Component/Header.vue";
 import Pagination from "../Component/Pagination.vue";
@@ -9,21 +9,27 @@ const rooms = ref([]);
 const loading = ref(true);
 const error = ref(null);
 const page = ref(1);
-const pageSize = 8;
+const pageSize = 9;
+const totalPages = ref(1);
 
-onMounted(async () => {
+const fetchRooms = async () => {
+  loading.value = true;
   try {
-    // Đổi sang gọi API cache nội bộ
-    const res = await axios.get("/api/my-data");
-    rooms.value = res.data;
+    const res = await axiosBase.get(
+      `/TatCaTruyCap/phong-rutgon?page=${page.value}&pageSize=${pageSize}`
+    );
+    rooms.value = res.data.data || res.data; // tuỳ API trả về
+    totalPages.value = 3; // Luôn có 3 trang
   } catch (err) {
     error.value = err.message || "Lỗi khi gọi API";
   } finally {
     loading.value = false;
   }
-});
+};
 
-// Tính toán các giá trị max/min cho badge
+onMounted(fetchRooms);
+watch(page, fetchRooms);
+
 const maxRating = computed(() =>
   Math.max(...rooms.value.map((r) => r.soSaoTrungBinh || 0))
 );
@@ -35,12 +41,6 @@ const bookedMap = computed(() =>
   )
 );
 const maxBooked = computed(() => Math.max(...Object.values(bookedMap.value)));
-
-// Phân trang
-const totalPages = computed(() => Math.ceil(rooms.value.length / pageSize));
-const pagedRooms = computed(() =>
-  rooms.value.slice((page.value - 1) * pageSize, page.value * pageSize)
-);
 </script>
 
 <template>
@@ -56,7 +56,7 @@ const pagedRooms = computed(() =>
     <div v-if="error" class="error-message">{{ error }}</div>
     <div v-else>
       <CardRooms
-        :rooms="pagedRooms"
+        :rooms="rooms"
         :max-rating="maxRating"
         :max-booked="maxBooked"
         :max-price="maxPrice"
