@@ -1,422 +1,327 @@
 <!-- Trang Mạnh Code xin đừng động vào -->
 <template>
-  <header>
-      <TheHeader />
-    </header> 
-  <div :class="['room-details-container', { 'dark-mode': theme.isDarkMode }]">
-    <div class="room-gallery">
-      <!-- Ảnh chính -->
-      <div class="main-image" @click="openImage(0)">
-        <img :src="images[0]" alt="Ảnh chính" class="gallery-img" />
-      </div>
-      <!-- Ảnh phụ -->
-      <div class="sub-images">
-        <div class="sub-image" v-for="(img, index) in subImages" :key="index" @click="openImage(index + 1)">
-          <img :src="img" alt="'Ảnh phụ ' + (index + 1)" class="gallery-img" />
+  <TheHeader />
+  <div :class="['room-detail-theme', { 'dark-mode': theme.isDarkMode }]">
+    <div class="room-detail-wrapper">
+      <!-- Nửa trái: Hình ảnh -->
+      <div class="room-detail-left">
+        <div class="main-image">
+          <img :src="room.urlAnhChinh" alt="Ảnh chính" />
+        </div>
+        <div class="sub-images">
+          <img
+            v-for="(img, idx) in room.urlAnhPhu"
+            :key="idx"
+            :src="img.urlAnh"
+            alt="Ảnh phụ"
+            class="sub-img"
+          />
         </div>
       </div>
-    </div>
-
-    <!-- Modal phóng to -->
-    <div v-if="isImageModalOpen" class="image-modal" @click.self="closeImage">
-      <div class="modal-content">
-        <img :src="images[currentSlide]" alt="Phóng to ảnh" class="modal-img zoom-img" />
-        <va-button color="danger" class="close-button" @click="closeImage">X</va-button>
-      </div>
-    </div>
-
-    <!-- Thông tin phòng -->
-    <va-card class="room-info" outlined>
-      <div class="info-content">
+      <!-- Nửa phải: Thông tin -->
+      <div class="room-detail-right">
         <h1 class="room-title">{{ room.loaiPhong }} (Mã: {{ room.maPhong }})</h1>
-        <p><strong>💵 Giá:</strong> {{ room.giaPhong }} VND</p>
-        <p><strong>🏢 Tầng:</strong> {{ room.tang }}</p>
-        <p><strong>🛏️ Kiểu giường:</strong> {{ room.kieuGiuong }}</p>
-        <p><strong>📝 Mô tả:</strong> {{ room.moTa }}</p>
-        <p><strong>📶 Tiện nghi:</strong></p>
-        <div class="amenities animate__animated animate__fadeIn">
-          <div
-            class="amenity animate__animated animate__bounce"
-            v-for="(amenity, index) in room.tienNghiList"
-            :key="index"
+        <div class="room-price">
+          <span>💵 Giá:</span>
+          {{ room.giaPhong != null ? room.giaPhong.toLocaleString() : "Đang cập nhật" }}
+          VND /
+          {{ room.donViTinh || "" }}
+        </div>
+        <div class="room-status">
+          <span>🔥 Trạng thái:</span>
+          <span
+            :class="room.tinhTrang === '1' ? 'status-available' : 'status-unavailable'"
           >
-            <i
-              :class="amenitiesMap[amenity]?.icon || defaultAmenityIcon"
-              class="amenity-icon"
-            ></i>
-            <span class="amenity-name">{{ amenity }}</span>
+            {{ room.tinhTrang === "1" ? "Còn trống" : "Đã đặt" }}
+          </span>
+        </div>
+        <div class="room-info-list">
+          <div><strong>🏢 Tầng:</strong> {{ room.tang }}</div>
+          <div><strong>🛏️ Kiểu giường:</strong> {{ room.kieuGiuong }}</div>
+          <div><strong>👥 Sức chứa:</strong> {{ room.sucChua }} người</div>
+          <div><strong>⭐ Đánh giá:</strong> {{ room.soSaoTrungBinh }}/5</div>
+        </div>
+        <div class="room-desc">
+          <strong>📝 Mô tả:</strong> {{ room.moTa || room.motaPhong }}
+        </div>
+        <!-- Tiện nghi -->
+        <div class="amenities">
+          <strong>📶 Tiện nghi:</strong>
+          <div class="amenity-list">
+            <span
+              v-for="t in tienNghi"
+              :key="t.maTienNghi"
+              class="amenity-item"
+              :title="t.moTa"
+            >
+              <i class="fa fa-check-circle amenity-icon"></i> {{ t.tenTienNghi }}
+            </span>
           </div>
         </div>
-        <p>
-          <strong>🔥 Trạng thái:</strong>
-          <span :class="room.tinhTrang === '1' ? 'status-available' : 'status-unavailable'">
-            {{ room.tinhTrang === '1' ? 'Còn trống' : 'Đã đặt' }}
-          </span>
-        </p>
-      </div>
-
-      <div class="actions">
-        <va-button
-          :disabled="room.tinhTrang !== '1'"
-          color="primary"
-          class="book-button"
-        >
-          <nuxt-link
-            :to="{
-              name: 'DatPhong',
-              params: { maPhong: room.maPhong }
-            }"
-            class="link-inside-button"
+        <!-- Feedback -->
+        <div class="feedbacks">
+          <strong>🗨️ Đánh giá khách hàng:</strong>
+          <div v-if="Array.isArray(feedbacks) && feedbacks.length">
+            <div v-for="(fb, idx) in feedbacks" :key="idx" class="feedback-item">
+              <span class="feedback-stars">{{ renderStars(fb.soSao) }}</span>
+              <span
+                class="feedback-type"
+                :class="fb.phanLoai === 'Tích cực' ? 'positive' : 'negative'"
+              >
+                {{ fb.phanLoai }}
+              </span>
+              <div class="feedback-comment">{{ fb.binhLuan }}</div>
+            </div>
+          </div>
+          <div v-else class="feedback-empty">Chưa có đánh giá nào.</div>
+        </div>
+        <!-- Đặt phòng -->
+        <div class="actions">
+          <va-button
+            :disabled="room.tinhTrang !== '1'"
+            color="primary"
+            class="book-button"
+            @click="goToBooking"
           >
             📩 Đặt phòng
-          </nuxt-link>
-        </va-button>
-        <va-button color="secondary" class="share-button" @click="shareRoom">
-          📤 Chia sẻ phòng
-        </va-button>
-        <nuxt-link to="/Phong" class="back-button">Quay lại danh sách phòng</nuxt-link>
+          </va-button>
+        </div>
       </div>
-    </va-card>
+    </div>
   </div>
-
-  <!-- Loading -->
-  <va-loading v-if="loading" />
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue'
-import { useRoute } from 'vue-router'
-import { useNuxtApp } from '#app'
-import { useThemeStore } from '@/store/DarkMode'
+import { ref, onMounted } from "vue";
+import { useRoute, useRouter } from "vue-router";
+import { axiosBase } from "@/utils/axiosBase";
+import TheHeader from "@/Component/Header.vue";
+import { useThemeStore } from "@/store/DarkMode";
 
-const theme = useThemeStore()
-theme.initializeDarkMode()
+const theme = useThemeStore();
+theme.initializeDarkMode();
 
-const room = ref({ tienNghiList: [] })
-const loading = ref(true)
-const error = ref(null)
-
-const route = useRoute()
-const { $api } = useNuxtApp()
-
-const maPhong = route.params.maPhong
- import TheHeader from '../../Component/Header.vue'
-const images = ref([])
-const subImages = ref([])
-const currentSlide = ref(0)
-const isImageModalOpen = ref(false)
-
-const amenitiesMap = {
-  "Máy lạnh": { icon: "fas fa-snowflake" }, // Icon điều hòa
-  "Wifi miễn phí": { icon: "fas fa-wifi" }, // Icon wifi
-  "Bộ trà/cà phê": { icon: "fas fa-mug-hot" }, // Icon tách trà/cà phê
-  "Tivi": { icon: "fa-solid fa-tv" }, // Icon TV
-  "Tủ lạnh": { icon: "fas fa-ice-cream" }, // Icon tủ lạnh
-  "Bồn tắm": { icon: "fas fa-bath" }, // Icon bồn tắm
-  "Mini Bar": { icon: "fa-solid fa-martini-glass-empty" }, // Icon mini bar (chọn chai rượu làm biểu tượng)
- // Icon mini bar
-  "Máy sấy tóc": { icon: "fas fa-blow-dryer" }, // Icon máy sấy tóc
-  "Bàn làm việc": { icon: "fas fa-desktop" }, // Icon bàn làm việc
-  "Bồn cầu": { icon: "fas fa-toilet" }, // Icon bồn cầu
-  "Bồn rửa mặt": { icon: "fas fa-sink" }, // Icon bồn rửa mặt
-  "Máy giặt": { icon: "fas fa-washing-machine" }, // Icon máy giặt
-  "Bếp": { icon: "fas fa-utensils" } // Icon bếp
-};
-
-const defaultAmenityIcon = "ri-question-line"; // Remix Icon mặc định
+const route = useRoute();
+const router = useRouter();
+const room = ref({});
+const tienNghi = ref([]);
+const feedbacks = ref([]);
 
 onMounted(async () => {
-  try {
-    const response = await $api.get(`http://nhom2webkhachsan.runasp.net/api/PhongWithTienNghi/${maPhong}`)
-    if (response.data) {
-      room.value = {
-        ...response.data,
-        tienNghiList: JSON.parse(response.data.tienNghi)
-      }
-      images.value = [
-        response.data.urlAnhChinh,
-        response.data.urlAnhPhu1,
-        response.data.urlAnhPhu2
-      ].filter(Boolean)
+  const maPhong = route.params.maPhong;
+  const res = await axiosBase.get(`/TatCaTruyCap/phong/${maPhong}`);
+  room.value = res.data.data;
+  tienNghi.value = room.value.tienNghi || [];
+  // Đảm bảo feedbacks luôn là mảng
+  feedbacks.value = Array.isArray(room.value.feedbacks) ? room.value.feedbacks : [];
+});
 
-      subImages.value = images.value.slice(1) // ảnh phụ là từ index 1 trở đi
-    } else {
-      error.value = 'Không tìm thấy thông tin cho mã phòng này.'
-    }
-  } catch (err) {
-    error.value = `Lỗi: ${err.message}`
-    console.error('Lỗi:', err)
-  } finally {
-    loading.value = false
-  }
-})
-
-const openImage = (index) => {
-  currentSlide.value = index
-  isImageModalOpen.value = true
+function goToBooking() {
+  router.push({ name: "DatPhong", params: { maPhong: room.value.maPhong } });
 }
 
-const closeImage = () => {
-  isImageModalOpen.value = false
-}
-
-const shareRoom = async () => {
-  const link = window.location.href
-  try {
-    await navigator.clipboard.writeText(link)
-    alert('📤 Đã sao chép link phòng vào clipboard!')
-  } catch (err) {
-    alert('❌ Sao chép thất bại, vui lòng thử lại.')
-  }
+// Hàm render sao
+function renderStars(soSao) {
+  soSao = Number(soSao) || 0;
+  return "★".repeat(soSao) + "☆".repeat(5 - soSao);
 }
 </script>
 
 <style scoped>
-.room-details-container {
+.room-detail-theme {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  padding: 40px 0;
+  transition: background 0.3s, color 0.3s;
+}
+.room-detail-theme.dark-mode {
+  background: #18181b;
+  color: #fff;
+}
+.room-detail-wrapper {
   display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
-  padding: 20px;
-  justify-content: center;
-  align-items: stretch;
-  transition: background-color 0.3s, color 0.3s;
-}
-
-.room-details-container.dark-mode {
-  background-color: #2c3e50;
-  color: #894040;
-}
-
-.room-gallery {
-  flex: 1;
-  display: flex;
-  min-height: 500px;
-  max-width: 600px;
+  max-width: 1100px;
+  margin: 0 auto;
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 18px;
+  box-shadow: 0 4px 32px #0002;
   overflow: hidden;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transition: background 0.3s, color 0.3s;
 }
-
-.main-image {
-  flex: 1;
-  overflow: hidden;
+.room-detail-theme.dark-mode .room-detail-wrapper {
+  background: #23232b;
+  color: #fff;
 }
-
-.sub-images {
-  flex: 1;
+.room-detail-left {
+  flex: 1.1;
+  min-width: 0;
   display: flex;
   flex-direction: column;
-}
-
-.sub-image {
-  flex: 1;
-  overflow: hidden;
-}
-
-.gallery-img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover; /* Cắt gọn ảnh để vừa với khung */
-  cursor: pointer;
-  transition: transform 0.3s;
-}
-
-.sub-image img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover; /* Cắt gọn ảnh phụ để vừa với khung */
-  border-radius: 5px;
-  transition: transform 0.3s;
-}
-
-.sub-image img:hover {
-  transform: scale(1.05); /* Hiệu ứng phóng to khi hover */
-}
-
-/* Modal phóng to */
-.image-modal {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.8);
-  display: flex;
-  justify-content: center;
   align-items: center;
-  z-index: 1000;
+  padding: 32px 18px 32px 32px;
+  background: transparent;
+  gap: 18px;
+  justify-content: center;
 }
-
-.modal-content {
-  position: relative;
+.main-image img {
+  width: 100%;
+  max-width: 340px;
+  aspect-ratio: 4/3;
+  object-fit: cover;
+  border-radius: 12px;
+  box-shadow: 0 2px 12px #0002;
 }
-
-.modal-img {
-  max-width: 100vw;
-  max-height: 90vh;
-  width: auto;
-  height: auto;
-  border-radius: 10px;
-  object-fit: contain;
-}
-
-.zoom-img {
-  transition: transform 0.3s;
-}
-
-.zoom-img:hover {
-  transform: scale(1.05);
-}
-
-.close-button {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-}
-
-/* Thông tin phòng */
-.room-info {
-  flex: 1;
-  max-width: 500px;
+.sub-images {
   display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  padding: 20px;
-  border-radius: 10px;
-  background-color: #e0b3ff; /* Màu tím nhạt */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  transition: background-color 0.3s, color 0.3s;
-}
-
-.room-details-container.dark-mode .room-info {
-  background-color: #151515 !important; /* Bắt buộc sử dụng màu tím đậm */
-  color: #ffffff !important; /* Chữ màu trắng */
-}
-
-.room-details-container.dark-mode .amenity-icon {
-  color: #ffffff; /* Icon màu trắng */
-}
-
-.room-details-container.dark-mode .amenity-name {
-  color: #ffffff; /* Tên tiện nghi màu trắng */
-}
-
-.room-details-container.dark-mode .room-title {
-  color: #ffffff !important;
-  border-bottom: 2px solid #ffffff; /* Đường gạch dưới màu trắng */
-}
-
-.room-details-container.dark-mode .status-available {
-  color: #2ecc71; /* Màu xanh lá cho trạng thái "Còn trống" */
-}
-
-.room-details-container.dark-mode .status-unavailable {
-  color: #e74c3c; /* Màu đỏ cho trạng thái "Đã đặt" */
-}
-
-.info-content {
-  margin-bottom: 20px;
-}
-
-.room-title {
-  font-size: 1.8rem;
-  font-weight: bold;
-  margin-bottom: 20px;
-  color: #2c3e50;
-  border-bottom: 2px solid #4caf50;
-  padding-bottom: 10px;
-}
-
-.room-details-container.dark-mode .room-title {
-  color: #000000;
-}
-
-.status-available {
-  color: green;
-  font-weight: bold;
-}
-
-.status-unavailable {
-  color: red;
-  font-weight: bold;
-}
-
-.amenities {
-  display: flex;
-  flex-wrap: wrap;
   gap: 10px;
   margin-top: 10px;
+  flex-wrap: wrap;
+  justify-content: center;
 }
-
-.amenity {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
+.sub-img {
   width: 80px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: 7px;
+  box-shadow: 0 1px 6px #0001;
+  cursor: pointer;
+  transition: transform 0.2s;
 }
-
-.amenity-icon {
-  font-size: 2rem; /* Kích thước icon */
-  color: #4caf50; /* Màu sắc icon */
-  margin-bottom: 5px;
+.sub-img:hover {
+  transform: scale(1.08);
 }
-
-.amenity-name {
-  font-size: 0.9rem;
-  color: #333;
-}
-
-.actions {
+.room-detail-right {
+  flex: 1.3;
+  min-width: 0;
+  padding: 32px 32px 32px 18px;
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  justify-content: flex-start;
+  gap: 18px;
 }
-
-.book-button, .share-button {
-  width: 100%;
+.room-title {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 8px;
+  color: #2c3e50;
+  border-bottom: 2px solid #4caf50;
+  padding-bottom: 8px;
 }
-
-.back-button {
-  text-align: center;
-  display: block;
-  padding: 10px 15px;
-  background-color: #6c757d;
-  color: white;
-  text-decoration: none;
-  border-radius: 5px;
+.room-detail-theme.dark-mode .room-title {
+  color: #fff;
+  border-bottom: 2px solid #fff;
+}
+.room-price {
+  font-size: 1.2rem;
+  font-weight: 500;
+  color: #0ea5e9;
+}
+.room-status {
   font-size: 1rem;
-  transition: background-color 0.3s, transform 0.2s;
+  margin-bottom: 6px;
 }
-
-.back-button:hover {
-  background-color: #5a6268;
-  transform: scale(1.05);
+.status-available {
+  color: #22c55e;
+  font-weight: bold;
 }
-
-/* Responsive */
-@media (max-width: 768px) {
-  .room-details-container {
+.status-unavailable {
+  color: #e74c3c;
+  font-weight: bold;
+}
+.room-info-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 18px 32px;
+  font-size: 1rem;
+  margin-bottom: 6px;
+}
+.room-desc {
+  font-size: 1rem;
+  margin-bottom: 8px;
+}
+.amenities {
+  margin-bottom: 8px;
+}
+.amenity-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 18px;
+  margin-top: 6px;
+}
+.amenity-item {
+  background: #e0e7ff;
+  color: #3730a3;
+  border-radius: 12px;
+  padding: 4px 12px;
+  font-size: 0.97em;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.room-detail-theme.dark-mode .amenity-item {
+  background: #312e81;
+  color: #fff;
+}
+.amenity-icon {
+  color: #22c55e;
+}
+.feedbacks {
+  margin-top: 10px;
+}
+.feedback-item {
+  background: #f3f4f6;
+  border-radius: 8px;
+  padding: 8px 12px;
+  margin-bottom: 8px;
+  font-size: 0.97em;
+}
+.room-detail-theme.dark-mode .feedback-item {
+  background: #23232b;
+  color: #fff;
+}
+.feedback-stars {
+  color: #fbbf24;
+  font-size: 1.1em;
+  margin-right: 8px;
+}
+.feedback-type.positive {
+  color: #22c55e;
+  font-weight: 600;
+  margin-right: 8px;
+}
+.feedback-type.negative {
+  color: #e74c3c;
+  font-weight: 600;
+  margin-right: 8px;
+}
+.feedback-comment {
+  margin-left: 24px;
+  font-style: italic;
+}
+.feedback-empty {
+  color: #888;
+  font-style: italic;
+}
+.actions {
+  margin-top: 18px;
+}
+.book-button {
+  width: 100%;
+  font-size: 1.1em;
+  font-weight: 600;
+}
+@media (max-width: 900px) {
+  .room-detail-wrapper {
     flex-direction: column;
-    align-items: center;
+    padding: 0;
+    border-radius: 0;
   }
-
-  .room-gallery,
-  .room-info {
-    max-width: 100%;
+  .room-detail-left,
+  .room-detail-right {
+    padding: 24px 8px;
   }
-
-  .room-gallery {
-    flex-direction: column;
-    min-height: auto;
-  }
-
-  .sub-images {
-    flex-direction: row;
-  }
-
-  .sub-image {
-    flex: 1;
+  .main-image img {
+    max-width: 100vw;
   }
 }
 </style>
