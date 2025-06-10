@@ -6,191 +6,170 @@
 <!-- Trang Thọ Code xin đừng động vào  -->
 <!-- Trang Thọ Code xin đừng động vào  -->
 
-
-
-
 <template>
-  <div class="login-page min-h-screen w-full flex items-center justify-center bg-cover bg-center" style="background-image: url('/images/login-bg.jpg')">
-    <!-- Modal đăng nhập -->
-    <div class="login-modal bg-white rounded-md shadow-lg w-full max-w-md p-8 relative">
-      <!-- Nút đóng -->
-      <button class="absolute top-4 right-4 text-gray-400 hover:text-gray-600">
-        <i class="fas fa-times"></i>
-      </button>
-      
-      <!-- Avatar giả -->
-      <div class="flex justify-center mb-5">
-        <div class="avatar-placeholder w-16 h-16 rounded-full bg-gray-100 flex items-center justify-center">
-          <svg class="w-8 h-8 text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-            <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"></path>
-          </svg>
-        </div>
-      </div>
-      
-      <!-- Tiêu đề -->
-      <div class="text-center mb-6">
-        <h1 class="text-xl font-semibold">Log in</h1>
-        <p class="text-sm text-gray-500 mt-1">
-          Don't have an account? 
-          <a href="/Register" class="text-gray-900 font-medium hover:underline">Sign up</a>
-        </p>
-      </div>
-      
-      <!-- Đăng nhập bằng mạng xã hội -->
-      <va-button
-        class="w-full mb-3 justify-center"
-        color="transparent"
-        border
-        @click="facebookLogin"
+  <div
+    class="login-page min-h-screen w-full flex items-center justify-center bg-cover bg-center"
+  >
+    <div
+      class="login-modal flex w-full max-w-3xl rounded-md shadow-lg overflow-hidden bg-white"
+    >
+      <!-- Bên trái: Ảnh + chữ -->
+      <div
+        class="login-left flex flex-col items-center justify-center p-8 bg-gradient-to-br from-blue-500 to-indigo-600 text-white w-1/2"
       >
-        <template #prepend>
-          <i class="fab fa-facebook text-blue-600 me-2"></i>
-        </template>
-        Log in with Facebook
-      </va-button>
-      
-      <va-button
-        class="w-full mb-6 justify-center"
-        color="transparent"
-        border
-        @click="googleLogin"
-      >
-        <template #prepend>
-          <i class="fab fa-google text-red-500 me-2"></i>
-        </template>
-        Log in with Google
-      </va-button>
-      
-      <!-- Divider -->
-      <div class="flex items-center mb-6">
-        <div class="flex-grow border-t border-gray-200"></div>
-        <div class="mx-4 text-gray-400 text-sm">OR</div>
-        <div class="flex-grow border-t border-gray-200"></div>
+        <img
+          src="/images/oceanview-logo.png"
+          alt="OceanView Hotels"
+          class="mb-6 w-20 h-20 object-contain"
+        />
+        <h2 class="text-2xl font-bold mb-2">OceanView Hotels</h2>
+        <div class="text-lg font-semibold mb-4">Luxury Experience</div>
+        <div class="text-base mb-1">Chào mừng trở lại</div>
+        <div class="text-base">Đăng nhập để truy cập tài khoản của bạn</div>
       </div>
-      
-      <!-- Form đăng nhập email -->
-      <form @submit.prevent="emailLogin">
-        <div class="mb-4">
-          <label for="email" class="block text-sm font-normal text-gray-600 mb-1">Your username</label>
-          <va-input 
-            v-model="formEmail" 
-            id="email"
-            placeholder="Username"
-            class="w-full"
-            required
-          />
+      <!-- Bên phải: Form đăng nhập -->
+      <div class="login-right flex flex-col justify-center w-1/2 p-8">
+        <div class="text-center mb-6">
+          <h1 class="text-xl font-semibold">Đăng nhập</h1>
+          <p class="text-sm text-gray-500 mt-1">
+            Chưa có tài khoản?
+            <a href="/Register" class="text-blue-600 font-medium hover:underline"
+              >Đăng ký</a
+            >
+          </p>
         </div>
-        
-        <div class="mb-1">
-          <label for="password" class="block text-sm font-normal text-gray-600 mb-1">Your password</label>
-          <va-input
-            v-model="formPassword"
-            id="password"
-            :type="showPassword ? 'text' : 'password'"
-            placeholder="Password"
-            class="w-full"
-            required
-          >
-            <template #append>
-              <va-button
-                icon
-                size="small"
-                color="gray"
-                @click="togglePassword"
-              >
-                <i :class="showPassword ? 'fa fa-eye-slash' : 'fa fa-eye'"></i>
-              </va-button>
-            </template>
-          </va-input>
-          <div class="text-right mt-1">
-            <a href="/ForgotPass" class="text-xs text-gray-600 hover:underline">Forgot your password?</a>
+        <form @submit.prevent="emailLogin">
+          <div class="mb-4">
+            <label for="email" class="block text-sm font-normal text-gray-600 mb-1"
+              >Tên đăng nhập</label
+            >
+            <va-input
+              v-model="formEmail"
+              id="email"
+              placeholder="Username"
+              class="w-full"
+              required
+            />
           </div>
-        </div>
-        
-        <!-- Error message display -->
-        <va-alert
-          v-if="loginError"
-          class="mt-2 mb-2"
-          color="danger"
-          outlined
-        >
-          {{ loginError }}
+          <div class="mb-1">
+            <label for="password" class="block text-sm font-normal text-gray-600 mb-1"
+              >Mật khẩu</label
+            >
+            <va-input
+              v-model="formPassword"
+              id="password"
+              :type="showPassword ? 'text' : 'password'"
+              placeholder="Password"
+              class="w-full"
+              required
+            >
+              <template #append>
+                <va-button
+                  icon
+                  size="small"
+                  color="gray"
+                  @click="togglePassword"
+                  type="button"
+                >
+                  <i :class="showPassword ? 'fa fa-eye-slash' : 'fa fa-eye'"></i>
+                </va-button>
+              </template>
+            </va-input>
+            <div class="text-right mt-1">
+              <a href="/ForgotPass" class="text-xs text-gray-600 hover:underline"
+                >Quên mật khẩu?</a
+              >
+            </div>
+          </div>
+          <va-alert v-if="loginError" class="mt-2 mb-2" color="danger" outlined>
+            {{ loginError }}
+          </va-alert>
+          <va-button
+            type="submit"
+            class="w-full mt-4"
+            color="#0ea5e9"
+            text-color="#fff"
+            :loading="isLoading"
+            :disabled="isLoading"
+          >
+            {{ isLoading ? "Đang đăng nhập..." : "Đăng nhập" }}
+          </va-button>
+        </form>
+        <va-alert v-if="email" class="mt-4" color="success" outlined>
+          <p>{{ email }}</p>
         </va-alert>
-
-        <va-button
-          type="submit" 
-          class="w-full mt-4"
-          color="#f0f0f0"
-          text-color="#333"
-          :loading="isLoading"
-          :disabled="isLoading"
-        >
-          {{ isLoading ? 'Logging in...' : 'Log in' }}
-        </va-button>
-      </form>
-
-      <!-- Thông báo đăng nhập thành công (nếu có) -->
-      <va-alert
-        v-if="email || facebookName"
-        class="mt-4"
-        color="success"
-        outlined
-      >
-        <p>{{ email }}</p>
-        <p>{{ facebookName }}</p>
-      </va-alert>
+      </div>
     </div>
   </div>
 </template>
 
 <script setup>
-import { useLogin } from '@/composables/useLogin'
-import { onMounted } from 'vue'
-import { useRouter } from 'vue-router'
-import { useAuthStore } from '@/store/Auth'
+import { useLogin } from "@/composables/useLogin";
+import { onMounted } from "vue";
+import { useRouter } from "vue-router";
+import { useAuthStore } from "@/store/Auth";
 
-const router = useRouter()
-const authStore = useAuthStore()
+const router = useRouter();
+const authStore = useAuthStore();
 
 const {
   email,
-  facebookName,
   formEmail,
   formPassword,
   showPassword,
   togglePassword,
   emailLogin,
-  facebookLogin,
   isLoading,
-  loginError
-} = useLogin()
+  loginError,
+} = useLogin();
 
-// Check if user is already logged in
 onMounted(() => {
-  // Khởi tạo Auth từ localStorage nếu cần
-  authStore.initAuth()
-  
-  // Kiểm tra xem người dùng đã đăng nhập chưa
+  authStore.initAuth();
   if (authStore.isAuthenticated) {
-    router.push('/')
+    router.push("/");
   }
-})
-
-// Thêm hàm đăng nhập Google
-const googleLogin = () => {
-  if (window.google && window.google.accounts && window.google.accounts.id) {
-    window.google.accounts.id.prompt()
-  } else {
-    alert('Google sign-in is not available yet. Please try again later.')
-  }
-}
+});
 </script>
 
 <style scoped>
 .login-modal {
   animation: fadeIn 0.3s ease-out;
+  min-height: 420px;
+  height: 480px;
 }
-
+.login-left {
+  min-width: 0;
+  min-height: 420px;
+  height: 480px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.login-right {
+  min-width: 0;
+  min-height: 420px;
+  height: 480px;
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+@media (max-width: 900px) {
+  .login-modal {
+    flex-direction: column;
+    min-height: unset;
+    height: auto;
+    max-width: 95vw;
+  }
+  .login-left,
+  .login-right {
+    width: 100%;
+    height: auto;
+    min-height: unset;
+    padding: 32px 16px;
+  }
+}
 @keyframes fadeIn {
   from {
     opacity: 0;
@@ -200,20 +179,5 @@ const googleLogin = () => {
     opacity: 1;
     transform: translateY(0);
   }
-}
-
-:deep(.va-button) {
-  letter-spacing: normal;
-  text-transform: none;
-  font-weight: normal;
-}
-
-:deep(.va-input__container) {
-  border: 1px solid #e5e7eb;
-  border-radius: 6px;
-}
-
-:deep(.va-input__field) {
-  padding: 8px 12px;
 }
 </style>
