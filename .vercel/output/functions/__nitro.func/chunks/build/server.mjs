@@ -391,7 +391,7 @@ const _routes = [
   {
     name: "index",
     path: "/",
-    component: () => import('./index-DVk-rSBi.mjs')
+    component: () => import('./index-CyzS9IUP.mjs')
   },
   {
     name: "letan",
@@ -404,14 +404,14 @@ const _routes = [
     component: () => import('./Login-BX_47uG3.mjs')
   },
   {
-    name: "phong",
-    path: "/phong",
-    component: () => import('./phong-DCoABzYR.mjs')
+    name: "Phong",
+    path: "/Phong",
+    component: () => import('./Phong-BH4tbya7.mjs')
   },
   {
     name: "DichVu",
     path: "/DichVu",
-    component: () => import('./DichVu-DqmfzVzG.mjs'),
+    component: () => import('./DichVu-CJLxKHFg.mjs'),
     children: [
       {
         name: "DichVu-maChiTietDichVu",
@@ -428,7 +428,7 @@ const _routes = [
   {
     name: "Booking",
     path: "/Booking",
-    component: () => import('./Booking-D2v36BEB.mjs')
+    component: () => import('./Booking-DGk9-1U9.mjs')
   },
   {
     name: "Payment",
@@ -438,7 +438,7 @@ const _routes = [
   {
     name: "Profile",
     path: "/Profile",
-    component: () => import('./Profile-DY7j4SKs.mjs')
+    component: () => import('./Profile-zDpArxE3.mjs')
   },
   {
     name: "RoomMap",
@@ -449,6 +449,11 @@ const _routes = [
     name: "RoomMNG",
     path: "/RoomMNG",
     component: () => import('./RoomMNG-CdsJvmpC.mjs')
+  },
+  {
+    name: "DangNhap",
+    path: "/DangNhap",
+    component: () => import('./DangNhap-BrXYZDtE.mjs')
   },
   {
     name: "DatPhong",
@@ -464,11 +469,6 @@ const _routes = [
     name: "ForgotPass",
     path: "/ForgotPass",
     component: () => import('./ForgotPass-uR_2Gx3U.mjs')
-  },
-  {
-    name: "DangNhapPhu",
-    path: "/DangNhapPhu",
-    component: () => import('./DangNhapPhu-DLQV_A92.mjs')
   },
   {
     name: "ExamplePage",
@@ -491,14 +491,14 @@ const _routes = [
     component: () => import('./SetNewPassword-Cq_nl589.mjs')
   },
   {
-    name: "Phong-maPhong",
-    path: "/Phong/:maPhong()",
-    component: () => import('./_maPhong_-CMy3sL5E.mjs')
+    name: "phong-maPhong",
+    path: "/phong/:maPhong()",
+    component: () => import('./_maPhong_-Bj6N5o_G.mjs')
   },
   {
     name: "HotelRegulations",
     path: "/HotelRegulations",
-    component: () => import('./HotelRegulations-Cs0dVm14.mjs')
+    component: () => import('./HotelRegulations-BE6SJXXq.mjs')
   },
   {
     name: "TestcomponentVuestic",
@@ -884,13 +884,13 @@ const axiosBase = axios.create({
     "Content-Type": "application/json"
   }
 });
-const setAuthToken = (token) => {
+function setAuthToken(token) {
   if (token) {
     axiosBase.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   } else {
     delete axiosBase.defaults.headers.common["Authorization"];
   }
-};
+}
 const axios_noAkUduv0vf78s7vht2Hls1EDqDfAXigM3_vcuRZv2s = /* @__PURE__ */ defineNuxtPlugin((nuxtApp) => {
   axiosBase.interceptors.request.use((config) => {
     const token = localStorage.getItem("userToken");
