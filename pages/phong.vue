@@ -5,6 +5,7 @@ import CardRooms from "../Component/CardRooms.vue";
 import TheHeader from "../Component/Header.vue";
 import Pagination from "../Component/Pagination.vue";
 
+const router = useRouter();
 const rooms = ref([]);
 const loading = ref(true);
 const error = ref(null);
@@ -18,8 +19,8 @@ const fetchRooms = async () => {
     const res = await axiosBase.get(
       `/TatCaTruyCap/phong-rutgon?page=${page.value}&pageSize=${pageSize}`
     );
-    rooms.value = res.data.data || res.data; // tuỳ API trả về
-    totalPages.value = 3; // Luôn có 3 trang
+    rooms.value = res.data.data || res.data;
+    totalPages.value = 3;
   } catch (err) {
     error.value = err.message || "Lỗi khi gọi API";
   } finally {
@@ -41,6 +42,10 @@ const bookedMap = computed(() =>
   )
 );
 const maxBooked = computed(() => Math.max(...Object.values(bookedMap.value)));
+
+function goToBooking(room) {
+  router.push(`/phong/${room.maPhong}`); // KHÔNG dùng `{ path: ... }`
+}
 </script>
 
 <template>
@@ -62,6 +67,7 @@ const maxBooked = computed(() => Math.max(...Object.values(bookedMap.value)));
         :max-price="maxPrice"
         :min-price="minPrice"
         :booked-map="bookedMap"
+        @book-room="goToBooking"
       />
       <Pagination v-model="page" :total-pages="totalPages" class="mt-6" />
     </div>

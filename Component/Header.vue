@@ -123,7 +123,7 @@
 
           <template v-else>
             <div class="auth-buttons">
-              <NuxtLink to="/DangNhapPhu" class="btn btn-outline">
+              <NuxtLink to="/DangNhap" class="btn btn-outline">
                 <va-icon name="login" size="small" />
                 Đăng nhập
               </NuxtLink>

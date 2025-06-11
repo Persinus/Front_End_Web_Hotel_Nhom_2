@@ -17,11 +17,7 @@
       <div
         class="login-left flex flex-col items-center justify-center p-8 bg-gradient-to-br from-blue-500 to-indigo-600 text-white w-1/2"
       >
-        <img
-          src="/images/oceanview-logo.png"
-          alt="OceanView Hotels"
-          class="mb-6 w-20 h-20 object-contain"
-        />
+        <img alt="OceanView Hotels" class="mb-6 w-20 h-20 object-contain" />
         <h2 class="text-2xl font-bold mb-2">OceanView Hotels</h2>
         <div class="text-lg font-semibold mb-4">Luxury Experience</div>
         <div class="text-base mb-1">Chào mừng trở lại</div>

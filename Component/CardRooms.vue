@@ -101,7 +101,14 @@
             </span>
             <span class="price-unit">/ {{ room.donViTinh || "đêm" }}</span>
           </div>
-          <va-button color="primary" size="medium" class="book-btn">Đặt ngay</va-button>
+          <va-button
+            color="primary"
+            size="medium"
+            class="book-btn"
+            @click="$emit('book-room', room)"
+          >
+            Xem chi tiết
+          </va-button>
         </div>
       </div>
       <div

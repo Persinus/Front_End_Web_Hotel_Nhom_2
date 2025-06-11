@@ -1,5 +1,5 @@
 import { resolveComponent, withCtx, createTextVNode, h, hasInjectionContext, getCurrentInstance, inject, useSSRContext, defineComponent, ref, Suspense, Fragment, createElementBlock, shallowRef, provide, cloneVNode, createApp, shallowReactive, toRef, onErrorCaptured, onServerPrefetch, unref, createVNode, resolveDynamicComponent, reactive, effectScope, isReadonly, isRef, isShallow, isReactive, toRaw, defineAsyncComponent, mergeProps, getCurrentScope } from 'vue';
-import { k as hasProtocol, l as isScriptProtocol, m as joinURL, w as withQuery, s as sanitizeStatusCode, n as getContext, $ as $fetch, o as createHooks, q as executeAsync, c as createError$1, r as toRouteMatcher, v as createRouter$1, x as defu } from '../_/nitro.mjs';
+import { h as hasProtocol, i as isScriptProtocol, k as joinURL, w as withQuery, s as sanitizeStatusCode, l as getContext, $ as $fetch, m as createHooks, n as executeAsync, e as createError$1, o as toRouteMatcher, q as createRouter$1, r as defu } from '../_/nitro.mjs';
 import { u as useHead$1, h as headSymbol, b as baseURL } from '../routes/renderer.mjs';
 import { RouterView, createMemoryHistory, createRouter, START_LOCATION } from 'vue-router';
 import axios from 'axios';
@@ -391,7 +391,7 @@ const _routes = [
   {
     name: "index",
     path: "/",
-    component: () => import('./index-BWSuQJXx.mjs')
+    component: () => import('./index-DVk-rSBi.mjs')
   },
   {
     name: "letan",
@@ -401,17 +401,17 @@ const _routes = [
   {
     name: "Login",
     path: "/Login",
-    component: () => import('./Login-O2vWZ8H7.mjs')
+    component: () => import('./Login-BX_47uG3.mjs')
   },
   {
     name: "phong",
     path: "/phong",
-    component: () => import('./phong-BWKhu0E7.mjs')
+    component: () => import('./phong-DCoABzYR.mjs')
   },
   {
     name: "DichVu",
     path: "/DichVu",
-    component: () => import('./DichVu-B6tX9vDK.mjs'),
+    component: () => import('./DichVu-DqmfzVzG.mjs'),
     children: [
       {
         name: "DichVu-maChiTietDichVu",
@@ -428,7 +428,7 @@ const _routes = [
   {
     name: "Booking",
     path: "/Booking",
-    component: () => import('./Booking-B1CEoJKs.mjs')
+    component: () => import('./Booking-D2v36BEB.mjs')
   },
   {
     name: "Payment",
@@ -453,7 +453,7 @@ const _routes = [
   {
     name: "DatPhong",
     path: "/DatPhong",
-    component: () => import('./DatPhong-ButS0eDy.mjs')
+    component: () => import('./DatPhong-BSKplJKC.mjs')
   },
   {
     name: "Register",
@@ -468,7 +468,7 @@ const _routes = [
   {
     name: "DangNhapPhu",
     path: "/DangNhapPhu",
-    component: () => import('./DangNhapPhu-ClY6ekMY.mjs')
+    component: () => import('./DangNhapPhu-DLQV_A92.mjs')
   },
   {
     name: "ExamplePage",
@@ -493,12 +493,12 @@ const _routes = [
   {
     name: "Phong-maPhong",
     path: "/Phong/:maPhong()",
-    component: () => import('./_maPhong_-n6Q1Zdco.mjs')
+    component: () => import('./_maPhong_-CMy3sL5E.mjs')
   },
   {
     name: "HotelRegulations",
     path: "/HotelRegulations",
-    component: () => import('./HotelRegulations-TzpsVRMd.mjs')
+    component: () => import('./HotelRegulations-Cs0dVm14.mjs')
   },
   {
     name: "TestcomponentVuestic",

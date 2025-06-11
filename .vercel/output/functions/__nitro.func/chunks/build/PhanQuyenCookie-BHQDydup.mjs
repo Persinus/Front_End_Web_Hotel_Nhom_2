@@ -1,7 +1,7 @@
 import { defineStore } from 'pinia';
 import { ref } from 'vue';
 import { s as setAuthToken, b as useNuxtApp, f as axiosBase, g as useRequestEvent } from './server.mjs';
-import { y as destr, z as klona, A as getRequestHeader, B as isEqual, C as setCookie, D as getCookie, E as deleteCookie } from '../_/nitro.mjs';
+import { v as destr, x as klona, y as getRequestHeader, z as isEqual, A as setCookie, B as getCookie, C as deleteCookie } from '../_/nitro.mjs';
 
 function parse(str, options) {
   if (typeof str !== "string") {

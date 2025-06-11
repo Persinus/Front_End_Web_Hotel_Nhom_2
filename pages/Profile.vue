@@ -1,11 +1,3 @@
-<!-- Trang Thọ Code xin đừng động vào  -->
-<!-- Trang Thọ Code xin đừng động vào  -->
-<!-- Trang Thọ Code xin đừng động vào  -->
-<!-- Trang Thọ Code xin đừng động vào  -->
-<!-- Trang Thọ Code xin đừng động vào  -->
-<!-- Trang Thọ Code xin đừng động vào  -->
-<!-- Trang Thọ Code xin đừng động vào  -->
-
 <template>
   <div class="profile-page">
     <!-- Background Animation -->
@@ -20,14 +12,17 @@
       <div class="header-content">
         <div class="profile-avatar-section">
           <div class="avatar-container">
-            <img 
-              :src="userProfile.avatar || 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face'" 
-              alt="Avatar" 
+            <img
+              :src="
+                userProfile.avatar ||
+                'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face'
+              "
+              alt="Avatar"
               class="profile-avatar"
             />
             <div class="avatar-badge">
               <svg viewBox="0 0 24 24" class="badge-icon">
-                <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
+                <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z" />
               </svg>
             </div>
           </div>
@@ -52,43 +47,46 @@
         </div>
       </div>
     </div>
-
     <!-- Navigation Tabs -->
     <div class="tabs-container" :class="{ 'animate-in': isVisible }">
       <div class="tabs-wrapper">
-        <button 
-          class="tab-button" 
-          :class="{ 'active': currentTab === 'info' }" 
+        <button
+          class="tab-button"
+          :class="{ active: currentTab === 'info' }"
           @click="switchTab('info')"
         >
           <svg viewBox="0 0 24 24" class="tab-icon">
-            <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+            <path
+              d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"
+            />
           </svg>
           <span>Thông tin cá nhân</span>
         </button>
-        
-        <button 
-          class="tab-button" 
-          :class="{ 'active': currentTab === 'history' }" 
+        <button
+          class="tab-button"
+          :class="{ active: currentTab === 'history' }"
           @click="switchTab('history')"
         >
           <svg viewBox="0 0 24 24" class="tab-icon">
-            <path d="M13 3c-4.97 0-9 4.03-9 9H1l3.89 3.89.07.14L9 12H6c0-3.87 3.13-7 7-7s7 3.13 7 7-3.13 7-7 7c-1.93 0-3.68-.79-4.94-2.06l-1.42 1.42C8.27 19.99 10.51 21 13 21c4.97 0 9-4.03 9-9s-4.03-9-9-9zm-1 5v5l4.28 2.54.72-1.21-3.5-2.08V8H12z"/>
+            <path
+              d="M13 3c-4.97 0-9 4.03-9 9H1l3.89 3.89.07.14L9 12H6c0-3.87 3.13-7 7-7s7 3.13 7 7-3.13 7-7 7c-1.93 0-3.68-.79-4.94-2.06l-1.42 1.42C8.27 19.99 10.51 21 13 21c4.97 0 9-4.03 9-9s-4.03-9-9-9zm-1 5v5l4.28 2.54.72-1.21-3.5-2.08V8H12z"
+            />
           </svg>
           <span>Lịch sử sử dụng</span>
         </button>
-        
-        <button 
-          class="tab-button" 
-          :class="{ 'active': currentTab === 'settings' }" 
+        <button
+          class="tab-button"
+          :class="{ active: currentTab === 'settings' }"
           @click="switchTab('settings')"
         >
           <svg viewBox="0 0 24 24" class="tab-icon">
-            <path d="M19.14,12.94c0.04-0.3,0.06-0.61,0.06-0.94c0-0.32-0.02-0.64-0.07-0.94l2.03-1.58c0.18-0.14,0.23-0.41,0.12-0.61 l-1.92-3.32c-0.12-0.22-0.37-0.29-0.59-0.22l-2.39,0.96c-0.5-0.38-1.03-0.7-1.62-0.94L14.4,2.81c-0.04-0.24-0.24-0.41-0.48-0.41 h-3.84c-0.24,0-0.43,0.17-0.47,0.41L9.25,5.35C8.66,5.59,8.12,5.92,7.63,6.29L5.24,5.33c-0.22-0.08-0.47,0-0.59,0.22L2.74,8.87 C2.62,9.08,2.66,9.34,2.86,9.48l2.03,1.58C4.84,11.36,4.82,11.69,4.82,12s0.02,0.64,0.07,0.94l-2.03,1.58 c-0.18,0.14-0.23,0.41-0.12,0.61l1.92,3.32c0.12,0.22,0.37,0.29,0.59,0.22l2.39-0.96c0.5,0.38,1.03,0.7,1.62,0.94l0.36,2.54 c0.05,0.24,0.24,0.41,0.48,0.41h3.84c0.24,0,0.44-0.17,0.47-0.41l0.36-2.54c0.59-0.24,1.13-0.56,1.62-0.94l2.39,0.96 c0.22,0.08,0.47,0,0.59-0.22l1.92-3.32c0.12-0.22,0.07-0.47-0.12-0.61L19.14,12.94z M12,15.6c-1.98,0-3.6-1.62-3.6-3.6 s1.62-3.6,3.6-3.6s3.6,1.62,3.6,3.6S13.98,15.6,12,15.6z"/>
+            <path
+              d="M19.14,12.94c0.04-0.3,0.06-0.61,0.06-0.94c0-0.32-0.02-0.64-0.07-0.94l2.03-1.58c0.18-0.14,0.23-0.41,0.12-0.61 l-1.92-3.32c-0.12-0.22-0.37-0.29-0.59-0.22l-2.39,0.96c-0.5-0.38-1.03-0.7-1.62-0.94L14.4,2.81c-0.04-0.24-0.24-0.41-0.48-0.41 h-3.84c-0.24,0-0.43,0.17-0.47,0.41L9.25,5.35C8.66,5.59,8.12,5.92,7.63,6.29L5.24,5.33c-0.22-0.08-0.47,0-0.59,0.22L2.74,8.87 C2.62,9.08,2.66,9.34,2.86,9.48l2.03,1.58C4.84,11.36,4.82,11.69,4.82,12s0.02,0.64,0.07,0.94l-2.03,1.58 c-0.18,0.14-0.23,0.41-0.12,0.61l1.92,3.32c0.12,0.22,0.37,0.29,0.59,0.22l2.39-0.96c0.5,0.38,1.03,0.7,1.62,0.94l0.36,2.54 c0.05,0.24,0.24,0.41,0.48,0.41h3.84c0.24,0,0.44-0.17,0.47-0.41l0.36-2.54c0.59-0.24,1.13-0.56,1.62-0.94l2.39,0.96 c0.22,0.08,0.47,0,0.59-0.22l1.92-3.32c0.12-0.22,0.07-0.47-0.12-0.61L19.14,12.94z M12,15.6c-1.98,0-3.6-1.62-3.6-3.6 s1.62-3.6,3.6-3.6s3.6,1.62,3.6,3.6S13.98,15.6,12,15.6z"
+            />
           </svg>
           <span>Cài đặt</span>
         </button>
-        
+
         <div class="tab-indicator" :style="tabIndicatorStyle"></div>
       </div>
     </div>
@@ -96,23 +94,27 @@
     <!-- Main Content -->
     <div class="profile-content">
       <!-- THÔNG TIN CÁ NHÂN -->
-      <div v-if="currentTab === 'info'" class="tab-content" :class="{ 'animate-in': tabAnimationKey === 'info' }">
+      <div
+        v-if="currentTab === 'info'"
+        class="tab-content"
+        :class="{ 'animate-in': tabAnimationKey === 'info' }"
+      >
         <div class="content-card">
           <div class="card-header">
             <h2 class="card-title">
               <svg viewBox="0 0 24 24" class="title-icon">
-                <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+                <path
+                  d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"
+                />
               </svg>
               Thông tin cá nhân
             </h2>
             <div class="card-actions">
-              <button 
-                v-if="!editable" 
-                @click="enableEdit" 
-                class="edit-btn"
-              >
+              <button v-if="!editable" @click="enableEdit" class="edit-btn">
                 <svg viewBox="0 0 24 24">
-                  <path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/>
+                  <path
+                    d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"
+                  />
                 </svg>
                 Chỉnh sửa
               </button>
@@ -124,21 +126,25 @@
               <div class="form-group">
                 <label class="form-label">
                   <svg viewBox="0 0 24 24" class="label-icon">
-                    <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+                    <path
+                      d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"
+                    />
                   </svg>
                   Họ và tên
                 </label>
                 <div class="input-wrapper">
-                  <input 
-                    :readonly="!editable" 
-                    type="text" 
-                    v-model="form.fullName" 
+                  <input
+                    :readonly="!editable"
+                    type="text"
+                    v-model="form.fullName"
                     class="form-input"
-                    :class="{ 'editable': editable }"
+                    :class="{ editable: editable }"
                   />
                   <div v-if="editable" class="input-status">
                     <svg viewBox="0 0 24 24" class="status-icon">
-                      <path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/>
+                      <path
+                        d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"
+                      />
                     </svg>
                   </div>
                 </div>
@@ -147,21 +153,25 @@
               <div class="form-group">
                 <label class="form-label">
                   <svg viewBox="0 0 24 24" class="label-icon">
-                    <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+                    <path
+                      d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"
+                    />
                   </svg>
                   Email
                 </label>
                 <div class="input-wrapper">
-                  <input 
-                    :readonly="!editable" 
-                    type="email" 
-                    v-model="form.email" 
+                  <input
+                    :readonly="!editable"
+                    type="email"
+                    v-model="form.email"
                     class="form-input"
-                    :class="{ 'editable': editable }"
+                    :class="{ editable: editable }"
                   />
                   <div v-if="editable" class="input-status">
                     <svg viewBox="0 0 24 24" class="status-icon">
-                      <path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/>
+                      <path
+                        d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"
+                      />
                     </svg>
                   </div>
                 </div>
@@ -170,21 +180,25 @@
               <div class="form-group">
                 <label class="form-label">
                   <svg viewBox="0 0 24 24" class="label-icon">
-                    <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/>
+                    <path
+                      d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"
+                    />
                   </svg>
                   Số điện thoại
                 </label>
                 <div class="input-wrapper">
-                  <input 
-                    :readonly="!editable" 
-                    type="tel" 
-                    v-model="form.phone" 
+                  <input
+                    :readonly="!editable"
+                    type="tel"
+                    v-model="form.phone"
                     class="form-input"
-                    :class="{ 'editable': editable }"
+                    :class="{ editable: editable }"
                   />
                   <div v-if="editable" class="input-status">
                     <svg viewBox="0 0 24 24" class="status-icon">
-                      <path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/>
+                      <path
+                        d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"
+                      />
                     </svg>
                   </div>
                 </div>
@@ -193,21 +207,25 @@
               <div class="form-group">
                 <label class="form-label">
                   <svg viewBox="0 0 24 24" class="label-icon">
-                    <path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 2 2h8c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-1 9H7v-2h6v2zm3-4H7V5h9v2z"/>
+                    <path
+                      d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 2 2h8c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-1 9H7v-2h6v2zm3-4H7V5h9v2z"
+                    />
                   </svg>
                   Số CCCD/Hộ chiếu
                 </label>
                 <div class="input-wrapper">
-                  <input 
-                    :readonly="!editable" 
-                    type="text" 
-                    v-model="form.idNumber" 
+                  <input
+                    :readonly="!editable"
+                    type="text"
+                    v-model="form.idNumber"
                     class="form-input"
-                    :class="{ 'editable': editable }"
+                    :class="{ editable: editable }"
                   />
                   <div v-if="editable" class="input-status">
                     <svg viewBox="0 0 24 24" class="status-icon">
-                      <path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/>
+                      <path
+                        d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"
+                      />
                     </svg>
                   </div>
                 </div>
@@ -216,21 +234,25 @@
               <div class="form-group full-width">
                 <label class="form-label">
                   <svg viewBox="0 0 24 24" class="label-icon">
-                    <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+                    <path
+                      d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"
+                    />
                   </svg>
                   Địa chỉ liên lạc
                 </label>
                 <div class="input-wrapper">
-                  <input 
-                    :readonly="!editable" 
-                    type="text" 
-                    v-model="form.address" 
+                  <input
+                    :readonly="!editable"
+                    type="text"
+                    v-model="form.address"
                     class="form-input"
-                    :class="{ 'editable': editable }"
+                    :class="{ editable: editable }"
                   />
                   <div v-if="editable" class="input-status">
                     <svg viewBox="0 0 24 24" class="status-icon">
-                      <path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/>
+                      <path
+                        d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"
+                      />
                     </svg>
                   </div>
                 </div>
@@ -245,23 +267,32 @@
               </div>
               <div class="otp-input-group">
                 <div class="otp-inputs">
-                  <input 
-                    v-for="(digit, index) in otpDigits" 
+                  <input
+                    v-for="(digit, index) in otpDigits"
                     :key="index"
-                    type="text" 
+                    type="text"
                     maxlength="1"
                     v-model="otpDigits[index]"
                     @input="handleOtpInput(index, $event)"
                     @keydown="handleOtpKeydown(index, $event)"
                     class="otp-digit"
-                    :ref="el => otpInputs[index] = el"
+                    :ref="(el) => (otpInputs[index] = el)"
                   />
                 </div>
-                <button type="button" @click="sendOtp" class="resend-btn" :disabled="resendCooldown > 0">
+                <button
+                  type="button"
+                  @click="sendOtp"
+                  class="resend-btn"
+                  :disabled="resendCooldown > 0"
+                >
                   <svg viewBox="0 0 24 24">
-                    <path d="M17.65 6.35C16.2 4.9 14.21 4 12 4c-4.42 0-7.99 3.58-7.99 8s3.57 8 7.99 8c3.73 0 6.84-2.55 7.73-6h-2.08c-.82 2.33-3.04 4-5.65 4-3.31 0-6-2.69-6-6s2.69-6 6-6c1.66 0 3.14.69 4.22 1.78L13 11h7V4l-2.35 2.35z"/>
+                    <path
+                      d="M17.65 6.35C16.2 4.9 14.21 4 12 4c-4.42 0-7.99 3.58-7.99 8s3.57 8 7.99 8c3.73 0 6.84-2.55 7.73-6h-2.08c-.82 2.33-3.04 4-5.65 4-3.31 0-6-2.69-6-6s2.69-6 6-6c1.66 0 3.14.69 4.22 1.78L13 11h7V4l-2.35 2.35z"
+                    />
                   </svg>
-                  {{ resendCooldown > 0 ? `Gửi lại sau ${resendCooldown}s` : 'Gửi lại OTP' }}
+                  {{
+                    resendCooldown > 0 ? `Gửi lại sau ${resendCooldown}s` : "Gửi lại OTP"
+                  }}
                 </button>
               </div>
             </div>
@@ -269,16 +300,18 @@
             <div v-if="editable" class="form-actions">
               <button type="button" @click="cancelEdit" class="cancel-btn">
                 <svg viewBox="0 0 24 24">
-                  <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
+                  <path
+                    d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"
+                  />
                 </svg>
                 Hủy
               </button>
               <button type="submit" class="save-btn" :disabled="isSaving">
                 <svg v-if="!isSaving" viewBox="0 0 24 24">
-                  <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
+                  <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z" />
                 </svg>
                 <div v-else class="loading-spinner"></div>
-                {{ isSaving ? 'Đang lưu...' : 'Lưu thay đổi' }}
+                {{ isSaving ? "Đang lưu..." : "Lưu thay đổi" }}
               </button>
             </div>
           </form>
@@ -286,19 +319,25 @@
       </div>
 
       <!-- LỊCH SỬ SỬ DỤNG -->
-      <div v-if="currentTab === 'history'" class="tab-content" :class="{ 'animate-in': tabAnimationKey === 'history' }">
+      <div
+        v-if="currentTab === 'history'"
+        class="tab-content"
+        :class="{ 'animate-in': tabAnimationKey === 'history' }"
+      >
         <div class="content-card">
           <div class="card-header">
             <h2 class="card-title">
               <svg viewBox="0 0 24 24" class="title-icon">
-                <path d="M13 3c-4.97 0-9 4.03-9 9H1l3.89 3.89.07.14L9 12H6c0-3.87 3.13-7 7-7s7 3.13 7 7-3.13 7-7 7c-1.93 0-3.68-.79-4.94-2.06l-1.42 1.42C8.27 19.99 10.51 21 13 21c4.97 0 9-4.03 9-9s-4.03-9-9-9zm-1 5v5l4.28 2.54.72-1.21-3.5-2.08V8H12z"/>
+                <path
+                  d="M13 3c-4.97 0-9 4.03-9 9H1l3.89 3.89.07.14L9 12H6c0-3.87 3.13-7 7-7s7 3.13 7 7-3.13 7-7 7c-1.93 0-3.68-.79-4.94-2.06l-1.42 1.42C8.27 19.99 10.51 21 13 21c4.97 0 9-4.03 9-9s-4.03-9-9-9zm-1 5v5l4.28 2.54.72-1.21-3.5-2.08V8H12z"
+                />
               </svg>
               Lịch sử sử dụng dịch vụ
             </h2>
             <div class="card-actions">
               <button class="export-btn" @click="exportHistory">
                 <svg viewBox="0 0 24 24">
-                  <path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/>
+                  <path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z" />
                 </svg>
                 Xuất dữ liệu
               </button>
@@ -310,21 +349,25 @@
             <div class="filter-group">
               <label class="filter-label">
                 <svg viewBox="0 0 24 24" class="filter-icon">
-                  <path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
+                  <path
+                    d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"
+                  />
                 </svg>
                 Tìm kiếm
               </label>
-              <input 
-                v-model="filters.keyword" 
-                placeholder="Tìm theo tên dịch vụ/phòng..." 
+              <input
+                v-model="filters.keyword"
+                placeholder="Tìm theo tên dịch vụ/phòng..."
                 class="filter-input"
               />
             </div>
-            
+
             <div class="filter-group">
               <label class="filter-label">
                 <svg viewBox="0 0 24 24" class="filter-icon">
-                  <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                  <path
+                    d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"
+                  />
                 </svg>
                 Loại dịch vụ
               </label>
@@ -334,11 +377,13 @@
                 <option value="service">Dịch vụ</option>
               </select>
             </div>
-            
+
             <div class="filter-group">
               <label class="filter-label">
                 <svg viewBox="0 0 24 24" class="filter-icon">
-                  <path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11zM7 10h5v5H7z"/>
+                  <path
+                    d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11zM7 10h5v5H7z"
+                  />
                 </svg>
                 Thời gian
               </label>
@@ -365,9 +410,9 @@
                 </tr>
               </thead>
               <tbody>
-                <tr 
-                  v-for="(item, index) in paginatedHistory" 
-                  :key="item.id" 
+                <tr
+                  v-for="(item, index) in paginatedHistory"
+                  :key="item.id"
                   class="table-row"
                   :style="{ animationDelay: `${index * 0.1}s` }"
                 >
@@ -375,10 +420,14 @@
                     <div class="service-info">
                       <div class="service-icon">
                         <svg v-if="item.type === 'room'" viewBox="0 0 24 24">
-                          <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 3c1.93 0 3.5 1.57 3.5 3.5S13.93 13 12 13s-3.5-1.57-3.5-3.5S10.07 6 12 6zm7 13H5v-.23c0-.62.28-1.2.76-1.58C7.47 15.82 9.64 15 12 15s4.53.82 6.24 2.19c.48.38.76.97.76 1.58V19z"/>
+                          <path
+                            d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 3c1.93 0 3.5 1.57 3.5 3.5S13.93 13 12 13s-3.5-1.57-3.5-3.5S10.07 6 12 6zm7 13H5v-.23c0-.62.28-1.2.76-1.58C7.47 15.82 9.64 15 12 15s4.53.82 6.24 2.19c.48.38.76.97.76 1.58V19z"
+                          />
                         </svg>
                         <svg v-else viewBox="0 0 24 24">
-                          <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                          <path
+                            d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"
+                          />
                         </svg>
                       </div>
                       <span class="service-name">{{ item.name }}</span>
@@ -386,7 +435,7 @@
                   </td>
                   <td>
                     <span class="service-type" :class="item.type">
-                      {{ item.type === 'room' ? 'Đặt phòng' : 'Dịch vụ' }}
+                      {{ item.type === "room" ? "Đặt phòng" : "Dịch vụ" }}
                     </span>
                   </td>
                   <td>{{ formatDate(item.date) }}</td>
@@ -400,12 +449,14 @@
                     <div class="action-buttons">
                       <button class="action-btn view" title="Xem chi tiết">
                         <svg viewBox="0 0 24 24">
-                          <path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/>
+                          <path
+                            d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"
+                          />
                         </svg>
                       </button>
                       <button class="action-btn download" title="Tải hóa đơn">
                         <svg viewBox="0 0 24 24">
-                          <path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/>
+                          <path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z" />
                         </svg>
                       </button>
                     </div>
@@ -418,35 +469,36 @@
           <!-- Pagination -->
           <div class="pagination-container" v-if="totalPages > 1">
             <div class="pagination-info">
-              Hiển thị {{ (currentPage - 1) * itemsPerPage + 1 }} - {{ Math.min(currentPage * itemsPerPage, filteredHistory.length) }} 
-              trong tổng số {{ filteredHistory.length }} bản ghi
+              Hiển thị {{ (currentPage - 1) * itemsPerPage + 1 }} -
+              {{ Math.min(currentPage * itemsPerPage, filteredHistory.length) }} trong
+              tổng số {{ filteredHistory.length }} bản ghi
             </div>
             <div class="pagination">
-              <button 
-                class="page-btn" 
+              <button
+                class="page-btn"
                 :disabled="currentPage === 1"
                 @click="currentPage--"
               >
                 <svg viewBox="0 0 24 24">
-                  <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/>
+                  <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z" />
                 </svg>
               </button>
               <button
                 v-for="page in visiblePages"
                 :key="page"
                 class="page-btn"
-                :class="{ 'active': currentPage === page }"
+                :class="{ active: currentPage === page }"
                 @click="currentPage = page"
               >
                 {{ page }}
               </button>
-              <button 
-                class="page-btn" 
+              <button
+                class="page-btn"
                 :disabled="currentPage === totalPages"
                 @click="currentPage++"
               >
                 <svg viewBox="0 0 24 24">
-                  <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/>
+                  <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z" />
                 </svg>
               </button>
             </div>
@@ -455,12 +507,18 @@
       </div>
 
       <!-- CÀI ĐẶT -->
-      <div v-if="currentTab === 'settings'" class="tab-content" :class="{ 'animate-in': tabAnimationKey === 'settings' }">
+      <div
+        v-if="currentTab === 'settings'"
+        class="tab-content"
+        :class="{ 'animate-in': tabAnimationKey === 'settings' }"
+      >
         <div class="content-card">
           <div class="card-header">
             <h2 class="card-title">
               <svg viewBox="0 0 24 24" class="title-icon">
-                <path d="M19.14,12.94c0.04-0.3,0.06-0.61,0.06-0.94c0-0.32-0.02-0.64-0.07-0.94l2.03-1.58c0.18-0.14,0.23-0.41,0.12-0.61 l-1.92-3.32c-0.12-0.22-0.37-0.29-0.59-0.22l-2.39,0.96c-0.5-0.38-1.03-0.7-1.62-0.94L14.4,2.81c-0.04-0.24-0.24-0.41-0.48-0.41 h-3.84c-0.24,0-0.43,0.17-0.47,0.41L9.25,5.35C8.66,5.59,8.12,5.92,7.63,6.29L5.24,5.33c-0.22-0.08-0.47,0-0.59,0.22L2.74,8.87 C2.62,9.08,2.66,9.34,2.86,9.48l2.03,1.58C4.84,11.36,4.82,11.69,4.82,12s0.02,0.64,0.07,0.94l-2.03,1.58 c-0.18,0.14-0.23,0.41-0.12,0.61l1.92,3.32c0.12,0.22,0.37,0.29,0.59,0.22l2.39-0.96c0.5,0.38,1.03,0.7,1.62,0.94l0.36,2.54 c0.05,0.24,0.24,0.41,0.48,0.41h3.84c0.24,0,0.44-0.17,0.47-0.41l0.36-2.54c0.59-0.24,1.13-0.56,1.62-0.94l2.39,0.96 c0.22,0.08,0.47,0,0.59-0.22l1.92-3.32c0.12-0.22,0.07-0.47-0.12-0.61L19.14,12.94z M12,15.6c-1.98,0-3.6-1.62-3.6-3.6 s1.62-3.6,3.6-3.6s3.6,1.62,3.6,3.6S13.98,15.6,12,15.6z"/>
+                <path
+                  d="M19.14,12.94c0.04-0.3,0.06-0.61,0.06-0.94c0-0.32-0.02-0.64-0.07-0.94l2.03-1.58c0.18-0.14,0.23-0.41,0.12-0.61 l-1.92-3.32c-0.12-0.22-0.37-0.29-0.59-0.22l-2.39,0.96c-0.5-0.38-1.03-0.7-1.62-0.94L14.4,2.81c-0.04-0.24-0.24-0.41-0.48-0.41 h-3.84c-0.24,0-0.43,0.17-0.47,0.41L9.25,5.35C8.66,5.59,8.12,5.92,7.63,6.29L5.24,5.33c-0.22-0.08-0.47,0-0.59,0.22L2.74,8.87 C2.62,9.08,2.66,9.34,2.86,9.48l2.03,1.58C4.84,11.36,4.82,11.69,4.82,12s0.02,0.64,0.07,0.94l-2.03,1.58 c-0.18,0.14-0.23,0.41-0.12,0.61l1.92,3.32c0.12,0.22,0.37,0.29,0.59,0.22l2.39-0.96c0.5,0.38,1.03,0.7,1.62,0.94l0.36,2.54 c0.05,0.24,0.24,0.41,0.48,0.41h3.84c0.24,0,0.44-0.17,0.47-0.41l0.36-2.54c0.59-0.24,1.13-0.56,1.62-0.94l2.39,0.96 c0.22,0.08,0.47,0,0.59-0.22l1.92-3.32c0.12-0.22,0.07-0.47-0.12-0.61L19.14,12.94z M12,15.6c-1.98,0-3.6-1.62-3.6-3.6 s1.62-3.6,3.6-3.6s3.6,1.62,3.6,3.6S13.98,15.6,12,15.6z"
+                />
               </svg>
               Cài đặt tài khoản
             </h2>
@@ -470,14 +528,16 @@
             <div class="setting-card">
               <div class="setting-icon">
                 <svg viewBox="0 0 24 24">
-                  <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                  <path
+                    d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"
+                  />
                 </svg>
               </div>
               <div class="setting-content">
                 <h3>Thông báo Email</h3>
                 <p>Nhận thông báo về đặt phòng và ưu đãi</p>
                 <label class="toggle-switch">
-                  <input type="checkbox" v-model="settings.emailNotifications">
+                  <input type="checkbox" v-model="settings.emailNotifications" />
                   <span class="slider"></span>
                 </label>
               </div>
@@ -486,14 +546,16 @@
             <div class="setting-card">
               <div class="setting-icon">
                 <svg viewBox="0 0 24 24">
-                  <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                  <path
+                    d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"
+                  />
                 </svg>
               </div>
               <div class="setting-content">
                 <h3>Thông báo SMS</h3>
                 <p>Nhận SMS xác nhận và nhắc nhở</p>
                 <label class="toggle-switch">
-                  <input type="checkbox" v-model="settings.smsNotifications">
+                  <input type="checkbox" v-model="settings.smsNotifications" />
                   <span class="slider"></span>
                 </label>
               </div>
@@ -502,14 +564,16 @@
             <div class="setting-card">
               <div class="setting-icon">
                 <svg viewBox="0 0 24 24">
-                  <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                  <path
+                    d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"
+                  />
                 </svg>
               </div>
               <div class="setting-content">
                 <h3>Chế độ riêng tư</h3>
                 <p>Ẩn thông tin cá nhân khỏi người khác</p>
                 <label class="toggle-switch">
-                  <input type="checkbox" v-model="settings.privateMode">
+                  <input type="checkbox" v-model="settings.privateMode" />
                   <span class="slider"></span>
                 </label>
               </div>
@@ -518,14 +582,16 @@
             <div class="setting-card">
               <div class="setting-icon">
                 <svg viewBox="0 0 24 24">
-                  <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                  <path
+                    d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"
+                  />
                 </svg>
               </div>
               <div class="setting-content">
                 <h3>Đăng nhập 2 lớp</h3>
                 <p>Tăng cường bảo mật với xác thực 2 yếu tố</p>
                 <label class="toggle-switch">
-                  <input type="checkbox" v-model="settings.twoFactorAuth">
+                  <input type="checkbox" v-model="settings.twoFactorAuth" />
                   <span class="slider"></span>
                 </label>
               </div>
@@ -537,13 +603,17 @@
             <div class="danger-actions">
               <button class="danger-btn" @click="changePassword">
                 <svg viewBox="0 0 24 24">
-                  <path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/>
+                  <path
+                    d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"
+                  />
                 </svg>
                 Đổi mật khẩu
               </button>
               <button class="danger-btn delete" @click="deleteAccount">
                 <svg viewBox="0 0 24 24">
-                  <path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"/>
+                  <path
+                    d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"
+                  />
                 </svg>
                 Xóa tài khoản
               </button>
@@ -554,23 +624,29 @@
     </div>
 
     <!-- Success Message -->
-    <div v-if="successMessage" class="success-message" :class="{ 'show': showSuccessMessage }">
+    <div
+      v-if="successMessage"
+      class="success-message"
+      :class="{ show: showSuccessMessage }"
+    >
       <div class="message-content">
         <svg viewBox="0 0 24 24" class="message-icon">
-          <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
+          <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z" />
         </svg>
         <span>{{ successMessage }}</span>
       </div>
     </div>
 
     <!-- Toast Notification -->
-    <div v-if="showToast" class="toast" :class="[toastType, { 'show': showToast }]">
+    <div v-if="showToast" class="toast" :class="[toastType, { show: showToast }]">
       <div class="toast-content">
         <svg v-if="toastType === 'success'" viewBox="0 0 24 24" class="toast-icon">
-          <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
+          <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z" />
         </svg>
         <svg v-else viewBox="0 0 24 24" class="toast-icon">
-          <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+          <path
+            d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"
+          />
         </svg>
         <span>{{ toastMessage }}</span>
       </div>
@@ -579,267 +655,372 @@
 </template>
 
 <script setup>
-import { ref, computed, watch, onMounted, nextTick } from 'vue'
+import { onMounted, ref } from "vue";
+import { useCookie } from "#app";
+import { axiosBase } from "~/utils/axiosBase";
+import { usePhanQuyenStore } from "~/store/PhanQuyenCookie";
 
-// Reactive data
-const currentTab = ref('info')
-const tabAnimationKey = ref('info')
-const isVisible = ref(false)
-const editable = ref(false)
-const otpRequired = ref(false)
-const otpDigits = ref(['', '', '', '', '', ''])
-const otpInputs = ref([])
-const generatedOtp = ref('')
-const successMessage = ref('')
-const showSuccessMessage = ref(false)
-const isSaving = ref(false)
-const resendCooldown = ref(0)
-const showToast = ref(false)
-const toastMessage = ref('')
-const toastType = ref('success')
-const currentPage = ref(1)
-const itemsPerPage = 5
+const currentTab = ref("info");
+const tabAnimationKey = ref("info");
+const isVisible = ref(false);
+const editable = ref(false);
+const otpRequired = ref(false);
+const otpDigits = ref(["", "", "", "", "", ""]);
+const otpInputs = ref([]);
+const generatedOtp = ref("");
+const successMessage = ref("");
+const showSuccessMessage = ref(false);
+const isSaving = ref(false);
+const resendCooldown = ref(0);
+const showToast = ref(false);
+const toastMessage = ref("");
+const toastType = ref("success");
+const currentPage = ref(1);
+const itemsPerPage = ref(5);
 
 // User data
 const userProfile = ref({
-  avatar: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face'
-})
+  avatar:
+    "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face",
+});
 
-const bookingCount = ref(12)
-const loyaltyPoints = ref(2450)
-const membershipLevel = ref('Gold')
+const bookingCount = ref(12);
+const loyaltyPoints = ref(2450);
+const membershipLevel = ref("Gold");
 
 const form = ref({
-  fullName: 'Nguyễn Văn A',
-  email: 'nguyenvana@gmail.com',
-  phone: '+84987654321',
-  idNumber: '012345678901',
-  address: '123 Võ Nguyên Giáp, Đà Nẵng'
-})
+  fullName: "Nguyễn Văn A",
+  email: "nguyenvana@gmail.com",
+  phone: "+84987654321",
+  idNumber: "012345678901",
+  address: "123 Võ Nguyên Giáp, Đà Nẵng",
+});
 
 const settings = ref({
   emailNotifications: true,
   smsNotifications: false,
   privateMode: false,
-  twoFactorAuth: false
-})
+  twoFactorAuth: false,
+});
 
 // Filters
 const filters = ref({
-  keyword: '',
-  type: '',
-  time: ''
-})
+  keyword: "",
+  type: "",
+  time: "",
+});
 
 // History data
 const history = ref([
-  { id: 1, name: 'Phòng Deluxe Ocean View', type: 'room', date: '2024-04-01', status: 'Hoàn tất', price: 1500000 },
-  { id: 2, name: 'Spa thư giãn toàn thân', type: 'service', date: '2024-04-02', status: 'Hoàn tất', price: 400000 },
-  { id: 3, name: 'Phòng Superior Garden', type: 'room', date: '2024-03-20', status: 'Đang xử lý', price: 1200000 },
-  { id: 4, name: 'Tour Bà Nà Hills', type: 'service', date: '2024-03-15', status: 'Hoàn tất', price: 800000 },
-  { id: 5, name: 'Massage đá nóng', type: 'service', date: '2024-03-10', status: 'Hoàn tất', price: 350000 },
-  { id: 6, name: 'Phòng Standard', type: 'room', date: '2024-02-28', status: 'Đã hủy', price: 900000 },
-  { id: 7, name: 'Buffet tối', type: 'service', date: '2024-02-25', status: 'Hoàn tất', price: 250000 },
-  { id: 8, name: 'Phòng Premium', type: 'room', date: '2024-02-15', status: 'Hoàn tất', price: 1800000 }
-])
+  {
+    id: 1,
+    name: "Phòng Deluxe Ocean View",
+    type: "room",
+    date: "2024-04-01",
+    status: "Hoàn tất",
+    price: 1500000,
+  },
+  {
+    id: 2,
+    name: "Spa thư giãn toàn thân",
+    type: "service",
+    date: "2024-04-02",
+    status: "Hoàn tất",
+    price: 400000,
+  },
+  {
+    id: 3,
+    name: "Phòng Superior Garden",
+    type: "room",
+    date: "2024-03-20",
+    status: "Đang xử lý",
+    price: 1200000,
+  },
+  {
+    id: 4,
+    name: "Tour Bà Nà Hills",
+    type: "service",
+    date: "2024-03-15",
+    status: "Hoàn tất",
+    price: 800000,
+  },
+  {
+    id: 5,
+    name: "Massage đá nóng",
+    type: "service",
+    date: "2024-03-10",
+    status: "Hoàn tất",
+    price: 350000,
+  },
+  {
+    id: 6,
+    name: "Phòng Standard",
+    type: "room",
+    date: "2024-02-28",
+    status: "Đã hủy",
+    price: 900000,
+  },
+  {
+    id: 7,
+    name: "Buffet tối",
+    type: "service",
+    date: "2024-02-25",
+    status: "Hoàn tất",
+    price: 250000,
+  },
+  {
+    id: 8,
+    name: "Phòng Premium",
+    type: "room",
+    date: "2024-02-15",
+    status: "Hoàn tất",
+    price: 1800000,
+  },
+]);
 
 // Computed properties
 const tabIndicatorStyle = computed(() => {
-  const tabIndex = ['info', 'history', 'settings'].indexOf(currentTab.value)
+  const tabIndex = ["info", "history", "settings"].indexOf(currentTab.value);
   return {
-    transform: `translateX(${tabIndex * 100}%)`
-  }
-})
+    transform: `translateX(${tabIndex * 100}%)`,
+  };
+});
 
 const filteredHistory = computed(() => {
   return history.value.filter((item) => {
-    const matchKeyword = item.name.toLowerCase().includes(filters.value.keyword.toLowerCase())
-    const matchType = filters.value.type ? item.type === filters.value.type : true
+    const matchKeyword = item.name
+      .toLowerCase()
+      .includes(filters.value.keyword.toLowerCase());
+    const matchType = filters.value.type ? item.type === filters.value.type : true;
     const matchTime = filters.value.time
-      ? (Date.now() - new Date(item.date).getTime()) / (1000 * 3600 * 24) <= parseInt(filters.value.time)
-      : true
-    return matchKeyword && matchType && matchTime
-  })
-})
+      ? (Date.now() - new Date(item.date).getTime()) / (1000 * 3600 * 24) <=
+        parseInt(filters.value.time)
+      : true;
+    return matchKeyword && matchType && matchTime;
+  });
+});
 
-const totalPages = computed(() => Math.ceil(filteredHistory.value.length / itemsPerPage))
+const totalPages = computed(() =>
+  Math.ceil(filteredHistory.value.length / itemsPerPage.value)
+);
 
 const paginatedHistory = computed(() => {
-  const start = (currentPage.value - 1) * itemsPerPage
-  return filteredHistory.value.slice(start, start + itemsPerPage)
-})
+  const start = (currentPage.value - 1) * itemsPerPage.value;
+  return filteredHistory.value.slice(start, start + itemsPerPage.value);
+});
 
 const visiblePages = computed(() => {
-  const total = totalPages.value
-  const current = currentPage.value
-  const delta = 2
-  const range = []
-  const rangeWithDots = []
+  const total = totalPages.value;
+  const current = currentPage.value;
+  const delta = 2;
+  const range = [];
+  const rangeWithDots = [];
 
-  for (let i = Math.max(2, current - delta); i <= Math.min(total - 1, current + delta); i++) {
-    range.push(i)
+  for (
+    let i = Math.max(2, current - delta);
+    i <= Math.min(total - 1, current + delta);
+    i++
+  ) {
+    range.push(i);
   }
 
   if (current - delta > 2) {
-    rangeWithDots.push(1, '...')
+    rangeWithDots.push(1, "...");
   } else {
-    rangeWithDots.push(1)
+    rangeWithDots.push(1);
   }
 
-  rangeWithDots.push(...range)
+  rangeWithDots.push(...range);
 
   if (current + delta < total - 1) {
-    rangeWithDots.push('...', total)
+    rangeWithDots.push("...", total);
   } else {
-    rangeWithDots.push(total)
+    rangeWithDots.push(total);
   }
 
-  return rangeWithDots.filter(item => item !== '...' || rangeWithDots.indexOf(item) === rangeWithDots.lastIndexOf(item))
-})
+  return rangeWithDots.filter(
+    (item) =>
+      item !== "..." || rangeWithDots.indexOf(item) === rangeWithDots.lastIndexOf(item)
+  );
+});
 
-const otp = computed(() => otpDigits.value.join(''))
+const otp = computed(() => otpDigits.value.join(""));
 
 // Methods
 const switchTab = (tab) => {
-  currentTab.value = tab
-  tabAnimationKey.value = ''
+  currentTab.value = tab;
+  tabAnimationKey.value = "";
   nextTick(() => {
-    tabAnimationKey.value = tab
-  })
-}
+    tabAnimationKey.value = tab;
+  });
+};
 
 const enableEdit = () => {
-  editable.value = true
-  otpRequired.value = true
-}
+  editable.value = true;
+  otpRequired.value = true;
+};
 
 const cancelEdit = () => {
-  editable.value = false
-  otpRequired.value = false
-  otpDigits.value = ['', '', '', '', '', '']
-}
+  editable.value = false;
+  otpRequired.value = false;
+  otpDigits.value = ["", "", "", "", "", ""];
+};
 
 const sendOtp = () => {
-  generatedOtp.value = (Math.floor(Math.random() * 900000) + 100000).toString()
-  showToastMessage(`Mã OTP đã được gửi: ${generatedOtp.value}`, 'success')
-  
+  generatedOtp.value = (Math.floor(Math.random() * 900000) + 100000).toString();
+  showToastMessage(`Mã OTP đã được gửi: ${generatedOtp.value}`, "success");
+
   // Start countdown
-  resendCooldown.value = 60
+  resendCooldown.value = 60;
   const interval = setInterval(() => {
-    resendCooldown.value--
+    resendCooldown.value--;
     if (resendCooldown.value <= 0) {
-      clearInterval(interval)
+      clearInterval(interval);
     }
-  }, 1000)
-}
+  }, 1000);
+};
 
 const handleOtpInput = (index, event) => {
-  const value = event.target.value
+  const value = event.target.value;
   if (value && index < 5) {
-    otpInputs.value[index + 1]?.focus()
+    otpInputs.value[index + 1]?.focus();
   }
-}
+};
 
 const handleOtpKeydown = (index, event) => {
-  if (event.key === 'Backspace' && !otpDigits.value[index] && index > 0) {
-    otpInputs.value[index - 1]?.focus()
+  if (event.key === "Backspace" && !otpDigits.value[index] && index > 0) {
+    otpInputs.value[index - 1]?.focus();
   }
-}
+};
 
 const handleSave = async () => {
   if (otpRequired.value && otp.value !== generatedOtp.value) {
-    showToastMessage('Mã OTP không chính xác hoặc đã hết hạn', 'error')
-    return
+    showToastMessage("Mã OTP không chính xác hoặc đã hết hạn", "error");
+    return;
   }
-  
-  isSaving.value = true
-  
+
+  isSaving.value = true;
+
   // Simulate API call
-  await new Promise(resolve => setTimeout(resolve, 2000))
-  
-  editable.value = false
-  otpRequired.value = false
-  otpDigits.value = ['', '', '', '', '', '']
-  isSaving.value = false
-  
-  successMessage.value = 'Thông tin đã được cập nhật thành công!'
-  showSuccessMessage.value = true
-  
+  await new Promise((resolve) => setTimeout(resolve, 2000));
+
+  editable.value = false;
+  otpRequired.value = false;
+  otpDigits.value = ["", "", "", "", "", ""];
+  isSaving.value = false;
+
+  successMessage.value = "Thông tin đã được cập nhật thành công!";
+  showSuccessMessage.value = true;
+
   setTimeout(() => {
-    showSuccessMessage.value = false
-    successMessage.value = ''
-  }, 3000)
-}
+    showSuccessMessage.value = false;
+    successMessage.value = "";
+  }, 3000);
+};
 
 const formatDate = (dateString) => {
-  const date = new Date(dateString)
-  return date.toLocaleDateString('vi-VN', {
-    year: 'numeric',
-    month: '2-digit',
-    day: '2-digit'
-  })
-}
+  const date = new Date(dateString);
+  return date.toLocaleDateString("vi-VN", {
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+  });
+};
 
 const formatPrice = (price) => {
-  return new Intl.NumberFormat('vi-VN', { 
-    style: 'currency', 
-    currency: 'VND' 
-  }).format(price)
-}
+  return new Intl.NumberFormat("vi-VN", {
+    style: "currency",
+    currency: "VND",
+  }).format(price);
+};
 
 const getStatusClass = (status) => {
   switch (status) {
-    case 'Hoàn tất': return 'completed'
-    case 'Đang xử lý': return 'processing'
-    case 'Đã hủy': return 'cancelled'
-    default: return ''
+    case "Hoàn tất":
+      return "completed";
+    case "Đang xử lý":
+      return "processing";
+    case "Đã hủy":
+      return "cancelled";
+    default:
+      return "";
   }
-}
+};
 
-const showToastMessage = (message, type = 'success') => {
-  toastMessage.value = message
-  toastType.value = type
-  showToast.value = true
-  
+const showToastMessage = (message, type = "success") => {
+  toastMessage.value = message;
+  toastType.value = type;
+  showToast.value = true;
+
   setTimeout(() => {
-    showToast.value = false
-  }, 3000)
-}
+    showToast.value = false;
+  }, 3000);
+};
 
 const exportHistory = () => {
-  showToastMessage('Đang xuất dữ liệu...', 'success')
+  showToastMessage("Đang xuất dữ liệu...", "success");
   // Implement export logic
-}
+};
 
 const changePassword = () => {
-  showToastMessage('Chức năng đổi mật khẩu sẽ sớm được cập nhật', 'info')
-}
+  showToastMessage("Chức năng đổi mật khẩu sẽ sớm được cập nhật", "info");
+};
 
 const deleteAccount = () => {
-  if (confirm('Bạn có chắc chắn muốn xóa tài khoản? Hành động này không thể hoàn tác.')) {
-    showToastMessage('Yêu cầu xóa tài khoản đã được ghi nhận', 'info')
+  if (confirm("Bạn có chắc chắn muốn xóa tài khoản? Hành động này không thể hoàn tác.")) {
+    showToastMessage("Yêu cầu xóa tài khoản đã được ghi nhận", "info");
   }
-}
+};
 
 // Watch filters to reset pagination
-watch(filters, () => {
-  currentPage.value = 1
-}, { deep: true })
+watch(
+  filters,
+  () => {
+    currentPage.value = 1;
+  },
+  { deep: true }
+);
 
 // Lifecycle
 onMounted(() => {
   setTimeout(() => {
-    isVisible.value = true
-    tabAnimationKey.value = 'info'
-  }, 100)
-})
+    isVisible.value = true;
+    tabAnimationKey.value = "info";
+  }, 100);
+
+  const { isLoggedIn } = usePhanQuyenStore();
+  if (!isLoggedIn()) {
+    // Có thể chuyển hướng về trang đăng nhập hoặc báo lỗi
+    return;
+  }
+
+  const token = useCookie("token").value;
+  axiosBase
+    .get("/xacthuc/profile", {
+      headers: token ? { Authorization: `Bearer ${token}` } : {},
+    })
+    .then((res) => {
+      const data = res.data?.data; // LẤY ĐÚNG TRƯỜNG data
+      if (data) {
+        userProfile.value.avatar = data.hinhAnhUrl || userProfile.value.avatar;
+        form.value.fullName = data.hoTen || "";
+        form.value.email = data.email || "";
+        form.value.phone = data.soDienThoai || "";
+        form.value.idNumber = data.canCuocCongDan || "";
+        form.value.address = data.diaChi || "";
+      }
+    })
+    .catch(() => {
+      showToastMessage("Không lấy được thông tin tài khoản", "error");
+    });
+});
 </script>
 
 <style scoped>
 .profile-page {
   min-height: 100vh;
   background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-  font-family: 'Inter', 'Segoe UI', sans-serif;
+  font-family: "Inter", "Segoe UI", sans-serif;
   position: relative;
   overflow-x: hidden;
 }
@@ -887,7 +1068,8 @@ onMounted(() => {
 }
 
 @keyframes float {
-  0%, 100% {
+  0%,
+  100% {
     transform: translateY(0px) rotate(0deg);
     opacity: 0.7;
   }
@@ -1386,8 +1568,12 @@ onMounted(() => {
 }
 
 @keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
 /* Filters Section */

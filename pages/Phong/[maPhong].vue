@@ -103,19 +103,37 @@ theme.initializeDarkMode();
 
 const route = useRoute();
 const router = useRouter();
-const room = ref({});
-const tienNghi = ref([]);
-const feedbacks = ref([]);
 
+// Lấy mã phòng từ params (chuẩn Nuxt 3)
+const maPhong = route.params.maPhong;
+
+// Khai báo các biến dữ liệu
+const room = ref({});
+const subImages = ref([]);
+const amenities = ref([]);
+const discounts = ref([]);
+const feedbacks = ref([]);
+const favorites = ref([]);
+
+// Gọi API lấy chi tiết phòng
 onMounted(async () => {
-  const maPhong = route.params.maPhong;
-  const res = await axiosBase.get(`/TatCaTruyCap/phong/${maPhong}`);
-  room.value = res.data.data;
-  tienNghi.value = room.value.tienNghi || [];
-  // Đảm bảo feedbacks luôn là mảng
-  feedbacks.value = Array.isArray(room.value.feedbacks) ? room.value.feedbacks : [];
+  try {
+    const res = await axiosBase.get(`/TatCaTruyCap/phong/${maPhong}`);
+    const data = res.data?.data;
+    if (data) {
+      room.value = data;
+      subImages.value = Array.isArray(data.urlAnhPhu) ? data.urlAnhPhu : [];
+      amenities.value = Array.isArray(data.tienNghi) ? data.tienNghi : [];
+      discounts.value = Array.isArray(data.giamGia) ? data.giamGia : [];
+      feedbacks.value = Array.isArray(data.feedbacks) ? data.feedbacks : [];
+      favorites.value = Array.isArray(data.yeuThich) ? data.yeuThich : [];
+    }
+  } catch (e) {
+    // Xử lý lỗi nếu cần
+  }
 });
 
+// Chuyển sang trang đặt phòng
 function goToBooking() {
   router.push({ name: "DatPhong", params: { maPhong: room.value.maPhong } });
 }
