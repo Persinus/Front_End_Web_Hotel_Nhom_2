@@ -1,17 +1,17 @@
 <template>
   <footer class="footer">
     <div class="footer-container">
-      <!-- Thông tin công ty -->
+      <!-- Thông tin khách sạn -->
       <div class="footer-section company-info">
-        <img src="../Assets/logo.png" alt="Logo Mixivivu" class="logo" />
-        <p>Công ty TNHH Du Lịch và Dịch Vụ Mixivivu</p>
+        <img src="../Assets/logo.png" alt="Logo Khách sạn Ánh Dương" class="logo" />
+        <p>Khách sạn OCEAN- Hệ thống quản lý khách sạn chuyên nghiệp</p>
         <p>
-          Tầng 7, số nhà 25, ngõ 38 phố Yên Lãng,<br />
-          phường Láng Hạ, quận Đống Đa, TP. Hà Nội
+          Số 88, đường Biển Xanh, phường Hòa Bình,<br />
+          TP. Khánh Hòa, Việt Nam
         </p>
         <p>
-          Mã số doanh nghiệp: 0110376372<br />
-          do Sở Kế hoạch và Đầu tư TP. Hà Nội cấp ngày 05/06/2023
+          Mã số doanh nghiệp: 0123456789<br />
+          do Sở Kế hoạch và Đầu tư TP. Khánh Hòa cấp ngày 01/01/2024
         </p>
       </div>
 
@@ -19,47 +19,41 @@
       <div class="footer-section">
         <h3>Giới thiệu</h3>
         <ul>
-          <li><a href="/about">Về chúng tôi</a></li>
-          <li><a href="/terms">Điều khoản và điều kiện</a></li>
-          <li><a href="/privacy">Chính sách riêng tư</a></li>
-          <li><a href="/guide">Hướng dẫn sử dụng</a></li>
-          <li><a href="/payment">Hình thức thanh toán</a></li>
-          <li><a href="/contact">Liên hệ</a></li>
+          <li>Về hệ thống</li>
+          <li>Chính sách và điều khoản</li>
+          <li>Hướng dẫn sử dụng</li>
+          <li>Phương thức thanh toán</li>
+          <li>Liên hệ hỗ trợ</li>
         </ul>
       </div>
 
-      <!-- Cột điểm đến -->
+      <!-- Cột dịch vụ -->
       <div class="footer-section">
-        <h3>Điểm đến</h3>
+        <h3>Dịch vụ</h3>
         <ul>
-          <li><a href="/ha-long">Hạ Long</a></li>
-          <li><a href="/ha-noi">Hà Nội</a></li>
-          <li><a href="/sapa">Sapa</a></li>
-          <li><a href="/ninh-binh">Ninh Bình</a></li>
-          <li><a href="/da-nang">Đà Nẵng</a></li>
-          <li><a href="/da-lat">Đà Lạt</a></li>
-          <li><a href="/nha-trang">Nha Trang</a></li>
-          <li><a href="/phu-quoc">Phú Quốc</a></li>
-          <li><a href="/quy-nhon">Quy Nhơn</a></li>
+          <li>Quản lý phòng</li>
+          <li>Quản lý đặt phòng</li>
+          <li>Quản lý hóa đơn</li>
+          <li>Quản lý khách hàng</li>
+          <li>Báo cáo doanh thu</li>
         </ul>
       </div>
 
-      <!-- Cột khách sạn -->
+      <!-- Cột hỗ trợ -->
       <div class="footer-section">
-        <h3>Khách sạn</h3>
+        <h3>Hỗ trợ</h3>
         <ul>
-          <li><a href="/blog">Blog</a></li>
-          <li><a href="/rules">Quy định chung và lưu ý</a></li>
-          <li><a href="/faq">Câu hỏi thường gặp</a></li>
+          <li>Blog chia sẻ kinh nghiệm</li>
+          <li>Quy định và lưu ý</li>
+          <li>Câu hỏi thường gặp</li>
         </ul>
       </div>
     </div>
     <div class="footer-bottom">
-      <p>Hotline: 0922222016 | Email: info@mixivivu.com</p>
+      <p>Hotline: 0909999988 | Email: hotro@anhduonghotel.vn</p>
     </div>
   </footer>
 </template>
-
 <script setup>
 // Không cần JS bổ sung cho component này
 </script>
@@ -79,25 +73,20 @@
 
   align-items: center;
   gap: 20px;
-
 }
 
 .footer-section {
   flex: 1;
-
 }
 
 .footer-section h3 {
   font-size: 16px;
- 
 }
-
 
 .social-icons {
   display: flex;
   justify-content: center;
   gap: 15px;
-
 }
 
 .footer-section ul li a {
