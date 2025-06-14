@@ -1,18 +1,16 @@
-# To get started with Dependabot version updates, you'll need to specify which
-# package ecosystems to update and where the package manifests are located.
-# Please see the documentation for all configuration options:
-# https://docs.github.com/code-security/dependabot/dependabot-version-updates/configuration-options-for-the-dependabot.yml-file
-
 version: 2 # Phiên bản cấu hình Dependabot
+
 updates:
   - package-ecosystem: "npm" # Hệ sinh thái package dành cho Nuxt (npm)
     directory: "/" # Thư mục chứa tệp quản lý dependencies, thường là tại gốc dự án
     schedule:
-      interval: "daily" # Lịch trình kiểm tra: hằng ngày
+      interval: "yearly" # Kiểm tra cập nhật mỗi năm (ít nhất có thể)
     commit-message:
-      prefix: "chore" # Thêm tiền tố cho commit do Dependabot tạo ra
-    open-pull-requests-limit: 5 # Giới hạn số lượng pull request đồng thời
+      prefix: "chore" # Tiền tố cho commit được tạo bởi Dependabot
+    open-pull-requests-limit: 0 # Không mở pull request tự động
     ignore:
-      - dependency-name: "nuxt" # Bỏ qua các phiên bản cụ thể của Nuxt
-        versions:
-          - "<3.0.0" # Bỏ qua tất cả các phiên bản Nuxt nhỏ hơn 3.0.0
+      - dependency-name: "*" # Bỏ qua tất cả dependencies
+        update-types: 
+          - "version-update:semver-major"
+          - "version-update:semver-minor"
+          - "version-update:semver-patch"
